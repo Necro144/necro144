@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" type="image/png" href="disc.png">
+    <title>Discord Username</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #36393F; /* Discord background color */
+        }
+        .container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.11); /* Faded white background */
+            padding: 20px;
+            border-radius: 10px;
+        }
+        p {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #ABCFFF; /* White text color */
+        }
+        button {
+            font-size: 60px;
+            background-color: #7289DA; /* Discord blue color */
+            color: #ABCFFF; /* White text color */
+            border: none;
+            border-radius: 1px;
+            padding: 10px 150px;
+            cursor: pointer;
+            transition: background-color 1.3s ease;
+        }
+        button:hover {
+            background-color: #677BC4; /* Slightly darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p>Click to copy my Discord username:</p>
+        <button id="copyButton" data-clipboard-text="nec_1999">nec_1999</button>
+        <p>Join the 'NS' Discord channel <a href="https://discord.gg/w8nrqPb8vG">here</a>. Created at — 09/22/2017 8:43 PM</p>
+    </div>
+
+    <!-- Include Clipboard.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+
+    <script>
+        // Initialize Clipboard.js
+        new ClipboardJS('#copyButton').on('success', function(e) {
+            e.clearSelection();
+            alert('Username copied to clipboard: ' + e.text);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qusai [ N E C R O ]</title>
+    <link rel="stylesheet" href="photog_styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2; /* Light gray background */
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+        .bio {
+            flex: 1;
+        }
+        .name {
+            font-size: 24px;
+            margin: 5px 0;
+        }
+        .description {
+            color: #666;
+            margin: 5px 0;
+        }
+        .link {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .controls {
+            margin-bottom: 20px;
+        }
+        .control-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-right: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .photos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+        .photos img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 80%;
+            max-height: 80%;
+        }
+        .close {
+            color: #ccc;
+            float: right;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            .profile-pic {
+                width: 80px;
+                height: 80px;
+                margin-right: 10px;
+            }
+            .name {
+                font-size: 20px;
+            }
+            .link {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+            .control-button {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+            .photos {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 5px;
+            }
+            .modal-content {
+                max-width: 90%;
+                max-height: 90%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <img src="0.jpg" alt="Profile Picture" class="profile-pic">
+            <div class="bio">
+                <h1 class="name">N E C R O -{ Qusai }-</h1>
+                <p class="description">SOON</p>
+                <a href="https://wa.me/00962799760271" class="link">WHATSAPP</a>
+            </div>
+        </header>
+        <div class="controls">
+            <button id="darkModeToggle" class="control-button">Toggle Dark Mode</button>
+            <button id="increaseTextSize" class="control-button">A+</button>
+            <button id="decreaseTextSize" class="control-button">A-</button>
+        </div>
+    <style>
+        .photos img {
+            width: 200px; /* Set your desired width */
+            height: 200px; /* Set your desired height */
+            object-fit: cover; /* Ensures the image fits the box, cropping if necessary */
+            margin: 5px; /* Optional: Adds some spacing between images */
+        }
+    </style>
+</head>
+<body>
+    <section class="photos">
+        <img src="20.jpg" alt="Photo 2">
+        <img src="21.jpg" alt="Photo 2">
+        <img src="22.jpg" alt="Photo 2">
+        <img src="23.jpg" alt="Photo 2">
+        <img src="3.jpg" alt="Photo 3">
+        <img src="5.jpg" alt="Photo 5">
+        <img src="8.jpg" alt="Photo 8">
+        <img src="11.jpg" alt="Photo 11">
+        <img src="12.jpg" alt="Photo 12">
+        <img src="13.jpg" alt="Photo 13">
+        <img src="14.jpg" alt="Photo 14">
+        <img src="15.jpg" alt="Photo 14">
+        <img src="16.jpg" alt="Photo 14">
+        <img src="17.jpg" alt="Photo 14">
+        <img src="18.jpg" alt="Photo 14">
+        <img src="19.jpg" alt="Photo 14">
+        <!-- Add more photos as needed -->
+    </section>
+    </div>
+
+    <div id="photoModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <script src="photog_scripts.js"></script>
+	
+<footer>
+    <div class="copyright">
+        &copy; 2024 Night-Shift Counter-Strike 1.6. All rights reserved.
+    </div>
+</footer>
+
+  <script>
+        // Disable right-click context menu
+        window.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Disable Ctrl+U shortcut
+        window.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'u') {
+                e.preventDefault();
+            }
+        });
+
+        // Disable all keyboard shortcuts
+        window.addEventListener('keydown', function(e) {
+            e.preventDefault();
+        });
+</script>
+</body>
+</html>

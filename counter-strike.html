@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Set the web title -->
+    <title>CS1.6 Reunite</title>
+    
+    <!-- Set the custom icon -->
+    <link rel="icon" href="https://i.imgur.com/vqfrYWD.png" type="image/png">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('https://i.imgur.com/Mw63ivr.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-family: Georgia, serif;
+            display: flex;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: rgba(200, 225, 215, 0.7);
+            padding: 20px;
+            margin-left: 40px; /* Adjust the margin as needed */
+            max-width: 450px; /* Adjust the width as needed */
+            border-radius: 15px;
+            text-align: center; /* Center the content inside the container */
+        }
+
+        .box-text {
+            text-align: left; /* Align text to the left inside the box */
+        }
+
+        h1 {
+            font-size: 34px;
+        }
+
+        p {
+            font-size: 18px;
+        }
+
+        .video-container {
+            position: absolute;
+            top: 50%;
+            right: 20px; /* Adjust the right position as needed */
+            transform: translate(0, -50%);
+        }
+
+        .video-container iframe {
+            width: 300px;
+            height: 169px;
+        }
+
+        .links {
+            margin-top: 10px;
+        }
+
+        .links a {
+            text-decoration: none;
+            color: #333;
+            margin-right: 20px;
+        }
+
+        .links a:hover {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box-text">
+            <h1>Welcome to Nostalgia CS1.6 Servers!</h1>
+            <p>Step back in time and relive the glory days of CS1.6 with our nostalgic servers featuring beloved classic maps. Join us for a trip down memory lane!</p>
+            <div class="links">
+                <a href="https://necro144.github.io/listingservers" target="_blank">Listing Servers</a>
+                <a href="mailto:Necro144@yahoo.com">Contact</a>
+                <a href="https://necro144.github.io/logs" target="_blank">Servers Log</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Container -->
+    <div class="video-container">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/CfwuiWw2Q1I?si=kDvHsmXdOUoLFp4i" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+
+<style>
+  /* Style for normal links */
+  a {
+    color: yellow; /* Change this to your desired color */
+    text-decoration: none;
+  }
+
+  /* Style for external links */
+  a[href^="http"]:not([href*="your-website-domain.com"]),
+  a[href^="https"]:not([href*="your-website-domain.com"]) {
+    color: yellow; /* Change this to your desired color for external links */
+    text-decoration: none;
+  }
+</style>
+<script>
+  // Disable right-click context menu
+  window.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+  });
+
+  // Disable Ctrl+U shortcut
+  window.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && e.key === 'u') {
+      e.preventDefault();
+    }
+  });
+
+  // Disable all keyboard shortcuts
+  window.addEventListener('keydown', function(e) {
+    e.preventDefault();
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qusai Allan - Poet Community</title>
+    <style>
+        :root {
+            --bg-color: #f5f5f5;
+            --text-color: #333;
+            --accent-color: #4a90e2;
+            --glow-color: rgba(74, 144, 226, 0.3);
+            --container-bg: #ffffff;
+        }
+        body {
+            font-family: 'Georgia', serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 40px;
+            background-color: var(--container-bg);
+            box-shadow: 0 0 20px var(--glow-color);
+            border-radius: 15px;
+        }
+        .profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .profile img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-right: 20px;
+            box-shadow: 0 0 10px var(--glow-color);
+        }
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .profile-info strong {
+            font-size: 1.4em;
+            color: var(--accent-color);
+        }
+        .timestamp {
+            color: #777;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        .post-content {
+            font-size: 1.1em;
+            text-align: justify;
+        }
+        .post-content h2 {
+            color: var(--accent-color);
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-shadow: 0 0 5px var(--glow-color);
+        }
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+        }
+        .dark-mode-toggle button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            background-color: var(--accent-color);
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Georgia', serif;
+            font-size: 0.9em;
+        }
+        .dark-mode-toggle button:hover {
+            background-color: #3a7bc8;
+            box-shadow: 0 0 10px var(--glow-color);
+        }
+        body.dark-mode {
+            --bg-color: #1a1a1a;
+            --text-color: #e0e0e0;
+            --accent-color: #6ab0ff;
+            --glow-color: rgba(106, 176, 255, 0.3);
+            --container-bg: #2a2a2a;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin: 20px;
+            }
+            .profile img {
+                width: 60px;
+                height: 60px;
+            }
+            .post-content {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dark-mode-toggle">
+        <button id="darkModeSwitcher">Toggle Dark Mode</button>
+    </div>
+
+    <div class="container">
+        <div class="profile">
+            <img src="IMG_6071_cropped.png" alt="Profile picture of Qusai Allan">
+            <div class="profile-info">
+                <strong>Qusai Allan</strong>
+                <span class="timestamp">18th July 2024</span>
+            </div>
+        </div>
+        <div class="post-content">
+            <h2>Mhmm, i don't feel like it.</h2>
+
+
+<p>In this world, I feel misplaced, as if I'm an anomaly in this era. Imagine the curse of misfortune shadowing every step—whether in games, studies, love, or even sleep. It’s like drifting through life without truly living, burdened by the weight of unrelenting bad luck. It's not that I don’t wish to embrace life; it’s that I simply can’t. I reside in Jordan, a land I find myself resenting, dreaming of disappearing into solitude where I could bear only my own burdens. Life here wears me down, a relentless tide of stress and exhaustion, leaving me in a strange limbo—neither joyful nor sorrowful, just steeped in a quiet melancholy. Sometimes, I long for tears, for the release that would let me feel alive once more.</p>
+
+<p>This generation seems to insist we 'vibe,' smoke, indulge in fleeting pleasures, grow cold hearts, curse, steal, and fight just to survive. But that’s not who I am. My heart remains gentle, pure at its core. I refuse to conform to a life that feels sick, hollow, and unworthy. In my quest for vitality, I cling to simple comforts—PUBG, solitary walks, music that heals the soul, the escapism of Netflix and YouTube, and the silent companionship of my bike. That bike has become my truest friend, whisking me away to places where no one else can see me. In the quiet of night, I sit in the darkness, sometimes in tears, sometimes lost in music, fighting to keep the shadows at bay. Each morning, I wake hoping to outrun the stress, finding some solace in the gym—though it's fleeting. I strive to remain on the right path, avoiding temptations, not harming anyone, holding tight to who I am without succumbing to the pressure to conform.</p>
+
+<p>Yet, despite my efforts, I feel like I've failed to find my place in this time. From the moment I step out my door until I return, I'm met with disappointment in the faces and hearts of those around me. I loathe this land—its people, its culture, its oppressive weight. Here, finding work feels like searching for gold in barren sands. I've turned to freelance photography, hoping it sustains me until I can afford better tools. </p>
+
+<p>As a self-taught psychiatrist and personality psychologist, I've learned to understand people's personalities, tensions, abilities, and psychological language. I give countless chances to salvage relationships, offering advice with a compassionate heart. I believe in redemption and growth, always seeking to guide others towards a better understanding of themselves and their connections. </p>
+
+<p>And today—Thursday, July 18, 2024—feels like every other day, marked by a silent prayer for change, a quiet yearning for escape.</p>
+</div>
+    </div>
+
+    <script>
+        const darkModeSwitcher = document.getElementById('darkModeSwitcher');
+        const body = document.body;
+
+        darkModeSwitcher.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+        });
+
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'true') {
+            body.classList.add('dark-mode');
+        }
+    </script>
+</body>
+</html>

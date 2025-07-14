@@ -1,0 +1,99 @@
+	    <!--------------------------------------------------------------LOADING START-------------------------------------------------------------->
+<!DOCTYPE html><font color=yellow>
+<html>
+<head>
+<style>
+/* Center the loader */
+#loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Add animation to "page content" */
+.animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 }
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom {
+  from{ bottom:-100px; opacity:0 }
+  to{ bottom:0; opacity:1 }
+}
+
+#myDiv {
+  display: none;
+  text-align: center;
+}
+</style>
+</head>
+<body onload="myFunction()" style="margin:1;">
+
+<div id="loader"></div>
+
+<div style="display:none;" id="myDiv" class="animate-bottom">
+
+<html>
+<body>
+<center>
+<body style="background-color:#1B0364;"></body><font face="Comic Sans MS">
+<font color=yellow><font size=5>
+<a href="http://www.mediafire.com/file/a5rce7sk9857705/troller1.rar
+" target="_blank">Demo Report ID 001</a> 
+
+<p>Demo uploaded by Necro 10/28/2017</p>
+</div>
+
+<script>
+var myVar;
+
+function myFunction() {
+    myVar = setTimeout(showPage, 3000);
+}
+
+function showPage() {
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("myDiv").style.display = "block";
+}
+</script>
+<style>
+body  {
+    background-image: url('http://cdn.akamai.steamstatic.com/steamcommunity/public/images/items/486360/81ad346b348e5ce79318ff6029576b6ca89093a2.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+</style>
+</body>
+</html>
+
+	    <!--------------------------------------------------------------LOADING END-------------------------------------------------------------->

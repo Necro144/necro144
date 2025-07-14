@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply for Adminship</title>
+    <link rel="icon" href="counter-strike-icon-1.jpg">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <script>
+        // Disable right-click context menu
+        window.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Disable Ctrl+U shortcut
+        window.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'u') {
+                e.preventDefault();
+            }
+        });
+
+        // Disable all keyboard shortcuts
+        window.addEventListener('keydown', function(e) {
+            e.preventDefault();
+        });
+    </script>
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            text-align: center;
+            background-color: #222;
+            margin: 0;
+            padding: 0;
+            color: #ffcc00;
+        }
+        .container {
+            padding: 20px;
+            background-color: #333;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            max-width: 90%;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #ffcc00;
+            color: #222;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            margin: 10px;
+        }
+        .button:hover {
+            background-color: #f0b700;
+        }
+        .vip-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            margin: 10px;
+        }
+        .vip-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Apply for VIP</h2>
+        <p>To apply for VIP, please fill in the blank in the form:</p>
+        <a class="button" href="https://forms.gle/wwLBhtnqKFEAfGzj9" target="_blank">Apply Now</a>
+    </div>
+    <div class="container">
+        <a class="vip-button" href="vip.html">VIP Access</a>
+        <a class="button" href="https://necro144.github.io">Back to Homepage</a>
+    </div>
+</body>
+</html>

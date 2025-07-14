@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="lambda.png">
+    <title>My Gaming Communities</title>
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --card-bg: #1a1a1a;
+            --text-color: #e0e0e0;
+            --neon-color: #00ff00;
+            --neon-glow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(0, 255, 0, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 255, 0, 0.05) 0%, transparent 50%);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 1.5rem 0;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--neon-color);
+            text-shadow: var(--neon-glow);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            padding: 1.5rem;
+            box-sizing: border-box;
+        }
+
+        .community-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 255, 0, 0.1);
+        }
+
+        .community-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 255, 0, 0.2);
+        }
+
+        .community-card img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .community-card h2 {
+            font-size: 1.25rem;
+            margin: 0;
+            color: var(--neon-color);
+        }
+
+        .community-card p {
+            margin: 0;
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+                text-align: center;
+            }
+
+            .container {
+                padding: 1rem;
+                gap: 1rem;
+            }
+
+            .community-card {
+                border-radius: 8px;
+            }
+
+            .card-content {
+                padding: 1rem;
+            }
+
+            .community-card h2 {
+                font-size: 1rem;
+            }
+
+            .community-card p {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>My Gaming Communities</h1>
+    <div class="container">
+        <div class="community-card">
+            <img src="wtb.jpg" alt="wTB community banner">
+            <div class="card-content">
+                <h2>wTB</h2>
+                <p>Game: Counter-Strike</p>
+                <p>Year Joined: 2012</p>
+                <p>Role: Regular Player</p>
+            </div>
+        </div>
+        <div class="community-card">
+            <img src="nd.jpg" alt="nD community banner">
+            <div class="card-content">
+                <h2>nD</h2>
+                <p>Game: Counter-Strike</p>
+                <p>Year Joined: 2014</p>
+                <p>Role: Regular Player</p>
+            </div>
+        </div>
+        <div class="community-card">
+            <img src="cs.png" alt="GamingDistrict community banner">
+            <div class="card-content">
+                <h2>GamingDistrict</h2>
+                <p>Game: Counter-Strike</p>
+                <p>Year Joined: 2015</p>
+                <p>Role: Server Manager (BaseBuilder)</p>
+            </div>
+        </div>
+        <div class="community-card">
+            <img src="ambrosia.jpg" alt="Ambrosia community banner">
+            <div class="card-content">
+                <h2>Ambrosia</h2>
+                <p>Game: Counter-Strike</p>
+                <p>Year Joined: 2014</p>
+                <p>Role: Regular Player</p>
+            </div>
+        </div>
+        <div class="community-card">
+            <img src="cs.png" alt="CSA community banner">
+            <div class="card-content">
+                <h2>CSA</h2>
+                <p>Game: Counter-Strike</p>
+                <p>Year Joined: 2016</p>
+                <p>Role: Regular Player</p>
+            </div>
+        </div>
+        <div class="community-card">
+            <img src="hs.jpg" alt="hsCorp community banner">
+            <div class="card-content">
+                <h2>hsCorp</h2>
+                <p>Game: Counter-Strike</p>
+                <p>Year Joined: 2017</p>
+                <p>Role: Regular Player</p>
+            </div>
+        </div>
+        <div class="community-card">
+            <img src="l4d.jpg" alt="-=HERO=- community banner">
+            <div class="card-content">
+                <h2>-=HERO=-</h2>
+                <p>Game: Left 4 Dead</p>
+                <p>Year Joined: 2014</p>
+                <p>Role: Regular Player</p>
+            </div>
+        </div>
+        <div class="community-card">
+            <img src="mr.jpg" alt="ModRiot community banner">
+            <div class="card-content">
+                <h2>ModRiot</h2>
+                <p>Game: Sven Co-Op</p>
+                <p>Year Joined: 2017</p>
+                <p>Role: Admin</p>
+            </div>
+        </div>
+        <div class="community-card">
+            <img src="ns.jpg" alt="NS community banner">
+            <div class="card-content">
+                <h2>NS</h2>
+                <p>Game: Counter-Strike</p>
+                <p>Year Joined: 2013</p>
+                <p>Role: Owner</p>
+            </div>
+        </div>
+        <div class="community-card">
+            <img src="df.png" alt="DopeFish community banner">
+            <div class="card-content">
+                <h2>DopeFish</h2>
+                <p>Game: Counter-Strike</p>
+                <p>Year Joined: 2023</p>
+                <p>Role: Regular Player</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Disable right-click context menu
+        window.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Disable Ctrl+U shortcut
+        window.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'u') {
+                e.preventDefault();
+            }
+        });
+
+        // Disable all keyboard shortcuts
+        window.addEventListener('keydown', function(e) {
+            if (e.ctrlKey || e.metaKey) {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>

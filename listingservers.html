@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MODRIOT GAMING SERVERS</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 3em;
+        }
+        .server-list {
+            margin-top: 20px;
+        }
+        .server {
+            border: 2px solid #00ff00;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+        .server h2 {
+            font-size: 1.5em;
+        }
+        .server p {
+            font-size: 1.2em;
+        }
+        button {
+            background-color: #00ff00;
+            color: #000;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #00cc00;
+        }
+    </style>
+    <script>
+        function copyToClipboard(text) {
+            const tempInput = document.createElement('input');
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            alert('IP Address copied to clipboard: ' + text);
+        }
+
+        // Disable right-click context menu
+        document.addEventListener('contextmenu', function(event) {
+            event.preventDefault();
+        });
+
+        // Disable all keyboard shortcuts
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey || event.metaKey || event.altKey || event.key === 'F12') {
+                event.preventDefault();
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Counter-Strike 1.6 MODRIOT / NS Servers * More Coming Soon *</h1>
+        <div class="server-list" id="server-list">
+            <!-- Manually added servers -->
+            <div class="server">
+                <h2>ModRiotGaming || Classic [NS]</h2>
+                <p><strong>IP Address:</strong> 157.173.104.59:27095 <button onclick="copyToClipboard('157.173.104.59:27095')">Copy IP</button></p>
+                <p><strong>MOD:</strong> Classic</p>
+            </div>
+            <div class="server">
+                <h2>ModRiotGaming || DeathMatch [NS]</h2>
+                <p><strong>IP Address:</strong> 157.173.104.59:27090 <button onclick="copyToClipboard('157.173.104.59:27090')">Copy IP</button></p>
+                <p><strong>MOD:</strong> DeathMatch</p>
+            </div>
+            <div class="server">
+                <h2>ModRiotGaming || DeathRun [NS]</h2>
+                <p><strong>IP Address:</strong> 157.173.104.59:27085 <button onclick="copyToClipboard('157.173.104.59:27085')">Copy IP</button></p>
+                <p><strong>MOD:</strong> DeathRun</p>
+            </div>
+            <div class="server">
+                <h2>ModRiotGaming || HideNSeek [NS]</h2>
+                <p><strong>IP Address:</strong> 157.173.104.59:27100 <button onclick="copyToClipboard('157.173.104.59:27100')">Copy IP</button></p>
+                <p><strong>MOD:</strong> HideNSeek</p>
+            </div>
+            <div class="server">
+                <h2>[NS] Necro's Server 24/7</h2>
+                <p><strong>IP Address:</strong> 173.199.107.158:27055 <button onclick="copyToClipboard('173.199.107.158:27055')">Copy IP</button></p>
+                <p><strong>MOD:</strong> 24/7</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Set the web title -->
+    <title>NS Banned Players</title>
+    
+    <!-- Set the custom icon -->
+    <link rel="icon" href="https://i.imgur.com/vqfrYWD.png" type="image/png">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: black;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #333;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #444;
+        }
+        tr:nth-child(odd) {
+            background-color: #555;
+        }
+        th, td {
+            border: 1px solid white;
+        }
+
+        /* Media query for small screens */
+        @media (max-width: 768px) {
+            th, td {
+                font-size: 14px;
+                padding: 5px;
+            }
+        }
+    </style>
+    <script>
+        // Disable right-clicking and text selection
+        window.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+        window.addEventListener('selectstart', function (e) {
+            e.preventDefault();
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Player Ban Information</h1>
+        <table>
+            <tr>
+                <th>Nickname</th>
+                <th>Date Banned</th>
+                <th>Time Until Ban Expires</th>
+                <th>Reason</th>
+                <th>Server</th>
+            </tr>
+            <tr>
+                <td>Haroun Ahmaro</td>
+                <td>2023-10-12</td>
+                <td>2 DAYS</td>
+                <td>TROLLING BEHAVIOUR</td>
+                <td>TROUBLE TOWN</td>
+            </tr>
+            <tr>
+                <td>efa</td>
+                <td>2020</td>
+                <td>7 DAYS</td>
+                <td>DISRESPECTFUL BEHAVIOUR</td>
+                <td>CLASSIC</td>
+            </tr>
+            <tr>
+                <td>s.</td>
+                <td>2023-10-12</td>
+                <td>2 DAYS</td>
+                <td>TROLLING</td>
+                <td>TROUBLE TOWN</td>
+            </tr>
+            <tr>
+                <td>(1)(Warrior) Player</td>
+                <td>2020-10-11</td>
+                <td>7 DAYS</td>
+                <td>MIS APPLYING RULES</td>
+                <td>CLASSIC</td>
+            </tr>
+            <tr>
+                <td>DoLFeeN</td>
+                <td>2020-11-28</td>
+                <td>2 DAYS</td>
+                <td>BAD LANGUAGE</td>
+                <td>CLASSIC</td>
+            </tr>
+            <tr>
+                <td>『DʀᾄGὄN』ツ</td>
+                <td>2020-11-28</td>
+                <td>7 DAYS</td>
+                <td>FREE KILLING + BAD LANGUAGE</td>
+                <td>TROUBLE TOWN</td>
+            </tr>
+            <tr>
+                <td>SOU O DIOGO</td>
+                <td>2023-04-18</td>
+                <td>30 DAYS</td>
+                <td>CHEATING</td>
+                <td>HIDE-N-SEEK</td>
+            </tr>
+            <tr>
+                <td>LoloAkaZabijaka</td>
+                <td>2022-09-05</td>
+                <td>14 DAYS</td>
+                <td>SPAMMING</td>
+                <td>DEATHMATCH</td>
+            </tr>
+            <tr>
+                <td>[SYG]*Hatech</td>
+                <td>2021-12-10</td>
+                <td>7 DAYS</td>
+                <td>HARASSMENT</td>
+                <td>ALL</td>
+            </tr>
+            <tr>
+                <td>Bilcho</td>
+                <td>2023-03-22</td>
+                <td>3 DAYS</td>
+                <td>DISRUPTIVE BEHAVIOR</td>
+                <td>TROUBLE TOWN</td>
+            </tr>
+            <tr>
+                <td>[SUP3R-B] Player</td>
+                <td>2022-11-15</td>
+                <td>10 DAYS</td>
+                <td>CHEATING</td>
+                <td>CLASSIC</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

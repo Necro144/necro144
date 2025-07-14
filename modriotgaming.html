@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ModRiotGaming Server List</title>
+	<link rel="icon" href="cs.png" type="image/x-icon">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="%23222" d="M0 0l50 50 50-50H0z"/></svg>');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        .container {
+            max-width: 900px;
+            padding: 40px;
+            text-align: center;
+            background-color: rgba(30, 30, 30, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            color: #00ff00;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: none;
+        }
+        th {
+            background-color: #333;
+            color: #00ff00;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        tr {
+            background-color: #2a2a2a;
+            transition: all 0.3s ease;
+        }
+        tr:hover {
+            background-color: #3a3a3a;
+            transform: scale(1.02);
+        }
+        .join-button {
+            background-color: #00ff00;
+            color: #1a1a1a;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .join-button:hover {
+            background-color: #00cc00;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+        .info {
+            margin-top: 30px;
+            font-style: italic;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ModRiotGaming Server List</h1>
+        <table>
+            <tr>
+                <th>Server Name</th>
+                <th>IP Address</th>
+                <th>Join</th>
+            </tr>
+            <tr>
+                <td>ModRiotGaming || Classic [NS]</td>
+                <td>157.173.104.59:27095</td>
+                <td><a href="steam://connect/157.173.104.59:27095" class="join-button">Join</a></td>
+            </tr>
+            <tr>
+                <td>ModRiotGaming || DeathRun [NS]</td>
+                <td>157.173.104.59:27085</td>
+                <td><a href="steam://connect/157.173.104.59:27085" class="join-button">Join</a></td>
+            </tr>
+            <tr>
+                <td>ModRiotGaming || HideNSeek [NS]</td>
+                <td>157.173.104.59:27100</td>
+                <td><a href="steam://connect/157.173.104.59:27100" class="join-button">Join</a></td>
+            </tr>
+            <tr>
+                <td>[NS] Necro's Server</td>
+                <td>173.199.107.158:27055</td>
+                <td><a href="steam://connect/173.199.107.158:27055" class="join-button">Join</a></td>
+            </tr>
+            <tr>
+                <td>soon</td>
+                <td>IP_ADDRESS_1</td>
+                <td><a href="steam://connect/IP_ADDRESS_1" class="join-button">Join</a></td>
+            </tr>
+            <tr>
+                <td>soon</td>
+                <td>IP_ADDRESS_2</td>
+                <td><a href="steam://connect/IP_ADDRESS_2" class="join-button">Join</a></td>
+            </tr>
+            <tr>
+                <td>soon</td>
+                <td>IP_ADDRESS_3</td>
+                <td><a href="steam://connect/IP_ADDRESS_3" class="join-button">Join</a></td>
+            </tr>
+        </table>
+
+        <div class="info">
+            <p>To join a server, click the "Join" button or copy the IP address and paste it into the game console.</p>
+        </div>
+    </div>
+</body>
+</html>

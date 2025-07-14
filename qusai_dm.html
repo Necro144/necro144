@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+        // Disable right-click context menu
+        window.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Disable Ctrl+U shortcut
+        window.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'u') {
+                e.preventDefault();
+            }
+        });
+
+        // Disable all keyboard shortcuts
+        window.addEventListener('keydown', function(e) {
+            e.preventDefault();
+        });
+</script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qusai 1999</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212; /* Dark background */
+            color: #fff; /* Light text color */
+            margin: 0;
+            padding: 0;
+        }
+
+        .profile {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #1e1e1e; /* Darker background */
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Lighter shadow */
+            text-align: left; /* Align elements to the left */
+        }
+
+        .profile-image-container {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 2px solid #777; /* Lighter border color */
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .story-indicator {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #4caf50; /* Green color */
+            display: none; /* Initially hidden */
+        }
+
+        .username {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .bio {
+            font-size: 16px;
+            color: #aaa; /* Lighter text color for bio */
+            margin-bottom: 20px;
+        }
+
+        /* Hide the modal by default */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            text-align: center;
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            max-height: 80%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #fff; /* Light text color on hover */
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-video {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Green circle */
+        .green-circle {
+            position: absolute;
+            top: -6px;
+            left: -6px;
+            width: 156px; /* Diameter of the circle + border */
+            height: 156px; /* Diameter of the circle + border */
+            border-radius: 50%;
+            border: 5px solid #4caf50; /* Green color */
+            z-index: 1; /* Behind the profile image */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="profile">
+        <div class="profile-image-container" onclick="openProfileStory()">
+            <div class="green-circle"></div> <!-- Green circle -->
+            <div class="profile-image">
+                <img src="selfie.JPG" alt="Profile Picture">
+                <div class="story-indicator" id="story-indicator"></div>
+            </div>
+        </div>
+        <div class="username">Qusai Allan aka Necro AL</div>
+        <div class="bio">📷 | ᴘᴏʀᴛʀᴀɪᴛ ᴘʜᴏᴛᴏɢʀᴀᴘʜɪᴄ ᴍᴀᴋᴇʀ
+            <div class="bio">📚 | ᴀᴘᴘʟɪᴇᴅ sᴄɪᴇɴᴄᴇ ᴜɴɪᴠᴇʀsɪᴛʏ
+                <div class="bio">👻 | ʟᴇɴs ᴄʀᴇᴀᴛᴏʀ
+                    <div class="bio">🎮 | ᴀᴋᴀ ɴᴇᴄʀᴏ.</div>
+                </div>
+
+                <div id="myModal" class="modal">
+                    <span class="close" onclick="closeProfileStory()">&times;</span>
+                    <div class="modal-content">
+                        <!-- Embed your video here -->
+                        <video class="modal-video" controls>
+                            <source src="IMG_2314.MP4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+
+                <script>
+                    function openProfileStory() {
+                        var modal = document.getElementById('myModal');
+                        var storyIndicator = document.getElementById('story-indicator');
+                        modal.style.display = "block";
+                        storyIndicator.style.display = "block"; // Show the story indicator
+                    }
+
+                    function closeProfileStory() {
+                        var modal = document.getElementById('myModal');
+                        var storyIndicator = document.getElementById('story-indicator');
+                        modal.style.display = "none";
+                        storyIndicator.style.display = "none"; // Hide the story indicator
+                    }
+                </script>
+
+</body>
+<a href="/qusai" style="display: inline-block; background-color: #333; color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 5px;">Switch to Light Mode</a>
+
+</html>

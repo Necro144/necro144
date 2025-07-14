@@ -1,0 +1,109 @@
+<!--------------------------------------------------------------LOADING START-------------------------------------------------------------->
+<!DOCTYPE html><font color=yellow>
+<html>
+<head>
+<style>
+/* Center the loader */
+#loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Add animation to "page content" */
+.animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 }
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom {
+  from{ bottom:-100px; opacity:0 }
+  to{ bottom:0; opacity:1 }
+}
+
+#myDiv {
+  display: none;
+  text-align: center;
+}
+</style>
+</head>
+<body onload="myFunction()" style="margin:0;">
+
+<div id="loader"></div>
+
+<div style="display:none;" id="myDiv" class="animate-bottom">
+<p> Saturday, June 9, 2018
+<p> 8:34 PM - Guccy: wait u rly ban me on the server?
+<p> 8:34 PM - ADMIN: You helped a Banevader. Make unban request if you are willing to play again.
+<p> 8:34 PM - Guccy: wtf??
+<p> 8:35 PM - Guccy: banevader?
+<p> 8:35 PM - ADMIN: Faycal is a banevade from ns server
+<p> 8:35 PM - Guccy: ah ye so why he can play on the server with hes real account
+<p> 8:35 PM - Guccy: .
+<p> 8:35 PM - Guccy: ?
+<p> 8:36 PM - Guccy: ????
+<p> 8:36 PM - ADMIN: Dude he is banevader don't you read :|
+<p> 8:36 PM - Guccy: lol
+<p> 8:37 PM - Guccy: ok banevader but he can play with hes account ok
+<p> 8:37 PM - Guccy: nvm i dont give a fuck but ur rly stupid iswear lol
+<p> 8:37 PM - ADMIN: his account not his account steam not steam he is not allowed to play anymore
+<p> 8:37 PM - Guccy: he have only 1 account steam
+<p> 8:37 PM - Guccy: so wtf u talking about
+<p> 8:38 PM - ADMIN: im done talking to you.
+<p> 8:38 PM - Guccy: lol
+<p> 8:38 PM - Guccy: kid
+<p> 8:38 PM - Guccy is now Offline. 
+</div>
+
+<script>
+var myVar;
+
+function myFunction() {
+    myVar = setTimeout(showPage, 3000);
+}
+
+function showPage() {
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("myDiv").style.display = "block";
+}
+</script>
+<style>
+body  {
+    background-image: url('http://cdn.edgecast.steamstatic.com/steamcommunity/public/images/items/224420/1cee148dbe320a9367bcdf5211ae077e695a4cfe.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+</style>
+</body>
+</html>
+
+	    <!--------------------------------------------------------------LOADING END-------------------------------------------------------------->
