@@ -1,0 +1,804 @@
+/* Main */
+body {
+    background: #2F0505;
+    margin: 0;
+    padding: 0;
+    font-size: 10px;
+    font-family: 'Open Sans', sans-serif;
+    
+}
+
+.col-sm-6 {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+td.no_data{
+    text-align: center!important;
+}
+
+@font-face {
+    font-family: daggersquare;
+    src: url("DAGGERSQUARE.otf") format("opentype");
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+    padding: 0;
+    margin: 0;
+    font-weight: 300;
+}
+
+p {
+    padding: 0;
+    margin: 0;
+}
+
+img.country {
+    margin-right: 3px;
+}
+
+/* Header */
+.header {
+    width: 100%;
+    background: url("../images/header.png") #1a1a1a center no-repeat;
+    text-shadow: 1px 1px black;
+    color: white;
+    padding-top: 3px;
+    padding-bottom: 5px;
+    border-bottom: 5px solid grey;
+    font-family: daggersquare;
+    text-shadow: 2px 2px #000000;
+}
+
+.header .holder {
+    width: 100%;
+    text-align: center;
+    position: relative;
+}
+
+.header img {
+    opacity: 0.825;
+    width: 380px;
+}
+
+.header .holder h2 {
+    font-size: 18px;
+    opacity: 0.8;
+}
+
+/* Main Navigation */
+.main_nav {
+    font-size: 18px;
+    color: white;
+    background: #1f374c;
+    overflow: hidden;
+}
+
+.main_nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+}
+
+.main_nav ul li{
+    float: left;
+}
+
+.main_nav ul li a {
+    display: inline-block;
+    padding: 7px 5px 7px 5px;
+    color: white;
+    text-decoration: none;
+    font-weight: 300;
+    font-size: 13px;
+}
+
+.main_nav ul li.active > a {
+    background: #1d3346;
+}
+
+.main_nav ul li a:hover {
+    background: #1d3346;
+}
+
+.main_nav ul li i {
+    padding-right: 3px;
+}
+
+.main_nav .pull-right {
+    margin-top: 4px;
+    font-size: 12px;
+    color: #ededed;
+    margin-right: 4px;
+}
+
+.main_nav select {
+    background: #313131;
+    border: none;
+    outline: none;
+    padding: 3px;
+}
+
+.main_nav select:hover {
+    background: #292929;
+}
+
+.main_nav option {
+    background: #292929;
+    border: none!important;
+}
+
+.main_nav option:hover {
+    background: #292929;
+}
+
+/* Sub Navigation */
+.sub_nav {
+    font-size: 18px;
+    color: white;
+    background: #233d53;
+    overflow: hidden;
+}
+
+.sub_nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+}
+
+.sub_nav ul li{
+    float: left;
+}
+
+.sub_nav ul li a {
+    display: inline-block;
+    padding: 7px 5px 7px 5px;
+    color: white;
+    text-decoration: none;
+    font-weight: 300;
+    font-size: 11px;
+}
+
+.sub_nav ul li:not(:last-of-type) > a {
+    border-right: 1px solid #21384b;
+}
+
+.sub_nav ul li.active > a {
+    background: #21384c;
+}
+
+.sub_nav ul li a:hover {
+    background: #21384c;
+}
+
+.sub_nav ul li i {
+    padding-right: 3px;
+}
+
+/* Content */
+.content {
+    background: #2f2f2f;
+    padding: 10px;
+    border-bottom: 1px solid #232323;
+    margin-top: 25px;
+    color: #ededed;
+}
+
+/* ------------------ Table --------------------------- */
+table {
+    width: 100%;
+    border-top: 2px solid #27445c;
+    font-size: 12px;
+    color: #ededed;
+}
+
+table tr th {
+    background: #284762;
+    padding: 3px;
+
+}
+
+table tr td {
+    padding: 3px;
+}
+
+table tr:not(:first-of-type){
+    cursor: pointer;
+}
+
+table tr td:not(:nth-child(2)),
+table tr th:not(:nth-child(2)){
+    text-align: center;
+}
+
+table tr td.t_rank,
+table tr th.t_rank {
+    width: 25px;
+}
+
+table tr td.steam,
+table tr th.steam{
+    text-align: left;
+}
+
+table tr:nth-child(odd){
+    background: #274259;
+}
+
+table tr:nth-child(even){
+    background: #264056;
+}
+
+table tr td:last-of-type,
+table tr th:last-of-type{
+    text-align: right;
+}
+
+/* ------------------ Achievement --------------------------- */
+.achievement {
+    color: #ededed;
+    overflow: hidden;
+    margin-top: 10px;
+    width: 100%;
+    
+}
+
+.achievement:first-of-type{
+    margin: 0;
+}
+
+.achievement .holder {
+    padding-left: 80px;
+    float: left;
+    min-height: 72px;
+    position: relative;
+    width: 100%;
+}
+
+.achievement .holder .progress_ach{
+    margin-top: -200px;
+    min-height: 200px;
+    float: left;
+    background: #264056;
+    z-index: 1;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    position: relative;
+}
+
+.achievement .holder .holder_2{
+    background: #284762;
+    width: 100%;
+    min-height: 72px;
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+}
+
+.achievement .holder .holder_2.locked{
+    border-bottom: 2px solid #d35858;
+}
+
+.achievement .holder .holder_2.unlocked{
+    border-bottom: 2px solid #469646;
+}
+
+.achievement .holder .holder_2 .float{
+    float: right;
+    padding: 5px 5px 0px 5px;
+    width: 100%;
+    min-height: 72px;
+    z-index: 100;
+    position: relative;
+}
+
+.achievement .holder .holder_2 .unlocked_by{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 3px;
+    text-align: right;
+}
+
+.achievement .holder .holder_2 .reward{
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    padding: 3px;
+    color: #52883f;
+    font-weight: 600;
+}
+
+.achievement .holder .holder_2 .bar_holder{
+    width: 60%;
+    height: 20px;
+    background: #386995;
+    border: 1px solid #1e3345;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+.achievement .holder .holder_2 .prog_target{
+    font-size: 12px;
+    font-weight: 300;
+    background: #1e3345;
+    border-top-right-radius: 3px;
+    opacity: 0.8;
+    float: left;
+    padding: 2px 3px 1px 3px;
+    height: 20px;
+    margin-top: -19px;
+    margin-left: 100%;
+}
+
+.achievement .holder .holder_2 .bar_holder .prog{
+    background: #5a8fda;
+    height: 18px;
+}
+
+.achievement h3 {
+    font-weight: 400;
+    font-size: 15px;
+    padding: 0;
+    margin: 0;
+    color: #5a8fda;
+}
+
+.achievement p {
+    font-size: 12px;
+    padding-top: 23px;
+    padding: 0;
+    margin: 0;
+}
+
+.achievement .img {
+    width: 72px;
+    height: 72px;
+    position: absolute;
+}
+
+.achievement .img.locked > img {
+    opacity: 0.5;
+}
+
+.achievement .img img {
+    width: 72px;
+    height: 72px;
+}
+
+/* ------------------ Profile --------------------------- */
+.profile{
+    overflow: hidden;
+    position: relative;
+    min-height: 200px;
+}
+
+.profile .avatar {
+    position: absolute;
+    left: 0;
+}
+
+.profile .avatar img {
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    width: 150px;
+    height: 150px;
+}
+
+.profile .next_info{
+    padding-left: 160px;
+    min-height: 180px;
+    margin-bottom: 10px;
+    padding-top: 37px;
+}
+
+.profile .avatar h2{
+    margin-top: 5px;
+    background: #284762;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    padding: 3px;
+    font-size: 18px;
+    text-align: center;
+    width: 150px;
+    height: 25px;
+    overflow: hidden;
+    white-space: nowrap; /* Don't forget this one */
+    text-overflow: ellipsis;
+}
+
+table.right {
+    float: right;
+    width: 50%;
+}
+
+table.left {
+    float:left;
+    width: 50%;
+}
+
+.profile table tr {
+    cursor: auto;
+}
+
+.profile table tr td {
+    text-align: left !important;
+}
+
+
+table.c_text tr td,
+table.c_text tr th {
+    text-align: center!important;
+}
+
+.profile table.sec_fix tr td:not(:first-of-type),
+.profile table.sec_fix tr th:not(:first-of-type) {
+    text-align: right!important;
+}
+
+
+.profile table.edited_t tr td:first-of-type{
+    font-weight: 600;
+    width: 100px;
+}
+
+.profile table.edited_t tr:nth-child(odd) > td:first-of-type{
+    background: #530000;
+}
+
+.profile table.edited_t tr:nth-child(even) > td:first-of-type{
+    background: #2F0505;
+}
+
+img.tiny_img {
+    height: 18px!important;
+    width: 18px!important;
+    border-radius: 3px;
+    margin-top: -5px;
+    margin-right: 3px;
+    display: none;
+}
+
+/* FORM SEARCH */
+
+form.search {
+    text-align: center;
+    margin: 0;
+}
+
+form.search input[type="text"]{
+    background: #3c6487;
+    padding: 5px;
+    outline: none;
+    border: 1px solid #274259;
+    border-right: none;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    color: white;
+    width: 40%;
+    min-width: 200px;
+}
+
+form.search input[type="submit"]{
+    background: url("../images/search.png") no-repeat center center #274259;
+    background-size: 20px 20px;
+    padding: 5px;
+    outline: none;
+    border: 1px solid #274259;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    color: white;
+    margin-left: -5px;
+    width: 30px;
+}
+
+/* ------------------ Achievement --------------------------- */
+.mapbox {
+    color: #ededed;
+    overflow: hidden;
+    margin-top: 10px;
+    width: 100%;
+    
+}
+
+.mapbox:first-of-type{
+    margin: 0;
+}
+
+.mapbox .holder {
+    padding-left: 108px;
+    float: left;
+    min-height: 96px;
+    position: relative;
+    width: 100%;
+}
+
+.mapbox .holder .progress_ach{
+    margin-top: -200px;
+    min-height: 200px;
+    float: left;
+    background: #264056;
+    z-index: 1;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    position: relative;
+}
+
+.mapbox .holder .holder_2{
+    background: #284762;
+    width: 100%;
+    min-height: 96px;
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+}
+
+.mapbox .holder .holder_2.locked{
+    border-bottom: 2px solid #d35858;
+}
+
+.mapbox .holder .holder_2.unlocked{
+    border-bottom: 2px solid #469646;
+}
+
+.mapbox .holder .holder_2 .float{
+    float: right;
+    padding: 5px 5px 0px 5px;
+    width: 100%;
+    min-height: 72px;
+    z-index: 100;
+    position: relative;
+}
+
+.mapbox .holder .holder_2 .unlocked_by{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 3px;
+    text-align: right;
+}
+
+.mapbox .holder .holder_2 .reward{
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    padding: 3px;
+    color: #52883f;
+    font-weight: 600;
+}
+
+.mapbox .holder .holder_2 .bar_holder{
+    width: 60%;
+    height: 20px;
+    background: #386995;
+    border: 1px solid #1e3345;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+.mapbox .holder .holder_2 .prog_target{
+    font-size: 12px;
+    font-weight: 300;
+    background: #1e3345;
+    border-top-right-radius: 3px;
+    opacity: 0.8;
+    float: left;
+    padding: 2px 3px 1px 3px;
+    height: 20px;
+    margin-top: -19px;
+    margin-left: 100%;
+}
+
+.mapbox .holder .holder_2 .bar_holder .prog{
+    background: #5a8fda;
+    height: 18px;
+}
+
+.mapbox h3 {
+    font-weight: 400;
+    font-size: 15px;
+    padding: 0;
+    margin: 0;
+    color: #5a8fda;
+}
+
+.mapbox p {
+    font-size: 12px;
+    padding-top: 23px;
+    padding: 0;
+    margin: 0;
+}
+
+.mapbox .img {
+    width: 72px;
+    height: 72px;
+    position: absolute;
+}
+
+.mapbox .img.locked > img {
+    opacity: 0.5;
+}
+
+.mapbox .img img {
+    width: 96px;
+    height: 96px;
+}
+
+.mapbox .progress-bar {
+    background-color: #0066CC;
+    height: 12px;
+    margin-top:5px;
+    margin-left:5px;
+    width: 65%;
+    display: inline-block;
+    float:left;    
+}
+.mapbox .progress-bar span {
+    float:left;
+    background-color: #d35858;
+    display: inline-block;
+    vertical-align:left;
+    height: 100%;
+    -webkit-transition: width .4s ease-in-out;
+    -moz-transition: width .4s ease-in-out;
+    -ms-transition: width .4s ease-in-out;
+    -o-transition: width .4s ease-in-out;
+    transition: width .4s ease-in-out;  
+}
+.mapbox .progress {
+    color: #29B6B6;
+    font-family: arial;
+    font-size: 0.75em;
+    float:right;
+    padding:0;
+    margin:.3em;
+}
+
+/* rating stars styling */
+.rating span {
+    position:relative;
+    display:inline-block;
+    width:1;
+    font-size: 20px;
+    color: black;
+    overflow:hidden;
+}
+.star:before {
+    display:block;
+    z-index:1;
+    position:absolute;
+    top:0;
+    width: 100%;
+    content: attr(data-content); /* dynamic content for the pseudo element */
+    overflow:hidden;
+    pointer-events: none; /* so the base char is selectable by mouse */
+    color: #469646; /* for demo purposes */
+}
+.halfstar:before {
+    display:block;
+    z-index:1;
+    position:absolute;
+    top:0;
+    width: 50%;
+    content: attr(data-content);
+    overflow:hidden;
+    pointer-events: none; 
+    color: #469646;
+}
+.quarterstar:before {
+    display:block;
+    z-index:1;
+    position:absolute;
+    top:0;
+    width: 35%;
+    content: attr(data-content);
+    overflow:hidden;
+    pointer-events: none; 
+    color: #469646;
+}
+.triquarterstar:before {
+    display:block;
+    z-index:1;
+    position:absolute;
+    top:0;
+    width: 65%;
+    content: attr(data-content);
+    overflow:hidden;
+    pointer-events: none; 
+    color: #469646;
+}
+
+/* ------------------ Footer --------------------------- */
+.footer {
+    padding-bottom: 20px;
+    padding-top: 20px;
+    margin: auto;
+    text-align: center;
+    opacity: 0.9;
+    font-size: 10px;
+    color: #ededed;
+}
+
+/* MD */
+@media (max-width: 992px) {
+    .container{
+        width: 100%;
+    }
+    
+    .header {
+        padding-bottom: 30px;
+        padding-top: 30px;
+    }
+    
+    table.right,
+    table.left {
+        float: none;
+        width: 100%;
+    }
+}
+
+/* XS */
+@media (max-width: 738px) {
+    .header img {
+        max-width: 100%;
+    }
+    
+    .header .holder h2 {
+        font-size: 18px;
+    }
+    
+    .profile .avatar {
+        position: static;
+        margin: auto;
+    }
+    
+    .profile .avatar h2 img.tiny_img {
+        display: inline!important;
+    }
+    
+    .profile .avatar h2 {
+        width: 100%;
+    }
+    
+    .profile .avatar img {
+        display: none;
+    }
+    
+    .profile .next_info {
+        padding-left: 0;
+        padding-top: 0;
+        min-height: 150px;
+    }
+    
+    .main_nav .pull-right{
+        float: none!important;
+        margin-bottom: 2px;
+        padding-left: 3px;
+        display: block!important;
+        width: 100%;
+        text-align: right;
+    }
+}
+
+table.players_live tr.player_t:nth-child(odd){
+    background-color: #562626;
+}
+
+table.players_live tr.player_t:nth-child(even) {
+    background-color: #592727;
+}
+
+table.players_live tr.player_ct:nth-child(odd){
+    background-color: #1f424c;
+}
+
+table.players_live tr.player_ct:nth-child(even) {
+    background-color: #234953;
+}

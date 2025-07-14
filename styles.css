@@ -1,0 +1,212 @@
+/* Body Style */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align items to the top */
+    height: 200vh; /* As per your initial setup */
+    background-color: var(--background-color);
+    margin: 0;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Container Style */
+.container {
+    text-align: center;
+    background: var(--container-background-color);
+    padding: 40px 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    max-width: 500px; /* Slightly wider container */
+    width: 100%; /* Adjust to 100% of the container */
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Profile Image */
+.profile img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--text-color); /* Border for emphasis */
+}
+
+/* Profile Text */
+.profile h1 {
+    margin: 15px 0 5px;
+    font-size: var(--font-size); /* Keep the same font size */
+    color: var(--text-color);
+}
+
+.profile p {
+    font-size: var(--font-size);
+    color: var(--text-color-secondary);
+    margin-bottom: 20px;
+}
+
+/* Links */
+.links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px 0;
+    padding: 15px;
+    background: var(--link-background, #0073e6); /* Maintain existing color */
+    color: var(--link-color, #fff); /* Maintain existing text color */
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: var(--font-size);
+    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+}
+
+.links a img {
+    width: 24px; /* Maintain icon size */
+    height: 24px;
+    margin-right: 10px;
+}
+
+.links a:hover {
+    background: var(--link-hover-background, #005bb5);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Controls */
+.controls button {
+    padding: 10px 10px; /* Keep button padding consistent */
+    margin: 5px;
+    border: none;
+    background: var(--button-background, #0073e6);
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.controls button:hover {
+    background: var(--button-hover-background, #005bb5);
+    transform: translateY(-2px); /* Slight movement on hover */
+}
+
+/* Light mode variables */
+:root {
+    --background-color: #f0f0f0;
+    --container-background-color: #fff;
+    --text-color: #333;
+    --text-color-secondary: #666;
+    --font-size: 16px;
+    --link-background: #0073e6;
+    --link-hover-background: #005bb5;
+    --button-background: #0073e6;
+    --button-hover-background: #005bb5;
+}
+
+/* Dark mode variables */
+body.dark-mode {
+    --background-color: #121212;
+    --container-background-color: #1e1e1e;
+    --text-color: #e0e0e0;
+    --text-color-secondary: #aaaaaa;
+    --link-background: #1a73e8;
+    --link-hover-background: #0c47a1;
+    --button-background: #1a73e8;
+    --button-hover-background: #0c47a1;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .container {
+        width: 90%; /* Adjust container width for smaller screens */
+    }
+    
+    .links a {
+        padding: 12px; /* Slightly reduce padding for smaller screens */
+    }
+    
+    .profile img {
+        width: 100px; /* Adjust profile image size */
+        height: 100px;
+    }
+}
+
+/* Card Color Replacement */
+.links a {
+    background: #FF6347; /* Replace blue with Tomato color */
+    color: #fff; /* Text color */
+    box-shadow: 0 4px 15px rgba(255, 99, 71, 0.4); /* Add shadow effect with color tint */
+}
+
+/* Hover Effect */
+.links a:hover {
+    background: #FF4500; /* Darker shade of the Tomato color on hover */
+    transform: scale(1.05); /* Slight zoom effect on hover */
+    box-shadow: 0 8px 20px rgba(255, 69, 0, 0.6); /* Enhanced shadow effect on hover */
+}
+
+/* Soft Inner Shadow */
+.links a {
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1); /* Soft inner shadow */
+}
+
+/* Elevation Effect */
+.links a {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* Multi-layered shadow for depth */
+}
+
+/* Gradient Border */
+.links a {
+    border: 2px solid transparent;
+    border-image: linear-gradient(45deg, #f3ec78, #af4261);
+    border-image-slice: 1; /* Gradient border effect */
+}
+
+/* Animated Border on Hover */
+.links a:hover {
+    border: 2px solid #FF6347;
+    transition: border 0.3s ease; /* Smooth transition for the border */
+}
+
+/* Subtle Gradient Background */
+.links a {
+    background: linear-gradient(135deg, #f06, #bada55); /* Diagonal gradient background */
+}
+
+/* Background Shift on Hover */
+.links a:hover {
+    background: linear-gradient(135deg, #bada55, #f06); /* Background gradient shift on hover */
+    transition: background 0.3s ease-in-out; /* Smooth background transition */
+}
+
+/* Text Shadow */
+.links a {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Slight shadow for text clarity */
+}
+
+/* Glowing Text on Hover */
+.links a:hover {
+    text-shadow: 0 0 8px rgba(255, 99, 71, 0.8); /* Glow effect on text when hovered */
+}
+
+/* Tilt Effect */
+.links a {
+    transform: perspective(1000px) rotateY(0deg); /* Default state */
+    transition: transform 0.3s ease-in-out;
+}
+
+.links a:hover {
+    transform: perspective(1000px) rotateY(10deg); /* Tilt slightly on the Y-axis */
+}
+
+/* Bounce Effect */
+.links a:hover {
+    transform: translateY(-5px); /* Move the card up slightly */
+    animation: bounce 0.5s ease-in-out infinite alternate; /* Bounce effect */
+}
+
+@keyframes bounce {
+    0% { transform: translateY(-5px); }
+    100% { transform: translateY(0px); }
+}
+

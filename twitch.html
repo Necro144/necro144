@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="refresh" content="0;url=https://www.twitch.tv/nekk1999/clips?featured=false&filter=clips&range=all">
+<title>Redirecting...</title>
+</head>
+<body>
+If you are not redirected, <a href="https://www.twitch.tv/nekk1999">click here</a>.
+  <style>
+  /* Style for normal links */
+  a {
+    color: yellow; /* Change this to your desired color */
+    text-decoration: none;
+  }
+
+  /* Style for external links */
+  a[href^="http"]:not([href*="your-website-domain.com"]),
+  a[href^="https"]:not([href*="your-website-domain.com"]) {
+    color: yellow; /* Change this to your desired color for external links */
+    text-decoration: none;
+  }
+</style>
+<script>
+  // Disable right-click context menu
+  window.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+  });
+
+  // Disable Ctrl+U shortcut
+  window.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && e.key === 'u') {
+      e.preventDefault();
+    }
+  });
+
+  // Disable all keyboard shortcuts
+  window.addEventListener('keydown', function(e) {
+    e.preventDefault();
+  });
+</script>
+</body>
+</html>

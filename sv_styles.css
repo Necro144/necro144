@@ -1,0 +1,124 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #000;
+    color: #00FF00;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    zoom: 70%; /* Sets the zoom level to 70% */
+    user-select: none; /* Disables text selection */
+}
+
+.container {
+    text-align: center;
+    background-color: #1A0000;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.7);
+    width: 70%;
+    max-width: 1200px; /* Ensures it fits on larger screens */
+    margin: auto; /* Centers the container */
+}
+
+h1 {
+    color: #FF0000;
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+    text-shadow: 0 0 10px #FF5555, 0 0 20px #FF0000; /* Adds a glowing horror effect */
+}
+
+.server-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.server {
+    background-color: #330000;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 220px;
+    text-align: center;
+    cursor: pointer; /* Indicates interactivity */
+}
+
+.server img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.server p {
+    color: #00FF00;
+    margin-top: 15px;
+    font-size: 1.1rem;
+    text-shadow: 0 0 5px #00FF00, 0 0 10px #00FF00; /* Adds a glowing text effect */
+}
+
+.server:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.7); /* Enhances the glow effect on hover */
+}
+
+a {
+    text-decoration: none;
+    color: #FF0000;
+    font-weight: bold;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    text-shadow: 0 0 5px #FF0000; /* Adds a light shadow effect */
+}
+
+a:hover {
+    color: #FF5555;
+    text-shadow: 0 0 10px #FF5555, 0 0 20px #FF0000; /* Intensifies the glow on hover */
+}
+
+.server img {
+    width: 200px; /* Fixed width */
+    height: 100px; /* Fixed height */
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+body {
+    margin: 0;
+    padding: 90px 0 0 0; /* Adds 50px space at the top */
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #000;
+    color: #00FF00;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Aligns the container with space above */
+    height: 100vh;
+    zoom: 70%;
+    user-select: none;
+}
+
+/* Apply zoom to the entire page */
+body {
+    zoom: 0.95; /* Normal size (100%) */
+}
+
+/* Different zoom levels */
+.zoom-small {
+    zoom: 0.8; /* 80% of the original size */
+}
+
+.zoom-large {
+    zoom: 1.2; /* 120% of the original size */
+}
+
+/* Example of changing zoom with a media query */
+@media (max-width: 600px) {
+    body {
+        zoom: 0.9; /* Reduce zoom for small screens */
+    }
+}
+
