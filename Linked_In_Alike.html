@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Qusai Ali Allan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #f0f2f5;
+      --card-bg: #ffffff;
+      --text-color: #1c2526;
+      --secondary-text: #606770;
+      --link-color: #0966c2;
+      --link-hover: #054b89;
+      --border-color: #e0e2e5;
+      --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      --button-bg: #0966c2;
+      --button-text: #ffffff;
+      --button-hover: #054b89;
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #18191a;
+      --card-bg: #242526;
+      --text-color: #e4e6eb;
+      --secondary-text: #b0b3b8;
+      --link-color: #4e97d9;
+      --link-hover: #70b5f9;
+      --border-color: #3e4042;
+      --shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      --button-bg: #4e97d9;
+      --button-hover: #70b5f9;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .profile-card {
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      padding: 20px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .profile-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--card-bg);
+      box-shadow: 0 0 0 2px var(--border-color);
+    }
+
+    .profile-info {
+      flex: 1;
+    }
+
+    .profile-info h1 {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .profile-info p {
+      font-size: 16px;
+      color: var(--secondary-text);
+      margin-bottom: 4px;
+    }
+
+    .theme-toggle, .back-button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      background-color: var(--button-bg);
+      color: var(--button-text);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 10px;
+    }
+
+    .theme-toggle:hover, .back-button:hover {
+      background-color: var(--button-hover);
+    }
+
+    .back-button {
+      background-color: #6c757d;
+    }
+
+    .back-button:hover {
+      background-color: #5a6268;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--border-color);
+      margin: 20px 0;
+    }
+
+    .section {
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .section h1, .section h2, .section h3 {
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .section h1 {
+      font-size: 24px;
+    }
+
+    .section h2 {
+      font-size: 20px;
+    }
+
+    .section h3 {
+      font-size: 18px;
+    }
+
+    .section p, .section li {
+      font-size: 16px;
+      color: var(--secondary-text);
+    }
+
+    .section ul {
+      list-style: none;
+      padding-left: 20px;
+    }
+
+    .section ul li {
+      position: relative;
+      margin-bottom: 8px;
+    }
+
+    .section ul li::before {
+      content: '•';
+      position: absolute;
+      left: -20px;
+      color: var(--link-color);
+    }
+
+    a {
+      color: var(--link-color);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--link-hover);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 10px;
+      }
+
+      .profile-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .profile-img {
+        width: 100px;
+        height: 100px;
+      }
+
+      .profile-info h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="profile-card">
+      <div class="profile-header">
+        <img src="selfie.JPG" alt="Profile Photo" class="profile-img">
+        <div class="profile-info">
+          <h1>Qusai Ali Allan</h1>
+          <p>Lifestyle Portrait Photographer</p>
+          <p>Location: Jordan</p>
+          <button class="theme-toggle" onclick="toggleTheme()">Toggle Dark/Light Mode</button>
+          <a href="index.html"><button class="back-button">Back to Home</button></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h1>Skills Overview</h1>
+      <div class="skills-section">
+        <div class="skill">
+          <h2>Photography</h2>
+          <ul>
+            <li>Proficient in capturing moments with creativity and precision.</li>
+            <li>Experienced in various photography styles including portrait, landscape, and event photography.</li>
+            <li>Skilled in utilizing professional-grade camera equipment and editing software to enhance visual impact.</li>
+            <a href="https://1drv.ms/f/s!AjI1eAlvEOSXgaQQrLKDgKEgi478OA?e=l4QYZh" target="_blank">Samples 📷</a>
+          </ul>
+        </div>
+        <div class="skill">
+          <h2>Short Quotes Writing</h2>
+          <ul>
+            <li>Gifted in crafting concise and impactful quotes that resonate with audiences.</li>
+            <li>Able to convey complex emotions and ideas in a succinct manner.</li>
+            <li>Experienced in tailoring quotes to suit various contexts and purposes.</li>
+            <a href="https://www.instagram.com/hnk.jo" target="_blank">Curator of Wisdom 🖤💭 [ Instagram ]</a>
+          </ul>
+        </div>
+        <div class="skill">
+          <h2>Short Video Editing</h2>
+          <ul>
+            <li>Proficient in assembling engaging short videos that captivate audiences.</li>
+            <li>Skilled in video editing software to enhance visual appeal and storytelling.</li>
+            <li>Experienced in creating compelling narratives through effective sequencing and pacing.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h1>General Achievements</h1>
+      <div>
+        <h2>University Community Service</h2>
+        <p>I have demonstrated my commitment to community engagement and service by actively participating in various initiatives both within and outside the university during my first year of study. Through these experiences, I have honed my abilities to collaborate effectively, communicate with diverse groups, and contribute positively to the betterment of society.</p>
+      </div>
+      <div>
+        <h2>Cultivating Resilience</h2>
+        <p>Triumphing Over Adversity and Inspiring Mental Wellness: I have overcome periods of sadness and worry as well as other personal obstacles with resiliency and persistence. I have effectively overcome these challenges and come out on the other side with a revitalized sense of purpose and wellbeing via self-reflection, counseling, and coping mechanism adoption. Inspired by my experience, I'm determined to help those going through comparable hardships by providing understanding, direction, and encouragement while also advancing a positive and mental health-conscious culture.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h1>Certifications</h1>
+      <div>
+        <a href="https://1drv.ms/b/s!AjI1eAlvEOSXgaQJQIRNH8qofiTqdQ?e=oIBgrT" target="_blank">
+          <h2>Certificate of Appreciation - Reading Event "Between the Lines"</h2>
+        </a>
+        <p>Date: November 24, 2022 at Applied Science University</p>
+      </div>
+      <div>
+        <a href="https://1drv.ms/b/s!AjI1eAlvEOSXgaQKUY_Nze8KVkwSUQ?e=Qxk3UV" target="_blank">
+          <h2>Public Speaking Competition</h2>
+        </a>
+        <p>Date: January 10, 2023 at Applied Science University</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h1>Education</h1>
+      <div>
+        <h3>Bachelor's Degree in English Literature</h3>
+        <p>Applied Science University</p>
+        <p>2022 - Expected Graduation in 2027</p>
+      </div>
+      <div>
+        <h3>High School</h3>
+        <p>Al Ittihad High School</p>
+        <p>2012 - 2017</p>
+      </div>
+      <div>
+        <h3>High School</h3>
+        <p>Al Hekma for Boys High School</p>
+        <p>2008 - 2012</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Theme toggle functionality
+    function toggleTheme() {
+      const body = document.body;
+      const currentTheme = body.getAttribute('data-theme');
+      body.setAttribute('data-theme', currentTheme === 'dark' ? 'light' : 'dark');
+      localStorage.setItem('theme', body.getAttribute('data-theme'));
+    }
+
+    // Load saved theme
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.body.setAttribute('data-theme', savedTheme);
+    });
+
+    // Disable right-click context menu
+    window.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+    });
+
+    // Disable Ctrl+U shortcut
+    window.addEventListener('keydown', function(e) {
+      if (e.ctrlKey && e.key === 'u') {
+        e.preventDefault();
+      }
+    });
+
+    // Disable all keyboard shortcuts (optional, as it may affect usability)
+    window.addEventListener('keydown', function(e) {
+      if (e.ctrlKey || e.metaKey) {
+        e.preventDefault();
+      }
+    });
+  </script>
+</body>
+</html>

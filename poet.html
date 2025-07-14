@@ -4,150 +4,419 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Qusai Allan - Poet Community</title>
+    <meta name="referrer" content="no-referrer">
+    <meta name="robots" content="noindex, nofollow">
     <style>
         :root {
-            --bg-color: #f5f5f5;
-            --text-color: #333;
-            --accent-color: #4a90e2;
-            --glow-color: rgba(74, 144, 226, 0.3);
+            --bg-color: #f8f9fa;
+            --text-color: #212529;
+            --accent-color: #6c5ce7;
+            --glow-color: rgba(108, 92, 231, 0.2);
             --container-bg: #ffffff;
+            --card-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --accent-color: #a78bfa;
+            --glow-color: rgba(167, 139, 250, 0.2);
+            --container-bg: #1e1e1e;
+            --card-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
-            font-family: 'Georgia', serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            transition: background-color 0.3s, color 0.3s;
+            transition: var(--transition);
+            min-height: 100vh;
+            padding: 20px;
         }
+        
         .container {
             max-width: 800px;
             margin: 40px auto;
             padding: 40px;
             background-color: var(--container-bg);
-            box-shadow: 0 0 20px var(--glow-color);
-            border-radius: 15px;
+            box-shadow: var(--card-shadow);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
         }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-color), #ff6b6b);
+        }
+        
         .profile {
             display: flex;
             align-items: center;
             margin-bottom: 30px;
+            gap: 20px;
         }
+        
         .profile img {
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            margin-right: 20px;
-            box-shadow: 0 0 10px var(--glow-color);
+            object-fit: cover;
+            border: 3px solid var(--accent-color);
+            box-shadow: 0 0 15px var(--glow-color);
+            transition: var(--transition);
         }
+        
         .profile-info {
             display: flex;
             flex-direction: column;
         }
+        
         .profile-info strong {
             font-size: 1.4em;
             color: var(--accent-color);
+            font-weight: 600;
         }
+        
         .timestamp {
-            color: #777;
+            color: var(--text-color);
+            opacity: 0.7;
             font-size: 0.9em;
             margin-top: 5px;
         }
+        
         .post-content {
             font-size: 1.1em;
             text-align: justify;
         }
+        
         .post-content h2 {
             color: var(--accent-color);
             font-size: 1.8em;
             margin-bottom: 20px;
-            text-shadow: 0 0 5px var(--glow-color);
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
         }
-        .dark-mode-toggle {
+        
+        .post-content h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-color), transparent);
+            border-radius: 3px;
+        }
+        
+        .post-content p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .controls {
             position: fixed;
             top: 20px;
             right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
         }
-        .dark-mode-toggle button {
-            padding: 10px 20px;
+        
+        .control-btn {
+            padding: 10px 15px;
             border: none;
-            border-radius: 25px;
+            border-radius: 50px;
             background-color: var(--accent-color);
-            color: #fff;
+            color: white;
             cursor: pointer;
-            transition: all 0.3s;
-            font-family: 'Georgia', serif;
-            font-size: 0.9em;
+            transition: var(--transition);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 10px var(--glow-color);
         }
-        .dark-mode-toggle button:hover {
-            background-color: #3a7bc8;
-            box-shadow: 0 0 10px var(--glow-color);
+        
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px var(--glow-color);
         }
-        body.dark-mode {
-            --bg-color: #1a1a1a;
-            --text-color: #e0e0e0;
-            --accent-color: #6ab0ff;
-            --glow-color: rgba(106, 176, 255, 0.3);
-            --container-bg: #2a2a2a;
+        
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 50px;
+            background-color: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            color: var(--text-color);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            z-index: 100;
         }
-        @media (max-width: 600px) {
+        
+        .back-btn:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        .language-selector {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+        
+        .language-btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 50px;
+            background-color: var(--accent-color);
+            color: white;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .language-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px var(--glow-color);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px;
+                margin: 20px auto;
+            }
+            
+            .profile {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .post-content h2 {
+                font-size: 1.5em;
+            }
+            
+            .controls {
+                top: 15px;
+                right: 15px;
+            }
+            
+            .back-btn {
+                top: 15px;
+                left: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
             .container {
                 padding: 20px;
-                margin: 20px;
             }
-            .profile img {
-                width: 60px;
-                height: 60px;
-            }
+            
             .post-content {
                 font-size: 1em;
             }
+            
+            .control-btn, .back-btn, .language-btn {
+                padding: 8px 12px;
+                font-size: 0.9em;
+            }
+        }
+        
+        /* Hidden content initially */
+        [data-lang] {
+            display: none;
+        }
+        
+        [data-lang="en"] {
+            display: block;
         }
     </style>
 </head>
 <body>
-    <div class="dark-mode-toggle">
-        <button id="darkModeSwitcher">Toggle Dark Mode</button>
+    <button class="back-btn" onclick="window.location.href='index.html'">
+        ← Back
+    </button>
+    
+    <div class="controls">
+        <button class="control-btn" id="themeSwitcher">
+            <span class="light-icon">☀️</span>
+            <span class="dark-icon" style="display:none">🌙</span>
+        </button>
     </div>
-
+    
     <div class="container">
         <div class="profile">
             <img src="IMG_6071_cropped.png" alt="Profile picture of Qusai Allan">
             <div class="profile-info">
                 <strong>Qusai Allan</strong>
-                <span class="timestamp">18th July 2024</span>
+                <span class="timestamp">July 18, 2024</span>
             </div>
         </div>
-        <div class="post-content">
+        
+        <!-- English Version -->
+        <div class="post-content" data-lang="en">
             <h2>Mhmm, i don't feel like it.</h2>
-
-
-<p>In this world, I feel misplaced, as if I'm an anomaly in this era. Imagine the curse of misfortune shadowing every step—whether in games, studies, love, or even sleep. It’s like drifting through life without truly living, burdened by the weight of unrelenting bad luck. It's not that I don’t wish to embrace life; it’s that I simply can’t. I reside in Jordan, a land I find myself resenting, dreaming of disappearing into solitude where I could bear only my own burdens. Life here wears me down, a relentless tide of stress and exhaustion, leaving me in a strange limbo—neither joyful nor sorrowful, just steeped in a quiet melancholy. Sometimes, I long for tears, for the release that would let me feel alive once more.</p>
-
-<p>This generation seems to insist we 'vibe,' smoke, indulge in fleeting pleasures, grow cold hearts, curse, steal, and fight just to survive. But that’s not who I am. My heart remains gentle, pure at its core. I refuse to conform to a life that feels sick, hollow, and unworthy. In my quest for vitality, I cling to simple comforts—PUBG, solitary walks, music that heals the soul, the escapism of Netflix and YouTube, and the silent companionship of my bike. That bike has become my truest friend, whisking me away to places where no one else can see me. In the quiet of night, I sit in the darkness, sometimes in tears, sometimes lost in music, fighting to keep the shadows at bay. Each morning, I wake hoping to outrun the stress, finding some solace in the gym—though it's fleeting. I strive to remain on the right path, avoiding temptations, not harming anyone, holding tight to who I am without succumbing to the pressure to conform.</p>
-
-<p>Yet, despite my efforts, I feel like I've failed to find my place in this time. From the moment I step out my door until I return, I'm met with disappointment in the faces and hearts of those around me. I loathe this land—its people, its culture, its oppressive weight. Here, finding work feels like searching for gold in barren sands. I've turned to freelance photography, hoping it sustains me until I can afford better tools. </p>
-
-<p>As a self-taught psychiatrist and personality psychologist, I've learned to understand people's personalities, tensions, abilities, and psychological language. I give countless chances to salvage relationships, offering advice with a compassionate heart. I believe in redemption and growth, always seeking to guide others towards a better understanding of themselves and their connections. </p>
-
-<p>And today—Thursday, July 18, 2024—feels like every other day, marked by a silent prayer for change, a quiet yearning for escape.</p>
-</div>
+            <p>In this world, I feel misplaced, as if I'm an anomaly in this era. Imagine the curse of misfortune shadowing every step—whether in games, studies, love, or even sleep. It's like drifting through life without truly living, burdened by the weight of unrelenting bad luck. It's not that I don't wish to embrace life; it's that I simply can't. I reside in Jordan, a land I find myself resenting, dreaming of disappearing into solitude where I could bear only my own burdens. Life here wears me down, a relentless tide of stress and exhaustion, leaving me in a strange limbo—neither joyful nor sorrowful, just steeped in a quiet melancholy. Sometimes, I long for tears, for the release that would let me feel alive once more.</p>
+            <p>This generation seems to insist we 'vibe,' smoke, indulge in fleeting pleasures, grow cold hearts, curse, steal, and fight just to survive. But that's not who I am. My heart remains gentle, pure at its core. I refuse to conform to a life that feels sick, hollow, and unworthy. In my quest for vitality, I cling to simple comforts—PUBG, solitary walks, music that heals the soul, the escapism of Netflix and YouTube, and the silent companionship of my bike. That bike has become my truest friend, whisking me away to places where no one else can see me. In the quiet of night, I sit in the darkness, sometimes in tears, sometimes lost in music, fighting to keep the shadows at bay. Each morning, I wake hoping to outrun the stress, finding some solace in the gym—though it's fleeting. I strive to remain on the right path, avoiding temptations, not harming anyone, holding tight to who I am without succumbing to the pressure to conform.</p>
+            <p>Yet, despite my efforts, I feel like I've failed to find my place in this time. From the moment I step out my door until I return, I'm met with disappointment in the faces and hearts of those around me. I loathe this land—its people, its culture, its oppressive weight. Here, finding work feels like searching for gold in barren sands. I've turned to freelance photography, hoping it sustains me until I can afford better tools.</p>
+            <p>As a self-taught psychiatrist and personality psychologist, I've learned to understand people's personalities, tensions, abilities, and psychological language. I give countless chances to salvage relationships, offering advice with a compassionate heart. I believe in redemption and growth, always seeking to guide others towards a better understanding of themselves and their connections.</p>
+            <p>And today—Thursday, July 18, 2024—feels like every other day, marked by a silent prayer for change, a quiet yearning for escape.</p>
+        </div>
+        
+        <!-- Russian Version -->
+        <div class="post-content" data-lang="ru">
+            <h2>Ммм, мне не хочется.</h2>
+            <p>В этом мире я чувствую себя не на своем месте, словно аномалия в этой эпохе. Представьте проклятие невезения, преследующее каждый шаг — будь то игры, учеба, любовь или даже сон. Это как дрейфовать по жизни, не живя по-настоящему, обремененным грузом непрекращающейся неудачи. Дело не в том, что я не хочу принимать жизнь; просто я не могу. Я живу в Иордании, стране, которую я возненавидел, мечтая исчезнуть в одиночестве, где мне пришлось бы нести только свои собственные тяготы. Жизнь здесь изматывает меня, непрекращающийся поток стресса и усталости, оставляя меня в странном лимбе — ни радости, ни печали, только тихая меланхолия. Иногда мне хочется заплакать, чтобы освободиться и снова почувствовать себя живым.</p>
+            <p>Это поколение, кажется, настаивает на том, чтобы мы "зажигали", курили, предавались мимолетным удовольствиям, ожесточали сердца, ругались, воровали и дрались просто чтобы выжить. Но это не я. Мое сердце остается мягким, чистым в своей основе. Я отказываюсь соответствовать жизни, которая кажется больной, пустой и недостойной. В поисках жизненной силы я цепляюсь за простые утешения — PUBG, одинокие прогулки, музыку, исцеляющую душу, бегство в Netflix и YouTube, и безмолвную компанию моего велосипеда. Этот велосипед стал моим самым верным другом, уносящим меня в места, где меня никто не видит. В тишине ночи я сижу в темноте, иногда в слезах, иногда потерянный в музыке, борясь, чтобы держать тени на расстоянии. Каждое утро я просыпаюсь с надеждой убежать от стресса, находя некоторое утешение в спортзале — хотя оно мимолетно. Я стараюсь оставаться на правильном пути, избегая искушений, никому не вредя, крепко держась за то, кто я есть, не поддаваясь давлению соответствовать.</p>
+            <p>И все же, несмотря на все мои усилия, я чувствую, что не смог найти свое место в этом времени. С момента, когда я выхожу из дома, и до возвращения, я встречаю разочарование в лицах и сердцах окружающих. Я ненавижу эту землю — ее людей, ее культуру, ее гнетущий груз. Здесь поиск работы ощущается как поиск золота в бесплодных песках. Я обратился к фриланс-фотографии, надеясь, что она поддержит меня, пока я не смогу позволить себе лучшие инструменты.</p>
+            <p>Как самоучка-психиатр и психолог личности, я научился понимать личности людей, их напряжения, способности и психологический язык. Я даю бесчисленные шансы спасти отношения, предлагая советы с сострадательным сердцем. Я верю в искупление и рост, всегда стремясь направить других к лучшему пониманию себя и своих связей.</p>
+            <p>И сегодня — четверг, 18 июля 2024 года — чувствуется как любой другой день, отмеченный тихой молитвой о переменах, тихим стремлением к побегу.</p>
+        </div>
+        
+        <!-- Spanish Version -->
+        <div class="post-content" data-lang="es">
+            <h2>Mmm, no me apetece.</h2>
+            <p>En este mundo, me siento fuera de lugar, como si fuera una anomalía en esta era. Imagina la maldición de la mala suerte siguiendo cada paso, ya sea en juegos, estudios, amor o incluso el sueño. Es como vagar por la vida sin vivir realmente, cargado con el peso de la implacable mala suerte. No es que no desee abrazar la vida; es que simplemente no puedo. Resido en Jordania, una tierra que termino resentido, soñando con desaparecer en la soledad donde solo tendría que soportar mis propias cargas. La vida aquí me agota, una marea implacable de estrés y agotamiento, dejándome en un extraño limbo, ni alegre ni triste, solo sumido en una melancolía silenciosa. A veces, anhelo llorar, por la liberación que me haría sentir vivo una vez más.</p>
+            <p>Esta generación parece insistir en que "vibremos", fumemos, nos entreguemos a placeres fugaces, endurezcamos nuestros corazones, maldigamos, robemos y luchemos solo para sobrevivir. Pero ese no soy yo. Mi corazón sigue siendo gentil, puro en su esencia. Me niego a conformarme con una vida que se siente enferma, vacía e indigna. En mi búsqueda de vitalidad, me aferro a consuelos simples: PUBG, caminatas solitarias, música que cura el alma, el escapismo de Netflix y YouTube, y la compañía silenciosa de mi bicicleta. Esa bicicleta se ha convertido en mi amiga más fiel, llevándome a lugares donde nadie más puede verme. En la quietud de la noche, me siento en la oscuridad, a veces llorando, a veces perdido en la música, luchando por mantener a raya las sombras. Cada mañana, me despierto esperando escapar del estrés, encontrando algún consuelo en el gimnasio, aunque sea fugaz. Me esfuerzo por permanecer en el camino correcto, evitando tentaciones, sin dañar a nadie, aferrándome a quien soy sin ceder a la presión de conformarme.</p>
+            <p>Sin embargo, a pesar de mis esfuerzos, siento que he fallado en encontrar mi lugar en este tiempo. Desde el momento en que salgo por la puerta hasta que regreso, me encuentro con decepción en los rostros y corazones de quienes me rodean. Detesto esta tierra: su gente, su cultura, su peso opresivo. Aquí, encontrar trabajo se siente como buscar oro en arenas estériles. Me he vuelto hacia la fotografía freelance, esperando que me sustente hasta que pueda permitirme mejores herramientas.</p>
+            <p>Como psiquiatra autodidacta y psicólogo de personalidad, he aprendido a entender las personalidades, tensiones, habilidades y lenguaje psicológico de las personas. Doy innumerables oportunidades para salvar relaciones, ofreciendo consejos con un corazón compasivo. Creo en la redención y el crecimiento, siempre buscando guiar a otros hacia un mejor entendimiento de sí mismos y sus conexiones.</p>
+            <p>Y hoy, jueves 18 de julio de 2024, se siente como cualquier otro día, marcado por una oración silenciosa por un cambio, un anhelo tranquilo de escape.</p>
+        </div>
+        
+        <!-- French Version -->
+        <div class="post-content" data-lang="fr">
+            <h2>Mhmm, je n'en ai pas envie.</h2>
+            <p>Dans ce monde, je me sens déplacé, comme une anomalie dans cette époque. Imaginez la malédiction de la malchance qui suit chaque pas, que ce soit dans les jeux, les études, l'amour ou même le sommeil. C'est comme dériver à travers la vie sans vraiment vivre, accablé par le poids d'une malchance implacable. Ce n'est pas que je ne veuille pas embrasser la vie ; c'est que je ne peux tout simplement pas. Je réside en Jordanie, une terre que je me surprends à détester, rêvant de disparaître dans la solitude où je ne porterais que mes propres fardeaux. La vie ici m'use, une marée incessante de stress et d'épuisement, me laissant dans un étrange limbe, ni joyeux ni triste, juste plongé dans une mélancolie tranquille. Parfois, j'ai envie de pleurer, pour la libération qui me ferait me sentir vivant à nouveau.</p>
+            <p>Cette génération semble insister pour que nous "vibrions", fumions, nous adonnions à des plaisirs éphémères, ayons des cœurs froids, jurions, volions et nous battions juste pour survivre. Mais ce n'est pas qui je suis. Mon cœur reste doux, pur dans son essence. Je refuse de me conformer à une vie qui semble malade, creuse et indigne. Dans ma quête de vitalité, je m'accroche à des réconforts simples : PUBG, des promenades solitaires, de la musique qui guérit l'âme, l'évasion de Netflix et YouTube, et la compagnie silencieuse de mon vélo. Ce vélo est devenu mon ami le plus fidèle, m'emportant vers des lieux où personne d'autre ne peut me voir. Dans le calme de la nuit, je m'assois dans l'obscurité, parfois en larmes, parfois perdu dans la musique, luttant pour garder les ombres à distance. Chaque matin, je me réveille en espérant échapper au stress, trouvant un certain réconfort dans la salle de sport, bien que fugace. Je m'efforce de rester sur le droit chemin, évitant les tentations, ne faisant de mal à personne, m'accrochant fermement à qui je suis sans succomber à la pression de me conformer.</p>
+            <p>Pourtant, malgré mes efforts, j'ai l'impression d'avoir échoué à trouver ma place dans cette époque. Dès que je franchis la porte jusqu'à mon retour, je suis confronté à la déception dans les visages et les cœurs de ceux qui m'entourent. Je déteste cette terre, ses gens, sa culture, son poids oppressant. Ici, trouver du travail ressemble à chercher de l'or dans des sables stériles. Je me suis tourné vers la photographie freelance, espérant qu'elle me soutiendra jusqu'à ce que je puisse me permettre de meilleurs outils.</p>
+            <p>En tant que psychiatre et psychologue de la personnalité autodidacte, j'ai appris à comprendre les personnalités, les tensions, les capacités et le langage psychologique des gens. Je donne d'innombrables chances pour sauver des relations, offrant des conseils avec un cœur compatissant. Je crois en la rédemption et en la croissance, cherchant toujours à guider les autres vers une meilleure compréhension d'eux-mêmes et de leurs connexions.</p>
+            <p>Et aujourd'hui, jeudi 18 juillet 2024, ressemble à n'importe quel autre jour, marqué par une prière silencieuse pour un changement, un désir tranquille d'évasion.</p>
+        </div>
+        
+        <!-- Arabic Version -->
+        <div class="post-content" data-lang="ar" dir="rtl">
+            <h2>هممم، لا أشعر بالرغبة.</h2>
+            <p>في هذا العالم، أشعر بأنني في غير مكاني، كأنني شذوذ في هذا العصر. تخيل لعنة الحظ السيء التي تتبع كل خطوة - سواء في الألعاب، الدراسة، الحب، أو حتى النوم. إنه مثل الانجراف عبر الحياة دون عيش حقيقي، مثقلًا بثقل الحظ السيء الذي لا يرحم. ليس الأمر أنني لا أرغب في احتضان الحياة؛ ببساطة لا أستطيع. أقيم في الأردن، أرض أجد نفسي ممتعضًا منها، أحلم بالاختفاء في العزلة حيث يمكنني تحمل أعبائي فقط. الحياة هنا ترهقني، مدًا لا ينقطع من التوتر والإرهاق، تاركًا إياي في حالة غريبة - لا فرح ولا حزن، فقط غارق في كآبة هادئة. أحيانًا، أتوق للبكاء، للتحرر الذي سيجعلني أشعر بالحياة مرة أخرى.</p>
+            <p>يبدو أن هذا الجيل يصر على أن نكون "في الموجة"، ندخن، ننغمس في ملذات عابرة، تصبح قلوبنا باردة، نلعن، نسرق، ونقاتل فقط للبقاء. لكن هذا ليس من أنا. قلبي يبقى لطيفًا، نقيًا في جوهره. أرفض أن أتأقلم مع حياة تشعرني بالمرض، الفراغ، وعدم القيمة. في سعياي للحيوية، أتشبث بوسائل الراحة البسيطة - PUBG، المشي وحيدًا، الموسيقى التي تشفي الروح، الهروب عبر Netflix وYouTube، ورفقة دراجتي الصامتة. أصبحت تلك الدراجة صديقي الأصدق، تنقلني إلى أماكن حيث لا يمكن لأحد رؤيتي. في هدوء الليل، أجلس في الظلام، أحيانًا أبكي، أحيانًا أضيع في الموسيقى، أحارب لإبعاد الظلال. كل صباح، أستيقظ آملاً في الهروب من التوتر، أجد بعض العزاء في الصالة الرياضية - رغم أنه عابر. أسعى للبقاء على الطريق الصحيح، متجنبًا الإغراءات، لا أؤذي أحدًا، متمسكًا بمن أنا دون الاستسلام لضغط التأقلم.</p>
+            <p>مع ذلك، رغم جهودي، أشعر أنني فشلت في إيجاد مكاني في هذا الزمن. من لحظة خروجي من الباب حتى عودتي، أواجه خيبة الأمل في وجوه وقلوب من حولي. أكره هذه الأرض - شعبها، ثقافتها، ثقلها القاهر. هنا، إيجاد عمل يشبه البحث عن الذهب في رمال قاحلة. توجهت نحو التصوير الفوتوغرافي المستقل، آملاً أن يعيلني حتى أتمكن من تحمل تكاليف أدوات أفضل.</p>
+            <p>كطبيب نفسي وعالم شخصيات علمته نفسه، تعلمت فهم شخصيات الناس، توتراتهم، قدراتهم، ولغتهم النفسية. أعطي فرصًا لا تحصى لإنقاذ العلاقات، مقدمًا النصح بقلب رحيم. أؤمن بالخلاص والنمو، دائمًا أسعى لتوجيه الآخرين نحو فهم أفضل لأنفسهم وعلاقاتهم.</p>
+            <p>واليوم - الخميس، 18 يوليو 2024 - يشبه أي يوم آخر، مميزًا بصلاة صامتة من أجل التغيير، توق هادئ للهروب.</p>
+        </div>
     </div>
-
+    
+    <div class="language-selector">
+        <button class="language-btn" id="languageSwitcher">English</button>
+    </div>
+    
     <script>
-        const darkModeSwitcher = document.getElementById('darkModeSwitcher');
+        // Theme switcher
+        const themeSwitcher = document.getElementById('themeSwitcher');
+        const lightIcon = themeSwitcher.querySelector('.light-icon');
+        const darkIcon = themeSwitcher.querySelector('.dark-icon');
         const body = document.body;
-
-        darkModeSwitcher.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
-            localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
-        });
-
-        // Check for saved dark mode preference
-        if (localStorage.getItem('darkMode') === 'true') {
-            body.classList.add('dark-mode');
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.setAttribute('data-theme', 'dark');
+            lightIcon.style.display = 'none';
+            darkIcon.style.display = 'inline';
         }
+        
+        themeSwitcher.addEventListener('click', () => {
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                lightIcon.style.display = 'inline';
+                darkIcon.style.display = 'none';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                lightIcon.style.display = 'none';
+                darkIcon.style.display = 'inline';
+            }
+        });
+        
+        // Language switcher
+        const languageSwitcher = document.getElementById('languageSwitcher');
+        const languageContents = document.querySelectorAll('[data-lang]');
+        
+        const languages = {
+            en: 'English',
+            ru: 'Русский',
+            es: 'Español',
+            fr: 'Français',
+            ar: 'العربية'
+        };
+        
+        let currentLang = 'en';
+        
+        function switchLanguage(lang) {
+            currentLang = lang;
+            languageContents.forEach(content => {
+                content.style.display = content.dataset.lang === lang ? 'block' : 'none';
+            });
+            languageSwitcher.textContent = languages[lang];
+            localStorage.setItem('language', lang);
+            
+            // Set direction for Arabic
+            if (lang === 'ar') {
+                document.documentElement.setAttribute('dir', 'rtl');
+            } else {
+                document.documentElement.setAttribute('dir', 'ltr');
+            }
+        }
+        
+        // Check for saved language preference
+        const savedLang = localStorage.getItem('language') || 'en';
+        switchLanguage(savedLang);
+        
+        languageSwitcher.addEventListener('click', () => {
+            const langOrder = ['en', 'ru', 'es', 'fr', 'ar'];
+            const currentIndex = langOrder.indexOf(currentLang);
+            const nextIndex = (currentIndex + 1) % langOrder.length;
+            switchLanguage(langOrder[nextIndex]);
+        });
+        
+        // Disable right-click context menu
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+        
+        // Disable keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Block common inspection shortcuts
+            if (e.key === 'F12' || 
+                (e.ctrlKey && e.shiftKey && e.key === 'I') || 
+                (e.ctrlKey && e.shiftKey && e.key === 'J') || 
+                (e.ctrlKey && e.shiftKey && e.key === 'C') ||
+                (e.ctrlKey && e.key === 'U')) {
+                e.preventDefault();
+            }
+        });
     </script>
 </body>
 </html>
