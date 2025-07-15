@@ -1,48 +1,215 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="disc.png">
-    <title>Discord Username</title>
+    <title>Connect on Discord | nec_1999</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Whitney:wght@500;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --discord-blurple: #5865F2;
+            --discord-dark: #36393F;
+            --discord-darker: #2F3136;
+            --discord-darkest: #202225;
+            --discord-light: #DCDDDE;
+            --discord-lighter: #FFFFFF;
+            --discord-green: #3BA55C;
+            --discord-red: #ED4245;
+        }
+        
         body {
+            font-family: 'Whitney', 'Roboto', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
-            background-color: #36393F; /* Discord background color */
+            background-color: var(--discord-dark);
+            background-image: radial-gradient(circle at 22% 30%, rgba(88, 101, 242, 0.1) 0%, transparent 30%),
+                              radial-gradient(circle at 78% 70%, rgba(59, 165, 92, 0.1) 0%, transparent 30%);
+            color: var(--discord-light);
+            line-height: 1.6;
         }
+        
         .container {
             text-align: center;
-            background-color: rgba(255, 255, 255, 0.11); /* Faded white background */
-            padding: 20px;
-            border-radius: 10px;
+            background-color: var(--discord-darker);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 90%;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        p {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: #ABCFFF; /* White text color */
+        
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
         }
-        button {
-            font-size: 60px;
-            background-color: #7289DA; /* Discord blue color */
-            color: #ABCFFF; /* White text color */
-            border: none;
-            border-radius: 1px;
-            padding: 10px 150px;
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 10px rgba(88, 101, 242, 0.4));
+        }
+        
+        h1 {
+            color: var(--discord-lighter);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .username-container {
+            position: relative;
+            margin: 2rem 0;
+        }
+        
+        .username-display {
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 1.8rem;
+            background-color: var(--discord-darkest);
+            padding: 1.2rem 2rem;
+            border-radius: 8px;
+            display: inline-block;
+            color: var(--discord-lighter);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
             cursor: pointer;
-            transition: background-color 1.3s ease;
+            position: relative;
+            overflow: hidden;
         }
-        button:hover {
-            background-color: #677BC4; /* Slightly darker blue on hover */
+        
+        .username-display:hover {
+            background-color: rgba(88, 101, 242, 0.1);
+            border-color: var(--discord-blurple);
+        }
+        
+        .username-display:active {
+            transform: scale(0.98);
+        }
+        
+        .username-display::after {
+            content: "Click to copy";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(88, 101, 242, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .username-display:hover::after {
+            opacity: 1;
+        }
+        
+        .copy-success {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: var(--discord-green);
+            color: white;
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        
+        .copy-success.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+            margin: 2rem 0;
+        }
+        
+        .server-invite {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--discord-blurple);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .server-invite:hover {
+            background-color: #4752C4;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .server-invite i {
+            margin-right: 8px;
+        }
+        
+        .creation-date {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .username-display {
+                font-size: 1.4rem;
+                padding: 1rem 1.5rem;
+            }
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="container">
-        <p>Click to copy my Discord username:</p>
-        <button id="copyButton" data-clipboard-text="nec_1999">nec_1999</button>
-        <p>Join the 'NS' Discord channel <a href="https://discord.gg/w8nrqPb8vG">here</a>. Created at — 09/22/2017 8:43 PM</p>
+        <img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png" alt="Discord Logo" class="logo">
+        <h1>Connect with me on Discord</h1>
+        
+        <p>Click below to copy my username:</p>
+        
+        <div class="username-container">
+            <div class="username-display" id="copyButton" data-clipboard-text="nec_1999">
+                nec_1999
+            </div>
+            <div class="copy-success" id="copySuccess">
+                Copied!
+            </div>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <p>You can also join my Discord server:</p>
+        <a href="https://discord.gg/w8nrqPb8vG" class="server-invite" target="_blank">
+            <i class="fab fa-discord"></i> Join NS Server
+        </a>
+        
+        <div class="creation-date">
+            Channel created: September 22, 2017 * Inactive *
+        </div>
     </div>
 
     <!-- Include Clipboard.js library -->
@@ -52,7 +219,24 @@
         // Initialize Clipboard.js
         new ClipboardJS('#copyButton').on('success', function(e) {
             e.clearSelection();
-            alert('Username copied to clipboard: ' + e.text);
+            
+            // Show success message
+            const copySuccess = document.getElementById('copySuccess');
+            copySuccess.classList.add('show');
+            
+            // Hide after 2 seconds
+            setTimeout(() => {
+                copySuccess.classList.remove('show');
+            }, 2000);
+        });
+        
+        // Fallback for mobile touch feedback
+        document.getElementById('copyButton').addEventListener('touchstart', function() {
+            this.style.backgroundColor = 'rgba(88, 101, 242, 0.2)';
+        });
+        
+        document.getElementById('copyButton').addEventListener('touchend', function() {
+            this.style.backgroundColor = '';
         });
     </script>
 </body>
