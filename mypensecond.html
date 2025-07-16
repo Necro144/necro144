@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qusai Allan - The Weight of Unluck</title>
+    <meta name="referrer" content="no-referrer">
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        :root {
+            --bg-color: #f8f9fa;
+            --text-color: #212529;
+            --accent-color: #6c5ce7;
+            --glow-color: rgba(108, 92, 231, 0.2);
+            --container-bg: #ffffff;
+            --card-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --accent-color: #a78bfa;
+            --glow-color: rgba(167, 139, 250, 0.2);
+            --container-bg: #1e1e1e;
+            --card-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: var(--transition);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 40px;
+            background-color: var(--container-bg);
+            box-shadow: var(--card-shadow);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-color), #ff6b6b);
+        }
+        
+        .profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 20px;
+        }
+        
+        .profile img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-color);
+            box-shadow: 0 0 15px var(--glow-color);
+            transition: var(--transition);
+        }
+        
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .profile-info strong {
+            font-size: 1.4em;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        
+        .timestamp {
+            color: var(--text-color);
+            opacity: 0.7;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        
+        .post-content {
+            font-size: 1.1em;
+            text-align: justify;
+        }
+        
+        .post-content h2 {
+            color: var(--accent-color);
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .post-content h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-color), transparent);
+            border-radius: 3px;
+        }
+        
+        .post-content p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .control-btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 50px;
+            background-color: var(--accent-color);
+            color: white;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 10px var(--glow-color);
+        }
+        
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px var(--glow-color);
+        }
+        
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 50px;
+            background-color: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            color: var(--text-color);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            z-index: 100;
+        }
+        
+        .back-btn:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px;
+                margin: 20px auto;
+            }
+            
+            .profile {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .post-content h2 {
+                font-size: 1.5em;
+            }
+            
+            .controls {
+                top: 15px;
+                right: 15px;
+            }
+            
+            .back-btn {
+                top: 15px;
+                left: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .post-content {
+                font-size: 1em;
+            }
+            
+            .control-btn, .back-btn {
+                padding: 8px 12px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="window.location.href='index.html'">
+        ← Back
+    </button>
+    
+    <div class="controls">
+        <button class="control-btn" id="themeSwitcher">
+            <span class="light-icon">☀️</span>
+            <span class="dark-icon" style="display:none">🌙</span>
+        </button>
+    </div>
+    
+    <div class="container">
+        <div class="profile">
+            <img src="IMG_6071_cropped.png" alt="Profile picture of Qusai Allan">
+            <div class="profile-info">
+                <strong>Qusai Allan</strong>
+                <span class="timestamp">July 16, 2025</span>
+            </div>
+        </div>
+        
+        <div class="post-content">
+            <h2>The Weight of Unluck: A Life Lived in Shadows</h2>
+            <p>Since the day I was born, it feels as though misfortune has been stitched into the fabric of my existence. Every corner of my life seems touched by an invisible curse—opportunities vanish before they arrive, friendships fade like whispers in the wind, and joy remains a distant mirage, always just out of reach. There is no fun, no job worth calling purpose, no friends who stay, and no life that feels truly mine. My health wavers like the tide, never stable, never predictable. Interests come and go like passing clouds, but nothing sticks, nothing brings meaning. Each day is not lived—it's endured.</p>
+            <p>The world buzzes around me, vibrant and alive, while I remain numb, watching from the outside like a ghost haunting my own life. All I want some days is for the clock to stop ticking, for the silence to be broken—not by noise, but by peace. But even that feels too far to reach.</p>
+            <p>I've become a spectator in my own story, watching as others move through life with purpose and connection while I remain anchored in this limbo of unluck. The simplest tasks feel monumental, and every small victory is quickly overshadowed by the next wave of misfortune. It's exhausting to keep pretending that everything might change tomorrow when history has shown me otherwise.</p>
+            <p>Yet somehow, I continue. Not because I want to, but because I must. There's a stubborn ember inside that refuses to be extinguished, no matter how strong the winds of misfortune blow. Maybe that's all I am—not a person living, but a will persisting against all odds.</p>
+        </div>
+    </div>
+    
+    <script>
+        // Theme switcher
+        const themeSwitcher = document.getElementById('themeSwitcher');
+        const lightIcon = themeSwitcher.querySelector('.light-icon');
+        const darkIcon = themeSwitcher.querySelector('.dark-icon');
+        const body = document.body;
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.setAttribute('data-theme', 'dark');
+            lightIcon.style.display = 'none';
+            darkIcon.style.display = 'inline';
+        }
+        
+        themeSwitcher.addEventListener('click', () => {
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                lightIcon.style.display = 'inline';
+                darkIcon.style.display = 'none';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                lightIcon.style.display = 'none';
+                darkIcon.style.display = 'inline';
+            }
+        });
+        
+        // Disable right-click context menu
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+        
+        // Disable keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Block common inspection shortcuts
+            if (e.key === 'F12' || 
+                (e.ctrlKey && e.shiftKey && e.key === 'I') || 
+                (e.ctrlKey && e.shiftKey && e.key === 'J') || 
+                (e.ctrlKey && e.shiftKey && e.key === 'C') ||
+                (e.ctrlKey && e.key === 'U')) {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
