@@ -1,8 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    document.body.style.transform = "scale(2.1)";
+    document.body.style.transformOrigin = "0 0";
+    document.body.style.width = "46.77%";  // Adjusted for correct scaling
+    document.body.style.height = "76.67%"; // Adjusted for correct scaling
+    document.body.style.overflow = "auto"; // Allow scrolling
+  });
+</script>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Necro's Hub</title>
     <style>
         * {
@@ -13,14 +21,14 @@
         
         body {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            line-height: 1.5;
+            line-height: 1;
             background-color: #0a0a0a;
             color: #f0f0f0;
             padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            min-height: 50vh;
         }
         
         .container {
@@ -46,7 +54,7 @@
         .btn {
             display: block;
             padding: 1rem;
-            border-radius: 8px;
+            border-radius: 2px;
             text-decoration: none;
             font-weight: 500;
             font-size: 1rem;
