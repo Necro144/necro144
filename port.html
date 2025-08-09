@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photographer Portfolio</title>
+    <title>Photography Work Samples</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* Reset and Base Styles */
@@ -50,6 +50,28 @@
             margin: 0;
         }
 
+        /* Quality Notice */
+        .quality-notice {
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            padding: 1rem;
+            margin: 1rem auto;
+            max-width: 1400px;
+            text-align: center;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        .whatsapp-link {
+            color: #25D366;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .whatsapp-link:hover {
+            text-decoration: underline;
+        }
+
         /* Gallery Grid */
         .gallery-container {
             padding: 2rem;
@@ -70,7 +92,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
             aspect-ratio: 1/1;
-            background-color: #eee; /* Placeholder color */
+            background-color: #eee;
         }
 
         .gallery-item:hover {
@@ -93,22 +115,6 @@
 
         .gallery-img.loaded {
             opacity: 1;
-        }
-
-        .photo-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 0.8rem;
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
-        }
-
-        .gallery-item:hover .photo-caption {
-            transform: translateY(0);
         }
 
         /* Loading spinner */
@@ -191,6 +197,15 @@
             right: 2rem;
         }
 
+        /* Footer */
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
         /* Responsive Design */
         @media (max-width: 1024px) {
             .gallery-grid {
@@ -233,9 +248,14 @@
 </head>
 <body>
     <header>
-        <a href="index.htm" class="back-button"><i class="fas fa-arrow-left"></i> Back</a>
-        <h1>My Photography Portfolio</h1>
+        <a href="index" class="back-button"><i class="fas fa-arrow-left"></i> Back</a>
+        <h1>Photography Work Samples</h1>
     </header>
+
+    <div class="quality-notice">
+        These are low-quality samples only. Customers successfully received their original HD quality photos. 
+        <br>For full-quality samples or more information, please <a href="https://wa.me/00962779352591" class="whatsapp-link">contact us via WhatsApp</a>.
+    </div>
 
     <div class="gallery-container">
         <div class="gallery-grid">
@@ -251,34 +271,46 @@
         <div class="lightbox-content">
             <img id="lightbox-img" src="" alt="" loading="eager">
             <div class="photo-info">
-                <h3 id="photo-title">Title</h3>
-                <p id="photo-description">Description</p>
+                <h3 id="photo-title"></h3>
+                <p id="photo-description">Low-quality sample - Contact us for HD version</p>
             </div>
         </div>
     </div>
 
+    <footer>
+        © 2025 Photography Portfolio | All photos shown are low-quality samples
+    </footer>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Photo data with your specified filenames
+            // Updated photo data with your specified directory
             const photos = [
-                { src: 'IMG_1470.jpg', title: 'Photo 1', description: 'Beautiful composition with excellent lighting' },
-                { src: 'IMG_1964.jpg', title: 'Photo 2', description: 'Stunning landscape with vibrant colors' },
-                { src: 'IMG_2189.jpg', title: 'Photo 3', description: 'Creative portrait with unique perspective' },
-                { src: 'IMG_2358.jpg', title: 'Photo 4', description: 'Detailed close-up with perfect focus' },
-                { src: 'IMG_2371.jpg', title: 'Photo 5', description: 'Dynamic action shot with great timing' },
-                { src: 'IMG_2378.jpg', title: 'Photo 6', description: 'Emotional moment captured perfectly' },
-                { src: 'IMG_2424.jpg', title: 'Photo 7', description: 'Architectural detail with strong lines' },
-                { src: 'IMG_4978.jpg', title: 'Photo 8', description: 'Natural beauty in its purest form' },
-                { src: 'IMG_1368.jpg', title: 'Photo 9', description: 'Urban scene with interesting textures' },
-                { src: 'IMG_1462.jpg', title: 'Photo 10', description: 'Play of light and shadow creating drama' },
-                { src: 'IMG_1469.jpg', title: 'Photo 11', description: 'Minimalist composition with strong impact' }
+                { src: 'work_samples/IMG_2189.jpg', title: 'Sample 1' },
+                { src: 'work_samples/IMG_2358.jpg', title: 'Sample 2' },
+                { src: 'work_samples/IMG_2371.jpg', title: 'Sample 3' },
+                { src: 'work_samples/IMG_2378.jpg', title: 'Sample 4' },
+                { src: 'work_samples/IMG_2424.jpg', title: 'Sample 5' },
+                { src: 'work_samples/IMG_4910.jpg', title: 'Sample 6' },
+                { src: 'work_samples/IMG_4928.JPG', title: 'Sample 7' },
+                { src: 'work_samples/IMG_4936.jpg', title: 'Sample 8' },
+                { src: 'work_samples/IMG_4950.jpg', title: 'Sample 9' },
+                { src: 'work_samples/IMG_4974.jpg', title: 'Sample 10' },
+                { src: 'work_samples/IMG_4978.jpg', title: 'Sample 11' },
+                { src: 'work_samples/IMG_4980.jpg', title: 'Sample 12' },
+                { src: 'work_samples/IMG_4998.jpg', title: 'Sample 13' },
+                { src: 'work_samples/IMG_5001.jpg', title: 'Sample 14' },
+                { src: 'work_samples/IMG_5010.jpg', title: 'Sample 15' },
+                { src: 'work_samples/IMG_1368.jpg', title: 'Sample 16' },
+                { src: 'work_samples/IMG_1462.jpg', title: 'Sample 17' },
+                { src: 'work_samples/IMG_1469.jpg', title: 'Sample 18' },
+                { src: 'work_samples/IMG_1470.jpg', title: 'Sample 19' },
+                { src: 'work_samples/IMG_1964.jpg', title: 'Sample 20' }
             ];
 
             const galleryGrid = document.querySelector('.gallery-grid');
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
             const photoTitle = document.getElementById('photo-title');
-            const photoDescription = document.getElementById('photo-description');
             const closeBtn = document.querySelector('.close-btn');
             const prevBtn = document.querySelector('.prev-btn');
             const nextBtn = document.querySelector('.next-btn');
@@ -333,17 +365,12 @@
                     // Create image with data-src for lazy loading
                     const img = document.createElement('img');
                     img.className = 'gallery-img loading';
-                    img.dataset.src = photo.src; // Use data-src instead of src
+                    img.dataset.src = photo.src;
                     img.alt = photo.title;
                     img.loading = 'lazy';
                     
-                    const caption = document.createElement('div');
-                    caption.className = 'photo-caption';
-                    caption.innerHTML = `<h3>${photo.title}</h3><p>${photo.description}</p>`;
-                    
                     galleryItem.appendChild(spinner);
                     galleryItem.appendChild(img);
-                    galleryItem.appendChild(caption);
                     galleryGrid.appendChild(galleryItem);
                     
                     // Observe this item for lazy loading
@@ -371,7 +398,6 @@
                 fullImg.onload = () => {
                     lightboxImg.src = photo.src;
                     photoTitle.textContent = photo.title;
-                    photoDescription.textContent = photo.description;
                 };
                 
                 lightbox.style.display = 'flex';
@@ -403,7 +429,6 @@
                 fullImg.onload = () => {
                     lightboxImg.src = photo.src;
                     photoTitle.textContent = photo.title;
-                    photoDescription.textContent = photo.description;
                 };
             }
 

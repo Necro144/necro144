@@ -2,17 +2,11 @@
 <html lang="en">
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    const scale = Math.min(
-      window.innerWidth / 400, 
-      window.innerHeight / 600,
-      1 // Maximum scale
-    );
-    
-    document.body.style.transform = `scale(${scale})`;
+    document.body.style.transform = "scale(2.1)";
     document.body.style.transformOrigin = "0 0";
-    document.body.style.width = `${86/scale}%`;
-    document.body.style.height = `${85/scale}%`;
-    document.body.style.overflow = "auto";
+    document.body.style.width = "46.77%";  // Adjusted for correct scaling
+    document.body.style.height = "76.67%"; // Adjusted for correct scaling
+    document.body.style.overflow = "auto"; // Allow scrolling
   });
 </script>
 <head>
