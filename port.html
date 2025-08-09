@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photographer Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #222;
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .back-button {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-button:hover {
+            color: #ddd;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin: 0;
+        }
+
+        /* Gallery Grid */
+        .gallery-container {
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            aspect-ratio: 1/1;
+            background-color: #eee; /* Placeholder color */
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-img.loading {
+            opacity: 0;
+        }
+
+        .gallery-img.loaded {
+            opacity: 1;
+        }
+
+        .photo-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 0.8rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .photo-caption {
+            transform: translateY(0);
+        }
+
+        /* Loading spinner */
+        .spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Lightbox Styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow: auto;
+        }
+
+        .lightbox-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            padding: 2rem;
+        }
+
+        #lightbox-img {
+            max-width: 80%;
+            max-height: 70vh;
+            object-fit: contain;
+        }
+
+        .photo-info {
+            color: white;
+            text-align: center;
+            margin-top: 1.5rem;
+            max-width: 80%;
+        }
+
+        .close-btn, .prev-btn, .next-btn {
+            position: absolute;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .close-btn {
+            top: 1.5rem;
+            right: 2rem;
+        }
+
+        .prev-btn, .next-btn {
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 1rem;
+        }
+
+        .prev-btn {
+            left: 2rem;
+        }
+
+        .next-btn {
+            right: 2rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .back-button {
+                font-size: 0.9rem;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-container {
+                padding: 1rem;
+            }
+            
+            #lightbox-img {
+                max-width: 95%;
+            }
+            
+            .photo-info {
+                max-width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.htm" class="back-button"><i class="fas fa-arrow-left"></i> Back</a>
+        <h1>My Photography Portfolio</h1>
+    </header>
+
+    <div class="gallery-container">
+        <div class="gallery-grid">
+            <!-- Photos will be added dynamically by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Lightbox/Slideshow Modal -->
+    <div id="lightbox" class="lightbox">
+        <span class="close-btn">&times;</span>
+        <span class="prev-btn"><i class="fas fa-chevron-left"></i></span>
+        <span class="next-btn"><i class="fas fa-chevron-right"></i></span>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="" loading="eager">
+            <div class="photo-info">
+                <h3 id="photo-title">Title</h3>
+                <p id="photo-description">Description</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Photo data with your specified filenames
+            const photos = [
+                { src: 'IMG_1470.jpg', title: 'Photo 1', description: 'Beautiful composition with excellent lighting' },
+                { src: 'IMG_1964.jpg', title: 'Photo 2', description: 'Stunning landscape with vibrant colors' },
+                { src: 'IMG_2189.jpg', title: 'Photo 3', description: 'Creative portrait with unique perspective' },
+                { src: 'IMG_2358.jpg', title: 'Photo 4', description: 'Detailed close-up with perfect focus' },
+                { src: 'IMG_2371.jpg', title: 'Photo 5', description: 'Dynamic action shot with great timing' },
+                { src: 'IMG_2378.jpg', title: 'Photo 6', description: 'Emotional moment captured perfectly' },
+                { src: 'IMG_2424.jpg', title: 'Photo 7', description: 'Architectural detail with strong lines' },
+                { src: 'IMG_4978.jpg', title: 'Photo 8', description: 'Natural beauty in its purest form' },
+                { src: 'IMG_1368.jpg', title: 'Photo 9', description: 'Urban scene with interesting textures' },
+                { src: 'IMG_1462.jpg', title: 'Photo 10', description: 'Play of light and shadow creating drama' },
+                { src: 'IMG_1469.jpg', title: 'Photo 11', description: 'Minimalist composition with strong impact' }
+            ];
+
+            const galleryGrid = document.querySelector('.gallery-grid');
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const photoTitle = document.getElementById('photo-title');
+            const photoDescription = document.getElementById('photo-description');
+            const closeBtn = document.querySelector('.close-btn');
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
+
+            let currentPhotoIndex = 0;
+            let loadedImages = 0;
+            const totalImages = photos.length;
+
+            // Function to load images with Intersection Observer
+            function setupLazyLoading() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target.querySelector('img');
+                            const spinner = entry.target.querySelector('.spinner');
+                            const src = img.dataset.src;
+                            
+                            if (src) {
+                                img.src = src;
+                                img.onload = () => {
+                                    img.classList.remove('loading');
+                                    img.classList.add('loaded');
+                                    if (spinner) spinner.remove();
+                                    loadedImages++;
+                                    // Remove the data-src to prevent reloading
+                                    img.removeAttribute('data-src');
+                                };
+                            }
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    rootMargin: '200px 0px', // Load images 200px before they come into view
+                    threshold: 0.01
+                });
+
+                return observer;
+            }
+
+            // Create gallery items with lazy loading
+            function createGalleryItems() {
+                const observer = setupLazyLoading();
+                
+                photos.forEach((photo, index) => {
+                    const galleryItem = document.createElement('div');
+                    galleryItem.className = 'gallery-item';
+                    
+                    // Create spinner
+                    const spinner = document.createElement('div');
+                    spinner.className = 'spinner';
+                    
+                    // Create image with data-src for lazy loading
+                    const img = document.createElement('img');
+                    img.className = 'gallery-img loading';
+                    img.dataset.src = photo.src; // Use data-src instead of src
+                    img.alt = photo.title;
+                    img.loading = 'lazy';
+                    
+                    const caption = document.createElement('div');
+                    caption.className = 'photo-caption';
+                    caption.innerHTML = `<h3>${photo.title}</h3><p>${photo.description}</p>`;
+                    
+                    galleryItem.appendChild(spinner);
+                    galleryItem.appendChild(img);
+                    galleryItem.appendChild(caption);
+                    galleryGrid.appendChild(galleryItem);
+                    
+                    // Observe this item for lazy loading
+                    observer.observe(galleryItem);
+
+                    // Add click event to open lightbox
+                    img.addEventListener('click', () => {
+                        currentPhotoIndex = index;
+                        openLightbox();
+                    });
+                });
+            }
+
+            // Lightbox functions
+            function openLightbox() {
+                const photo = photos[currentPhotoIndex];
+                
+                // Show loading state
+                lightboxImg.src = '';
+                lightboxImg.alt = 'Loading...';
+                
+                // Load the full quality image for lightbox
+                const fullImg = new Image();
+                fullImg.src = photo.src;
+                fullImg.onload = () => {
+                    lightboxImg.src = photo.src;
+                    photoTitle.textContent = photo.title;
+                    photoDescription.textContent = photo.description;
+                };
+                
+                lightbox.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+                lightbox.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+
+            function navigatePhotos(direction) {
+                currentPhotoIndex += direction;
+                
+                if (currentPhotoIndex >= photos.length) {
+                    currentPhotoIndex = 0;
+                } else if (currentPhotoIndex < 0) {
+                    currentPhotoIndex = photos.length - 1;
+                }
+                
+                const photo = photos[currentPhotoIndex];
+                
+                // Show loading state
+                lightboxImg.src = '';
+                
+                // Load the full quality image for lightbox
+                const fullImg = new Image();
+                fullImg.src = photo.src;
+                fullImg.onload = () => {
+                    lightboxImg.src = photo.src;
+                    photoTitle.textContent = photo.title;
+                    photoDescription.textContent = photo.description;
+                };
+            }
+
+            // Initialize the gallery
+            createGalleryItems();
+
+            // Event listeners
+            closeBtn.addEventListener('click', closeLightbox);
+            prevBtn.addEventListener('click', () => navigatePhotos(-1));
+            nextBtn.addEventListener('click', () => navigatePhotos(1));
+
+            // Close lightbox when clicking outside the image
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (lightbox.style.display === 'flex') {
+                    if (e.key === 'Escape') {
+                        closeLightbox();
+                    } else if (e.key === 'ArrowLeft') {
+                        navigatePhotos(-1);
+                    } else if (e.key === 'ArrowRight') {
+                        navigatePhotos(1);
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
