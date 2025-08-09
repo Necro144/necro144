@@ -265,8 +265,10 @@
     <div class="quality-notice">
         These are low-quality samples only. Customers successfully received their original HD quality photos. 
         <br>For full-quality samples or more information, please <a href="https://wa.me/00962779352591" class="whatsapp-link">contact us via WhatsApp</a>.
+        <br><br>
+        هذه عينات منخفضة الجودة فقط. العملاء تلقوا بنجاح صورهم الأصلية بجودة عالية الدقة.
+        <br>للحصول على عينات كاملة الجودة أو لمزيد من المعلومات، يرجى <a href="https://wa.me/00962779352591" class="whatsapp-link">الاتصال بنا عبر واتساب</a>.
     </div>
-
     <div class="gallery-container">
         <div class="gallery-grid">
             <!-- Photos will be added dynamically by JavaScript -->
@@ -573,54 +575,6 @@
                         openLightbox();
                     });
                 });
-            }
-
-            // Lightbox functions
-            function openLightbox() {
-                const photo = photos[currentPhotoIndex];
-                
-                // Show loading state
-                lightboxImg.src = '';
-                lightboxImg.alt = 'Loading...';
-                
-                // Load the full quality image for lightbox
-                const fullImg = new Image();
-                fullImg.src = photo.src;
-                fullImg.onload = () => {
-                    lightboxImg.src = photo.src;
-                    photoTitle.textContent = photo.title;
-                };
-                
-                lightbox.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-            }
-
-            function closeLightbox() {
-                lightbox.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-
-            function navigatePhotos(direction) {
-                currentPhotoIndex += direction;
-                
-                if (currentPhotoIndex >= photos.length) {
-                    currentPhotoIndex = 0;
-                } else if (currentPhotoIndex < 0) {
-                    currentPhotoIndex = photos.length - 1;
-                }
-                
-                const photo = photos[currentPhotoIndex];
-                
-                // Show loading state
-                lightboxImg.src = '';
-                
-                // Load the full quality image for lightbox
-                const fullImg = new Image();
-                fullImg.src = photo.src;
-                fullImg.onload = () => {
-                    lightboxImg.src = photo.src;
-                    photoTitle.textContent = photo.title;
-                };
             }
 
             // Initialize the gallery
