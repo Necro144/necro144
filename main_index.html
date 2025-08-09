@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta name="google-site-verification" content="cz0glns7ExEWa8_DNAhC8qiB8L-0HoWdS2cRPevPby4" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N E C R O</title>
+    <link rel="icon" href="cs.png" type="image/x-icon">
+    <meta name="referrer" content="no-referrer">
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #007AFF;
+            --secondary-color: #5856D6;
+            --accent-color: #FF2D55;
+            --background-color: #f5f5f7;
+            --card-color: rgba(255, 255, 255, 0.75);
+            --text-color: #1c1c1e;
+            --text-muted: #8e8e93;
+            --border-radius: 20px;
+            --box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --blur-amount: 20px;
+            
+            /* Color scheme presets */
+            --scheme-1: #007AFF, #5856D6, #FF2D55; /* iOS Blue */
+            --scheme-2: #34C759, #5856D6, #FF9500; /* Green */
+            --scheme-3: #FF9500, #FF2D55, #AF52DE; /* Orange */
+            --scheme-4: #AF52DE, #5856D6, #007AFF; /* Purple */
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(var(--primary-rgb), 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(var(--secondary-rgb), 0.05) 0%, transparent 50%);
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 900px;
+            padding: 30px;
+            background: var(--card-color);
+            backdrop-filter: blur(var(--blur-amount));
+            -webkit-backdrop-filter: blur(var(--blur-amount));
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(var(--primary-rgb), 0.05) 0%, transparent 70%);
+            z-index: -1;
+            animation: float 15s infinite alternate ease-in-out;
+            opacity: 0.6;
+        }
+        
+        .container::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            right: -30%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(var(--secondary-rgb), 0.05) 0%, transparent 70%);
+            z-index: -1;
+            animation: float2 18s infinite alternate ease-in-out;
+            opacity: 0.6;
+        }
+        
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(10%, 10%); }
+        }
+        
+        @keyframes float2 {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-10%, -10%); }
+        }
+        
+        .profile {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .profile-image-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            padding: 5px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            box-shadow: 0 0 25px rgba(var(--primary-rgb), 0.2);
+            transition: var(--transition);
+        }
+        
+        .profile-image-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 35px rgba(var(--primary-rgb), 0.3);
+        }
+        
+        .profile img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--card-color);
+            pointer-events: none;
+        }
+        
+        h1 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            margin: 15px 0;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .tagline {
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+            font-weight: 400;
+        }
+        
+        .tagline::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+            border-radius: 2px;
+        }
+        
+        .info {
+            font-size: clamp(0.85rem, 3vw, 1rem);
+            color: var(--text-muted);
+            margin: 8px 0;
+            font-weight: 400;
+        }
+        
+        .info.highlight {
+            color: var(--text-color);
+            font-weight: 500;
+            margin-top: 15px;
+            background: rgba(var(--primary-rgb), 0.1);
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(var(--primary-rgb), 0.15);
+        }
+        
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .link-item {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .link-item:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.85);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            border-color: rgba(var(--primary-rgb), 0.3);
+        }
+        
+        .link-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.05), rgba(var(--secondary-rgb), 0.05));
+            z-index: -1;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .link-item:hover::before {
+            opacity: 1;
+        }
+        
+        .link-item img {
+            width: 24px;
+            height: 24px;
+            margin-right: 15px;
+            filter: drop-shadow(0 0 5px rgba(var(--primary-rgb), 0.1));
+            transition: var(--transition);
+        }
+        
+        .link-item:hover img {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 8px rgba(var(--primary-rgb), 0.2));
+        }
+        
+        .link-item .link-text {
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .link-item:hover .link-text {
+            color: var(--primary-color);
+        }
+        
+        .discord-username {
+            margin-left: auto;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            background: rgba(var(--primary-rgb), 0.1);
+            padding: 3px 8px;
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+        
+        .link-item:hover .discord-username {
+            color: var(--primary-color);
+            background: rgba(var(--primary-rgb), 0.2);
+        }
+        
+        .color-scheme-toggle {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--card-color);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            transition: var(--transition);
+        }
+        
+        .color-scheme-toggle:hover {
+            transform: scale(1.1) rotate(30deg);
+            box-shadow: 0 0 25px rgba(var(--primary-rgb), 0.2);
+            background: rgba(var(--primary-rgb), 0.1);
+            border-color: rgba(var(--primary-rgb), 0.3);
+        }
+        
+        .color-scheme-toggle i {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+        
+        .color-scheme-toggle:hover i {
+            transform: scale(1.1);
+        }
+        
+        /* iOS-like status bar */
+        .status-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: transparent;
+            z-index: 1000;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        .status-bar .time {
+            font-weight: 600;
+        }
+        
+        .status-bar .icons {
+            display: flex;
+            gap: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+                --blur-amount: 15px;
+            }
+            
+            .profile-image-container {
+                width: 130px;
+                height: 130px;
+            }
+            
+            .links-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .color-scheme-toggle {
+                width: 48px;
+                height: 48px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+                --blur-amount: 12px;
+            }
+            
+            .profile-image-container {
+                width: 110px;
+                height: 110px;
+            }
+            
+            .link-item {
+                padding: 14px 18px;
+            }
+            
+            .status-bar {
+                padding: 8px 15px;
+                font-size: 0.7rem;
+            }
+        }
+        
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background-color: #1c1c1e;
+                --card-color: rgba(44, 44, 46, 0.75);
+                --text-color: #f5f5f7;
+                --text-muted: #8e8e93;
+            }
+            
+            .link-item {
+                background: rgba(44, 44, 46, 0.65);
+                border-color: rgba(255, 255, 255, 0.1);
+            }
+            
+            .link-item:hover {
+                background: rgba(44, 44, 46, 0.85);
+                border-color: rgba(var(--primary-rgb), 0.3);
+            }
+            
+            .info.highlight {
+                background: rgba(var(--primary-rgb), 0.2);
+                border-color: rgba(var(--primary-rgb), 0.3);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- iOS-like status bar -->
+    <div class="status-bar">
+        <div class="time" id="currentTime">12:34</div>
+        <div class="icons">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-three-quarters"></i>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="profile">
+            <div class="profile-image-container">
+                <img src="mr.jpg" alt="Profile picture of Qusai aka N E C R O">
+            </div>
+            <h1>Qusai aka N E C R O</h1>
+            <p class="tagline">𝑫𝒊𝒔𝒄𝒐𝒏𝒏𝒆𝒄𝒕𝒊𝒐𝒏 𝒔𝒆𝒆𝒎𝒔 𝒍𝒊𝒌𝒆 𝒕𝒉𝒆 𝒐𝒏𝒍𝒚 𝒆𝒔𝒄𝒂𝒑𝒆 𝒇𝒓𝒐𝒎 𝒕𝒉𝒆 𝒆𝒎𝒑𝒕𝒊𝒏𝒆𝒔𝒔 𝒕𝒉𝒂𝒕 𝒇𝒊𝒍𝒍𝒔 𝒎𝒆</p>
+            <p class="info">🎓 Applied Science Private University</p>
+            <p class="info highlight">sᴇʟғ-ᴛᴀᴜɢʜᴛ ᴘsʏᴄʜɪᴀᴛʀɪs - ᴡᴇʙ ᴅᴇsɪɢɴᴇʀ - ᴘʜᴏᴛᴏɢʀᴀᴘʜᴇʀ - ʟᴇɴs ᴄʀᴇᴀᴛᴏʀ</p>
+            <p class="info highlight">ǫᴜᴏᴛᴇs ᴡʀɪᴛᴇʀ - 𝟯𝗗 ᴍᴏᴅᴇʟ ᴇᴅɪᴛᴏʀ - ɢᴏʟᴅsʀᴄ �ᴀᴘᴘᴇʀ</p>
+        </div>
+        
+        <div class="links-grid">
+            <a href="modriotgaming.html" class="link-item">
+                <img src="home.png" alt="Game servers icon">
+                <span class="link-text">Gaming Center (Servers)</span>
+            </a>
+            <a href="https://asubank.xyz/" class="link-item" target="_blank" rel="noopener noreferrer">
+                <img src="poem.png" alt="University icon">
+                <span class="link-text">ASU TEST BANK</span>
+            </a>
+            <a href="poet.html" class="link-item">
+                <img src="poem.png" alt="Journal icon">
+                <span class="link-text">MyPen</span>
+            </a>
+            <a href="mypensecond.html" class="link-item">
+                <img src="poem.png" alt="Journal icon">
+                <span class="link-text">MyPen Second</span>
+            </a>
+            <a href="https://api.whatsapp.com/send/?phone=%2B962799760271&text&type=phone_number&app_absent=0" class="link-item">
+                <img src="wa.png" alt="WhatsApp icon">
+                <span class="link-text">WhatsApp</span>
+            </a>
+            <a href="https://www.tiktok.com/@4_qik_" class="link-item">
+                <img src="tt.png" alt="TikTok icon">
+                <span class="link-text">TikTok Clips</span>
+            </a>
+            <a href="#" class="link-item">
+                <img src="tg.png" alt="Telegram icon">
+                <span class="link-text">Telegram Channel</span>
+            </a>
+            <a href="Linked_In_Alike.html" class="link-item">
+                <img src="user.png" alt="Persona icon">
+                <span class="link-text">LinkedIn-Alike</span>
+            </a>
+            <a href="https://tellonym.me/qusai_99" class="link-item">
+                <img src="user.png" alt="TellOnYm icon">
+                <span class="link-text">TellOnYm</span>
+            </a>
+            <a href="gaminghistory.html" class="link-item">
+                <img src="user.png" alt="Community icon">
+                <span class="link-text">Community History</span>
+            </a>
+            <a href="https://mynickname.com/Necrophos" class="link-item" target="_blank" rel="noopener noreferrer">
+                <img src="user.png" alt="NickName icon">
+                <span class="link-text">NickName Service</span>
+            </a>
+            <a href="discord.html" class="link-item discord-item">
+                <img src="disc.png" alt="Discord icon">
+                <span class="link-text">Discord</span>
+                <span class="discord-username">@nec_1999</span>
+            </a>
+        </div>
+    </div>    
+    <div class="color-scheme-toggle" id="colorToggle">
+        <i class="fas fa-palette"></i>
+    </div>
+    
+    <script>
+        // Convert color variables to RGB for animations
+        const root = document.documentElement;
+        const primaryColor = getComputedStyle(root).getPropertyValue('--primary-color').trim();
+        const secondaryColor = getComputedStyle(root).getPropertyValue('--secondary-color').trim();
+        const accentColor = getComputedStyle(root).getPropertyValue('--accent-color').trim();
+        
+        // Convert hex to rgb
+        function hexToRgb(hex) {
+            hex = hex.replace('#', '');
+            const r = parseInt(hex.substring(0, 2), 16);
+            const g = parseInt(hex.substring(2, 4), 16);
+            const b = parseInt(hex.substring(4, 6), 16);
+            return `${r}, ${g}, ${b}`;
+        }
+        
+        root.style.setProperty('--primary-rgb', hexToRgb(primaryColor));
+        root.style.setProperty('--secondary-rgb', hexToRgb(secondaryColor));
+        root.style.setProperty('--accent-rgb', hexToRgb(accentColor));
+        
+        // Color scheme cycling
+        const schemes = ['scheme-1', 'scheme-2', 'scheme-3', 'scheme-4'];
+        let currentScheme = 0;
+        
+        function setColorScheme(schemeIndex) {
+            const [primary, secondary, accent] = getComputedStyle(root).getPropertyValue(`--${schemes[schemeIndex]}`)
+                .trim()
+                .split(', ')
+                .map(color => color.trim());
+            
+            root.style.setProperty('--primary-color', primary);
+            root.style.setProperty('--secondary-color', secondary);
+            root.style.setProperty('--accent-color', accent);
+            
+            // Update RGB values
+            root.style.setProperty('--primary-rgb', hexToRgb(primary));
+            root.style.setProperty('--secondary-rgb', hexToRgb(secondary));
+            root.style.setProperty('--accent-rgb', hexToRgb(accent));
+            
+            // Store the selected scheme in localStorage
+            localStorage.setItem('colorScheme', schemeIndex);
+        }
+        
+        // Check for saved color scheme
+        const savedScheme = localStorage.getItem('colorScheme');
+        if (savedScheme !== null) {
+            currentScheme = parseInt(savedScheme);
+            setColorScheme(currentScheme);
+        }
+        
+        document.getElementById('colorToggle').addEventListener('click', () => {
+            currentScheme = (currentScheme + 1) % schemes.length;
+            setColorScheme(currentScheme);
+        });
+        
+        // Update time in status bar
+        function updateTime() {
+            const now = new Date();
+            let hours = now.getHours();
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            
+            // Convert to 12-hour format
+            hours = hours % 12;
+            hours = hours ? hours : 12; // the hour '0' should be '12'
+            
+            document.getElementById('currentTime').textContent = `${hours}:${minutes} ${ampm}`;
+        }
+        
+        updateTime();
+        setInterval(updateTime, 60000); // Update every minute
+        
+        // Disable all interactions
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            // Disable all keyboard shortcuts
+            e.preventDefault();
+            
+            // Specifically block common inspection shortcuts
+            if (e.ctrlKey || e.metaKey) {
+                e.preventDefault();
+            }
+            
+            // Block F12, Ctrl+Shift+I, etc.
+            if (e.key === 'F12' || 
+                (e.ctrlKey && e.shiftKey && e.key === 'I') || 
+                (e.ctrlKey && e.shiftKey && e.key === 'J') || 
+                (e.ctrlKey && e.shiftKey && e.key === 'C')) {
+                e.preventDefault();
+            }
+        });
+        
+        // Disable any potential drag-and-drop
+        document.addEventListener('dragstart', function(e) {
+            e.preventDefault();
+        });
+        
+        // Disable text selection
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+        });
+        
+        // Add subtle hover animations to all interactive elements
+        const interactiveElements = document.querySelectorAll('a, button, .link-item, .color-scheme-toggle');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                el.style.transform = 'translateY(-2px)';
+                el.style.boxShadow = '0 6px 16px rgba(0, 0, 0, 0.1)';
+            });
+            
+            el.addEventListener('mouseleave', () => {
+                el.style.transform = '';
+                el.style.boxShadow = '';
+            });
+        });
+    </script>
+</body>
+</html>
