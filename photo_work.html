@@ -1,306 +1,277 @@
 <!DOCTYPE html>
 <html lang="en">
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    document.body.style.transform = "scale(2.1)";
-    document.body.style.transformOrigin = "0 0";
-    document.body.style.width = "46.77%";  // Adjusted for correct scaling
-    document.body.style.height = "76.67%"; // Adjusted for correct scaling
-    document.body.style.overflow = "auto"; // Allow scrolling
-  });
-</script>
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Photo Session Details - Amman, Jordan</title>
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photo Session Details - Amman, Jordan</title>
+<style>
     :root {
-      --ios-blue: #007AFF;
-      --ios-gray: #F2F2F7;
-      --ios-dark: #1C1C1E;
-      --ios-light: #FFFFFF;
-      --ios-border: #D1D1D6;
-      --ios-red: #FF3B30;
-      --ios-yellow: #FFCC00;
+        --ios-blue: #007AFF;
+        --ios-gray: #F2F2F7;
+        --ios-dark: #1C1C1E;
+        --ios-light: #FFFFFF;
+        --ios-border: #D1D1D6;
+        --ios-red: #FF3B30;
+        --ios-yellow: #FFCC00;
     }
-    
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      background-color: var(--ios-gray);
-      color: var(--ios-dark);
-      margin: 0;
-      padding: 20px;
-      line-height: 1.5;
-      -webkit-font-smoothing: antialiased;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        background-color: var(--ios-gray);
+        color: var(--ios-dark);
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        font-size: 1.5rem; /* naturally larger for mobile */
     }
-    
     .container {
-      max-width: 600px;
-      margin: 20px auto;
-      padding: 0;
-      background: var(--ios-light);
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        max-width: 900px;
+        margin: 0 auto;
+        background: var(--ios-light);
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     }
-    
     .header {
-      padding: 20px;
-      background: linear-gradient(135deg, #3A5C8A, #2D4A72);
-      color: white;
-      text-align: center;
+        padding: 20px;
+        background: linear-gradient(135deg, #3A5C8A, #2D4A72);
+        color: white;
+        text-align: center;
     }
-    
     h1 {
-      font-size: 22px;
-      font-weight: 600;
-      margin: 0;
-      padding: 0;
+        font-size: 2.2rem;
+        font-weight: 600;
+        margin: 0;
     }
-    
     h2 {
-      font-size: 18px;
-      font-weight: 600;
-      margin: 25px 0 15px 0;
-      padding: 0 20px;
-      color: var(--ios-dark);
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin: 25px 0 15px 0;
+        padding: 0 20px;
+        color: var(--ios-dark);
     }
-    
+    .sale-banner {
+        background: var(--ios-red);
+        color: white;
+        font-size: 1.8rem;
+        font-weight: bold;
+        text-align: center;
+        padding: 1rem;
+        animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
     .section {
-      padding: 0 20px 20px 20px;
-      border-bottom: 1px solid var(--ios-border);
+        padding: 0 20px 20px 20px;
+        border-bottom: 1px solid var(--ios-border);
     }
-    
     .section:last-child {
-      border-bottom: none;
+        border-bottom: none;
     }
-    
     .bilingual {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
     }
-    
-    .english {
-      text-align: left;
+    .english { text-align: left; }
+    .arabic { direction: rtl; text-align: right; }
+    .table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
-    
-    .arabic {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      direction: rtl;
-      text-align: right;
-    }
-    
     .price-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 15px 0;
-      font-size: 15px;
-      border-radius: 12px;
-      overflow: hidden;
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+        font-size: 1.2rem;
+        table-layout: fixed;
     }
-    
     .price-table th, .price-table td {
-      border: 1px solid var(--ios-border);
-      padding: 12px 15px;
-      text-align: left;
+        border: 1px solid var(--ios-border);
+        padding: 12px 15px;
+        text-align: left;
+        word-wrap: break-word;
+        white-space: normal;
     }
-    
     .price-table th {
-      background-color: var(--ios-gray);
-      font-weight: 500;
+        background-color: var(--ios-gray);
+        font-weight: 600;
     }
-    
     .price-table tr:nth-child(even) {
-      background-color: var(--ios-gray);
+        background-color: var(--ios-gray);
     }
-    
+    .old-price {
+        text-decoration: line-through;
+        color: gray;
+        margin-right: 8px;
+    }
     .highlight {
-      background-color: rgba(255, 204, 0, 0.1);
-      padding: 15px;
-      border-radius: 12px;
-      margin: 15px 0;
-      border-left: 4px solid var(--ios-yellow);
+        background-color: rgba(255, 204, 0, 0.1);
+        padding: 15px;
+        border-radius: 12px;
+        margin: 15px 0;
+        border-left: 4px solid var(--ios-yellow);
     }
-    
     .warning {
-      background-color: rgba(255, 59, 48, 0.1);
-      padding: 15px;
-      border-radius: 12px;
-      margin: 15px 0;
-      border-left: 4px solid var(--ios-red);
+        background-color: rgba(255, 59, 48, 0.1);
+        padding: 15px;
+        border-radius: 12px;
+        margin: 15px 0;
+        border-left: 4px solid var(--ios-red);
     }
-    
     .btn-container {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding: 20px;
     }
-    
     .btn {
-      display: block;
-      padding: 14px;
-      background-color: var(--ios-blue);
-      color: white;
-      text-decoration: none;
-      border-radius: 10px;
-      font-weight: 500;
-      text-align: center;
-      transition: all 0.2s;
+        display: block;
+        padding: 18px;
+        background-color: var(--ios-blue);
+        color: white;
+        text-decoration: none;
+        border-radius: 10px;
+        font-weight: 600;
+        text-align: center;
+        font-size: 1.5rem;
+        transition: all 0.2s;
     }
-    
     .btn:hover {
-      background-color: #0062CC;
+        background-color: #0062CC;
     }
-    
     .btn.secondary {
-      background-color: var(--ios-gray);
-      color: var(--ios-blue);
+        background-color: var(--ios-gray);
+        color: var(--ios-blue);
     }
-    
-    ul, ol {
-      padding-left: 20px;
-      margin: 10px 0;
-    }
-    
-    li {
-      margin-bottom: 8px;
-    }
-    
-    @media (max-width: 600px) {
-      .container {
-        border-radius: 0;
-      }
-      
-      h1 {
-        font-size: 20px;
-      }
-      
-      h2 {
-        font-size: 17px;
-      }
-    }
-  </style>
+</style>
 </head>
 <body>
-  <div class="container">
+<div class="container">
     <div class="header">
-      <h1>Photo Session Booking Details | تفاصيل حجز جلسة التصوير</h1>
+        <h1>Photo Session Booking Details | تفاصيل حجز جلسة التصوير</h1>
+    </div>
+
+    <div class="sale-banner">
+        🎉 50% OFF Everything – Limited Time Offer! 🎉
     </div>
     
     <div class="section">
-      <h2>Service Overview | نظرة عامة على الخدمة</h2>
-      <div class="bilingual">
-        <div class="english">Professional photography sessions in Amman, Jordan with high-quality editing. Unlimited photos during session time.</div>
-        <div class="arabic">جلسات تصوير احترافية في عمّان، الأردن مع تعديلات عالية الجودة. صور غير محدودة خلال وقت الجلسة.</div>
-      </div>
-    </div>
-    
-    <div class="section">
-      <h2>Pricing Structure | هيكل الأسعار</h2>
-      <div class="bilingual">
-        <div class="english">Clear pricing with no hidden fees. All prices in Jordanian Dinars (JOD):</div>
-        <div class="arabic">أسعار واضحة بدون رسوم خفية. جميع الأسعار بالدينار الأردني:</div>
-      </div>
-      
-      <table class="price-table">
-        <thead>
-          <tr>
-            <th>Service | الخدمة</th>
-            <th>Price | السعر</th>
-            <th>Details | التفاصيل</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Photo Session (1 hour) | جلسة التصوير (ساعة واحدة)</td>
-            <td>15 JOD</td>
-            <td>Unlimited photos | صور غير محدودة</td>
-          </tr>
-          <tr>
-            <td>Photo Session (2 hours) | جلسة التصوير (ساعتين)</td>
-            <td>25 JOD</td>
-            <td>Unlimited photos | صور غير محدودة</td>
-          </tr>
-          <tr>
-            <td>Photo Session (3 hours) | جلسة التصوير (3 ساعات)</td>
-            <td>35 JOD</td>
-            <td>Unlimited photos (Max duration) | صور غير محدودة (الحد الأقصى)</td>
-          </tr>
-          <tr>
-            <td>Transportation/Taxi | المواصلات/تاكسي</td>
-            <td>5-7 JOD</td>
-            <td>Dynamic pricing based on location | سعر متغير حسب الموقع</td>
-          </tr>
-          <tr>
-            <td>Camera Kit Rental | استئجار طقم الكاميرا</td>
-            <td>5 JOD</td>
-            <td>Fixed price | سعر ثابت</td>
-          </tr>
-          <tr>
-            <td>Session Effort Fee | رسوم جهد الجلسة</td>
-            <td>5 JOD</td>
-            <td>Fixed price | سعر ثابت</td>
-          </tr>
-          <tr>
-            <td>Photoshop Editing (per photo) | تعديل الفوتوشوب (لكل صورة)</td>
-            <td>2 JOD</td>
-            <td>Optional service | خدمة اختيارية</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    
-    <div class="section">
-      <h2>Booking Process | عملية الحجز</h2>
-      <div class="bilingual">
-        <div class="english">
-          <ol>
-            <li>Contact us to discuss your requirements</li>
-            <li>We'll send a custom invoice via WhatsApp</li>
-            <li>50% deposit required to confirm booking</li>
-            <li>Remaining 50% due after edits are approved</li>
-            <li>No refunds after deposit payment</li>
-          </ol>
-        </div>
-        <div class="arabic">
-          <ol>
-            <li>تواصل معنا لمناقشة متطلباتك</li>
-            <li>سنرسل فاتورة مخصصة عبر واتساب</li>
-            <li>50% دفعة مطلوبة لتأكيد الحجز</li>
-            <li>50% المتبقية مستحقة بعد الموافقة على التعديلات</li>
-            <li>لا يوجد استرداد للأموال بعد سداد الدفعة</li>
-          </ol>
-        </div>
-      </div>
-    </div>
-    
-    <div class="section">
-      <div class="highlight">
-        <h3>Package Details | تفاصيل الباقات</h3>
+        <h2>Service Overview | نظرة عامة على الخدمة</h2>
         <div class="bilingual">
-          <div class="english">All session packages include unlimited photos during the booked time. Photoshop editing is charged per photo (2 JOD/photo).</div>
-          <div class="arabic">جميع باقات الجلسات تشمل صور غير محدودة خلال الوقت المحجوز. تعديل الفوتوشوب يتم حسابه لكل صورة (2 دينار/صورة).</div>
+            <div class="english">Professional photography sessions in Amman, Jordan with high-quality editing. Unlimited photos during session time.</div>
+            <div class="arabic">جلسات تصوير احترافية في عمّان، الأردن مع تعديلات عالية الجودة. صور غير محدودة خلال وقت الجلسة.</div>
         </div>
-      </div>
     </div>
-    
+
     <div class="section">
-      <div class="warning">
-        <h3>No Refund Policy | سياسة عدم الاسترداد</h3>
+        <h2>Pricing Structure | هيكل الأسعار</h2>
         <div class="bilingual">
-          <div class="english">Once the deposit is paid and editing begins, we cannot offer refunds as this is custom creative work. You will receive samples before final payment.</div>
-          <div class="arabic">بمجرد سداد الدفعة وبدء التعديلات، لا يمكننا تقديم استرداد لأن هذا عمل إبداعي مخصص. سوف تتلقى عينات قبل الدفع النهائي.</div>
+            <div class="english">All prices now 50% OFF – original price is crossed out.</div>
+            <div class="arabic">جميع الأسعار الآن بخصم 50٪ – السعر الأصلي مشطوب.</div>
         </div>
-      </div>
+
+        <div class="table-wrapper">
+            <table class="price-table">
+                <thead>
+                    <tr>
+                        <th>Service | الخدمة</th>
+                        <th>Price | السعر</th>
+                        <th>Details | التفاصيل</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Photo Session (1 hour) | جلسة التصوير (ساعة واحدة)</td>
+                        <td><span class="old-price">15 JOD</span> 7.5 JOD</td>
+                        <td>Unlimited photos | صور غير محدودة</td>
+                    </tr>
+                    <tr>
+                        <td>Photo Session (2 hours) | جلسة التصوير (ساعتين)</td>
+                        <td><span class="old-price">25 JOD</span> 12.5 JOD</td>
+                        <td>Unlimited photos | صور غير محدودة</td>
+                    </tr>
+                    <tr>
+                        <td>Photo Session (3 hours) | جلسة التصوير (3 ساعات)</td>
+                        <td><span class="old-price">35 JOD</span> 17.5 JOD</td>
+                        <td>Unlimited photos (Max duration) | صور غير محدودة (الحد الأقصى)</td>
+                    </tr>
+                    <tr>
+                        <td>Transportation/Taxi | المواصلات/تاكسي</td>
+                        <td><span class="old-price">5-7 JOD</span> 2.5-3.5 JOD</td>
+                        <td>Dynamic pricing based on location | سعر متغير حسب الموقع</td>
+                    </tr>
+                    <tr>
+                        <td>Camera Kit Rental | استئجار طقم الكاميرا</td>
+                        <td><span class="old-price">5 JOD</span> 2.5 JOD</td>
+                        <td>Fixed price | سعر ثابت</td>
+                    </tr>
+                    <tr>
+                        <td>Session Effort Fee | رسوم جهد الجلسة</td>
+                        <td><span class="old-price">5 JOD</span> 2.5 JOD</td>
+                        <td>Fixed price | سعر ثابت</td>
+                    </tr>
+                    <tr>
+                        <td>Photoshop Editing (per photo) | تعديل الفوتوشوب (لكل صورة)</td>
+                        <td><span class="old-price">2 JOD</span> 1 JOD</td>
+                        <td>Optional service | خدمة اختيارية</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    
+
+    <div class="section">
+        <h2>Booking Process | عملية الحجز</h2>
+        <div class="bilingual">
+            <div class="english">
+                <ol>
+                    <li>Contact us to discuss your requirements</li>
+                    <li>We'll send a custom invoice via WhatsApp</li>
+                    <li>50% deposit required to confirm booking</li>
+                    <li>Remaining 50% due after edits are approved</li>
+                    <li>No refunds after deposit payment</li>
+                </ol>
+            </div>
+            <div class="arabic">
+                <ol>
+                    <li>تواصل معنا لمناقشة متطلباتك</li>
+                    <li>سنرسل فاتورة مخصصة عبر واتساب</li>
+                    <li>50% دفعة مطلوبة لتأكيد الحجز</li>
+                    <li>50% المتبقية مستحقة بعد الموافقة على التعديلات</li>
+                    <li>لا يوجد استرداد للأموال بعد سداد الدفعة</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="highlight">
+            <h3>Package Details | تفاصيل الباقات</h3>
+            <div class="bilingual">
+                <div class="english">All session packages include unlimited photos during the booked time. Photoshop editing is now only 1 JOD/photo.</div>
+                <div class="arabic">جميع باقات الجلسات تشمل صور غير محدودة خلال الوقت المحجوز. تعديل الفوتوشوب الآن 1 دينار/صورة فقط.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="warning">
+            <h3>No Refund Policy | سياسة عدم الاسترداد</h3>
+            <div class="bilingual">
+                <div class="english">Once the deposit is paid and editing begins, we cannot offer refunds as this is custom creative work. You will receive samples before final payment.</div>
+                <div class="arabic">بمجرد سداد الدفعة وبدء التعديلات، لا يمكننا تقديم استرداد لأن هذا عمل إبداعي مخصص. سوف تتلقى عينات قبل الدفع النهائي.</div>
+            </div>
+        </div>
+    </div>
+
     <div class="btn-container">
-      <a href="photo_work_contact" class="btn">Book Your Session | احجز جلستك</a>
-      <a href="port" class="btn secondary">View Portfolio | معرض الأعمال</a>
+        <a href="photo_work_must_read" class="btn">Book Your Session | احجز جلستك</a>
+        <a href="port" class="btn secondary">View Portfolio | معرض الأعمال</a>
     </div>
-  </div>
+</div>
 </body>
 </html>

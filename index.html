@@ -1,108 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    document.body.style.transform = "scale(2.1)";
-    document.body.style.transformOrigin = "0 0";
-    document.body.style.width = "46.77%";  // Adjusted for correct scaling
-    document.body.style.height = "76.67%"; // Adjusted for correct scaling
-    document.body.style.overflow = "auto"; // Allow scrolling
-  });
-</script>
 <head>
-    <meta charset="UTF-8">
-    <title>Necro's Hub</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        
-        body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            line-height: 1;
-            background-color: #0a0a0a;
-            color: #f0f0f0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 50vh;
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-        }
-        
-        h1 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-            color: #ffffff;
-            letter-spacing: -0.5px;
-        }
-        
-        .button-container {
-            display: grid;
-            gap: 1rem;
-            width: 100%;
-        }
-        
-        .btn {
-            display: block;
-            padding: 1rem;
-            border-radius: 2px;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1rem;
-            transition: all 0.2s ease;
-            border: none;
-            cursor: pointer;
-        }
-        
-        .btn-primary {
-            background-color: #3a5c8a;
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background-color: #2d4a72;
-            transform: translateY(-2px);
-        }
-        
-        .btn-secondary {
-            background-color: #333;
-            color: white;
-        }
-        
-        .btn-secondary:hover {
-            background-color: #444;
-            transform: translateY(-2px);
-        }
-        
-        .btn-tertiary {
-            background-color: #4a3a5a;
-            color: white;
-        }
-        
-        .btn-tertiary:hover {
-            background-color: #3a2a4a;
-            transform: translateY(-2px);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Necro's Hub</title>
+<style>
+    :root {
+        --bg-color: #0a0a0a;
+        --text-color: #f0f0f0;
+        --primary-btn: #ff5722;
+        --primary-hover: #e04d1e;
+        --secondary-btn: #333;
+        --secondary-hover: #444;
+        --tertiary-btn: #4a3a5a;
+        --tertiary-hover: #3a2a4a;
+        --accent-color: #ffd700;
+    }
+    body {
+        font-family: 'Segoe UI', system-ui, sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        text-align: center;
+        font-size: 200%;
+    }
+    .container {
+        width: 100%;
+        max-width: 800px;
+    }
+    h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        letter-spacing: -1px;
+    }
+    .sale-banner {
+        background: var(--primary-btn);
+        color: white;
+        padding: 1rem;
+        border-radius: 10px;
+        margin-bottom: 2rem;
+        font-size: 2rem;
+        font-weight: bold;
+        animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+    .button-container {
+        display: grid;
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+    .btn {
+        display: inline-block;
+        padding: 1.5rem 2rem;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.8rem;
+        transition: all 0.3s ease;
+    }
+    .btn-primary {
+        background-color: var(--primary-btn);
+        color: white;
+    }
+    .btn-primary:hover {
+        background-color: var(--primary-hover);
+        transform: translateY(-3px);
+    }
+    .btn-secondary {
+        background-color: var(--secondary-btn);
+        color: white;
+    }
+    .btn-secondary:hover {
+        background-color: var(--secondary-hover);
+        transform: translateY(-3px);
+    }
+    .btn-tertiary {
+        background-color: var(--tertiary-btn);
+        color: white;
+    }
+    .btn-tertiary:hover {
+        background-color: var(--tertiary-hover);
+        transform: translateY(-3px);
+    }
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>Necro's Hub</h1>
-        
-        <div class="button-container">
-            <a href="photo_work" class="btn btn-primary">Photo Sessions</a>
-            <a href="main_index" class="btn btn-secondary">Social Media</a>
-            <a href="https://asubank.xyz" target="_blank" class="btn btn-tertiary">ASU Test Banks</a>
-        </div>
+<div class="container">
+    <h1>Necro's Hub</h1>
+    <div class="sale-banner">
+       50% OFF Photo Sessions – Limited Time Only!
     </div>
+    <div class="button-container">
+        <a href="photo_work" class="btn btn-primary">Book Photo Sessions</a>
+        <a href="main_index" class="btn btn-secondary">Social Media</a>
+        <a href="https://asubank.xyz" target="_blank" class="btn btn-tertiary">ASU Test Banks</a>
+    </div>
+</div>
 </body>
 </html>
