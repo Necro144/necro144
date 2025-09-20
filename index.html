@@ -26,190 +26,334 @@
   <link rel="apple-touch-icon" href="icons/apple-touch-icon-180.png" />
   <link rel="manifest" href="manifest.webmanifest" />
 
-  <style>
-    /* ====== Design tokens ====== */
-    :root {
-      --bg: #0a0a0a;
-      --surface: #121212;
-      --surface-2: #171717;
-      --text: #f5f5f5;
-      --muted: #b8b8b8;
-      --brand: #ff5722;
-      --brand-pressed: #e04d1e;
-      --accent: #ffd700;
-      --border: #222;
-      --shadow: 0 8px 24px rgba(0,0,0,.4);
-      --radius: 18px;
-      --tap: -2px;
-    }
+<style>
+  /* ====== Design Tokens ====== */
+  :root {
+    --bg: #0a0a0a;
+    --surface: #121212;
+    --surface-2: #171717;
+    --text: #f5f5f5;
+    --muted: #b8b8b8;
+    --brand: #ff5722;
+    --brand-pressed: #e04d1e;
+    --accent: #ffd700;
+    --border: #222;
+    --shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    --radius: 18px;
+    --tap: -2px;
+  }
 
-    /* ====== Reset / base ====== */
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font: 16px/1.3 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, system-ui, sans-serif;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      overscroll-behavior-y: none;
-      /* Honor iPhone safe areas (notch & home indicator) */
-      padding-top: env(safe-area-inset-top);
-      padding-bottom: env(safe-area-inset-bottom);
-    }
+  /* ====== Reset / Base ====== */
+  *, *::before, *::after { box-sizing: border-box; }
 
-    /* ====== App shell ====== */
-    .app {
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-      min-height: 100dvh;
-      position: relative;
-      overflow: hidden;
-    }
+  html, body { height: 100%; margin: 0; }
 
-    /* Top bar (iOS style) */
-    .topbar {
-      position: sticky; top: 0;
-      padding: calc(10px + env(safe-area-inset-top)) 14px 10px;
-      background: linear-gradient(180deg, rgba(18,18,18,.95), rgba(18,18,18,.75));
-      backdrop-filter: saturate(140%) blur(10px);
-      border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; gap: 12px;
-      z-index: 20;
-    }
-    .icon-btn {
-      appearance: none; border: 0; background: var(--surface-2);
-      width: 38px; height: 38px; border-radius: 12px;
-      display: grid; place-items: center; color: var(--text);
-      box-shadow: var(--shadow);
-      transition: transform .06s ease, background .2s ease;
-    }
-    .icon-btn:active { transform: translateY(var(--tap)); background: #1e1e1e; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.4 -apple-system, BlinkMacSystemFont, "SF Pro Text",
+          "Segoe UI", Roboto, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overscroll-behavior-y: none;
 
-    .title {
-      font-weight: 700; font-size: 18px; letter-spacing: .2px;
-    }
+    /* Safe-area padding for iOS */
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
 
-    /* ====== Drawer (sidebar) ====== */
-    .drawer-backdrop {
-      position: fixed; inset: 0;
-      background: rgba(0,0,0,.4);
-      opacity: 0; pointer-events: none;
-      transition: opacity .2s ease;
-      z-index: 30;
-    }
-    .drawer {
-      position: fixed; inset: 0 auto 0 0;
-      width: min(86vw, 320px);
-      background: #0e0e0e;
-      border-right: 1px solid var(--border);
-      transform: translateX(-100%);
-      transition: transform .25s ease;
-      z-index: 40;
-      display: flex; flex-direction: column;
-      padding-top: env(safe-area-inset-top);
-    }
-    .drawer.open { transform: translateX(0); }
-    .drawer-backdrop.show { opacity: 1; pointer-events: auto; }
+  /* ====== App Shell ====== */
+  .app {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+  }
 
-    .drawer__header {
-      padding: 18px 16px 12px;
-      display: flex; align-items: center; gap: 12px;
-      border-bottom: 1px solid var(--border);
-    }
-    .avatar {
-      width: 40px; height: 40px; border-radius: 12px; background: #222;
-      display: grid; place-items: center; font-weight: 700; color: var(--accent);
-    }
-    .drawer__brand { font-weight: 700; }
-    .drawer__nav { padding: 10px; display: grid; gap: 6px; }
-    .nav-link {
-      display: flex; align-items: center; gap: 12px;
-      padding: 14px 12px; border-radius: 14px; color: var(--text);
-      text-decoration: none; background: transparent; border: 1px solid transparent;
-    }
-    .nav-link:hover { background: #141414; border-color: #1c1c1c; }
-    .nav-badge {
-      margin-left: auto; background: var(--brand); color: #fff;
-      padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 700;
-    }
+  /* ====== Top Bar ====== */
+  .topbar {
+    position: sticky;
+    top: 0;
+    padding: calc(10px + env(safe-area-inset-top)) 14px 10px;
+    background: linear-gradient(180deg, rgba(18,18,18,0.95), rgba(18,18,18,0.75));
+    backdrop-filter: saturate(140%) blur(10px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 20;
+  }
 
-    /* ====== Content ====== */
-    main {
-      padding: 14px;
-      display: grid; gap: 14px;
-    }
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 16px;
-    }
-    .hero {
-      position: relative; overflow: hidden;
-      background: radial-gradient(1200px 500px at 80% -10%, rgba(255,87,34,.15), transparent 60%), var(--surface);
-    }
-    .hero h1 { margin: 0 0 6px; font-size: 22px; letter-spacing: -.2px; }
-    .hero p { margin: 0; color: var(--muted); }
+  .title {
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 0.2px;
+  }
 
-    .sale {
-      display: flex; align-items: center; gap: 12px; padding: 14px;
-      border-radius: 14px; background: #1a120e; border: 1px solid #2a1a14;
-    }
-    .sale__tag {
-      width: 42px; height: 42px; border-radius: 12px; background: var(--brand); color: #fff;
-      display: grid; place-items: center; font-weight: 800;
-      box-shadow: 0 8px 20px rgba(255,87,34,.35);
-    }
-    .sale__text { font-weight: 700; font-size: 16px; }
-    .grid {
-      display: grid; gap: 10px;
-    }
-    .action {
-      display: flex; align-items: center; justify-content: space-between; gap: 10px;
-      padding: 14px; border-radius: 14px; background: var(--surface-2); border: 1px solid var(--border);
-      text-decoration: none; color: var(--text);
-    }
-    .action b { font-size: 16px; }
-    .action small { color: var(--muted); display: block; margin-top: 2px; }
-    .action:active { transform: translateY(var(--tap)); }
+  .icon-btn {
+    appearance: none;
+    border: none;
+    background: var(--surface-2);
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    color: var(--text);
+    box-shadow: var(--shadow);
+    transition: transform 0.06s ease, background 0.2s ease;
+    cursor: pointer;
+  }
+  .icon-btn:active {
+    transform: translateY(var(--tap));
+    background: #1e1e1e;
+  }
 
-    /* ====== Bottom bar (iOS tabbar vibe) ====== */
-    .bottombar {
-      position: sticky; bottom: 0;
-      padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
-      background: linear-gradient(0deg, rgba(12,12,12,.95), rgba(12,12,12,.75));
-      border-top: 1px solid var(--border);
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
-      z-index: 10;
-    }
-    .primary {
-      grid-column: span 3;
-      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-      background: var(--brand); color: #fff; text-decoration: none; height: 48px;
-      border-radius: 14px; font-weight: 800; letter-spacing: .2px;
-      box-shadow: 0 10px 24px rgba(255,87,34,.35);
-      transition: transform .06s ease, background .2s ease;
-    }
-    .primary:active { transform: translateY(var(--tap)); background: var(--brand-pressed); }
+  /* ====== Drawer (Sidebar) ====== */
+  .drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 30;
+  }
+  .drawer-backdrop.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
 
-    /* ====== A2HS tip (only shown in Safari when not standalone) ====== */
-    .a2hs {
-      position: fixed; left: 12px; right: 12px; bottom: calc(76px + env(safe-area-inset-bottom));
-      background: #111; border: 1px solid var(--border); border-radius: 16px; padding: 12px 12px 12px 14px;
-      display: none; gap: 10px; align-items: center; box-shadow: var(--shadow); z-index: 25;
-    }
-    .a2hs.show { display: flex; }
-    .a2hs button {
-      margin-left: auto;
-      border: 0; background: #222; color: var(--text); padding: 8px 10px; border-radius: 10px;
-    }
+  .drawer {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: min(86vw, 320px);
+    background: #0e0e0e;
+    border-right: 1px solid var(--border);
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    z-index: 40;
+    display: flex;
+    flex-direction: column;
+    padding-top: env(safe-area-inset-top);
+  }
+  .drawer.open { transform: translateX(0); }
 
-    /* ====== Tiny icons (SVG) ====== */
-    .i { width: 20px; height: 20px; display: inline-block; }
-  </style>
+  .drawer__header {
+    padding: 18px 16px 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: #222;
+    display: grid;
+    place-items: center;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .drawer__brand { font-weight: 700; }
+  .drawer__nav {
+    padding: 10px;
+    display: grid;
+    gap: 6px;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 12px;
+    border-radius: 14px;
+    color: var(--text);
+    text-decoration: none;
+    background: transparent;
+    border: 1px solid transparent;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+  .nav-link:hover, .nav-link:focus {
+    background: #141414;
+    border-color: #1c1c1c;
+    outline: none;
+  }
+
+  .nav-badge {
+    margin-left: auto;
+    background: var(--brand);
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  /* ====== Main Content ====== */
+  main {
+    padding: 14px;
+    display: grid;
+    gap: 14px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 16px;
+  }
+
+  .hero {
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(1200px 500px at 80% -10%, rgba(255,87,34,0.15), transparent 60%), var(--surface);
+  }
+  .hero h1 {
+    margin: 0 0 6px;
+    font-size: 22px;
+    letter-spacing: -0.2px;
+  }
+  .hero p {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .sale {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px;
+    border-radius: 14px;
+    background: #1a120e;
+    border: 1px solid #2a1a14;
+  }
+  .sale__tag {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: var(--brand);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+    box-shadow: 0 8px 20px rgba(255,87,34,0.35);
+  }
+  .sale__text { font-weight: 700; font-size: 16px; }
+
+  .grid { display: grid; gap: 10px; }
+
+  .action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 14px;
+    border-radius: 14px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    text-decoration: none;
+    color: var(--text);
+    transition: transform 0.06s ease;
+  }
+  .action b { font-size: 16px; }
+  .action small {
+    color: var(--muted);
+    display: block;
+    margin-top: 2px;
+  }
+  .action:active { transform: translateY(var(--tap)); }
+
+  /* ====== Bottom Bar ====== */
+  .bottombar {
+    position: sticky;
+    bottom: 0;
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+    background: linear-gradient(0deg, rgba(12,12,12,0.95), rgba(12,12,12,0.75));
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    z-index: 10;
+  }
+
+  .primary {
+    grid-column: span 3;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--brand);
+    color: #fff;
+    text-decoration: none;
+    height: 48px;
+    border-radius: 14px;
+    font-weight: 800;
+    letter-spacing: 0.2px;
+    box-shadow: 0 10px 24px rgba(255,87,34,0.35);
+    transition: transform 0.06s ease, background 0.2s ease;
+  }
+  .primary:active {
+    transform: translateY(var(--tap));
+    background: var(--brand-pressed);
+  }
+
+  /* ====== A2HS Tip ====== */
+  .a2hs {
+    position: fixed;
+    left: 12px;
+    right: 12px;
+    bottom: calc(76px + env(safe-area-inset-bottom));
+    background: #111;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 12px 12px 12px 14px;
+    display: none;
+    gap: 10px;
+    align-items: center;
+    box-shadow: var(--shadow);
+    z-index: 25;
+  }
+  .a2hs.show { display: flex; }
+
+  .a2hs button {
+    margin-left: auto;
+    border: none;
+    background: #222;
+    color: var(--text);
+    padding: 8px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  /* ====== Icons ====== */
+  .i {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+  }
+  /* Ensure cards stack flush with grid gap only */
+main {
+  padding: 90px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px; /* This is the only spacing */
+}
+
+.card,
+.sale {
+  margin: 0;        /* kill default section spacing */
+  padding: 16px;
+  display: block;
+}
+
+</style>
+
 </head>
 <body>
   <div class="app" id="app">

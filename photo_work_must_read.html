@@ -155,6 +155,21 @@ li { margin-bottom: 12px; }
   background: var(--brand); color: #fff; text-decoration: none; height: 48px;
   border-radius: 14px; font-weight: 800;
 }
+  /* Ensure cards stack flush with grid gap only */
+main {
+  padding: 90px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px; /* This is the only spacing */
+}
+
+.card,
+.sale {
+  margin: 0;        /* kill default section spacing */
+  padding: 16px;
+  display: block;
+}
+
 </style>
 </head>
 <body>
