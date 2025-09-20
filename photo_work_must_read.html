@@ -1,98 +1,234 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Terms of Service - Photo Sessions</title>
+<meta charset="UTF-8" />
+<title>Terms of Service - Necro’s Hub</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0a0a0a" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Necro’s Hub" />
+<link rel="apple-touch-icon" href="icons/apple-touch-icon-180.png" />
+<link rel="manifest" href="manifest.webmanifest" />
+
 <style>
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #f5f5f5;
-        margin: 0;
-        padding: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        font-size: 1.4rem;
-    }
-    .tos-container {
-        background: white;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        padding: 30px;
-        max-width: 800px;
-        width: 100%;
-    }
-    h1 {
-        text-align: center;
-        font-size: 2rem;
-        margin-bottom: 20px;
-        color: #333;
-    }
-    ol {
-        padding-left: 20px;
-        margin-bottom: 30px;
-    }
-    li {
-        margin-bottom: 20px;
-        line-height: 1.6;
-    }
-    .highlight {
-        background-color: #fff8e1;
-        padding: 10px;
-        border-left: 4px solid #ff9800;
-        border-radius: 6px;
-        margin-bottom: 20px;
-    }
-    .accept-btn {
-        display: block;
-        background-color: #007AFF;
-        color: white;
-        padding: 15px;
-        text-align: center;
-        border-radius: 8px;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 1.4rem;
-        transition: background 0.3s;
-    }
-    .accept-btn:hover {
-        background-color: #005ecb;
-    }
-    .arabic {
-        direction: rtl;
-        font-size: 1.3rem;
-        color: #555;
-        margin-top: 10px;
-    }
+:root {
+  --bg: #0a0a0a;
+  --surface: #121212;
+  --surface-2: #171717;
+  --text: #f5f5f5;
+  --muted: #b8b8b8;
+  --brand: #ff5722;
+  --brand-pressed: #e04d1e;
+  --accent: #ffd700;
+  --border: #222;
+  --shadow: 0 8px 24px rgba(0,0,0,.4);
+  --radius: 18px;
+  --tap: -2px;
+}
+
+/* Base */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.4 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+@media (min-width: 900px) {
+  body::before {
+    content: "This app is optimized for mobile. Resize your window or open on a phone.";
+    position: fixed; inset: 0;
+    display: grid; place-items: center;
+    background: #0a0a0af2; color: #fff; z-index: 9999; padding: 24px;
+    text-align: center; font-size: 18px;
+  }
+}
+
+/* App shell */
+.app {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100dvh;
+  overflow: hidden;
+}
+
+.topbar {
+  position: sticky; top: 0;
+  padding: calc(10px + env(safe-area-inset-top)) 14px 10px;
+  background: linear-gradient(180deg, rgba(18,18,18,.95), rgba(18,18,18,.75));
+  backdrop-filter: saturate(140%) blur(10px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 12px;
+  z-index: 20;
+}
+.icon-btn {
+  border: 0; background: var(--surface-2);
+  width: 38px; height: 38px; border-radius: 12px;
+  display: grid; place-items: center; color: var(--text);
+}
+.title { font-weight: 700; font-size: 18px; }
+
+/* Drawer */
+.drawer-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.4);
+  opacity: 0; pointer-events: none;
+  transition: opacity .2s ease;
+  z-index: 30;
+}
+.drawer {
+  position: fixed; inset: 0 auto 0 0;
+  width: min(86vw, 320px);
+  background: #0e0e0e;
+  border-right: 1px solid var(--border);
+  transform: translateX(-100%);
+  transition: transform .25s ease;
+  z-index: 40;
+  display: flex; flex-direction: column;
+  padding-top: env(safe-area-inset-top);
+}
+.drawer.open { transform: translateX(0); }
+.drawer-backdrop.show { opacity: 1; pointer-events: auto; }
+.drawer__header {
+  padding: 18px 16px 12px;
+  display: flex; align-items: center; gap: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.avatar {
+  width: 40px; height: 40px; border-radius: 12px; background: #222;
+  display: grid; place-items: center; font-weight: 700; color: var(--accent);
+}
+.drawer__brand { font-weight: 700; }
+.drawer__nav { padding: 10px; display: grid; gap: 6px; }
+.nav-link {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 12px; border-radius: 14px; color: var(--text);
+  text-decoration: none;
+}
+.nav-link:hover { background: #141414; }
+.nav-badge {
+  margin-left: auto; background: var(--brand); color: #fff;
+  padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 700;
+}
+
+/* Content */
+main {
+  padding: 14px;
+  display: grid; gap: 14px;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px;
+}
+h1 {
+  font-size: 1.4rem; margin: 0 0 12px;
+}
+ol {
+  padding-left: 20px;
+}
+li { margin-bottom: 12px; }
+.highlight {
+  background-color: rgba(255, 215, 0, 0.1);
+  padding: 12px; border-left: 4px solid var(--accent);
+  border-radius: var(--radius); margin-bottom: 14px;
+}
+.arabic { direction: rtl; font-size: 0.95rem; color: var(--muted); margin-top: 4px; }
+
+/* Bottom bar */
+.bottombar {
+  position: sticky; bottom: 0;
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+  background: linear-gradient(0deg, rgba(12,12,12,.95), rgba(12,12,12,.75));
+  border-top: 1px solid var(--border);
+}
+.primary {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  background: var(--brand); color: #fff; text-decoration: none; height: 48px;
+  border-radius: 14px; font-weight: 800;
+}
 </style>
 </head>
 <body>
-<div class="tos-container">
-    <h1>Terms of Service | شروط الخدمة</h1>
+<div class="app" id="app">
+  <!-- Drawer -->
+  <div class="drawer-backdrop" id="backdrop"></div>
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer__header">
+      <div class="avatar">N</div>
+      <div>
+        <div class="drawer__brand">Necro’s Hub</div>
+        <div style="color:var(--muted);font-size:12px">Creative Services</div>
+      </div>
+    </div>
+    <nav class="drawer__nav">
+      <a class="nav-link" href="index.html">🏠 Home</a>
+      <a class="nav-link" href="photo_work.html">📷 Photo Sessions <span class="nav-badge">-50%</span></a>
+      <a class="nav-link" href="main_index">🌐 Social Media</a>
+    </nav>
+  </aside>
 
-    <div class="highlight">
+  <!-- Top bar -->
+  <header class="topbar">
+    <button class="icon-btn" id="menuBtn">☰</button>
+    <div class="title">Terms of Service</div>
+  </header>
+
+  <!-- Content -->
+  <main>
+    <section class="card">
+      <h1>Terms of Service | شروط الخدمة</h1>
+      <div class="highlight">
         Please read and accept these terms before booking a photo session.<br>
         يرجى قراءة وقبول هذه الشروط قبل حجز جلسة التصوير.
-    </div>
+      </div>
+      <ol>
+        <li>
+          You must pay <strong>50%</strong> of the session cost via <strong>CliQ</strong> or <strong>Cash</strong> before the photographer proceeds.
+          <div class="arabic">يجب دفع <strong>50٪</strong> من تكلفة الجلسة عبر <strong>CliQ</strong> أو نقدًا قبل أن يتوجه المصور.</div>
+        </li>
+        <li>
+          The remaining 50% must be paid upon receiving an invoice (PDF or QR code via WhatsApp).
+          <div class="arabic">يجب دفع 50٪ المتبقية عند استلام الفاتورة (PDF أو رمز QR عبر الواتساب).</div>
+        </li>
+        <li>
+          You must send a WhatsApp screenshot of payment to receive your HQ photos.
+          <div class="arabic">يجب إرسال لقطة شاشة على واتساب لإثبات الدفع حتى تستلم صورك بجودة عالية.</div>
+        </li>
+      </ol>
+    </section>
+  </main>
 
-    <ol>
-        <li>
-            You must pay <strong>50%</strong> of the session cost via <strong>CliQ</strong> or <strong>Cash</strong> before the photographer proceeds to your location.
-            <div class="arabic">يجب دفع <strong>50٪</strong> من تكلفة الجلسة عبر <strong>CliQ</strong> أو نقدًا قبل أن يتوجه المصور إلى موقعك.</div>
-        </li>
-        <li>
-            The remaining 50% must be paid upon receiving an invoice. You will get a <strong>PDF</strong> or <strong>QR code</strong> invoice sent to your WhatsApp number with full payment details before the session continues.
-            <div class="arabic">يجب دفع 50٪ المتبقية عند استلام الفاتورة. سيتم إرسال فاتورة <strong>PDF</strong> أو <strong>رمز QR</strong> إلى رقم الواتساب الخاص بك مع تفاصيل الدفع الكاملة قبل متابعة الجلسة.</div>
-        </li>
-        <li>
-            If you accept, you must send a <strong>WhatsApp screenshot</strong> of the CliQ invoice payment in order to receive your <strong>full HQ quality photos</strong>.
-            <div class="arabic">إذا قبلت، يجب عليك إرسال <strong>لقطة شاشة على واتساب</strong> لدفعة فاتورة CliQ حتى تستلم صورك الكاملة بجودة عالية.</div>
-        </li>
-    </ol>
-
-    <a href="photo_work_contact" class="accept-btn">✅ I Accept & Continue | أوافق وأكمل</a>
+  <!-- Bottom bar -->
+  <footer class="bottombar">
+    <a class="primary" href="photo_work_contact">✅ I Accept & Continue</a>
+  </footer>
 </div>
+
+<script>
+// Drawer interactions
+const drawer = document.getElementById('drawer');
+const backdrop = document.getElementById('backdrop');
+const menuBtn = document.getElementById('menuBtn');
+function openDrawer() { drawer.classList.add('open'); backdrop.classList.add('show'); }
+function closeDrawer() { drawer.classList.remove('open'); backdrop.classList.remove('show'); }
+menuBtn.addEventListener('click', openDrawer);
+backdrop.addEventListener('click', closeDrawer);
+
+// Register service worker for offline/app-shell
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(console.error);
+  });
+}
+</script>
 </body>
 </html>

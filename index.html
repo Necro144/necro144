@@ -1,109 +1,377 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Necro's Hub</title>
-<style>
+  <meta charset="utf-8" />
+  <title>Necro’s Hub</title>
+
+  <!-- Mobile-first & iOS app-like setup -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <!-- iOS: allow “standalone” (launched from Home Screen without browser UI) -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Necro’s Hub" />
+
+  <!-- App icons (provide real PNGs at these paths) -->
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon-180.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
+
+  <style>
+    /* ====== Design tokens ====== */
     :root {
-        --bg-color: #0a0a0a;
-        --text-color: #f0f0f0;
-        --primary-btn: #ff5722;
-        --primary-hover: #e04d1e;
-        --secondary-btn: #333;
-        --secondary-hover: #444;
-        --tertiary-btn: #4a3a5a;
-        --tertiary-hover: #3a2a4a;
-        --accent-color: #ffd700;
+      --bg: #0a0a0a;
+      --surface: #121212;
+      --surface-2: #171717;
+      --text: #f5f5f5;
+      --muted: #b8b8b8;
+      --brand: #ff5722;
+      --brand-pressed: #e04d1e;
+      --accent: #ffd700;
+      --border: #222;
+      --shadow: 0 8px 24px rgba(0,0,0,.4);
+      --radius: 18px;
+      --tap: -2px;
     }
+
+    /* ====== Reset / base ====== */
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
     body {
-        font-family: 'Segoe UI', system-ui, sans-serif;
-        background-color: var(--bg-color);
-        color: var(--text-color);
-        margin: 0;
-        padding: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        text-align: center;
-        font-size: 200%;
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.3 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overscroll-behavior-y: none;
+      /* Honor iPhone safe areas (notch & home indicator) */
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: env(safe-area-inset-bottom);
     }
-    .container {
-        width: 100%;
-        max-width: 800px;
+
+    /* Hide on non-mobile (this build is mobile-only) */
+    @media (min-width: 900px) {
+      body::before {
+        content: "This app is optimized for mobile. Resize your window or open on a phone.";
+        position: fixed; inset: 0;
+        display: grid; place-items: center;
+        background: #0a0a0af2; color: #fff; z-index: 9999; padding: 24px;
+        text-align: center; font-size: 18px;
+      }
     }
-    h1 {
-        font-size: 3rem;
-        margin-bottom: 1rem;
-        letter-spacing: -1px;
+
+    /* ====== App shell ====== */
+    .app {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      min-height: 100dvh;
+      position: relative;
+      overflow: hidden;
     }
-    .sale-banner {
-        background: var(--primary-btn);
-        color: white;
-        padding: 1rem;
-        border-radius: 10px;
-        margin-bottom: 2rem;
-        font-size: 2rem;
-        font-weight: bold;
-        animation: pulse 2s infinite;
+
+    /* Top bar (iOS style) */
+    .topbar {
+      position: sticky; top: 0;
+      padding: calc(10px + env(safe-area-inset-top)) 14px 10px;
+      background: linear-gradient(180deg, rgba(18,18,18,.95), rgba(18,18,18,.75));
+      backdrop-filter: saturate(140%) blur(10px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 12px;
+      z-index: 20;
     }
-    @keyframes pulse {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-        100% { transform: scale(1); }
+    .icon-btn {
+      appearance: none; border: 0; background: var(--surface-2);
+      width: 38px; height: 38px; border-radius: 12px;
+      display: grid; place-items: center; color: var(--text);
+      box-shadow: var(--shadow);
+      transition: transform .06s ease, background .2s ease;
     }
-    .button-container {
-        display: grid;
-        gap: 1.5rem;
-        margin-top: 2rem;
+    .icon-btn:active { transform: translateY(var(--tap)); background: #1e1e1e; }
+
+    .title {
+      font-weight: 700; font-size: 18px; letter-spacing: .2px;
     }
-    .btn {
-        display: inline-block;
-        padding: 1.5rem 2rem;
-        border-radius: 10px;
-        text-decoration: none;
-        font-weight: 600;
-        font-size: 1.8rem;
-        transition: all 0.3s ease;
+
+    /* ====== Drawer (sidebar) ====== */
+    .drawer-backdrop {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.4);
+      opacity: 0; pointer-events: none;
+      transition: opacity .2s ease;
+      z-index: 30;
     }
-    .btn-primary {
-        background-color: var(--primary-btn);
-        color: white;
+    .drawer {
+      position: fixed; inset: 0 auto 0 0;
+      width: min(86vw, 320px);
+      background: #0e0e0e;
+      border-right: 1px solid var(--border);
+      transform: translateX(-100%);
+      transition: transform .25s ease;
+      z-index: 40;
+      display: flex; flex-direction: column;
+      padding-top: env(safe-area-inset-top);
     }
-    .btn-primary:hover {
-        background-color: var(--primary-hover);
-        transform: translateY(-3px);
+    .drawer.open { transform: translateX(0); }
+    .drawer-backdrop.show { opacity: 1; pointer-events: auto; }
+
+    .drawer__header {
+      padding: 18px 16px 12px;
+      display: flex; align-items: center; gap: 12px;
+      border-bottom: 1px solid var(--border);
     }
-    .btn-secondary {
-        background-color: var(--secondary-btn);
-        color: white;
+    .avatar {
+      width: 40px; height: 40px; border-radius: 12px; background: #222;
+      display: grid; place-items: center; font-weight: 700; color: var(--accent);
     }
-    .btn-secondary:hover {
-        background-color: var(--secondary-hover);
-        transform: translateY(-3px);
+    .drawer__brand { font-weight: 700; }
+    .drawer__nav { padding: 10px; display: grid; gap: 6px; }
+    .nav-link {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 12px; border-radius: 14px; color: var(--text);
+      text-decoration: none; background: transparent; border: 1px solid transparent;
     }
-    .btn-tertiary {
-        background-color: var(--tertiary-btn);
-        color: white;
+    .nav-link:hover { background: #141414; border-color: #1c1c1c; }
+    .nav-badge {
+      margin-left: auto; background: var(--brand); color: #fff;
+      padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 700;
     }
-    .btn-tertiary:hover {
-        background-color: var(--tertiary-hover);
-        transform: translateY(-3px);
+
+    /* ====== Content ====== */
+    main {
+      padding: 14px;
+      display: grid; gap: 14px;
     }
-</style>
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 16px;
+    }
+    .hero {
+      position: relative; overflow: hidden;
+      background: radial-gradient(1200px 500px at 80% -10%, rgba(255,87,34,.15), transparent 60%), var(--surface);
+    }
+    .hero h1 { margin: 0 0 6px; font-size: 22px; letter-spacing: -.2px; }
+    .hero p { margin: 0; color: var(--muted); }
+
+    .sale {
+      display: flex; align-items: center; gap: 12px; padding: 14px;
+      border-radius: 14px; background: #1a120e; border: 1px solid #2a1a14;
+    }
+    .sale__tag {
+      width: 42px; height: 42px; border-radius: 12px; background: var(--brand); color: #fff;
+      display: grid; place-items: center; font-weight: 800;
+      box-shadow: 0 8px 20px rgba(255,87,34,.35);
+    }
+    .sale__text { font-weight: 700; font-size: 16px; }
+    .grid {
+      display: grid; gap: 10px;
+    }
+    .action {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      padding: 14px; border-radius: 14px; background: var(--surface-2); border: 1px solid var(--border);
+      text-decoration: none; color: var(--text);
+    }
+    .action b { font-size: 16px; }
+    .action small { color: var(--muted); display: block; margin-top: 2px; }
+    .action:active { transform: translateY(var(--tap)); }
+
+    /* ====== Bottom bar (iOS tabbar vibe) ====== */
+    .bottombar {
+      position: sticky; bottom: 0;
+      padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+      background: linear-gradient(0deg, rgba(12,12,12,.95), rgba(12,12,12,.75));
+      border-top: 1px solid var(--border);
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+      z-index: 10;
+    }
+    .primary {
+      grid-column: span 3;
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      background: var(--brand); color: #fff; text-decoration: none; height: 48px;
+      border-radius: 14px; font-weight: 800; letter-spacing: .2px;
+      box-shadow: 0 10px 24px rgba(255,87,34,.35);
+      transition: transform .06s ease, background .2s ease;
+    }
+    .primary:active { transform: translateY(var(--tap)); background: var(--brand-pressed); }
+
+    /* ====== A2HS tip (only shown in Safari when not standalone) ====== */
+    .a2hs {
+      position: fixed; left: 12px; right: 12px; bottom: calc(76px + env(safe-area-inset-bottom));
+      background: #111; border: 1px solid var(--border); border-radius: 16px; padding: 12px 12px 12px 14px;
+      display: none; gap: 10px; align-items: center; box-shadow: var(--shadow); z-index: 25;
+    }
+    .a2hs.show { display: flex; }
+    .a2hs button {
+      margin-left: auto;
+      border: 0; background: #222; color: var(--text); padding: 8px 10px; border-radius: 10px;
+    }
+
+    /* ====== Tiny icons (SVG) ====== */
+    .i { width: 20px; height: 20px; display: inline-block; }
+  </style>
 </head>
 <body>
-<div class="container">
-    <h1>Necro's Hub</h1>
-    <div class="sale-banner">
-       50% OFF Photo Sessions – Limited Time Only!
-    </div>
-    <div class="button-container">
-        <a href="photo_work" class="btn btn-primary">Book Photo Sessions</a>
-        <a href="main_index" class="btn btn-secondary">Social Media</a>
-        <a href="https://asubank.xyz" target="_blank" class="btn btn-tertiary">ASU Test Banks</a>
-    </div>
-</div>
+  <div class="app" id="app">
+    <!-- Drawer -->
+    <div class="drawer-backdrop" id="backdrop"></div>
+    <aside class="drawer" id="drawer" aria-hidden="true" aria-label="Sidebar">
+      <div class="drawer__header">
+        <div class="avatar" aria-hidden="true">N</div>
+        <div>
+          <div class="drawer__brand">Necro’s Hub</div>
+          <div style="color:var(--muted);font-size:12px">Creative Services</div>
+        </div>
+      </div>
+      <nav class="drawer__nav">
+        <a class="nav-link" href="photo_work">
+          <span class="i" aria-hidden="true">📷</span>
+          Book Photo Sessions
+          <span class="nav-badge">-50%</span>
+        </a>
+        <a class="nav-link" href="main_index">
+          <span class="i" aria-hidden="true">🌐</span>
+          Social Media
+        </a>
+        <a class="nav-link" href="https://asubank.xyz" target="_blank" rel="noopener">
+          <span class="i" aria-hidden="true">📚</span>
+          ASU Test Banks
+        </a>
+        <hr style="border:0;border-top:1px solid var(--border);margin:6px 2px;">
+        <a class="nav-link" href="#about">
+          <span class="i" aria-hidden="true">ℹ️</span>
+          About
+        </a>
+        <a class="nav-link" href="#contact">
+          <span class="i" aria-hidden="true">✉️</span>
+          Contact
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Top bar -->
+    <header class="topbar">
+      <button class="icon-btn" id="menuBtn" aria-label="Open menu">☰</button>
+      <div class="title">Necro’s Hub</div>
+    </header>
+
+    <!-- Content -->
+    <main>
+      <section class="card hero">
+        <h1>Welcome 👋</h1>
+        <p>|Ns| 刀ec[尺]o /A/'s Hub.</p>
+      </section>
+
+      <section class="card sale" role="note" aria-label="Limited-time offer">
+        <div class="sale__tag">50%</div>
+        <div class="sale__text">Photo Sessions — Limited Time Only!</div>
+      </section>
+
+      <section class="grid">
+        <a class="action" href="photo_work">
+          <div>
+            <b>Book Photo Sessions</b>
+            <small>Pick a date, pay, done.</small>
+          </div>
+          <span aria-hidden="true">›</span>
+        </a>
+        <a class="action" href="main_index">
+          <div>
+            <b>Social Media</b>
+            <small>Follow, DM, and latest work.</small>
+          </div>
+          <span aria-hidden="true">›</span>
+        </a>
+        <a class="action" href="https://asubank.xyz" target="_blank" rel="noopener">
+          <div>
+            <b>ASU Test Banks</b>
+            <small>Study resources (opens in new tab).</small>
+          </div>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </section>
+
+      <section id="about" class="card">
+        <h2 style="margin:0 0 6px;font-size:18px;">About</h2>
+        <p style="margin:0;color:var(--muted)">Null.</p>
+      </section>
+    </main>
+
+    <!-- Bottom bar -->
+    <footer class="bottombar" role="contentinfo">
+      <a class="primary" href="photo_work">
+        <span class="i" aria-hidden="true">📅</span>
+        Book now — 50% OFF
+      </a>
+    </footer>
+  </div>
+
+  <!-- “Add to Home Screen” helper (iOS Safari only, not in standalone) -->
+  <div class="a2hs" id="a2hs" role="dialog" aria-live="polite" aria-label="Add to Home Screen Tip">
+    <div>Tip: Add to Home Screen for full-screen app. Share ▸ <b>Add to Home Screen</b></div>
+    <button id="a2hsClose" aria-label="Dismiss tip">Got it</button>
+  </div>
+
+  <script>
+    // Drawer interactions
+    const drawer = document.getElementById('drawer');
+    const backdrop = document.getElementById('backdrop');
+    const menuBtn = document.getElementById('menuBtn');
+
+    function openDrawer() {
+      drawer.classList.add('open');
+      backdrop.classList.add('show');
+      drawer.setAttribute('aria-hidden', 'false');
+    }
+    function closeDrawer() {
+      drawer.classList.remove('open');
+      backdrop.classList.remove('show');
+      drawer.setAttribute('aria-hidden', 'true');
+    }
+    menuBtn.addEventListener('click', openDrawer);
+    backdrop.addEventListener('click', closeDrawer);
+    // Close with ESC
+    window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDrawer(); });
+
+    // Register service worker for offline/app-shell
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(console.error);
+      });
+    }
+
+    // Show iOS "Add to Home Screen" tip only when:
+    // - Safari on iOS
+    // - not already installed (not standalone)
+    // - hide it after user dismisses
+    (function() {
+      const isiOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+      const isStandalone = window.navigator.standalone === true; // iOS Safari only
+      const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+      const tip = document.getElementById('a2hs');
+      const closeBtn = document.getElementById('a2hsClose');
+
+      if (isiOS && isSafari && !isStandalone) {
+        // delay slightly so it doesn't pop immediately
+        setTimeout(() => tip.classList.add('show'), 900);
+      }
+
+      closeBtn.addEventListener('click', () => tip.classList.remove('show'));
+    })();
+
+    // Keep navigation in standalone without bouncing to Safari (internal links only)
+    document.addEventListener('click', function (e) {
+      const t = e.target.closest('a[href]');
+      if (!t) return;
+      const url = new URL(t.href, location.href);
+      const isExternal = url.origin !== location.origin || t.hasAttribute('target');
+      if (window.navigator.standalone && !isExternal) {
+        e.preventDefault();
+        location.href = url.href;
+      }
+    }, { capture: true });
+  </script>
 </body>
 </html>
