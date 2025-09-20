@@ -1,5 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    document.body.style.transform = "scale(2.1)";
+    document.body.style.transformOrigin = "0 0";
+    document.body.style.width = "46.77%";  // Adjusted for correct scaling
+    document.body.style.height = "76.67%"; // Adjusted for correct scaling
+    document.body.style.overflow = "auto"; // Allow scrolling
+  });
+</script>
+
 <head>
 <meta charset="UTF-8" />
 <title>Terms of Service - Necro’s Hub</title>
@@ -38,16 +48,6 @@ body {
   -webkit-font-smoothing: antialiased;
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
-}
-
-@media (min-width: 900px) {
-  body::before {
-    content: "This app is optimized for mobile. Resize your window or open on a phone.";
-    position: fixed; inset: 0;
-    display: grid; place-items: center;
-    background: #0a0a0af2; color: #fff; z-index: 9999; padding: 24px;
-    text-align: center; font-size: 18px;
-  }
 }
 
 /* App shell */
