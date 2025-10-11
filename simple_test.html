@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Test Page</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --accent: #4c8bf5;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #f8f9ff, #e8f1ff);
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+      }
+
+      main {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 16px;
+        padding: 2.5rem;
+        max-width: 480px;
+        width: min(92vw, 480px);
+        box-shadow: 0 18px 45px rgba(76, 139, 245, 0.15);
+        text-align: center;
+      }
+
+      h1 {
+        margin: 0 0 1rem;
+        font-size: clamp(2rem, 4vw, 2.8rem);
+        color: var(--accent);
+      }
+
+      p {
+        margin: 0 0 1.5rem;
+        line-height: 1.6;
+        color: #333;
+      }
+
+      button {
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 999px;
+        font-size: 1rem;
+        font-weight: 600;
+        background: var(--accent);
+        color: white;
+        cursor: pointer;
+        transition: transform 150ms ease, box-shadow 150ms ease;
+      }
+
+      button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 22px rgba(76, 139, 245, 0.3);
+      }
+
+      button:active {
+        transform: translateY(0);
+        box-shadow: none;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Hello there! ✨</h1>
+      <p>
+        This is a lightweight test page to confirm that HTML, CSS, and JavaScript are
+        wired up correctly. Tap the button below to see a friendly message.
+      </p>
+      <button id="greet-btn" type="button">Say hi</button>
+      <p id="status" aria-live="polite"></p>
+    </main>
+    <script>
+      const button = document.getElementById("greet-btn");
+      const status = document.getElementById("status");
+
+      button.addEventListener("click", () => {
+        const now = new Date().toLocaleTimeString();
+        status.textContent = `Thanks for stopping by! Button clicked at ${now}.`;
+      });
+    </script>
+  </body>
+</html>
