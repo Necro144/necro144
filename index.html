@@ -1,520 +1,698 @@
 <!DOCTYPE html>
 <html lang="en">
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    document.body.style.transform = "scale(2.1)";
-    document.body.style.transformOrigin = "0 0";
-    document.body.style.width = "46.77%";  // Adjusted for correct scaling
-    document.body.style.height = "76.67%"; // Adjusted for correct scaling
-    document.body.style.overflow = "auto"; // Allow scrolling
-  });
-</script>
-
 <head>
-  <meta charset="utf-8" />
-  <title>Necro’s Hub</title>
-
-  <!-- Mobile-first & iOS app-like setup -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#0a0a0a" />
-  <!-- iOS: allow “standalone” (launched from Home Screen without browser UI) -->
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Necro’s Hub" />
-
-  <!-- App icons (provide real PNGs at these paths) -->
-  <link rel="apple-touch-icon" href="icons/apple-touch-icon-180.png" />
-  <link rel="manifest" href="manifest.webmanifest" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+<meta name="theme-color" content="#0a0a0a" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Necro's Hub" />
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect fill='%23ff3b30' width='180' height='180' rx='40'/%3E%3Ctext x='90' y='120' font-size='100' text-anchor='middle' fill='white' font-weight='900' font-family='system-ui'%3EN%3C/text%3E%3C/svg%3E" />
+<link rel="manifest" href="data:application/json;charset=utf-8,%7B%22name%22%3A%22Necro's%20Hub%22%2C%22short_name%22%3A%22Necro%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23000000%22%2C%22theme_color%22%3A%22%230a0a0a%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%2520viewBox%3D'0%25200%2520180%2520180'%253E%253Crect%2520fill%3D'%2523ff3b30'%2520width%3D'180'%2520height%3D'180'%2520rx%3D'40'%2F%253E%253Ctext%2520x%3D'90'%2520y%3D'120'%2520font-size%3D'100'%2520text-anchor%3D'middle'%2520fill%3D'white'%2520font-weight%3D'900'%2520font-family%3D'system-ui'%253EN%253C%2Ftext%253E%253C%2Fsvg%253E%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%5D%7D" />
+<title>Necro's Hub – Neon Restyle</title>
 
 <style>
-  /* ====== Design Tokens ====== */
-  :root {
-    --bg: #0a0a0a;
-    --surface: #121212;
-    --surface-2: #171717;
-    --text: #f5f5f5;
-    --muted: #b8b8b8;
-    --brand: #ff5722;
-    --brand-pressed: #e04d1e;
-    --accent: #ffd700;
-    --border: #222;
-    --shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-    --radius: 18px;
-    --tap: -2px;
-  }
+/* ===== Root Theme ===== */
+:root {
+  --bg: radial-gradient(circle at 20% 10%, #111 0%, #000 100%);
+  --surface: rgba(25, 25, 25, 0.9);
+  --surface-2: rgba(35, 35, 35, 0.85);
+  --text: #f5f5f5;
+  --muted: #9a9a9a;
+  --brand: #ff3b30;
+  --brand-glow: #ff6a5c;
+  --accent: #ffd166;
+  --border: rgba(255, 255, 255, 0.07);
+  --shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+  --blur: blur(14px);
+  --radius: 18px;
+  --tap: -2px;
+}
 
-  /* ====== Reset / Base ====== */
-  *, *::before, *::after { box-sizing: border-box; }
+/* ===== Global Reset ===== */
+*, *::before, *::after { 
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+html, body { 
+  margin: 0; 
+  height: 100%; 
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", "SF Pro Text", system-ui, sans-serif;
+  overscroll-behavior: none;
+}
 
-  html, body { height: 100%; margin: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background 0.4s ease;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font: 16px/1.4 -apple-system, BlinkMacSystemFont, "SF Pro Text",
-          "Segoe UI", Roboto, system-ui, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    overscroll-behavior-y: none;
+/* Disable selection on most elements */
+img, button, a, .card, .hero, .sale { 
+  -webkit-user-select: none;
+  user-select: none;
+}
 
-    /* Safe-area padding for iOS */
-    padding-top: env(safe-area-inset-top);
-    padding-bottom: env(safe-area-inset-bottom);
-  }
+/* Allow selection on text content only */
+p, h1, h2, small {
+  -webkit-user-select: text;
+  user-select: text;
+}
 
-  /* ====== App Shell ====== */
-  .app {
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    min-height: 50dvh;
-    position: relative;
-    overflow: hidden;
-  }
+/* ===== Topbar ===== */
+.topbar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: rgba(15, 15, 15, 0.7);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border-bottom: 1px solid var(--border);
+  z-index: 20;
+  animation: fadeInDown 0.6s ease;
+}
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.title {
+  font-weight: 800;
+  font-size: clamp(18px, 5vw, 20px);
+  letter-spacing: 0.4px;
+  text-shadow: 0 0 8px rgba(255, 59, 48, 0.3);
+}
+.icon-btn {
+  width: 42px; height: 42px;
+  display: grid; place-items: center;
+  background: var(--surface-2);
+  color: var(--text);
+  border-radius: 12px;
+  border: none;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
+  touch-action: manipulation;
+}
+.icon-btn:hover { background: var(--brand); color: #fff; }
+.icon-btn:active { transform: translateY(var(--tap)) scale(0.97); }
 
-  /* ====== Top Bar ====== */
-  .topbar {
-    position: sticky;
-    top: 0;
-    padding: calc(10px + env(safe-area-inset-top)) 14px 10px;
-    background: linear-gradient(180deg, rgba(18,18,18,0.95), rgba(18,18,18,0.75));
-    backdrop-filter: saturate(140%) blur(10px);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    z-index: 20;
-  }
-
-  .title {
-    font-weight: 700;
-    font-size: 18px;
-    letter-spacing: 0.2px;
-  }
-
-  .icon-btn {
-    appearance: none;
-    border: none;
-    background: var(--surface-2);
-    width: 38px;
-    height: 38px;
-    border-radius: 12px;
-    display: grid;
-    place-items: center;
-    color: var(--text);
-    box-shadow: var(--shadow);
-    transition: transform 0.06s ease, background 0.2s ease;
-    cursor: pointer;
-  }
-  .icon-btn:active {
-    transform: translateY(var(--tap));
-    background: #1e1e1e;
-  }
-
-  /* ====== Drawer (Sidebar) ====== */
-  .drawer-backdrop {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.4);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s ease;
-    z-index: 30;
-  }
-  .drawer-backdrop.show {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  .drawer {
-    position: fixed;
-    inset: 0 auto 0 0;
-    width: min(86vw, 320px);
-    background: #0e0e0e;
-    border-right: 1px solid var(--border);
-    transform: translateX(-100%);
-    transition: transform 0.25s ease;
-    z-index: 40;
-    display: flex;
-    flex-direction: column;
-    padding-top: env(safe-area-inset-top);
-  }
-  .drawer.open { transform: translateX(0); }
-
-  .drawer__header {
-    padding: 18px 16px 12px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
-    background: #222;
-    display: grid;
-    place-items: center;
-    font-weight: 700;
-    color: var(--accent);
-  }
-
-  .drawer__brand { font-weight: 700; }
-  .drawer__nav {
-    padding: 10px;
-    display: grid;
-    gap: 6px;
-  }
-
-  .nav-link {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 12px;
-    border-radius: 14px;
-    color: var(--text);
-    text-decoration: none;
-    background: transparent;
-    border: 1px solid transparent;
-    transition: background 0.2s ease, border-color 0.2s ease;
-  }
-  .nav-link:hover, .nav-link:focus {
-    background: #141414;
-    border-color: #1c1c1c;
-    outline: none;
-  }
-
-  .nav-badge {
-    margin-left: auto;
-    background: var(--brand);
-    color: #fff;
-    padding: 4px 10px;
-    border-radius: 999px;
-    font-size: 12px;
-    font-weight: 700;
-  }
-
-  /* ====== Main Content ====== */
-  main {
-    padding: 14px;
-    display: grid;
-    gap: 14px;
-  }
-
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 16px;
-  }
-
-  .hero {
-    position: relative;
-    overflow: hidden;
-    background: radial-gradient(1200px 500px at 80% -10%, rgba(255,87,34,0.15), transparent 60%), var(--surface);
-  }
-  .hero h1 {
-    margin: 0 0 6px;
-    font-size: 22px;
-    letter-spacing: -0.2px;
-  }
-  .hero p {
-    margin: 0;
-    color: var(--muted);
-  }
-
-  .sale {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px;
-    border-radius: 14px;
-    background: #1a120e;
-    border: 1px solid #2a1a14;
-  }
-  .sale__tag {
-    width: 42px;
-    height: 42px;
-    border-radius: 12px;
-    background: var(--brand);
-    color: #fff;
-    display: grid;
-    place-items: center;
-    font-weight: 800;
-    box-shadow: 0 8px 20px rgba(255,87,34,0.35);
-  }
-  .sale__text { font-weight: 700; font-size: 16px; }
-
-  .grid { display: grid; gap: 10px; }
-
-  .action {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    padding: 14px;
-    border-radius: 14px;
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    text-decoration: none;
-    color: var(--text);
-    transition: transform 0.06s ease;
-  }
-  .action b { font-size: 16px; }
-  .action small {
-    color: var(--muted);
-    display: block;
-    margin-top: 2px;
-  }
-  .action:active { transform: translateY(var(--tap)); }
-
-  /* ====== Bottom Bar ====== */
-  .bottombar {
-    position: sticky;
-    bottom: 0;
-    padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
-    background: linear-gradient(0deg, rgba(12,12,12,0.95), rgba(12,12,12,0.75));
-    border-top: 1px solid var(--border);
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    z-index: 10;
-  }
-
-  .primary {
-    grid-column: span 3;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    background: var(--brand);
-    color: #fff;
-    text-decoration: none;
-    height: 48px;
-    border-radius: 14px;
-    font-weight: 800;
-    letter-spacing: 0.2px;
-    box-shadow: 0 10px 24px rgba(255,87,34,0.35);
-    transition: transform 0.06s ease, background 0.2s ease;
-  }
-  .primary:active {
-    transform: translateY(var(--tap));
-    background: var(--brand-pressed);
-  }
-
-  /* ====== A2HS Tip ====== */
-  .a2hs {
-    position: fixed;
-    left: 12px;
-    right: 12px;
-    bottom: calc(76px + env(safe-area-inset-bottom));
-    background: #111;
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 12px 12px 12px 14px;
-    display: none;
-    gap: 10px;
-    align-items: center;
-    box-shadow: var(--shadow);
-    z-index: 25;
-  }
-  .a2hs.show { display: flex; }
-
-  .a2hs button {
-    margin-left: auto;
-    border: none;
-    background: #222;
-    color: var(--text);
-    padding: 8px 10px;
-    border-radius: 10px;
-    cursor: pointer;
-  }
-
-  /* ====== Icons ====== */
-  .i {
-    width: 20px;
-    height: 20px;
-    display: inline-block;
-  }
-  /* Ensure cards stack flush with grid gap only */
-main {
-  padding: 20px;
+/* ===== Drawer ===== */
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 30;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.drawer-backdrop.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+.drawer {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: min(82vw, 340px);
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
   display: flex;
   flex-direction: column;
-  gap: 7px; /* This is the only spacing */
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  z-index: 40;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.drawer.open { transform: translateX(0); }
+.drawer__header {
+  padding: 18px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-bottom: 1px solid var(--border);
+}
+.avatar {
+  width: 48px; height: 48px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--brand), var(--accent));
+  display: grid; place-items: center;
+  color: #fff; font-weight: 900;
+  font-size: 20px;
+  box-shadow: 0 0 12px var(--brand-glow);
+  flex-shrink: 0;
+}
+.drawer__brand { font-weight: 700; font-size: 18px; }
+.drawer__nav {
+  padding: 14px;
+  display: grid;
+  gap: 10px;
+}
+.nav-link {
+  display: flex; align-items: center;
+  gap: 14px; padding: 14px 12px;
+  border-radius: 14px;
+  text-decoration: none; color: var(--text);
+  border: 1px solid transparent;
+  transition: all 0.25s ease;
+  touch-action: manipulation;
+}
+.nav-link:active {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.08);
+  transform: translateX(4px) scale(0.98);
+}
+@media (hover: hover) {
+  .nav-link:hover {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.08);
+    transform: translateX(4px);
+  }
+}
+.nav-badge {
+  margin-left: auto;
+  background: var(--brand);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
 }
 
-.card,
+/* ===== Main Content ===== */
+main {
+  padding: max(22px, env(safe-area-inset-left)) max(22px, env(safe-area-inset-right));
+  padding-top: 22px;
+  padding-bottom: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+@media (hover: hover) {
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(255, 59, 48, 0.15);
+  }
+}
+
+/* ===== Hero Section ===== */
+.hero {
+  background: linear-gradient(120deg, rgba(255,59,48,0.15), rgba(255,255,255,0.03) 60%), var(--surface);
+  overflow: hidden;
+  position: relative;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -100px;
+  left: -100px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(255,59,48,0.3), transparent 70%);
+  filter: blur(80px);
+  animation: glow 6s ease-in-out infinite alternate;
+}
+@keyframes glow {
+  0% { transform: translate(0,0); opacity: 0.7; }
+  100% { transform: translate(50px, 60px); opacity: 1; }
+}
+.hero h1 {
+  margin: 0 0 8px;
+  font-size: clamp(22px, 6vw, 26px);
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+}
+.hero p {
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(14px, 4vw, 15px);
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== Sale Card ===== */
 .sale {
-  margin: 0;        /* kill default section spacing */
-  padding: 16px;
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(255,59,48,0.1);
+  border: 1px solid rgba(255,59,48,0.2);
+  border-radius: var(--radius);
+  padding: 18px;
+  animation: pulse 3s infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 12px rgba(255,59,48,0.15); }
+  50% { box-shadow: 0 0 28px rgba(255,59,48,0.25); }
+}
+.sale__tag {
+  width: 46px; height: 46px;
+  border-radius: 12px;
+  background: var(--brand);
+  color: #fff; display: grid; place-items: center;
+  font-weight: 800; font-size: 15px;
+  flex-shrink: 0;
+}
+.sale__text { 
+  font-weight: 700; 
+  font-size: clamp(14px, 4vw, 16px);
+  line-height: 1.3;
 }
 
+/* ===== Action Buttons ===== */
+.action {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  text-decoration: none;
+  transition: all 0.25s ease;
+  touch-action: manipulation;
+}
+.action:active {
+  background: rgba(255,59,48,0.08);
+  border-color: rgba(255,59,48,0.2);
+  transform: scale(0.98);
+}
+@media (hover: hover) {
+  .action:hover {
+    background: rgba(255,59,48,0.08);
+    border-color: rgba(255,59,48,0.2);
+    transform: scale(1.02);
+  }
+}
+.action b {
+  display: block;
+  margin-bottom: 2px;
+  font-size: clamp(14px, 4vw, 16px);
+}
+.action small {
+  display: block;
+  color: var(--muted);
+  font-size: clamp(12px, 3vw, 13px);
+}
+
+/* ===== Bottom Bar ===== */
+.bottombar {
+  position: sticky;
+  bottom: 0;
+  padding: 12px;
+  background: rgba(20, 20, 20, 0.8);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border-top: 1px solid var(--border);
+  z-index: 10;
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
+}
+.primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--brand), var(--brand-glow));
+  color: white;
+  height: 52px;
+  border-radius: 16px;
+  text-decoration: none;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  box-shadow: 0 10px 28px rgba(255,59,48,0.4);
+  transition: transform 0.1s ease;
+  touch-action: manipulation;
+  font-size: clamp(14px, 4vw, 16px);
+}
+.primary:active { transform: translateY(-2px) scale(0.98); }
+@media (hover: hover) {
+  .primary:hover { transform: translateY(-2px); }
+}
+
+/* ===== A2HS Tip ===== */
+.a2hs {
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: calc(80px + env(safe-area-inset-bottom));
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 14px 16px;
+  display: none;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: var(--shadow);
+  z-index: 25;
+  animation: slideUp 0.4s ease;
+}
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.a2hs.show { display: flex; }
+.a2hs-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.a2hs-icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--brand), var(--accent));
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+.a2hs-text {
+  flex: 1;
+  font-size: 14px;
+  line-height: 1.4;
+}
+.a2hs-actions {
+  display: flex;
+  gap: 8px;
+}
+.a2hs button {
+  flex: 1;
+  background: var(--brand);
+  border: none;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  touch-action: manipulation;
+  transition: transform 0.1s ease;
+}
+.a2hs button:active { transform: scale(0.96); }
+.a2hs .btn-dismiss {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+/* ===== Icons ===== */
+.i { 
+  width: 20px; 
+  height: 20px; 
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* ===== Context Menu Block ===== */
+.no-context {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.9);
+  z-index: 9999;
+  animation: fadeIn 0.2s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.no-context.show { display: flex; }
+.no-context-msg {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  text-align: center;
+  max-width: 300px;
+  animation: scaleIn 0.3s ease;
+}
+@keyframes scaleIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* ===== Responsive Tweaks ===== */
+@media (max-width: 380px) {
+  .sale {
+    flex-direction: column;
+    text-align: center;
+  }
+  .sale__text {
+    font-size: 14px;
+  }
+}
 </style>
-
 </head>
+
 <body>
-  <div class="app" id="app">
-    <!-- Drawer -->
-    <div class="drawer-backdrop" id="backdrop"></div>
-    <aside class="drawer" id="drawer" aria-hidden="true" aria-label="Sidebar">
-      <div class="drawer__header">
-        <div class="avatar" aria-hidden="true">N</div>
-        <div>
-          <div class="drawer__brand">Necro’s Hub</div>
-          <div style="color:var(--muted);font-size:12px">Creative Services</div>
-        </div>
+  <header class="topbar">
+    <button class="icon-btn" id="menuBtn" aria-label="Menu">☰</button>
+    <div class="title">Necro's Hub</div>
+  </header>
+
+  <div class="drawer-backdrop" id="backdrop"></div>
+  <aside class="drawer" id="drawer" role="navigation">
+    <div class="drawer__header">
+      <div class="avatar">N</div>
+      <div>
+        <div class="drawer__brand">Necro's Hub</div>
+        <div style="color:var(--muted);font-size:12px">Creative Services</div>
       </div>
-      <nav class="drawer__nav">
-        <a class="nav-link" href="photo_work">
-          <span class="i" aria-hidden="true">📷</span>
-          Book Photo Sessions
-          <span class="nav-badge">-50%</span>
-        </a>
-        <a class="nav-link" href="main_index">
-          <span class="i" aria-hidden="true">🌐</span>
-          Social Media
-        </a>
-        <a class="nav-link" href="https://asubank.xyz" target="_blank" rel="noopener">
-          <span class="i" aria-hidden="true">📚</span>
-          ASU Test Banks
-        </a>
-        <hr style="border:0;border-top:1px solid var(--border);margin:6px 2px;">
-        <a class="nav-link" href="#about">
-          <span class="i" aria-hidden="true">ℹ️</span>
-          About
-        </a>
-        <a class="nav-link" href="#contact">
-          <span class="i" aria-hidden="true">✉️</span>
-          Contact
-        </a>
-      </nav>
-    </aside>
+    </div>
+    <nav class="drawer__nav">
+      <a class="nav-link" href="photo_work_must_read.html"><span class="i">📷</span>Photo Sessions<span class="nav-badge">-50%</span></a>
+      <a class="nav-link" href="main_index.html"><span class="i">🌐</span>NECRO144's Main Page</a>
+      <a class="nav-link" href="https://asubank.xyz/"><span class="i">📚</span>ASU Test Banks</a>
+      <hr style="border:0;border-top:1px solid var(--border);margin:6px 2px;">
+      <a class="nav-link" href="port.html"><span class="i">📸</span>Photography Work Samples</a>
+    </nav>
+  </aside>
 
-    <!-- Top bar -->
-    <header class="topbar">
-      <button class="icon-btn" id="menuBtn" aria-label="Open menu">☰</button>
-      <div class="title">Necro’s Hub</div>
-    </header>
+  <main>
+    <section class="card hero">
+      <h1>Welcome 👋</h1>
+      <p>|Ns| 刀ec[尺]o /A/'s Hub.</p>
+    </section>
 
-    <!-- Content -->
-    <main>
-      <section class="card hero">
-        <h1>Welcome 👋</h1>
-        <p>|Ns| 刀ec[尺]o /A/'s Hub.</p>
-      </section>
+    <section class="card sale">
+      <div class="sale__tag">50%</div>
+      <div class="sale__text">Photo Sessions – Limited Time Only!</div>
+    </section>
 
-      <section class="card sale" role="note" aria-label="Limited-time offer">
-        <div class="sale__tag">50%</div>
-        <div class="sale__text">Photo Sessions — Limited Time Only!</div>
-      </section>
+    <a class="action" href="photo_work_must_read.html">
+      <div><b>Book Photo Sessions</b><small>Pick a date, pay, done.</small></div><span>›</span>
+    </a>
+    <a class="action" href="main_index.html">
+      <div><b>Social Media</b><small>Follow, DM, and see work.</small></div><span>›</span>
+    </a>
+    <a class="action" href="https://asubank.xyz/">
+      <div><b>ASU Test Banks</b><small>Study smarter with curated notes.</small></div><span>↗</span>
+    </a>
 
-      <section class="grid">
-        <a class="action" href="photo_work">
-          <div>
-            <b>Book Photo Sessions</b>
-            <small>Pick a date, pay, done.</small>
-          </div>
-          <span aria-hidden="true">›</span>
-        </a>
-        <a class="action" href="main_index">
-          <div>
-            <b>Social Media</b>
-            <small>Follow, DM, and latest work.</small>
-          </div>
-          <span aria-hidden="true">›</span>
-        </a>
-        <a class="action" href="https://asubank.xyz" target="_blank" rel="noopener">
-          <div>
-            <b>ASU Test Banks</b>
-            <small>Study resources (opens in new tab).</small>
-          </div>
-          <span aria-hidden="true">↗</span>
-        </a>
-      </section>
+    <section class="card">
+      <h2 style="margin:0 0 8px;font-size:18px;">About</h2>
+      <p style="margin:0;color:var(--muted)">ᴘʜᴏᴛᴏɢʀᴀᴘʜᴇʀ - ғʀᴏɴᴛᴇɴᴅ ᴅᴇᴠᴇʟᴏᴘᴇʀ - ɢᴇɴᴇʀᴀʟ ᴛᴇᴄʜ sᴘᴇᴄɪᴀʟɪsᴛ</p>
+    </section>
+  </main>
 
-      <section id="about" class="card">
-        <h2 style="margin:0 0 6px;font-size:18px;">About</h2>
-        <p style="margin:0;color:var(--muted)">Null.</p>
-      </section>
-    </main>
+  <footer class="bottombar">
+    <a class="primary" href="photo_work_must_read.html"><span class="i">📅</span>Book Now – 50% OFF</a>
+  </footer>
 
-    <!-- Bottom bar -->
-    <footer class="bottombar" role="contentinfo">
-      <a class="primary" href="photo_work">
-        <span class="i" aria-hidden="true">📅</span>
-        Book now — 50% OFF
-      </a>
-    </footer>
+  <div class="a2hs" id="a2hs">
+    <div class="a2hs-content">
+      <div class="a2hs-icon">📱</div>
+      <div class="a2hs-text">
+        <strong>Add to Home Screen</strong><br>
+        Tap Share <b>⬆</b> then <b>"Add to Home Screen"</b> for the full app experience
+      </div>
+    </div>
+    <div class="a2hs-actions">
+      <button id="a2hsClose" class="btn-dismiss">Dismiss</button>
+    </div>
   </div>
 
-  <!-- “Add to Home Screen” helper (iOS Safari only, not in standalone) -->
-  <div class="a2hs" id="a2hs" role="dialog" aria-live="polite" aria-label="Add to Home Screen Tip">
-    <div>Tip: Add to Home Screen for full-screen app. Share ▸ <b>Add to Home Screen</b></div>
-    <button id="a2hsClose" aria-label="Dismiss tip">Got it</button>
+  <div class="no-context" id="noContext">
+    <div class="no-context-msg">
+      <h3 style="margin:0 0 8px;color:var(--brand)">⚠️ Action Blocked</h3>
+      <p style="margin:0;font-size:14px;color:var(--muted)">Right-click and keyboard shortcuts are disabled for content protection.</p>
+    </div>
   </div>
 
-  <script>
-    // Drawer interactions
-    const drawer = document.getElementById('drawer');
-    const backdrop = document.getElementById('backdrop');
-    const menuBtn = document.getElementById('menuBtn');
+<script>
+// ===== Drawer Navigation =====
+const drawer = document.getElementById('drawer');
+const backdrop = document.getElementById('backdrop');
+const menuBtn = document.getElementById('menuBtn');
 
-    function openDrawer() {
-      drawer.classList.add('open');
-      backdrop.classList.add('show');
-      drawer.setAttribute('aria-hidden', 'false');
-    }
-    function closeDrawer() {
-      drawer.classList.remove('open');
-      backdrop.classList.remove('show');
-      drawer.setAttribute('aria-hidden', 'true');
-    }
-    menuBtn.addEventListener('click', openDrawer);
-    backdrop.addEventListener('click', closeDrawer);
-    // Close with ESC
-    window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDrawer(); });
+function openDrawer() { 
+  drawer.classList.add('open'); 
+  backdrop.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
 
-    // Register service worker for offline/app-shell
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').catch(console.error);
-      });
-    }
+function closeDrawer() { 
+  drawer.classList.remove('open'); 
+  backdrop.classList.remove('show');
+  document.body.style.overflow = '';
+}
 
-    // Show iOS "Add to Home Screen" tip only when:
-    // - Safari on iOS
-    // - not already installed (not standalone)
-    // - hide it after user dismisses
-    (function() {
-      const isiOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
-      const isStandalone = window.navigator.standalone === true; // iOS Safari only
-      const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+menuBtn.addEventListener('click', openDrawer);
+backdrop.addEventListener('click', closeDrawer);
+window.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
 
-      const tip = document.getElementById('a2hs');
-      const closeBtn = document.getElementById('a2hsClose');
+// ===== Privacy & Security =====
+const noContextEl = document.getElementById('noContext');
+let contextTimeout;
 
-      if (isiOS && isSafari && !isStandalone) {
-        // delay slightly so it doesn't pop immediately
-        setTimeout(() => tip.classList.add('show'), 900);
-      }
+function showContextBlock() {
+  noContextEl.classList.add('show');
+  clearTimeout(contextTimeout);
+  contextTimeout = setTimeout(() => {
+    noContextEl.classList.remove('show');
+  }, 2000);
+}
 
-      closeBtn.addEventListener('click', () => tip.classList.remove('show'));
-    })();
+// Prevent right-click
+document.addEventListener('contextmenu', e => {
+  e.preventDefault();
+  showContextBlock();
+  return false;
+});
 
-    // Keep navigation in standalone without bouncing to Safari (internal links only)
-    document.addEventListener('click', function (e) {
-      const t = e.target.closest('a[href]');
-      if (!t) return;
-      const url = new URL(t.href, location.href);
-      const isExternal = url.origin !== location.origin || t.hasAttribute('target');
-      if (window.navigator.standalone && !isExternal) {
-        e.preventDefault();
-        location.href = url.href;
-      }
-    }, { capture: true });
-  </script>
+// Prevent common keyboard shortcuts
+document.addEventListener('keydown', e => {
+  // Ctrl/Cmd + S (Save)
+  if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+    e.preventDefault();
+    showContextBlock();
+    return false;
+  }
+  // Ctrl/Cmd + P (Print)
+  if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+    e.preventDefault();
+    showContextBlock();
+    return false;
+  }
+  // Ctrl/Cmd + U (View Source)
+  if ((e.ctrlKey || e.metaKey) && e.key === 'u') {
+    e.preventDefault();
+    showContextBlock();
+    return false;
+  }
+  // Ctrl/Cmd + Shift + I (DevTools)
+  if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'I') {
+    e.preventDefault();
+    showContextBlock();
+    return false;
+  }
+  // Ctrl/Cmd + Shift + J (Console)
+  if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'J') {
+    e.preventDefault();
+    showContextBlock();
+    return false;
+  }
+  // Ctrl/Cmd + Shift + C (Inspect)
+  if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'C') {
+    e.preventDefault();
+    showContextBlock();
+    return false;
+  }
+  // F12 (DevTools)
+  if (e.key === 'F12') {
+    e.preventDefault();
+    showContextBlock();
+    return false;
+  }
+});
+
+// Prevent text selection on drag
+document.addEventListener('selectstart', e => {
+  if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA' && !e.target.closest('p, h1, h2')) {
+    e.preventDefault();
+  }
+});
+
+// Prevent image dragging
+document.addEventListener('dragstart', e => {
+  e.preventDefault();
+  return false;
+});
+
+// ===== Add to Home Screen (iOS) =====
+(function() {
+  const isiOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  const isStandalone = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  const tip = document.getElementById('a2hs');
+  const closeBtn = document.getElementById('a2hsClose');
+  const dismissed = localStorage.getItem('a2hs-dismissed');
+
+  if (isiOS && isSafari && !isStandalone && !dismissed) {
+    setTimeout(() => tip.classList.add('show'), 2000);
+  }
+
+  closeBtn.addEventListener('click', () => {
+    tip.classList.remove('show');
+    localStorage.setItem('a2hs-dismissed', 'true');
+  });
+})();
+
+// ===== Mobile Optimization =====
+// Prevent double-tap zoom on buttons
+const buttons = document.querySelectorAll('button, a, .action, .nav-link');
+buttons.forEach(btn => {
+  btn.addEventListener('touchend', e => {
+    e.preventDefault();
+    btn.click();
+  }, { passive: false });
+});
+
+// Handle iOS viewport height changes (for Safari address bar)
+function setViewportHeight() {
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+setViewportHeight();
+window.addEventListener('resize', setViewportHeight);
+
+// Haptic feedback for iOS (if supported)
+function haptic() {
+  if (window.navigator && window.navigator.vibrate) {
+    window.navigator.vibrate(10);
+  }
+}
+
+menuBtn.addEventListener('click', haptic);
+closeBtn.addEventListener('click', haptic);
+</script>
 </body>
 </html>
