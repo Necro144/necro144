@@ -6,7 +6,7 @@ Welcome to my personal online space — a casual, no-frills corner of the web wh
 
 ## 🖼️ Photo Work Sessions
 
-This is where I showcase my photography sessions — whether it’s portraits, landscapes, experimental shots, or behind-the-scenes edits. I’m constantly learning and experimenting, so expect raw, real, and sometimes unfinished work. Feedback is always welcome (but not expected 😉).
+This is where I showcase my photography sessions — whether it’s portraits, landscapes, experimental shots, or behind-the-scenes edits. I’m constantly learning and experimenting, so expect raw, real, and sometimes unfinished work. Feedback is always welcome (but not expected 😉). 
 
 📁 *Check out the `photos` link or gallery section for latest uploads.*
 
