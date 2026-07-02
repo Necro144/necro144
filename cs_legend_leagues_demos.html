@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSLS // DEMO ARCHIVE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0c0d;
+    --bg-grid: rgba(244,117,33,0.035);
+    --panel:#12171a;
+    --panel-2:#161c20;
+    --border:#242c30;
+    --border-hi:#3a4650;
+    --orange:#f47521;
+    --orange-dim:#c95e18;
+    --gold:#d4af37;
+    --green:#7cff9e;
+    --red:#ff4655;
+    --text:#e8e6e1;
+    --text-dim:#8b9298;
+    --text-faint:#565e63;
+    --font-display:'Oswald',sans-serif;
+    --font-mono:'JetBrains Mono',monospace;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html,body{
+    height:100%;
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-mono);
+    overflow-x:hidden;
+  }
+
+  body{
+    background-image:
+      linear-gradient(var(--bg-grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--bg-grid) 1px, transparent 1px);
+    background-size: 42px 42px;
+    min-height:100vh;
+    position:relative;
+  }
+
+  body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background:radial-gradient(ellipse at 50% -10%, rgba(244,117,33,0.10), transparent 55%);
+    z-index:0;
+  }
+
+  ::selection{ background:var(--orange); color:#0a0c0d; }
+
+  /* scrollbar */
+  ::-webkit-scrollbar{ width:10px; }
+  ::-webkit-scrollbar-track{ background:var(--panel); }
+  ::-webkit-scrollbar-thumb{ background:var(--border-hi); border-radius:0; }
+
+  /* ============ GATE SCREEN ============ */
+  #gate{
+    position:fixed;
+    inset:0;
+    z-index:50;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+      radial-gradient(ellipse at 50% 40%, rgba(244,117,33,0.08), transparent 60%),
+      var(--bg);
+    transition:opacity .5s ease, visibility .5s ease;
+  }
+  #gate.hidden{ opacity:0; visibility:hidden; pointer-events:none; }
+
+  .gate-box{
+    width:min(420px, 90vw);
+    border:1px solid var(--border-hi);
+    background:linear-gradient(180deg, var(--panel), var(--panel-2));
+    position:relative;
+    padding:0;
+    box-shadow:0 0 0 1px rgba(0,0,0,.4), 0 30px 80px rgba(0,0,0,.6);
+  }
+  .gate-box::before{
+    content:'';
+    position:absolute; top:-1px; left:-1px; right:-1px; height:3px;
+    background:linear-gradient(90deg, var(--orange), var(--gold), var(--orange));
+  }
+
+  .gate-head{
+    padding:22px 26px 14px;
+    border-bottom:1px dashed var(--border);
+  }
+  .gate-eyebrow{
+    font-family:var(--font-mono);
+    font-size:11px;
+    letter-spacing:.25em;
+    color:var(--text-faint);
+    text-transform:uppercase;
+  }
+  .gate-title{
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:34px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    color:var(--text);
+    margin-top:4px;
+    line-height:1;
+  }
+  .gate-title span{ color:var(--orange); }
+
+  .gate-body{ padding:22px 26px 26px; }
+
+  .console-line{
+    font-size:12.5px;
+    color:var(--text-dim);
+    margin-bottom:14px;
+    line-height:1.6;
+  }
+  .console-line b{ color:var(--green); font-weight:500; }
+  .console-line .path{ color:var(--gold); }
+
+  .field-label{
+    font-size:10.5px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--text-faint);
+    margin-bottom:8px;
+    display:flex;
+    justify-content:space-between;
+  }
+
+  .pw-row{
+    display:flex;
+    border:1px solid var(--border-hi);
+    background:#0d1114;
+  }
+  .pw-prefix{
+    padding:13px 10px 13px 14px;
+    color:var(--orange);
+    font-weight:700;
+    user-select:none;
+    border-right:1px solid var(--border);
+  }
+  #pwInput{
+    flex:1;
+    background:transparent;
+    border:none;
+    outline:none;
+    color:var(--text);
+    font-family:var(--font-mono);
+    font-size:15px;
+    letter-spacing:.12em;
+    padding:13px 14px;
+  }
+  #pwInput::placeholder{ color:var(--text-faint); letter-spacing:normal;}
+
+  .gate-btn{
+    margin-top:14px;
+    width:100%;
+    padding:13px 16px;
+    background:var(--orange);
+    color:#150900;
+    border:none;
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:15px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    cursor:pointer;
+    position:relative;
+    transition:filter .15s ease, transform .1s ease;
+    clip-path:polygon(0 0,100% 0,100% 70%,97% 100%,0 100%);
+  }
+  .gate-btn:hover{ filter:brightness(1.12); }
+  .gate-btn:active{ transform:translateY(1px); }
+
+  .gate-error{
+    margin-top:12px;
+    font-size:12px;
+    color:var(--red);
+    letter-spacing:.03em;
+    min-height:16px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .gate-error.show::before{
+    content:'✕';
+    display:inline-flex;
+    width:16px; height:16px;
+    align-items:center; justify-content:center;
+    background:var(--red); color:#1a0507;
+    font-size:10px; font-weight:700;
+  }
+
+  .gate-foot{
+    padding:12px 26px;
+    border-top:1px dashed var(--border);
+    font-size:10.5px;
+    color:var(--text-faint);
+    display:flex;
+    justify-content:space-between;
+    letter-spacing:.06em;
+  }
+  .blink{ animation:blink 1.1s steps(1) infinite; }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  /* ============ MAIN APP ============ */
+  #app{
+    position:relative;
+    z-index:1;
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 22px 80px;
+    opacity:0;
+    transform:translateY(8px);
+    transition:opacity .5s ease, transform .5s ease;
+  }
+  #app.show{ opacity:1; transform:none; }
+
+  header.hud{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:28px 0 20px;
+    border-bottom:1px solid var(--border);
+    margin-bottom:26px;
+    gap:20px;
+    flex-wrap:wrap;
+  }
+
+  .brand{ display:flex; align-items:center; gap:14px; }
+  .brand-mark{
+    width:46px; height:46px;
+    border:2px solid var(--orange);
+    display:flex; align-items:center; justify-content:center;
+    position:relative;
+    background:#0d1114;
+  }
+  .brand-mark svg{ width:26px; height:26px; }
+  .brand-text .t1{
+    font-family:var(--font-display);
+    font-size:22px;
+    font-weight:700;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    line-height:1;
+  }
+  .brand-text .t1 span{ color:var(--orange); }
+  .brand-text .t2{
+    font-size:10.5px;
+    color:var(--text-faint);
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    margin-top:4px;
+  }
+
+  .hud-stats{
+    display:flex;
+    gap:0;
+    border:1px solid var(--border);
+  }
+  .hud-stat{
+    padding:9px 18px;
+    border-right:1px solid var(--border);
+    text-align:center;
+  }
+  .hud-stat:last-child{ border-right:none; }
+  .hud-stat .n{
+    font-family:var(--font-display);
+    font-size:20px;
+    font-weight:600;
+    color:var(--green);
+    line-height:1;
+  }
+  .hud-stat .l{
+    font-size:9px;
+    letter-spacing:.15em;
+    color:var(--text-faint);
+    text-transform:uppercase;
+    margin-top:4px;
+  }
+
+  .toolbar{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    margin-bottom:18px;
+    flex-wrap:wrap;
+  }
+  .search-wrap{
+    flex:1;
+    min-width:220px;
+    display:flex;
+    border:1px solid var(--border);
+    background:var(--panel);
+  }
+  .search-wrap svg{ margin:0 10px; align-self:center; opacity:.5; width:15px; height:15px; flex-shrink:0;}
+  #searchInput{
+    flex:1;
+    background:transparent;
+    border:none;
+    outline:none;
+    color:var(--text);
+    font-family:var(--font-mono);
+    font-size:13px;
+    padding:11px 12px 11px 0;
+  }
+  #searchInput::placeholder{ color:var(--text-faint); }
+
+  .sort-select{
+    background:var(--panel);
+    border:1px solid var(--border);
+    color:var(--text-dim);
+    font-family:var(--font-mono);
+    font-size:12px;
+    padding:11px 12px;
+    outline:none;
+    cursor:pointer;
+  }
+
+  .refresh-btn{
+    background:var(--panel);
+    border:1px solid var(--border);
+    color:var(--text-dim);
+    padding:11px 14px;
+    font-family:var(--font-mono);
+    font-size:12px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .refresh-btn:hover{ border-color:var(--orange); color:var(--orange); }
+  .refresh-btn svg{ width:13px; height:13px; }
+  .refresh-btn.spinning svg{ animation:spin .8s linear infinite; }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+
+  /* scoreboard column headers */
+  .board-head{
+    display:grid;
+    grid-template-columns:52px 1fr 130px 110px 130px;
+    gap:14px;
+    padding:0 14px 10px;
+    font-size:10px;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    color:var(--text-faint);
+    border-bottom:1px solid var(--border);
+  }
+  .board-head span:nth-child(3),
+  .board-head span:nth-child(4){ text-align:right; }
+  .board-head span:last-child{ text-align:center; }
+
+  #board{ margin-top:4px; }
+
+  .row{
+    display:grid;
+    grid-template-columns:52px 1fr 130px 110px 130px;
+    gap:14px;
+    align-items:center;
+    padding:12px 14px;
+    border-bottom:1px solid var(--border);
+    background:var(--panel);
+    position:relative;
+    transition:background .15s ease;
+    animation:rowIn .35s ease both;
+  }
+  .row:nth-child(even){ background:var(--panel-2); }
+  .row:hover{ background:#1b2226; }
+  .row:hover .row-icon{ border-color:var(--orange); }
+  .row::before{
+    content:'';
+    position:absolute; left:0; top:0; bottom:0; width:2px;
+    background:transparent;
+    transition:background .15s ease;
+  }
+  .row:hover::before{ background:var(--orange); }
+
+  @keyframes rowIn{
+    from{ opacity:0; transform:translateY(6px); }
+    to{ opacity:1; transform:none; }
+  }
+
+  .row-icon{
+    width:40px; height:40px;
+    border:1px solid var(--border-hi);
+    background:#0d1114;
+    display:flex; align-items:center; justify-content:center;
+    transition:border-color .15s ease;
+  }
+  .row-icon svg{ width:22px; height:22px; }
+
+  .row-name{ min-width:0; }
+  .row-name .fname{
+    font-size:13.5px;
+    color:var(--text);
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    font-weight:500;
+  }
+  .row-name .ftag{
+    font-size:10px;
+    color:var(--text-faint);
+    letter-spacing:.08em;
+    margin-top:3px;
+    text-transform:uppercase;
+  }
+  .row-name .ftag em{
+    font-style:normal;
+    color:var(--gold);
+  }
+
+  .row-date{ text-align:right; font-size:11.5px; color:var(--text-dim); }
+  .row-size{ text-align:right; font-size:11.5px; color:var(--text-dim); }
+
+  .row-action{ display:flex; justify-content:center; }
+  .dl-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:8px 14px;
+    background:transparent;
+    border:1px solid var(--orange-dim);
+    color:var(--orange);
+    text-decoration:none;
+    font-family:var(--font-mono);
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    cursor:pointer;
+    transition:all .15s ease;
+    white-space:nowrap;
+  }
+  .dl-btn:hover{ background:var(--orange); color:#150900; border-color:var(--orange); }
+  .dl-btn svg{ width:12px; height:12px; }
+
+  /* states */
+  .state-panel{
+    padding:60px 20px;
+    text-align:center;
+    color:var(--text-faint);
+    font-size:13px;
+    border:1px dashed var(--border);
+    margin-top:6px;
+  }
+  .state-panel .big{
+    font-family:var(--font-display);
+    font-size:16px;
+    color:var(--text-dim);
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    margin-bottom:8px;
+  }
+  .state-panel.error{ border-color:rgba(255,70,85,.3); }
+  .state-panel.error .big{ color:var(--red); }
+  .state-panel code{
+    display:block;
+    margin-top:14px;
+    color:var(--text-faint);
+    font-size:11px;
+    background:#0d1114;
+    padding:10px;
+    border:1px solid var(--border);
+    word-break:break-all;
+  }
+
+  .loader-dots{ display:inline-flex; gap:6px; margin-bottom:14px; }
+  .loader-dots span{
+    width:8px; height:8px; background:var(--orange);
+    animation:dotPulse 1s ease-in-out infinite;
+  }
+  .loader-dots span:nth-child(2){ animation-delay:.15s; }
+  .loader-dots span:nth-child(3){ animation-delay:.3s; }
+  @keyframes dotPulse{ 0%,80%,100%{ opacity:.25; transform:scale(.8);} 40%{ opacity:1; transform:scale(1);} }
+
+  footer{
+    margin-top:34px;
+    padding-top:16px;
+    border-top:1px dashed var(--border);
+    display:flex;
+    justify-content:space-between;
+    font-size:10.5px;
+    color:var(--text-faint);
+    letter-spacing:.08em;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+
+  @media (max-width: 720px){
+    .board-head{ grid-template-columns:44px 1fr 90px; }
+    .board-head span:nth-child(4),
+    .board-head span:nth-child(5){ display:none; }
+    .row{ grid-template-columns:44px 1fr auto; }
+    .row-date, .row-size{ display:none; }
+    .hud-stats{ display:none; }
+  }
+
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible{
+    outline:2px solid var(--orange);
+    outline-offset:2px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:.001ms !important; transition-duration:.001ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ICON DEFINITIONS -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="ic-crosshair" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="6.5"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/></g></symbol>
+    <symbol id="ic-dune" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 17c3-4 5-4 7-1s5 2 7-2 5-3 8 1"/><circle cx="18" cy="6" r="2.4"/></g></symbol>
+    <symbol id="ic-flame" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M12 2c1 3-2 4-2 7a3 3 0 1 0 6 0c1.5 1.5 2 3.3 2 5a6 6 0 1 1-12 0c0-4 2-5 3-7 .6 1 1 1.6 1.6 1.2C11 7 10.5 4.5 12 2Z"/></symbol>
+    <symbol id="ic-radiation" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="2.2"/><path d="M12 2v6M12 2a10 10 0 0 1 8.66 5l-5.2 3M20.66 7a10 10 0 0 1 0 10l-5.2-3M20.66 17a10 10 0 0 1-17.32 0l5.2-3M3.34 17a10 10 0 0 1 0-10l5.2 3M3.34 7A10 10 0 0 1 12 2"/></g></symbol>
+    <symbol id="ic-building" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18"/><path d="M8 7h2M14 7h2M8 11h2M14 11h2M8 15h2M14 15h2M10 21v-4h4v4"/></g></symbol>
+    <symbol id="ic-pyramid" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3 22 20H2L12 3Z"/><path d="M12 3v17M7 20l5-9M17 20l-5-9"/></g></symbol>
+    <symbol id="ic-train" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><rect x="4" y="4" width="16" height="12" rx="2"/><path d="M4 12h16M8 16l-2 4M16 16l2 4M8 8h.01M16 8h.01"/></g></symbol>
+    <symbol id="ic-cobble" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="8" height="7"/><rect x="11" y="4" width="11" height="5"/><rect x="2" y="13" width="6" height="7"/><rect x="9" y="12" width="7" height="8"/><rect x="17" y="11" width="5" height="9"/></g></symbol>
+    <symbol id="ic-mill" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="7" r="1.4"/><path d="M12 7 5 3M12 7l7-2M12 7l-2 8M12 7l4 7M12 21V9"/></g></symbol>
+    <symbol id="ic-tower" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M7 21 9 8h6l2 13M6 8h12M9 8 8 3h8l-1 5M12 3v0"/></g></symbol>
+    <symbol id="ic-knife" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21 14 10M13 4l7 7-3.5 3.5L9 7l4-3Z"/></g></symbol>
+    <symbol id="ic-bomb" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="14" r="7"/><path d="M15.5 9.5 19 6M17 3l3 3M19 6l2-1M19 6l1 2"/></g></symbol>
+    <symbol id="ic-skull" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 1.9 5.3 3 6.5V19h2v2h6v-2h2v-2.5c1.1-1.2 3-3.1 3-6.5a8 8 0 0 0-8-8Z"/><circle cx="9" cy="10" r="1.4" fill="currentColor" stroke="none"/><circle cx="15" cy="10" r="1.4" fill="currentColor" stroke="none"/><path d="M11 12.5h2l-1 2z"/></g></symbol>
+    <symbol id="ic-target" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/></g></symbol>
+    <symbol id="ic-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></g></symbol>
+    <symbol id="ic-refresh" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></g></symbol>
+    <symbol id="ic-download" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></g></symbol>
+  </defs>
+</svg>
+
+<!-- PASSWORD GATE -->
+<div id="gate">
+  <div class="gate-box">
+    <div class="gate-head">
+      <div class="gate-eyebrow">restricted access // csls network</div>
+      <div class="gate-title">DEMO<span>::</span>ARCHIVE</div>
+    </div>
+    <div class="gate-body">
+      <div class="console-line">
+        <b>&gt;</b> connecting to <span class="path">/mnt/drive/csls_demos</span><br>
+        <b>&gt;</b> authorization required before mount.
+      </div>
+      <div class="field-label"><span>rcon_password</span><span id="capsWarn" style="visibility:hidden;color:var(--red)">caps lock on</span></div>
+      <div class="pw-row">
+        <div class="pw-prefix">&gt;</div>
+        <input id="pwInput" type="password" placeholder="enter password" autocomplete="off" spellcheck="false">
+      </div>
+      <button class="gate-btn" id="gateBtn">connect</button>
+      <div class="gate-error" id="gateError"></div>
+    </div>
+    <div class="gate-foot">
+      <span>STATUS: <span style="color:var(--red)">LOCKED</span></span>
+      <span class="blink">_</span>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app">
+  <header class="hud">
+    <div class="brand">
+      <div class="brand-mark"><svg viewBox="0 0 24 24"><use href="#ic-target" stroke="#f47521"/></svg></div>
+      <div class="brand-text">
+        <div class="t1">CS<span>LS</span> DEMO ARCHIVE</div>
+        <div class="t2">Counter-Strike 1.6 // Match Recordings</div>
+      </div>
+    </div>
+    <div class="hud-stats">
+      <div class="hud-stat"><div class="n" id="statCount">--</div><div class="l">demos</div></div>
+      <div class="hud-stat"><div class="n" id="statSize">--</div><div class="l">total size</div></div>
+      <div class="hud-stat"><div class="n" id="statLatest">--</div><div class="l">last upload</div></div>
+    </div>
+  </header>
+
+  <div class="toolbar">
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24"><use href="#ic-search"/></svg>
+      <input id="searchInput" type="text" placeholder="search by map or filename... (e.g. dust2, inferno)">
+    </div>
+    <select class="sort-select" id="sortSelect">
+      <option value="date-desc">newest first</option>
+      <option value="date-asc">oldest first</option>
+      <option value="name-asc">name A-Z</option>
+      <option value="size-desc">largest first</option>
+    </select>
+    <button class="refresh-btn" id="refreshBtn"><svg viewBox="0 0 24 24"><use href="#ic-refresh"/></svg>refresh</button>
+  </div>
+
+  <div class="board-head">
+    <span>map</span>
+    <span>filename</span>
+    <span>size</span>
+    <span>date</span>
+    <span>download</span>
+  </div>
+
+  <div id="board">
+    <div class="state-panel" id="loadingState">
+      <div class="loader-dots"><span></span><span></span><span></span></div>
+      <div class="big">Loading demo files...</div>
+      <div>pulling file list from google drive</div>
+    </div>
+  </div>
+
+  <footer>
+    <span>powered by NECRO</span>
+    <span id="footTime">--</span>
+  </footer>
+</div>
+
+<script>
+/* =========================================================
+   CONFIG — replace with your deployed Apps Script /exec URL
+   ========================================================= */
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzt4oI90ED3g7CfOVnLZFf6Hr_7dAYby4d_IWvrPdavleAODaAwkPgPuVj7ZM87EsGJ/exec";
+const ACCESS_PASSWORD = "csls";
+
+let allDemos = [];
+let sessionPassword = "";
+
+/* ---------- Icon matching (CS 1.6 map keywords) ---------- */
+const ICON_RULES = [
+  { keys:['dust','sand'], icon:'ic-dune' },
+  { keys:['inferno','flame','fire'], icon:'ic-flame' },
+  { keys:['nuke','radio'], icon:'ic-radiation' },
+  { keys:['office','ffa'], icon:'ic-building' },
+  { keys:['aztec','pyramid','temple'], icon:'ic-pyramid' },
+  { keys:['train'], icon:'ic-train' },
+  { keys:['cbble','cobble'], icon:'ic-cobble' },
+  { keys:['mill','vertigo'], icon:'ic-mill' },
+  { keys:['italy','tower','assault'], icon:'ic-tower' },
+  { keys:['knife','fy_'], icon:'ic-knife' },
+  { keys:['bomb','de_'], icon:'ic-bomb' },
+  { keys:['awp','as_'], icon:'ic-skull' },
+];
+function pickIcon(filename){
+  const n = filename.toLowerCase();
+  for(const rule of ICON_RULES){
+    if(rule.keys.some(k => n.includes(k))) return rule.icon;
+  }
+  return 'ic-crosshair';
+}
+function mapTag(filename){
+  const n = filename.toLowerCase();
+  const m = n.match(/(de_|cs_|fy_|as_|aim_)[a-z0-9_]+/);
+  if(m) return m[0];
+  return 'unknown map';
+}
+
+/* ---------- Gate logic ---------- */
+const gate = document.getElementById('gate');
+const app = document.getElementById('app');
+const pwInput = document.getElementById('pwInput');
+const gateBtn = document.getElementById('gateBtn');
+const gateError = document.getElementById('gateError');
+const capsWarn = document.getElementById('capsWarn');
+
+pwInput.addEventListener('keydown', (e) => {
+  capsWarn.style.visibility = e.getModifierState && e.getModifierState('CapsLock') ? 'visible' : 'hidden';
+  if(e.key === 'Enter') attemptLogin();
+});
+gateBtn.addEventListener('click', attemptLogin);
+
+function attemptLogin(){
+  const val = pwInput.value.trim();
+  if(val === ACCESS_PASSWORD){
+    sessionPassword = val;
+    gateError.classList.remove('show');
+    gateError.textContent = '';
+    gate.classList.add('hidden');
+    setTimeout(() => {
+      app.classList.add('show');
+      loadDemos();
+    }, 150);
+  } else {
+    gateError.textContent = 'access denied — invalid password';
+    gateError.classList.add('show');
+    gateBtn.style.animation = 'none';
+    pwInput.value = '';
+    const box = document.querySelector('.gate-box');
+    box.style.transform = 'translateX(-6px)';
+    setTimeout(()=> box.style.transform = 'translateX(6px)', 60);
+    setTimeout(()=> box.style.transform = '', 120);
+  }
+}
+window.addEventListener('DOMContentLoaded', () => pwInput.focus());
+
+/* ---------- Data loading ---------- */
+const boardEl = document.getElementById('board');
+const refreshBtn = document.getElementById('refreshBtn');
+const searchInput = document.getElementById('searchInput');
+const sortSelect = document.getElementById('sortSelect');
+
+refreshBtn.addEventListener('click', loadDemos);
+searchInput.addEventListener('input', renderBoard);
+sortSelect.addEventListener('change', renderBoard);
+
+async function loadDemos(){
+  refreshBtn.classList.add('spinning');
+  boardEl.innerHTML = `
+    <div class="state-panel" id="loadingState">
+      <div class="loader-dots"><span></span><span></span><span></span></div>
+      <div class="big">Loading demo files...</div>
+      <div>pulling file list from google drive</div>
+    </div>`;
+
+  if(!SCRIPT_URL || SCRIPT_URL.includes('PASTE_YOUR')){
+    boardEl.innerHTML = `
+      <div class="state-panel error">
+        <div class="big">Backend not connected</div>
+        <div>set SCRIPT_URL in index.html to your deployed Google Apps Script web app URL.</div>
+        <code>const SCRIPT_URL = "https://script.google.com/macros/s/XXXXX/exec";</code>
+      </div>`;
+    refreshBtn.classList.remove('spinning');
+    return;
+  }
+
+  try{
+    const url = `${SCRIPT_URL}?password=${encodeURIComponent(sessionPassword)}&action=list`;
+    const res = await fetch(url);
+    const data = await res.json();
+
+    if(!data.success){
+      throw new Error(data.error || 'request failed');
+    }
+    allDemos = data.demos || [];
+    updateStats();
+    renderBoard();
+  }catch(err){
+    boardEl.innerHTML = `
+      <div class="state-panel error">
+        <div class="big">Could not load demos</div>
+        <div>${escapeHtml(err.message)}</div>
+        <code>check that the apps script is deployed as a web app with access "anyone", and the folder ID is correct.</code>
+      </div>`;
+  }finally{
+    refreshBtn.classList.remove('spinning');
+    document.getElementById('footTime').textContent = 'last synced ' + new Date().toLocaleTimeString();
+  }
+}
+
+function updateStats(){
+  document.getElementById('statCount').textContent = allDemos.length;
+  const totalBytes = allDemos.reduce((s,d) => s + (d.size||0), 0);
+  document.getElementById('statSize').textContent = formatBytes(totalBytes);
+  if(allDemos.length){
+    const latest = allDemos.reduce((a,b) => new Date(a.updated) > new Date(b.updated) ? a : b);
+    document.getElementById('statLatest').textContent = timeAgo(latest.updated);
+  } else {
+    document.getElementById('statLatest').textContent = '--';
+  }
+}
+
+function renderBoard(){
+  const q = searchInput.value.trim().toLowerCase();
+  let list = allDemos.filter(d => d.name.toLowerCase().includes(q));
+
+  const sort = sortSelect.value;
+  list = list.slice().sort((a,b) => {
+    if(sort === 'date-desc') return new Date(b.updated) - new Date(a.updated);
+    if(sort === 'date-asc') return new Date(a.updated) - new Date(b.updated);
+    if(sort === 'name-asc') return a.name.localeCompare(b.name);
+    if(sort === 'size-desc') return (b.size||0) - (a.size||0);
+    return 0;
+  });
+
+  if(!list.length){
+    boardEl.innerHTML = `
+      <div class="state-panel">
+        <div class="big">No demos found</div>
+        <div>${allDemos.length ? 'try a different search term' : 'the drive folder has no .dem files yet'}</div>
+      </div>`;
+    return;
+  }
+
+  boardEl.innerHTML = list.map((d, i) => {
+    const icon = pickIcon(d.name);
+    const tag = mapTag(d.name);
+    return `
+      <div class="row" style="animation-delay:${Math.min(i*30,300)}ms">
+        <div class="row-icon"><svg viewBox="0 0 24 24" style="color:var(--orange)"><use href="#${icon}"/></svg></div>
+        <div class="row-name">
+          <div class="fname" title="${escapeHtml(d.name)}">${escapeHtml(d.name)}</div>
+          <div class="ftag"><em>${escapeHtml(tag)}</em> · demo file</div>
+        </div>
+        <div class="row-size">${escapeHtml(d.sizeFormatted || formatBytes(d.size))}</div>
+        <div class="row-date">${formatDate(d.updated)}</div>
+        <div class="row-action">
+          <a class="dl-btn" href="${d.downloadUrl}" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><use href="#ic-download"/></svg>get
+          </a>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+/* ---------- helpers ---------- */
+function formatBytes(bytes){
+  if(!bytes) return '0 B';
+  const k = 1024, sizes = ['B','KB','MB','GB'];
+  const i = Math.floor(Math.log(bytes)/Math.log(k));
+  return parseFloat((bytes/Math.pow(k,i)).toFixed(1)) + ' ' + sizes[i];
+}
+function formatDate(iso){
+  if(!iso) return '--';
+  const d = new Date(iso);
+  return d.toLocaleDateString(undefined,{ month:'short', day:'2-digit', year:'numeric' });
+}
+function timeAgo(iso){
+  const diff = (Date.now() - new Date(iso).getTime())/1000;
+  if(diff < 3600) return Math.floor(diff/60) + 'm ago';
+  if(diff < 86400) return Math.floor(diff/3600) + 'h ago';
+  return Math.floor(diff/86400) + 'd ago';
+}
+function escapeHtml(str){
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+</script>
+</body>
+</html>
