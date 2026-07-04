@@ -2,443 +2,412 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#04070a">
+    <meta name="color-scheme" content="dark">
     <link rel="icon" type="image/png" href="lambda.png">
-    <title>My Counter-Strike 1.6 Communities</title>
+    <title>gaminghistory.log // NECRO</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --bg-color: #121212;
-            --card-bg: #1e1e1e;
-            --text-color: #d8d8d8;
-            --accent-color: #e67e22;
-            --accent-dark: #d35400;
-            --header-bg: rgba(0, 0, 0, 0.7);
-            --border-radius: 8px;
-            --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            --bg: #04070a;
+            --bg-deep: #010302;
+            --panel: rgba(8, 16, 18, 0.85);
+            --line: rgba(46, 230, 208, 0.18);
+            --cyan: #2ee6d0;
+            --cyan-soft: #7dfbe9;
+            --magenta: #ff3ea5;
+            --amber: #ffb703;
+            --text: #d9f6f0;
+            --muted: #5f8b85;
+            --radius: 10px;
+            --mono: 'JetBrains Mono', ui-monospace, monospace;
+            --pixel: 'VT323', monospace;
         }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        html, body { height: 100%; }
+
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'Tahoma', 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
+            font-family: var(--mono);
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.6;
-            background-image: 
-                linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-                url('basebuilder.jpg');
-            background-size: cover;
-            background-attachment: fixed;
-            background-position: center;
+            position: relative;
+            overflow-x: hidden;
+            padding-bottom: 60px;
+        }
+
+        .bg-grid {
+            position: fixed; inset: 0; z-index: -2;
+            background-color: var(--bg-deep);
+            background-image:
+                linear-gradient(rgba(46, 230, 208, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(46, 230, 208, 0.06) 1px, transparent 1px);
+            background-size: 34px 34px;
+        }
+        .bg-glow {
+            position: fixed; inset: 0; z-index: -1;
+            background:
+                radial-gradient(circle at 15% 8%, rgba(46, 230, 208, 0.10) 0%, transparent 45%),
+                radial-gradient(circle at 85% 95%, rgba(255, 62, 165, 0.08) 0%, transparent 45%);
+        }
+        body::after {
+            content: '';
+            position: fixed; inset: 0; z-index: 45; pointer-events: none;
+            background: repeating-linear-gradient(180deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 2px, transparent 4px);
+            mix-blend-mode: overlay;
         }
 
         header {
-            background: var(--header-bg);
-            padding: 2rem 0;
-            text-align: center;
-            margin-bottom: 2rem;
-            border-bottom: 2px solid var(--accent-color);
             position: relative;
+            padding: 2.4rem 20px 2rem;
+            text-align: center;
+            border-bottom: 1px solid var(--line);
+            background: rgba(4, 7, 10, 0.6);
+            backdrop-filter: blur(10px);
         }
 
         .back-button {
             position: absolute;
-            left: 20px;
+            left: 16px;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(230, 126, 34, 0.3);
-            color: var(--accent-color);
-            border: none;
-            padding: 8px 15px;
-            border-radius: 4px;
-            cursor: pointer;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            color: var(--cyan);
+            padding: 8px 14px;
+            border-radius: 8px;
             text-decoration: none;
-            font-family: inherit;
-            transition: background 0.3s ease;
+            font-family: var(--mono);
+            font-size: 0.78rem;
+            transition: all 0.25s ease;
         }
+        .back-button:hover { background: rgba(46,230,208,0.1); border-color: var(--cyan); }
 
-        .back-button:hover {
-            background: rgba(230, 126, 34, 0.5);
+        .terminal-path {
+            font-size: 0.72rem;
+            color: var(--muted);
+            margin-bottom: 8px;
         }
+        .terminal-path .ps1 { color: var(--cyan); }
 
         h1 {
-            font-size: 2.8rem;
-            margin: 0;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-family: var(--pixel);
+            font-weight: 400;
+            font-size: clamp(2rem, 8vw, 2.8rem);
             letter-spacing: 1px;
-            font-weight: normal;
+            color: var(--cyan-soft);
+            text-shadow: 0 0 10px rgba(46,230,208,0.45);
         }
 
-        h1 span {
-            color: var(--accent-color);
-            font-weight: bold;
-        }
+        h1 span { color: var(--magenta); text-shadow: 0 0 10px rgba(255,62,165,0.45); }
 
         .subtitle {
-            font-size: 1.1rem;
-            color: #aaa;
-            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-top: 8px;
         }
 
         .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
+            width: 92%;
+            max-width: 1100px;
+            margin: 2.2rem auto 0;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
-            padding-bottom: 3rem;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.1rem;
         }
 
         .community-card {
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: var(--box-shadow);
-            border: 1px solid #333;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+        }
+        .community-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--cyan);
+            box-shadow: 0 12px 30px rgba(46,230,208,0.12);
         }
 
-        .community-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-            border-color: var(--accent-dark);
+        .card-bar {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            background: rgba(0,0,0,0.35);
+            border-bottom: 1px solid var(--line);
+            font-size: 0.68rem;
+            color: var(--muted);
         }
+        .card-bar .dot { width: 8px; height: 8px; border-radius: 50%; }
+        .card-bar .dot.r { background: #ff5f56; }
+        .card-bar .dot.y { background: #ffbd2e; }
+        .card-bar .dot.g { background: #27c93f; }
+        .card-bar span.file { margin-left: 6px; }
 
         .card-image {
             position: relative;
-            height: 160px;
+            height: 150px;
             overflow: hidden;
+            border-bottom: 1px solid var(--line);
+            filter: saturate(0.7) brightness(0.85);
         }
-
         .card-image img {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.5s ease, filter 0.5s ease;
         }
+        .community-card:hover .card-image img { transform: scale(1.06); filter: saturate(1.1) brightness(1); }
 
-        .community-card:hover .card-image img {
-            transform: scale(1.05);
-        }
-
-        .card-content {
-            padding: 1.5rem;
-        }
+        .card-content { padding: 1.2rem 1.3rem 1.4rem; }
 
         .community-card h2 {
-            font-size: 1.4rem;
-            margin: 0 0 0.5rem 0;
-            color: white;
-            font-weight: bold;
-        }
-
-        .community-card p {
-            margin: 0.5rem 0;
-            font-size: 0.95rem;
-            color: #bbb;
+            font-family: var(--pixel);
+            font-weight: 400;
+            font-size: 1.5rem;
+            letter-spacing: 0.5px;
+            color: var(--cyan-soft);
+            margin-bottom: 6px;
         }
 
         .game-info {
             display: flex;
             align-items: center;
-            margin: 0.8rem 0;
+            gap: 8px;
+            margin: 0.6rem 0;
+            font-size: 0.82rem;
+            color: var(--muted);
         }
+        .game-icon { width: 20px; height: 20px; filter: grayscale(1) brightness(1.5); }
 
-        .game-icon {
-            width: 24px;
-            height: 24px;
-            margin-right: 10px;
-            filter: brightness(0.8);
-        }
-
-        .year {
-            color: var(--accent-color);
-            font-weight: bold;
-        }
+        .year { color: var(--cyan); font-weight: 600; font-size: 0.8rem; }
+        .year::before { content: '> '; color: var(--muted); }
 
         .role {
             display: inline-block;
-            padding: 0.2rem 0.5rem;
-            background: rgba(230, 126, 34, 0.2);
-            color: var(--accent-color);
-            border-radius: 4px;
-            font-size: 0.85rem;
+            margin-top: 6px;
+            padding: 3px 10px;
+            background: rgba(255, 62, 165, 0.1);
+            border: 1px solid rgba(255, 62, 165, 0.3);
+            color: var(--magenta);
+            border-radius: 999px;
+            font-size: 0.72rem;
+            letter-spacing: 0.3px;
         }
 
         footer {
             text-align: center;
-            padding: 2rem 0;
-            color: #777;
-            font-size: 0.9rem;
-            border-top: 1px solid #333;
-            margin-top: 2rem;
+            padding: 2.4rem 20px 1rem;
+            color: var(--muted);
+            font-size: 0.78rem;
+            border-top: 1px solid var(--line);
+            margin-top: 2.4rem;
         }
 
         .nicknote {
-            color: var(--accent-color);
+            color: var(--cyan);
             font-style: italic;
-            margin-top: 0.5rem;
+            margin-top: 8px;
+            font-size: 0.76rem;
         }
 
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .container {
-                grid-template-columns: 1fr;
-                width: 95%;
-            }
-            
-            .card-image {
-                height: 200px;
-            }
+            .container { grid-template-columns: 1fr; width: 90%; }
+            .card-image { height: 180px; }
+            .back-button { position: static; transform: none; margin-bottom: 14px; display: inline-block; }
+        }
 
-            .back-button {
-                position: static;
-                transform: none;
-                margin-bottom: 1rem;
-                display: inline-block;
-            }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
         }
     </style>
 </head>
 <body>
+    <div class="bg-grid"></div>
+    <div class="bg-glow"></div>
+
     <header>
-        <a href="index.html" class="back-button">← Back</a>
-        <h1>My <span>Counter-Strike 1.6</span> Communities</h1>
-        <div class="subtitle">A journey through my gaming history</div>
+        <a href="index" class="back-button">&lt; back</a>
+        <p class="terminal-path"><span class="ps1">necro@root</span>:~$ cat gaminghistory.log</p>
+        <h1>Counter-Strike 1.6 <span>Communities</span></h1>
+        <div class="subtitle">a journey through my gaming history</div>
     </header>
 
     <div class="container">
         <div class="community-card">
-            <div class="card-image">
-                <img src="wtb.jpg" alt="wTB community banner">
-            </div>
+            <div class="card-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="file">wtb.entry</span></div>
+            <div class="card-image"><img src="wtb.jpg" alt="wTB community banner"></div>
             <div class="card-content">
                 <h2>wTB</h2>
-                <div class="game-info">
-                    <img src="cs.png" alt="CS 1.6 icon" class="game-icon">
-                    <p>Counter-Strike 1.6</p>
-                </div>
+                <div class="game-info"><img src="cs.png" alt="CS 1.6 icon" class="game-icon">Counter-Strike 1.6</div>
                 <p class="year">Year Joined: 2012</p>
-                <p><span class="role">Regular Player</span></p>
-            </div>
-        </div>
-        
-        <div class="community-card">
-            <div class="card-image">
-                <img src="nd.jpg" alt="nD community banner">
-            </div>
-            <div class="card-content">
-                <h2>nD</h2>
-                <div class="game-info">
-                    <img src="cs.png" alt="CS 1.6 icon" class="game-icon">
-                    <p>Counter-Strike 1.6</p>
-                </div>
-                <p class="year">Year Joined: 2014</p>
-                <p><span class="role">Regular Player</span></p>
-            </div>
-        </div>
-        
-        <div class="community-card">
-            <div class="card-image">
-                <img src="cs.png" alt="GamingDistrict community banner">
-            </div>
-            <div class="card-content">
-                <h2>GamingDistrict</h2>
-                <div class="game-info">
-                    <img src="cs.png" alt="CS 1.6 icon" class="game-icon">
-                    <p>Counter-Strike 1.6</p>
-                </div>
-                <p class="year">Year Joined: 2015</p>
-                <p><span class="role">Server Manager (BaseBuilder)</span></p>
-            </div>
-        </div>
-        
-        <div class="community-card">
-            <div class="card-image">
-                <img src="ambrosia.jpg" alt="Ambrosia community banner">
-            </div>
-            <div class="card-content">
-                <h2>Ambrosia</h2>
-                <div class="game-info">
-                    <img src="cs.png" alt="CS 1.6 icon" class="game-icon">
-                    <p>Counter-Strike 1.6</p>
-                </div>
-                <p class="year">Year Joined: 2014</p>
-                <p><span class="role">Regular Player</span></p>
-            </div>
-        </div>
-        
-        <div class="community-card">
-            <div class="card-image">
-                <img src="cs.png" alt="CSA community banner">
-            </div>
-            <div class="card-content">
-                <h2>CSA</h2>
-                <div class="game-info">
-                    <img src="cs.png" alt="CS 1.6 icon" class="game-icon">
-                    <p>Counter-Strike 1.6</p>
-                </div>
-                <p class="year">Year Joined: 2016</p>
-                <p><span class="role">Regular Player</span></p>
-            </div>
-        </div>
-        
-        <div class="community-card">
-            <div class="card-image">
-                <img src="hs.jpg" alt="hsCorp community banner">
-            </div>
-            <div class="card-content">
-                <h2>hsCorp</h2>
-                <div class="game-info">
-                    <img src="cs.png" alt="CS 1.6 icon" class="game-icon">
-                    <p>Counter-Strike 1.6</p>
-                </div>
-                <p class="year">Year Joined: 2017</p>
-                <p><span class="role">Regular Player</span></p>
-            </div>
-        </div>
-        
-        <div class="community-card">
-            <div class="card-image">
-                <img src="l4d.jpg" alt="-=HERO=- community banner">
-            </div>
-            <div class="card-content">
-                <h2>-=HERO=-</h2>
-                <div class="game-info">
-                    <img src="l4dd.png" alt="Left 4 Dead icon" class="game-icon">
-                    <p>Left 4 Dead</p>
-                </div>
-                <p class="year">Year Joined: 2014</p>
-                <p><span class="role">Regular Player</span></p>
-            </div>
-        </div>
-        
-        <div class="community-card">
-            <div class="card-image">
-                <img src="l4d.jpg" alt="Island Server banner">
-            </div>
-            <div class="card-content">
-                <h2>Island Server</h2>
-                <div class="game-info">
-                    <img src="l4dd.png" alt="Left 4 Dead icon" class="game-icon">
-                    <p>Left 4 Dead</p>
-                </div>
-                <p class="year">Year Joined: 2014</p>
-                <p><span class="role">Regular Player</span></p>
-            </div>
-        </div>
-        
-        <div class="community-card">
-            <div class="card-image">
-                <img src="mr.jpg" alt="ModRiot community banner">
-            </div>
-            <div class="card-content">
-                <h2>ModRiot</h2>
-                <div class="game-info">
-                    <img src="cs.png" alt="CS 1.6 icon" class="game-icon">
-                    <p>Counter-Strike 1.6</p>
-                </div>
-                <p class="year">Year Joined: 2017</p>
-                <p><span class="role">Admin</span></p>
-            </div>
-        </div>
-        
-        <div class="community-card">
-            <div class="card-image">
-                <img src="ns.jpg" alt="NS community banner">
-            </div>
-            <div class="card-content">
-                <h2>NS</h2>
-                <div class="game-info">
-                    <img src="cs.png" alt="CS 1.6 icon" class="game-icon">
-                    <p>Counter-Strike 1.6</p>
-                </div>
-                <p class="year">Year Joined: 2013</p>
-                <p><span class="role">Owner</span></p>
-            </div>
-        </div>
-        
-        <div class="community-card">
-            <div class="card-image">
-                <img src="df.png" alt="DopeFish community banner">
-            </div>
-            <div class="card-content">
-                <h2>DopeFish</h2>
-                <div class="game-info">
-                    <img src="cs.png" alt="CS 1.6 icon" class="game-icon">
-                    <p>Counter-Strike 1.6</p>
-                </div>
-                <p class="year">Year Joined: 2023</p>
-                <p><span class="role">Regular Player</span></p>
-            </div>
-        </div>
-        
-        <div class="community-card">
-            <div class="card-image">
-                <img src="dscs.jpg" alt="DInScurt community banner">
-            </div>
-            <div class="card-content">
-                <h2>DInScurt</h2>
-                <div class="game-info">
-                    <img src="cs.png" alt="CS 1.6 icon" class="game-icon">
-                    <p>Counter-Strike 1.6</p>
-                </div>
-                <p class="year">Year Joined: 2025</p>
-                <p><span class="role">Regular Player</span></p>
+                <span class="role">Regular Player</span>
             </div>
         </div>
 
         <div class="community-card">
-            <div class="card-image">
-                <img src="Screenshot 2025-09-20 145600.png" alt="LL JB community banner">
+            <div class="card-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="file">nd.entry</span></div>
+            <div class="card-image"><img src="nd.jpg" alt="nD community banner"></div>
+            <div class="card-content">
+                <h2>nD</h2>
+                <div class="game-info"><img src="cs.png" alt="CS 1.6 icon" class="game-icon">Counter-Strike 1.6</div>
+                <p class="year">Year Joined: 2014</p>
+                <span class="role">Regular Player</span>
             </div>
+        </div>
+
+        <div class="community-card">
+            <div class="card-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="file">gamingdistrict.entry</span></div>
+            <div class="card-image"><img src="cs.png" alt="GamingDistrict community banner"></div>
+            <div class="card-content">
+                <h2>GamingDistrict</h2>
+                <div class="game-info"><img src="cs.png" alt="CS 1.6 icon" class="game-icon">Counter-Strike 1.6</div>
+                <p class="year">Year Joined: 2015</p>
+                <span class="role">Server Manager (BaseBuilder)</span>
+            </div>
+        </div>
+
+        <div class="community-card">
+            <div class="card-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="file">ambrosia.entry</span></div>
+            <div class="card-image"><img src="ambrosia.jpg" alt="Ambrosia community banner"></div>
+            <div class="card-content">
+                <h2>Ambrosia</h2>
+                <div class="game-info"><img src="cs.png" alt="CS 1.6 icon" class="game-icon">Counter-Strike 1.6</div>
+                <p class="year">Year Joined: 2014</p>
+                <span class="role">Regular Player</span>
+            </div>
+        </div>
+
+        <div class="community-card">
+            <div class="card-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="file">csa.entry</span></div>
+            <div class="card-image"><img src="cs.png" alt="CSA community banner"></div>
+            <div class="card-content">
+                <h2>CSA</h2>
+                <div class="game-info"><img src="cs.png" alt="CS 1.6 icon" class="game-icon">Counter-Strike 1.6</div>
+                <p class="year">Year Joined: 2016</p>
+                <span class="role">Regular Player</span>
+            </div>
+        </div>
+
+        <div class="community-card">
+            <div class="card-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="file">hscorp.entry</span></div>
+            <div class="card-image"><img src="hs.jpg" alt="hsCorp community banner"></div>
+            <div class="card-content">
+                <h2>hsCorp</h2>
+                <div class="game-info"><img src="cs.png" alt="CS 1.6 icon" class="game-icon">Counter-Strike 1.6</div>
+                <p class="year">Year Joined: 2017</p>
+                <span class="role">Regular Player</span>
+            </div>
+        </div>
+
+        <div class="community-card">
+            <div class="card-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="file">hero.entry</span></div>
+            <div class="card-image"><img src="l4d.jpg" alt="-=HERO=- community banner"></div>
+            <div class="card-content">
+                <h2>-=HERO=-</h2>
+                <div class="game-info"><img src="l4dd.png" alt="Left 4 Dead icon" class="game-icon">Left 4 Dead</div>
+                <p class="year">Year Joined: 2014</p>
+                <span class="role">Regular Player</span>
+            </div>
+        </div>
+
+        <div class="community-card">
+            <div class="card-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="file">island.entry</span></div>
+            <div class="card-image"><img src="l4d.jpg" alt="Island Server banner"></div>
+            <div class="card-content">
+                <h2>Island Server</h2>
+                <div class="game-info"><img src="l4dd.png" alt="Left 4 Dead icon" class="game-icon">Left 4 Dead</div>
+                <p class="year">Year Joined: 2014</p>
+                <span class="role">Regular Player</span>
+            </div>
+        </div>
+
+        <div class="community-card">
+            <div class="card-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="file">modriot.entry</span></div>
+            <div class="card-image"><img src="mr.jpg" alt="ModRiot community banner"></div>
+            <div class="card-content">
+                <h2>ModRiot</h2>
+                <div class="game-info"><img src="cs.png" alt="CS 1.6 icon" class="game-icon">Counter-Strike 1.6</div>
+                <p class="year">Year Joined: 2017</p>
+                <span class="role">Admin</span>
+            </div>
+        </div>
+
+        <div class="community-card">
+            <div class="card-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="file">ns.entry</span></div>
+            <div class="card-image"><img src="ns.jpg" alt="NS community banner"></div>
+            <div class="card-content">
+                <h2>NS</h2>
+                <div class="game-info"><img src="cs.png" alt="CS 1.6 icon" class="game-icon">Counter-Strike 1.6</div>
+                <p class="year">Year Joined: 2013</p>
+                <span class="role">Owner</span>
+            </div>
+        </div>
+
+        <div class="community-card">
+            <div class="card-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="file">dopefish.entry</span></div>
+            <div class="card-image"><img src="df.png" alt="DopeFish community banner"></div>
+            <div class="card-content">
+                <h2>DopeFish</h2>
+                <div class="game-info"><img src="cs.png" alt="CS 1.6 icon" class="game-icon">Counter-Strike 1.6</div>
+                <p class="year">Year Joined: 2023</p>
+                <span class="role">Regular Player</span>
+            </div>
+        </div>
+
+        <div class="community-card">
+            <div class="card-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="file">dinscurt.entry</span></div>
+            <div class="card-image"><img src="dscs.jpg" alt="DInScurt community banner"></div>
+            <div class="card-content">
+                <h2>DInScurt</h2>
+                <div class="game-info"><img src="cs.png" alt="CS 1.6 icon" class="game-icon">Counter-Strike 1.6</div>
+                <p class="year">Year Joined: 2025</p>
+                <span class="role">Regular Player</span>
+            </div>
+        </div>
+
+        <div class="community-card">
+            <div class="card-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="file">lljb.entry</span></div>
+            <div class="card-image"><img src="Screenshot 2025-09-20 145600.png" alt="LL JB community banner"></div>
             <div class="card-content">
                 <h2>LegendLeagues Jailbreak</h2>
-                <div class="game-info">
-                    <img src="cs.png" alt="CS 1.6 icon" class="game-icon">
-                    <p>Counter-Strike 1.6</p>
-                </div>
+                <div class="game-info"><img src="cs.png" alt="CS 1.6 icon" class="game-icon">Counter-Strike 1.6</div>
                 <p class="year">Year Joined: 2025</p>
-                <p><span class="role">Assistant Manager</span></p>
+                <span class="role">Assistant Manager</span>
             </div>
         </div>
     </div>
 
     <footer>
-        © 2023 Counter-Strike 1.6 Communities • All rights reserved
-        <div class="nicknote">Note: My nickname always contained '|Ns| 刀ec[尺]o /A/' throughout all these years and never changed.</div>
+        © 2027 Counter-Strike 1.6 Communities • All rights reserved
+        <div class="nicknote">Note: my nickname always contained '|Ns| 刀ec[尺]o /A/' throughout all these years and never changed.</div>
     </footer>
 
     <script>
-        // Disable right-click context menu
-        window.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
+        // Content-protection flavor (non-blocking, matches rest of site)
+        window.addEventListener('contextmenu', e => e.preventDefault());
+        window.addEventListener('keydown', e => {
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'u') e.preventDefault();
         });
 
-        // Disable Ctrl+U shortcut
-        window.addEventListener('keydown', function(e) {
-            if (e.ctrlKey && e.key === 'u') {
-                e.preventDefault();
-            }
-        });
-
-        // Add fade-in animation to cards
-        document.addEventListener('DOMContentLoaded', function() {
+        // Staggered fade-in for cards
+        document.addEventListener('DOMContentLoaded', () => {
             const cards = document.querySelectorAll('.community-card');
             cards.forEach((card, index) => {
                 card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                card.style.transition = `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`;
-                
+                card.style.transform = 'translateY(16px)';
+                card.style.transition = `opacity 0.5s ease ${index * 0.06}s, transform 0.5s ease ${index * 0.06}s`;
                 setTimeout(() => {
                     card.style.opacity = '1';
                     card.style.transform = 'translateY(0)';
-                }, 100);
+                }, 80);
             });
         });
     </script>

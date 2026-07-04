@@ -1,93 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    document.body.style.transform = "scale(2.1)";
-    document.body.style.transformOrigin = "0 0";
-    document.body.style.width = "46.77%";  // Adjusted for correct scaling
-    document.body.style.height = "76.67%"; // Adjusted for correct scaling
-    document.body.style.overflow = "auto"; // Allow scrolling
-  });
-</script>
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photography Work Samples</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#04070a">
+    <meta name="color-scheme" content="dark">
+    <title>gallery.log // Photography Work Samples</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
     <style>
-        /* Reset and Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+        :root {
+            --bg: #04070a;
+            --bg-deep: #010302;
+            --panel: rgba(8, 16, 18, 0.85);
+            --line: rgba(46, 230, 208, 0.18);
+            --cyan: #2ee6d0;
+            --cyan-soft: #7dfbe9;
+            --magenta: #ff3ea5;
+            --amber: #ffb703;
+            --text: #d9f6f0;
+            --muted: #5f8b85;
+            --radius: 10px;
+            --mono: 'JetBrains Mono', ui-monospace, monospace;
+            --pixel: 'VT323', monospace;
         }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        html, body { height: 100%; }
+
         body {
-            background-color: #f5f5f5;
-            color: #333;
+            font-family: var(--mono);
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .bg-grid {
+            position: fixed; inset: 0; z-index: -2;
+            background-color: var(--bg-deep);
+            background-image:
+                linear-gradient(rgba(46, 230, 208, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(46, 230, 208, 0.06) 1px, transparent 1px);
+            background-size: 34px 34px;
+        }
+        .bg-glow {
+            position: fixed; inset: 0; z-index: -1;
+            background:
+                radial-gradient(circle at 15% 8%, rgba(46, 230, 208, 0.10) 0%, transparent 45%),
+                radial-gradient(circle at 85% 95%, rgba(255, 62, 165, 0.08) 0%, transparent 45%);
+        }
+        body::after {
+            content: '';
+            position: fixed; inset: 0; z-index: 45; pointer-events: none;
+            background: repeating-linear-gradient(180deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 2px, transparent 4px);
+            mix-blend-mode: overlay;
         }
 
         header {
-            background-color: #222;
-            color: white;
-            padding: 1.5rem;
-            text-align: center;
             position: relative;
+            padding: 2.2rem 20px 1.8rem;
+            text-align: center;
+            border-bottom: 1px solid var(--line);
+            background: rgba(4, 7, 10, 0.6);
+            backdrop-filter: blur(10px);
         }
 
         .back-button {
             position: absolute;
-            left: 1rem;
+            left: 16px;
             top: 50%;
             transform: translateY(-50%);
-            color: white;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            color: var(--cyan);
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 0.8rem;
+            padding: 8px 14px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 8px;
+            transition: all 0.25s ease;
         }
+        .back-button:hover { background: rgba(46,230,208,0.1); border-color: var(--cyan); }
 
-        .back-button:hover {
-            color: #ddd;
-        }
+        .terminal-path { font-size: 0.72rem; color: var(--muted); margin-bottom: 8px; }
+        .terminal-path .ps1 { color: var(--cyan); }
 
         h1 {
-            font-size: 1.8rem;
-            margin: 0;
+            font-family: var(--pixel);
+            font-weight: 400;
+            font-size: clamp(1.8rem, 7vw, 2.4rem);
+            letter-spacing: 1px;
+            color: var(--cyan-soft);
+            text-shadow: 0 0 10px rgba(46,230,208,0.45);
         }
 
         /* Quality Notice */
         .quality-notice {
-            background-color: #f8f8f8;
-            border: 1px solid #ddd;
-            padding: 1rem;
-            margin: 1rem auto;
-            max-width: 1400px;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-left: 3px solid var(--cyan);
+            padding: 1.1rem 1.3rem;
+            margin: 1.6rem auto;
+            max-width: 1200px;
+            width: 92%;
             text-align: center;
-            border-radius: 5px;
-            font-size: 0.9rem;
+            border-radius: var(--radius);
+            font-size: 0.85rem;
+            color: var(--muted);
         }
 
-        .whatsapp-link {
-            color: #25D366;
-            text-decoration: none;
-            font-weight: bold;
-        }
+        .whatsapp-link { color: var(--cyan); font-weight: 700; text-decoration: none; }
+        .whatsapp-link:hover { text-decoration: underline; }
 
-        .whatsapp-link:hover {
-            text-decoration: underline;
-        }
+        .arabic-line { direction: rtl; font-family: 'SF Arabic', 'Segoe UI', system-ui, sans-serif; margin-top: 8px; }
 
         /* Gallery Grid */
-        .gallery-container {
-            padding: 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+        .gallery-container { padding: 1.5rem; max-width: 1200px; margin: 0 auto; }
 
         .gallery-grid {
             display: grid;
@@ -98,16 +134,17 @@
         .gallery-item {
             position: relative;
             overflow: hidden;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            border-radius: var(--radius);
+            border: 1px solid var(--line);
+            background: var(--panel);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
             aspect-ratio: 1/1;
-            background-color: #eee;
         }
 
         .gallery-item:hover {
-            transform: scale(1.02);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            transform: translateY(-3px);
+            border-color: var(--cyan);
+            box-shadow: 0 10px 26px rgba(46,230,208,0.15);
         }
 
         .gallery-img {
@@ -116,45 +153,35 @@
             object-fit: cover;
             display: block;
             cursor: pointer;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.3s ease, filter 0.3s ease;
+            filter: saturate(0.75) brightness(0.9);
         }
+        .gallery-item:hover .gallery-img { filter: saturate(1) brightness(1); }
 
-        .gallery-img.loading {
-            opacity: 0;
-        }
-
-        .gallery-img.loaded {
-            opacity: 1;
-        }
+        .gallery-img.loading { opacity: 0; }
+        .gallery-img.loaded { opacity: 1; }
 
         /* Loading spinner */
         .spinner {
             position: absolute;
-            top: 50%;
-            left: 50%;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 40px;
-            height: 40px;
-            border: 4px solid rgba(255, 255, 255, 0.3);
+            width: 34px; height: 34px;
+            border: 3px solid rgba(46, 230, 208, 0.15);
             border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
+            border-top-color: var(--cyan);
+            animation: spin 0.9s linear infinite;
         }
-
-        @keyframes spin {
-            to { transform: translate(-50%, -50%) rotate(360deg); }
-        }
+        @keyframes spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
 
         /* Lightbox Styles */
         .lightbox {
             display: none;
             position: fixed;
             z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
+            inset: 0;
+            background: rgba(2, 4, 5, 0.94);
+            backdrop-filter: blur(6px);
             overflow: auto;
         }
 
@@ -171,291 +198,197 @@
             max-width: 80%;
             max-height: 70vh;
             object-fit: contain;
+            border-radius: 8px;
+            border: 1px solid var(--line);
+            box-shadow: 0 0 40px rgba(46,230,208,0.15);
         }
 
-        .photo-info {
-            color: white;
-            text-align: center;
-            margin-top: 1.5rem;
-            max-width: 80%;
-        }
+        .photo-info { color: var(--text); text-align: center; margin-top: 1.4rem; max-width: 80%; }
+        .photo-info h3 { font-family: var(--pixel); font-size: 1.4rem; color: var(--cyan-soft); letter-spacing: 1px; }
+        .photo-info p { color: var(--muted); font-size: 0.85rem; margin-top: 6px; }
 
         .close-btn, .prev-btn, .next-btn {
             position: absolute;
-            color: white;
-            font-size: 2.5rem;
+            color: var(--cyan);
+            font-size: 2rem;
             cursor: pointer;
             user-select: none;
+            transition: color 0.2s ease, transform 0.2s ease;
         }
+        .close-btn:hover, .prev-btn:hover, .next-btn:hover { color: var(--magenta); transform: scale(1.1); }
 
-        .close-btn {
-            top: 1.5rem;
-            right: 2rem;
-        }
+        .close-btn { top: 1.4rem; right: 1.6rem; }
+        .prev-btn, .next-btn { top: 50%; transform: translateY(-50%); padding: 1rem; }
+        .prev-btn { left: 1rem; }
+        .next-btn { right: 1rem; }
 
-        .prev-btn, .next-btn {
-            top: 50%;
-            transform: translateY(-50%);
-            padding: 1rem;
-        }
-
-        .prev-btn {
-            left: 2rem;
-        }
-
-        .next-btn {
-            right: 2rem;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #222;
-            color: white;
+        /* Testimonials */
+        .testimonials { max-width: 1200px; margin: 2.2rem auto; padding: 0 1.5rem 2rem; }
+        .testimonials h2 {
             text-align: center;
-            padding: 1.5rem;
-            margin-top: 2rem;
+            margin-bottom: 1.6rem;
+            font-family: var(--pixel);
+            font-weight: 400;
+            font-size: 1.9rem;
+            letter-spacing: 1px;
+            color: var(--cyan-soft);
+            text-shadow: 0 0 8px rgba(46,230,208,0.35);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 1.1rem;
+        }
+
+        .testimonial {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 1.2rem 1.3rem;
+            text-align: left;
+            transition: border-color 0.25s ease, transform 0.25s ease;
+        }
+        .testimonial:hover { border-color: var(--cyan); transform: translateY(-2px); }
+
+        .testimonial-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+            font-size: 0.85rem;
+        }
+        .customer-name { color: var(--cyan-soft); font-weight: 700; }
+        .testimonial-date { color: var(--muted); font-size: 0.78rem; }
+        .testimonial-text { color: var(--text); line-height: 1.6; font-style: italic; font-size: 0.88rem; }
+        .testimonial-text[dir="rtl"], .testimonial:has(.customer-name:lang(ar)) .testimonial-text { direction: rtl; }
+
+        footer {
+            text-align: center;
+            padding: 2rem 20px 1.2rem;
+            color: var(--muted);
+            font-size: 0.78rem;
+            border-top: 1px solid var(--line);
         }
 
         /* Responsive Design */
         @media (max-width: 1024px) {
-            .gallery-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
+            .gallery-grid { grid-template-columns: repeat(3, 1fr); }
         }
-
         @media (max-width: 768px) {
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .back-button {
-                font-size: 0.9rem;
-            }
-            
-            h1 {
-                font-size: 1.5rem;
-            }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .back-button { position: static; transform: none; margin-bottom: 12px; display: inline-flex; }
+            header { text-align: center; }
         }
-
         @media (max-width: 480px) {
-            .gallery-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .gallery-container {
-                padding: 1rem;
-            }
-            
-            #lightbox-img {
-                max-width: 95%;
-            }
-            
-            .photo-info {
-                max-width: 95%;
-            }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .gallery-container { padding: 1rem; }
+            #lightbox-img { max-width: 95%; }
+            .photo-info { max-width: 95%; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
         }
     </style>
 </head>
 <body>
+    <div class="bg-grid"></div>
+    <div class="bg-glow"></div>
+
     <header>
         <a href="index" class="back-button"><i class="fas fa-arrow-left"></i> Back</a>
+        <p class="terminal-path"><span class="ps1">necro@root</span>:~$ ls gallery/samples</p>
         <h1>Photography Work Samples</h1>
     </header>
 
     <div class="quality-notice">
-        These are low-quality samples only. Customers successfully received their original HD quality photos. 
+        These are low-quality samples only. Customers successfully received their original HD quality photos.
         <br>For full-quality samples or more information, please <a href="https://wa.me/00962779352591" class="whatsapp-link">contact us via WhatsApp</a>.
-        <br><br>
-        هذه عينات منخفضة الجودة فقط. العملاء تلقوا بنجاح صورهم الأصلية بجودة عالية الدقة.
-        <br>للحصول على عينات كاملة الجودة أو لمزيد من المعلومات، يرجى <a href="https://wa.me/00962779352591" class="whatsapp-link">الاتصال بنا عبر واتساب</a>.
+        <div class="arabic-line">
+            هذه عينات منخفضة الجودة فقط. العملاء تلقوا بنجاح صورهم الأصلية بجودة عالية الدقة.
+            <br>للحصول على عينات كاملة الجودة أو لمزيد من المعلومات، يرجى <a href="https://wa.me/00962779352591" class="whatsapp-link">الاتصال بنا عبر واتساب</a>.
+        </div>
     </div>
+
     <div class="gallery-container">
         <div class="gallery-grid">
             <!-- Photos will be added dynamically by JavaScript -->
         </div>
     </div>
-    <!-- Testimonials Section -->
+
     <div class="testimonials">
         <h2>Customer Feedback</h2>
         <div class="testimonial-grid">
-		<div class="testimonial">
-    <div class="testimonial-header">
-        <span class="customer-name">خالد أ****</span>
-        <span class="testimonial-date">03/05/2023</span>
-    </div>
-    <p class="testimonial-text">"والله الجودة تفوق التوقعات! الصور كانت أجمل من ما توقعت والسعر أكثر من معقول"</p>
-</div>
-<div class="testimonial">
-    <div class="testimonial-header">
-        <span class="customer-name">عمر ك****</span>
-        <span class="testimonial-date">22/10/2023</span>
-    </div>
-    <p class="testimonial-text">"جودة الصور كانت فوق الممتاز! والخدمة سريعة ودقيقة. الله يبارك فيكم"</p>
-</div>
-<div class="testimonial">
-    <div class="testimonial-header">
-        <span class="customer-name">سارة ن****</span>
-        <span class="testimonial-date">11/01/2024</span>
-    </div>
-    <p class="testimonial-text">"حرفياً أحسن مصور تعاملت معه! الصور كانت تحفة فنية والسعر زهيد جداً بالمقارنة"</p>
-</div>
-<div class="testimonial">
-    <div class="testimonial-header">
-        <span class="customer-name">أحمد م****</span>
-        <span class="testimonial-date">29/03/2024</span>
-    </div>
-    <p class="testimonial-text">"النتيجة كانت تفوق الخيال! المصور فهم بالضبط اللي كنت أبيه من أول مرة"</p>
-</div>
-<div class="testimonial">
-    <div class="testimonial-header">
-        <span class="customer-name">لينا ر****</span>
-        <span class="testimonial-date">14/06/2024</span>
-    </div>
-    <p class="testimonial-text">"ما قصرتوا والله! الجودة عالية جداً والتعديلات كانت بالمقاس المثالي"</p>
-</div>
-<div class="testimonial">
-    <div class="testimonial-header">
-        <span class="customer-name">يوسف ع****</span>
-        <span class="testimonial-date">07/09/2024</span>
-    </div>
-    <p class="testimonial-text">"أحسنت يا رب! الصور كانت أنضف من اللي يشوفها بالمجلات العالمية"</p>
-</div>
-<div class="testimonial">
-    <div class="testimonial-header">
-        <span class="customer-name">دانا و****</span>
-        <span class="testimonial-date">25/11/2024</span>
-    </div>
-    <p class="testimonial-text">"مافي أحسن من كذا! المصور عنده موهبة حقيقية والأسعار مناسبة جداً"</p>
-</div>
-<div class="testimonial">
-    <div class="testimonial-header">
-        <span class="customer-name">محمود س****</span>
-        <span class="testimonial-date">19/02/2025</span>
-    </div>
-    <p class="testimonial-text">"حرفياً كل اللي شافوا الصور قالوا إني دفعت ضعف السعر! الجودة لا توصف"</p>
-</div>
             <div class="testimonial">
-                <div class="testimonial-header">
-                    <span class="customer-name">Mohammad A*****</span>
-                    <span class="testimonial-date">15/03/2023</span>
-                </div>
+                <div class="testimonial-header"><span class="customer-name">خالد أ****</span><span class="testimonial-date">03/05/2023</span></div>
+                <p class="testimonial-text" dir="rtl">"والله الجودة تفوق التوقعات! الصور كانت أجمل من ما توقعت والسعر أكثر من معقول"</p>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-header"><span class="customer-name">عمر ك****</span><span class="testimonial-date">22/10/2023</span></div>
+                <p class="testimonial-text" dir="rtl">"جودة الصور كانت فوق الممتاز! والخدمة سريعة ودقيقة. الله يبارك فيكم"</p>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-header"><span class="customer-name">سارة ن****</span><span class="testimonial-date">11/01/2024</span></div>
+                <p class="testimonial-text" dir="rtl">"حرفياً أحسن مصور تعاملت معه! الصور كانت تحفة فنية والسعر زهيد جداً بالمقارنة"</p>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-header"><span class="customer-name">أحمد م****</span><span class="testimonial-date">29/03/2024</span></div>
+                <p class="testimonial-text" dir="rtl">"النتيجة كانت تفوق الخيال! المصور فهم بالضبط اللي كنت أبيه من أول مرة"</p>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-header"><span class="customer-name">لينا ر****</span><span class="testimonial-date">14/06/2024</span></div>
+                <p class="testimonial-text" dir="rtl">"ما قصرتوا والله! الجودة عالية جداً والتعديلات كانت بالمقاس المثالي"</p>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-header"><span class="customer-name">يوسف ع****</span><span class="testimonial-date">07/09/2024</span></div>
+                <p class="testimonial-text" dir="rtl">"أحسنت يا رب! الصور كانت أنضف من اللي يشوفها بالمجلات العالمية"</p>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-header"><span class="customer-name">دانا و****</span><span class="testimonial-date">25/11/2024</span></div>
+                <p class="testimonial-text" dir="rtl">"مافي أحسن من كذا! المصور عنده موهبة حقيقية والأسعار مناسبة جداً"</p>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-header"><span class="customer-name">محمود س****</span><span class="testimonial-date">19/02/2025</span></div>
+                <p class="testimonial-text" dir="rtl">"حرفياً كل اللي شافوا الصور قالوا إني دفعت ضعف السعر! الجودة لا توصف"</p>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-header"><span class="customer-name">Mohammad A*****</span><span class="testimonial-date">15/03/2023</span></div>
                 <p class="testimonial-text">"Wallah the photos came out amazing! Better than I expected for the price. You deserve more money for this quality!"</p>
             </div>
             <div class="testimonial">
-                <div class="testimonial-header">
-                    <span class="customer-name">Ahmad K****</span>
-                    <span class="testimonial-date">22/07/2023</span>
-                </div>
+                <div class="testimonial-header"><span class="customer-name">Ahmad K****</span><span class="testimonial-date">22/07/2023</span></div>
                 <p class="testimonial-text">"Professional work mashallah! The photographer has an eye for details. Will book again inshallah."</p>
             </div>
             <div class="testimonial">
-                <div class="testimonial-header">
-                    <span class="customer-name">Sarah M****</span>
-                    <span class="testimonial-date">05/11/2023</span>
-                </div>
+                <div class="testimonial-header"><span class="customer-name">Sarah M****</span><span class="testimonial-date">05/11/2023</span></div>
                 <p class="testimonial-text">"I was skeptical at first but subhanallah the results were perfect! Very fair prices for this level of quality."</p>
             </div>
             <div class="testimonial">
-                <div class="testimonial-header">
-                    <span class="customer-name">Yousef B*****</span>
-                    <span class="testimonial-date">18/01/2024</span>
-                </div>
+                <div class="testimonial-header"><span class="customer-name">Yousef B*****</span><span class="testimonial-date">18/01/2024</span></div>
                 <p class="testimonial-text">"The service was top-notch! Photos came out crispy clear. For the price? It's a steal ya zalameh!"</p>
             </div>
             <div class="testimonial">
-                <div class="testimonial-header">
-                    <span class="customer-name">Leena S****</span>
-                    <span class="testimonial-date">30/04/2024</span>
-                </div>
+                <div class="testimonial-header"><span class="customer-name">Leena S****</span><span class="testimonial-date">30/04/2024</span></div>
                 <p class="testimonial-text">"Masha'Allah the photographer captured every special moment perfectly. Worth every fils!"</p>
             </div>
             <div class="testimonial">
-                <div class="testimonial-header">
-                    <span class="customer-name">Omar H****</span>
-                    <span class="testimonial-date">12/06/2024</span>
-                </div>
+                <div class="testimonial-header"><span class="customer-name">Omar H****</span><span class="testimonial-date">12/06/2024</span></div>
                 <p class="testimonial-text">"Allah ykhalikom, the photos were stunning! The editing was on point and delivery was fast."</p>
             </div>
             <div class="testimonial">
-                <div class="testimonial-header">
-                    <span class="customer-name">Rania T****</span>
-                    <span class="testimonial-date">25/09/2024</span>
-                </div>
+                <div class="testimonial-header"><span class="customer-name">Rania T****</span><span class="testimonial-date">25/09/2024</span></div>
                 <p class="testimonial-text">"Honestly, I expected less for what I paid. But subhanallah, the results were professional grade!"</p>
             </div>
             <div class="testimonial">
-                <div class="testimonial-header">
-                    <span class="customer-name">Khalid N****</span>
-                    <span class="testimonial-date">08/12/2024</span>
-                </div>
+                <div class="testimonial-header"><span class="customer-name">Khalid N****</span><span class="testimonial-date">08/12/2024</span></div>
                 <p class="testimonial-text">"The wedding photos made everyone cry. Price was too cheap for this quality!"</p>
             </div>
             <div class="testimonial">
-                <div class="testimonial-header">
-                    <span class="customer-name">Dana R****</span>
-                    <span class="testimonial-date">14/02/2025</span>
-                </div>
+                <div class="testimonial-header"><span class="customer-name">Dana R****</span><span class="testimonial-date">14/02/2025</span></div>
                 <p class="testimonial-text">"Ya hala! The photos were next level! I would've paid double for these results. Highly recommended!"</p>
             </div>
         </div>
     </div>
 
-    <style>
-        /* Testimonials Styles */
-        .testimonials {
-            max-width: 1400px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-        }
-
-        .testimonials h2 {
-            text-align: center;
-            margin-bottom: 2rem;
-            color: #333;
-            font-size: 1.8rem;
-        }
-
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .testimonial {
-            background-color: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .testimonial-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-            font-weight: bold;
-        }
-
-        .customer-name {
-            color: #333;
-        }
-
-        .testimonial-date {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        .testimonial-text {
-            color: #444;
-            line-height: 1.6;
-            font-style: italic;
-        }
-
-        @media (max-width: 768px) {
-            .testimonial-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
     <!-- Lightbox/Slideshow Modal -->
     <div id="lightbox" class="lightbox">
         <span class="close-btn">&times;</span>
@@ -465,7 +398,7 @@
             <img id="lightbox-img" src="" alt="" loading="eager">
             <div class="photo-info">
                 <h3 id="photo-title"></h3>
-                <p id="photo-description">Low-quality sample - Contact us for HD version</p>
+                <p id="photo-description">Low-quality sample — contact us for HD version</p>
             </div>
         </div>
     </div>
@@ -476,7 +409,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Updated photo data with your specified directory
             const photos = [
                 { src: 'work_samples/IMG_2189.jpg', title: 'Sample 1' },
                 { src: 'work_samples/IMG_2358.jpg', title: 'Sample 2' },
@@ -509,10 +441,7 @@
             const nextBtn = document.querySelector('.next-btn');
 
             let currentPhotoIndex = 0;
-            let loadedImages = 0;
-            const totalImages = photos.length;
 
-            // Function to load images with Intersection Observer
             function setupLazyLoading() {
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
@@ -520,56 +449,43 @@
                             const img = entry.target.querySelector('img');
                             const spinner = entry.target.querySelector('.spinner');
                             const src = img.dataset.src;
-                            
                             if (src) {
                                 img.src = src;
                                 img.onload = () => {
                                     img.classList.remove('loading');
                                     img.classList.add('loaded');
                                     if (spinner) spinner.remove();
-                                    loadedImages++;
-                                    // Remove the data-src to prevent reloading
                                     img.removeAttribute('data-src');
                                 };
                             }
                             observer.unobserve(entry.target);
                         }
                     });
-                }, {
-                    rootMargin: '200px 0px', // Load images 200px before they come into view
-                    threshold: 0.01
-                });
-
+                }, { rootMargin: '200px 0px', threshold: 0.01 });
                 return observer;
             }
 
-            // Create gallery items with lazy loading
             function createGalleryItems() {
                 const observer = setupLazyLoading();
-                
                 photos.forEach((photo, index) => {
                     const galleryItem = document.createElement('div');
                     galleryItem.className = 'gallery-item';
-                    
-                    // Create spinner
+
                     const spinner = document.createElement('div');
                     spinner.className = 'spinner';
-                    
-                    // Create image with data-src for lazy loading
+
                     const img = document.createElement('img');
                     img.className = 'gallery-img loading';
                     img.dataset.src = photo.src;
                     img.alt = photo.title;
                     img.loading = 'lazy';
-                    
+
                     galleryItem.appendChild(spinner);
                     galleryItem.appendChild(img);
                     galleryGrid.appendChild(galleryItem);
-                    
-                    // Observe this item for lazy loading
+
                     observer.observe(galleryItem);
 
-                    // Add click event to open lightbox
                     img.addEventListener('click', () => {
                         currentPhotoIndex = index;
                         openLightbox();
@@ -577,31 +493,39 @@
                 });
             }
 
-            // Initialize the gallery
             createGalleryItems();
 
-            // Event listeners
+            function openLightbox() {
+                const photo = photos[currentPhotoIndex];
+                lightboxImg.src = photo.src;
+                photoTitle.textContent = photo.title;
+                lightbox.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+                lightbox.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+
+            function navigatePhotos(direction) {
+                currentPhotoIndex = (currentPhotoIndex + direction + photos.length) % photos.length;
+                openLightbox();
+            }
+
             closeBtn.addEventListener('click', closeLightbox);
             prevBtn.addEventListener('click', () => navigatePhotos(-1));
             nextBtn.addEventListener('click', () => navigatePhotos(1));
 
-            // Close lightbox when clicking outside the image
             lightbox.addEventListener('click', (e) => {
-                if (e.target === lightbox) {
-                    closeLightbox();
-                }
+                if (e.target === lightbox) closeLightbox();
             });
 
-            // Keyboard navigation
             document.addEventListener('keydown', (e) => {
                 if (lightbox.style.display === 'flex') {
-                    if (e.key === 'Escape') {
-                        closeLightbox();
-                    } else if (e.key === 'ArrowLeft') {
-                        navigatePhotos(-1);
-                    } else if (e.key === 'ArrowRight') {
-                        navigatePhotos(1);
-                    }
+                    if (e.key === 'Escape') closeLightbox();
+                    else if (e.key === 'ArrowLeft') navigatePhotos(-1);
+                    else if (e.key === 'ArrowRight') navigatePhotos(1);
                 }
             });
         });

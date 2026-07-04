@@ -1,249 +1,478 @@
 <!DOCTYPE html>
 <html lang="en">
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    document.body.style.transform = "scale(2.1)";
-    document.body.style.transformOrigin = "0 0";
-    document.body.style.width = "46.77%";  // Adjusted for correct scaling
-    document.body.style.height = "76.67%"; // Adjusted for correct scaling
-    document.body.style.overflow = "auto"; // Allow scrolling
-  });
-</script>
-
 <head>
 <meta charset="UTF-8" />
-<title>Terms of Service - Necro’s Hub</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#0a0a0a" />
+<title>terms.log // Necro's Hub</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+<meta name="theme-color" content="#04070a" />
+<meta name="color-scheme" content="dark" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<meta name="apple-mobile-web-app-title" content="Necro’s Hub" />
-<link rel="apple-touch-icon" href="icons/apple-touch-icon-180.png" />
-<link rel="manifest" href="manifest.webmanifest" />
+<meta name="apple-mobile-web-app-title" content="Necro's Hub" />
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect fill='%2304070a' width='180' height='180' rx='40'/%3E%3Ctext x='90' y='125' font-size='100' text-anchor='middle' fill='%232ee6d0' font-weight='900' font-family='monospace'%3EN%3C/text%3E%3C/svg%3E" />
+<link rel="manifest" href="data:application/json;charset=utf-8,%7B%22name%22%3A%22Necro's%20Hub%22%2C%22short_name%22%3A%22Necro%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%2304070a%22%2C%22theme_color%22%3A%22%2304070a%22%7D" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 :root {
-  --bg: #0a0a0a;
-  --surface: #121212;
-  --surface-2: #171717;
-  --text: #f5f5f5;
-  --muted: #b8b8b8;
-  --brand: #ff5722;
-  --brand-pressed: #e04d1e;
-  --accent: #ffd700;
-  --border: #222;
-  --shadow: 0 8px 24px rgba(0,0,0,.4);
-  --radius: 18px;
-  --tap: -2px;
+  --bg: #04070a;
+  --bg-deep: #010302;
+  --panel: rgba(8, 16, 18, 0.85);
+  --line: rgba(46, 230, 208, 0.18);
+  --cyan: #2ee6d0;
+  --cyan-soft: #7dfbe9;
+  --magenta: #ff3ea5;
+  --amber: #ffb703;
+  --text: #d9f6f0;
+  --muted: #5f8b85;
+  --radius: 14px;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+  --pixel: 'VT323', monospace;
 }
 
-/* Base */
-* { box-sizing: border-box; }
-html, body { height: 100%; }
+*, *::before, *::after { box-sizing: border-box; -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; }
+html, body { height: 100%; margin: 0; overscroll-behavior: none; }
+
 body {
-  margin: 0;
   background: var(--bg);
   color: var(--text);
-  font: 16px/1.4 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, system-ui, sans-serif;
+  font-family: var(--mono);
+  font-size: 15px;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
+  position: relative;
 }
 
-/* App shell */
-.app {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  min-height: 50dvh;
-  overflow: hidden;
+.bg-grid {
+  position: fixed; inset: 0; z-index: -2;
+  background-color: var(--bg-deep);
+  background-image:
+    linear-gradient(rgba(46, 230, 208, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(46, 230, 208, 0.06) 1px, transparent 1px);
+  background-size: 34px 34px;
 }
+.bg-glow {
+  position: fixed; inset: 0; z-index: -1;
+  background:
+    radial-gradient(circle at 15% 8%, rgba(46, 230, 208, 0.10) 0%, transparent 45%),
+    radial-gradient(circle at 85% 95%, rgba(255, 62, 165, 0.08) 0%, transparent 45%);
+}
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 45; pointer-events: none;
+  background: repeating-linear-gradient(180deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 2px, transparent 4px);
+  mix-blend-mode: overlay;
+}
+
+.app { display: grid; grid-template-rows: auto 1fr auto; min-height: 100vh; min-height: 100dvh; }
 
 .topbar {
   position: sticky; top: 0;
-  padding: calc(10px + env(safe-area-inset-top)) 14px 10px;
-  background: linear-gradient(180deg, rgba(18,18,18,.95), rgba(18,18,18,.75));
-  backdrop-filter: saturate(140%) blur(10px);
-  border-bottom: 1px solid var(--border);
-  display: flex; align-items: center; gap: 12px;
+  padding: 14px;
+  background: rgba(4, 7, 10, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: center; gap: 12px;
   z-index: 20;
 }
 .icon-btn {
-  border: 0; background: var(--surface-2);
-  width: 38px; height: 38px; border-radius: 12px;
-  display: grid; place-items: center; color: var(--text);
+  position: absolute; left: 14px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  width: 38px; height: 38px; border-radius: 10px;
+  display: grid; place-items: center;
+  color: var(--cyan);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  touch-action: manipulation;
+  flex-shrink: 0;
 }
-.title { font-weight: 700; font-size: 18px; }
+.icon-btn:active { transform: scale(0.95); background: rgba(46,230,208,0.12); }
+@media (hover: hover) { .icon-btn:hover { background: rgba(46,230,208,0.1); } }
+
+.title {
+  font-family: var(--pixel);
+  font-weight: 400;
+  font-size: clamp(18px, 5vw, 22px);
+  letter-spacing: 1px;
+  color: var(--cyan-soft);
+  text-shadow: 0 0 8px rgba(46,230,208,0.4);
+}
 
 /* Drawer */
 .drawer-backdrop {
   position: fixed; inset: 0;
-  background: rgba(0,0,0,.4);
+  background: rgba(0,0,0,.65);
   opacity: 0; pointer-events: none;
-  transition: opacity .2s ease;
+  transition: opacity .25s ease;
   z-index: 30;
+  backdrop-filter: blur(4px);
 }
 .drawer {
   position: fixed; inset: 0 auto 0 0;
   width: min(86vw, 320px);
-  background: #0e0e0e;
-  border-right: 1px solid var(--border);
+  background: var(--panel);
+  backdrop-filter: blur(16px);
+  border-right: 1px solid var(--line);
   transform: translateX(-100%);
-  transition: transform .25s ease;
+  transition: transform .3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 40;
   display: flex; flex-direction: column;
-  padding-top: env(safe-area-inset-top);
+  overflow-y: auto;
+  text-align: left;
 }
 .drawer.open { transform: translateX(0); }
 .drawer-backdrop.show { opacity: 1; pointer-events: auto; }
-.drawer__header {
-  padding: 18px 16px 12px;
-  display: flex; align-items: center; gap: 12px;
-  border-bottom: 1px solid var(--border);
-}
+
+.drawer__header { padding: 18px 16px 12px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--line); }
 .avatar {
-  width: 40px; height: 40px; border-radius: 12px; background: #222;
-  display: grid; place-items: center; font-weight: 700; color: var(--accent);
+  width: 40px; height: 40px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--cyan), var(--magenta));
+  display: grid; place-items: center;
+  font-family: var(--pixel); font-weight: 900; color: #04070a; font-size: 22px;
+  flex-shrink: 0;
 }
-.drawer__brand { font-weight: 700; }
+.drawer__brand { font-weight: 700; font-size: 15px; color: var(--cyan-soft); }
 .drawer__nav { padding: 10px; display: grid; gap: 6px; }
 .nav-link {
   display: flex; align-items: center; gap: 12px;
-  padding: 14px 12px; border-radius: 14px; color: var(--text);
-  text-decoration: none;
+  padding: 13px 12px; border-radius: 10px;
+  color: var(--text); text-decoration: none;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  font-size: 0.85rem;
 }
-.nav-link:hover { background: #141414; }
+.nav-link::before { content: '>'; color: var(--cyan); font-weight: 700; }
+.nav-link:active, .nav-link:hover { background: rgba(46,230,208,0.08); border-color: var(--line); }
 .nav-badge {
-  margin-left: auto; background: var(--brand); color: #fff;
+  margin-left: auto; background: var(--magenta); color: #04070a;
   padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 700;
+  flex-shrink: 0;
 }
 
 /* Content */
 main {
-  padding: 14px;
-  display: grid; gap: 14px;
+  padding: 20px;
+  padding-left: max(20px, env(safe-area-inset-left));
+  padding-right: max(20px, env(safe-area-inset-right));
+  display: flex; flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  max-width: 720px;
+  margin: 0 auto;
+  width: 100%;
 }
+
 .card {
-  background: var(--surface);
-  border: 1px solid var(--border);
+  width: 100%;
+  background: var(--panel);
+  border: 1px solid var(--line);
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 16px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  padding: clamp(18px, 4vw, 28px);
+  text-align: center;
 }
+
+.terminal-path {
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-bottom: 12px;
+  text-align: left;
+}
+.terminal-path .ps1 { color: var(--cyan); }
+
 h1 {
-  font-size: 1.4rem; margin: 0 0 12px;
+  font-family: var(--pixel);
+  font-weight: 400;
+  font-size: clamp(1.6rem, 6vw, 2.1rem);
+  letter-spacing: 1px;
+  margin: 0 0 18px;
+  color: var(--cyan-soft);
+  text-shadow: 0 0 10px rgba(46,230,208,0.4);
 }
-ol {
-  padding-left: 20px;
-}
-li { margin-bottom: 12px; }
+
+ol { padding-left: 20px; margin: 0; text-align: left; }
+li { margin-bottom: 18px; line-height: 1.65; font-size: 0.92rem; }
+li:last-child { margin-bottom: 0; }
+li::marker { color: var(--cyan); font-weight: 700; }
+
+strong { color: var(--amber); font-weight: 700; }
+
 .highlight {
-  background-color: rgba(255, 215, 0, 0.1);
-  padding: 12px; border-left: 4px solid var(--accent);
-  border-radius: var(--radius); margin-bottom: 14px;
+  background: linear-gradient(135deg, rgba(46, 230, 208, 0.1), rgba(46, 230, 208, 0.03));
+  padding: 16px;
+  border-left: 3px solid var(--cyan);
+  border-radius: 10px;
+  margin-bottom: 22px;
+  font-size: clamp(13px, 3.5vw, 14px);
+  line-height: 1.6;
+  text-align: left;
 }
-.arabic { direction: rtl; font-size: 0.95rem; color: var(--muted); margin-top: 4px; }
+
+.arabic {
+  direction: rtl;
+  font-size: clamp(13px, 3.5vw, 14px);
+  color: var(--muted);
+  margin-top: 8px;
+  font-family: 'SF Arabic', 'Segoe UI', system-ui, sans-serif;
+  line-height: 1.7;
+  text-align: right;
+}
 
 /* Bottom bar */
 .bottombar {
   position: sticky; bottom: 0;
-  padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
-  background: linear-gradient(0deg, rgba(12,12,12,.95), rgba(12,12,12,.75));
-  border-top: 1px solid var(--border);
+  padding: 12px;
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
+  background: rgba(4,7,10,0.9);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--line);
+  z-index: 10;
 }
 .primary {
   display: flex; align-items: center; justify-content: center; gap: 10px;
-  background: var(--brand); color: #fff; text-decoration: none; height: 48px;
-  border-radius: 14px; font-weight: 800;
+  background: linear-gradient(135deg, var(--cyan), var(--magenta));
+  color: #04070a;
+  text-decoration: none;
+  height: 52px;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: clamp(15px, 4vw, 16px);
+  letter-spacing: 0.3px;
+  transition: transform 0.15s ease;
+  touch-action: manipulation;
 }
-  /* Ensure cards stack flush with grid gap only */
-main {
-  padding: 20px;
-  display: flex;
+.primary:active { transform: translateY(-1px) scale(0.98); }
+@media (hover: hover) { .primary:hover { transform: translateY(-2px); } }
+
+/* A2HS Banner */
+.a2hs {
+  position: fixed;
+  left: 12px; right: 12px;
+  bottom: calc(80px + env(safe-area-inset-bottom));
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: none;
   flex-direction: column;
-  gap: 7px; /* This is the only spacing */
+  gap: 12px;
+  z-index: 25;
+}
+.a2hs.show { display: flex; }
+.a2hs-content { display: flex; align-items: center; gap: 12px; }
+.a2hs-icon {
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, var(--cyan), var(--magenta));
+  border-radius: 10px;
+  display: grid; place-items: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.a2hs-text { flex: 1; font-size: 13px; line-height: 1.4; }
+.a2hs button {
+  background: var(--cyan);
+  border: none;
+  color: #04070a;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  width: 100%;
+}
+.a2hs button:active { transform: scale(0.96); }
+
+/* Context Menu Block */
+.no-context {
+  position: fixed; inset: 0; display: none;
+  align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.9);
+  z-index: 9999;
+  padding: 20px;
+}
+.no-context.show { display: flex; }
+.no-context-msg {
+  background: var(--panel);
+  border: 1px solid var(--magenta);
+  border-radius: 14px;
+  padding: 24px;
+  text-align: center;
+  max-width: 300px;
+}
+.no-context-msg h3 { margin: 0 0 8px; font-family: var(--pixel); font-size: 1.4rem; color: var(--magenta); letter-spacing: 1px; }
+.no-context-msg p { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+@media (max-width: 380px) {
+  main { padding: 16px; }
+  .card { padding: 16px; }
+  h1 { font-size: 1.3rem; }
 }
 
-.card,
-.sale {
-  margin: 0;        /* kill default section spacing */
-  padding: 16px;
-  display: block;
-}
+html { scroll-behavior: smooth; }
 
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
+}
 </style>
 </head>
+
 <body>
+<div class="bg-grid"></div>
+<div class="bg-glow"></div>
+
 <div class="app" id="app">
-  <!-- Drawer -->
   <div class="drawer-backdrop" id="backdrop"></div>
-  <aside class="drawer" id="drawer" aria-hidden="true">
+
+  <aside class="drawer" id="drawer" role="navigation" aria-hidden="true">
     <div class="drawer__header">
       <div class="avatar">N</div>
       <div>
-        <div class="drawer__brand">Necro’s Hub</div>
-        <div style="color:var(--muted);font-size:12px">Creative Services</div>
+        <div class="drawer__brand">Necro's Hub</div>
+        <div style="color:var(--muted);font-size:12px">creative_services.exe</div>
       </div>
     </div>
     <nav class="drawer__nav">
-      <a class="nav-link" href="index.html">🏠 Home</a>
-      <a class="nav-link" href="photo_work.html">📷 Photo Sessions <span class="nav-badge">-50%</span></a>
-      <a class="nav-link" href="main_index">🌐 Social Media</a>
+      <a class="nav-link" href="index">Home</a>
+      <a class="nav-link" href="photo_work">Photo Sessions<span class="nav-badge">-50%</span></a>
+      <a class="nav-link" href="main_index">Social Media</a>
+      <hr style="border:0;border-top:1px solid var(--line);margin:8px 0;">
+      <a class="nav-link" href="port">Portfolio</a>
     </nav>
   </aside>
 
-  <!-- Top bar -->
   <header class="topbar">
-    <button class="icon-btn" id="menuBtn">☰</button>
-    <div class="title">Terms of Service</div>
+    <button class="icon-btn" id="menuBtn" aria-label="Menu">☰</button>
+    <div class="title">TERMS OF SERVICE</div>
   </header>
 
-  <!-- Content -->
   <main>
     <section class="card">
+      <p class="terminal-path"><span class="ps1">necro@root</span>:~$ cat terms.log</p>
       <h1>Terms of Service | شروط الخدمة</h1>
+
       <div class="highlight">
-        Please read and accept these terms before booking a photo session.<br>
-        يرجى قراءة وقبول هذه الشروط قبل حجز جلسة التصوير.
+        <strong>📋 Please read and accept these terms before booking a photo session.</strong><br>
+        <div class="arabic">يرجى قراءة وقبول هذه الشروط قبل حجز جلسة التصوير.</div>
       </div>
+
       <ol>
         <li>
           You must pay <strong>50%</strong> of the session cost via <strong>CliQ</strong> or <strong>Cash</strong> before the photographer proceeds.
           <div class="arabic">يجب دفع <strong>50٪</strong> من تكلفة الجلسة عبر <strong>CliQ</strong> أو نقدًا قبل أن يتوجه المصور.</div>
         </li>
         <li>
-          The remaining 50% must be paid upon receiving an invoice (PDF or QR code via WhatsApp).
-          <div class="arabic">يجب دفع 50٪ المتبقية عند استلام الفاتورة (PDF أو رمز QR عبر الواتساب).</div>
+          The remaining <strong>50%</strong> must be paid upon receiving an invoice (PDF or QR code via WhatsApp).
+          <div class="arabic">يجب دفع <strong>50٪</strong> المتبقية عند استلام الفاتورة (PDF أو رمز QR عبر الواتساب).</div>
         </li>
         <li>
-          You must send a WhatsApp screenshot of payment to receive your HQ photos.
+          You must send a WhatsApp screenshot of payment to receive your <strong>HQ photos</strong>.
           <div class="arabic">يجب إرسال لقطة شاشة على واتساب لإثبات الدفع حتى تستلم صورك بجودة عالية.</div>
         </li>
       </ol>
     </section>
   </main>
 
-  <!-- Bottom bar -->
   <footer class="bottombar">
     <a class="primary" href="photo_work_contact">✅ I Accept & Continue</a>
   </footer>
+
+  <div class="a2hs" id="a2hs">
+    <div class="a2hs-content">
+      <div class="a2hs-icon">📱</div>
+      <div class="a2hs-text"><strong>Add to Home Screen</strong><br>Tap Share ⬆ then "Add to Home Screen"</div>
+    </div>
+    <button id="a2hsClose">Got it</button>
+  </div>
+
+  <div class="no-context" id="noContext">
+    <div class="no-context-msg">
+      <h3>ACCESS BLOCKED</h3>
+      <p>Right-click and keyboard shortcuts are disabled for content protection.</p>
+    </div>
+  </div>
 </div>
 
 <script>
-// Drawer interactions
+// ===== Drawer Navigation =====
 const drawer = document.getElementById('drawer');
 const backdrop = document.getElementById('backdrop');
 const menuBtn = document.getElementById('menuBtn');
-function openDrawer() { drawer.classList.add('open'); backdrop.classList.add('show'); }
-function closeDrawer() { drawer.classList.remove('open'); backdrop.classList.remove('show'); }
+
+function openDrawer() {
+  drawer.classList.add('open');
+  backdrop.classList.add('show');
+  drawer.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+function closeDrawer() {
+  drawer.classList.remove('open');
+  backdrop.classList.remove('show');
+  drawer.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
 menuBtn.addEventListener('click', openDrawer);
 backdrop.addEventListener('click', closeDrawer);
+window.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
 
-// Register service worker for offline/app-shell
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js').catch(console.error);
-  });
+// ===== Content protection flavor (non-blocking) =====
+const noContextEl = document.getElementById('noContext');
+let contextTimeout;
+function showContextBlock() {
+  noContextEl.classList.add('show');
+  clearTimeout(contextTimeout);
+  contextTimeout = setTimeout(() => noContextEl.classList.remove('show'), 2000);
 }
+document.addEventListener('contextmenu', e => { e.preventDefault(); showContextBlock(); });
+document.addEventListener('keydown', e => {
+  const blocked = (e.key === 'F12') ||
+    ((e.ctrlKey || e.metaKey) && ['s','p','u'].includes(e.key.toLowerCase())) ||
+    ((e.ctrlKey || e.metaKey) && e.shiftKey && ['I','J','C'].includes(e.key.toUpperCase()));
+  if (blocked) { e.preventDefault(); showContextBlock(); }
+});
+
+// ===== Add to Home Screen (iOS) =====
+(function() {
+  const isiOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  const isStandalone = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  const tip = document.getElementById('a2hs');
+  const closeBtn = document.getElementById('a2hsClose');
+  const dismissed = localStorage.getItem('a2hs-dismissed-tos');
+
+  if (isiOS && isSafari && !isStandalone && !dismissed) {
+    setTimeout(() => tip.classList.add('show'), 2000);
+  }
+  closeBtn.addEventListener('click', () => {
+    tip.classList.remove('show');
+    localStorage.setItem('a2hs-dismissed-tos', 'true');
+  });
+})();
+
+// ===== Haptics & double-tap zoom prevention =====
+function haptic() { if (window.navigator && window.navigator.vibrate) window.navigator.vibrate(10); }
+menuBtn.addEventListener('click', haptic);
+const primaryBtn = document.querySelector('.primary');
+if (primaryBtn) primaryBtn.addEventListener('click', haptic);
+
+const interactiveElements = document.querySelectorAll('button, a, .nav-link');
+interactiveElements.forEach(el => {
+  let lastTap = 0;
+  el.addEventListener('touchend', e => {
+    const currentTime = new Date().getTime();
+    const tapLength = currentTime - lastTap;
+    if (tapLength < 300 && tapLength > 0) e.preventDefault();
+    lastTap = currentTime;
+  }, { passive: false });
+});
+
+window.addEventListener('load', () => {
+  setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100);
+});
 </script>
 </body>
 </html>
