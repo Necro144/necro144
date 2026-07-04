@@ -2,301 +2,260 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Qusai Allan - The Weight of Unluck</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#04070a">
+    <meta name="color-scheme" content="dark">
+    <title>entry.log // The Weight of Unluck</title>
     <meta name="referrer" content="no-referrer">
     <meta name="robots" content="noindex, nofollow">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --bg-color: #f8f9fa;
-            --text-color: #212529;
-            --accent-color: #6c5ce7;
-            --glow-color: rgba(108, 92, 231, 0.2);
-            --container-bg: #ffffff;
-            --card-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --bg: #04070a;
+            --bg-deep: #010302;
+            --panel: rgba(8, 16, 18, 0.85);
+            --line: rgba(46, 230, 208, 0.18);
+            --cyan: #2ee6d0;
+            --cyan-soft: #7dfbe9;
+            --magenta: #ff3ea5;
+            --amber: #ffb703;
+            --text: #d9f6f0;
+            --muted: #5f8b85;
+            --radius: 16px;
+            --mono: 'JetBrains Mono', ui-monospace, monospace;
+            --pixel: 'VT323', monospace;
+            --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        
-        [data-theme="dark"] {
-            --bg-color: #121212;
-            --text-color: #e0e0e0;
-            --accent-color: #a78bfa;
-            --glow-color: rgba(167, 139, 250, 0.2);
-            --container-bg: #1e1e1e;
-            --card-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        html, body { height: 100%; }
+
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            font-family: var(--mono);
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.6;
-            transition: var(--transition);
             min-height: 100vh;
             padding: 20px;
+            position: relative;
+            overflow-x: hidden;
         }
-        
+
+        .bg-grid {
+            position: fixed; inset: 0; z-index: -2;
+            background-color: var(--bg-deep);
+            background-image:
+                linear-gradient(rgba(46, 230, 208, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(46, 230, 208, 0.06) 1px, transparent 1px);
+            background-size: 34px 34px;
+        }
+        .bg-glow {
+            position: fixed; inset: 0; z-index: -1;
+            background:
+                radial-gradient(circle at 15% 8%, rgba(46, 230, 208, 0.10) 0%, transparent 45%),
+                radial-gradient(circle at 85% 95%, rgba(255, 62, 165, 0.08) 0%, transparent 45%);
+        }
+        body::after {
+            content: '';
+            position: fixed; inset: 0; z-index: 45; pointer-events: none;
+            background: repeating-linear-gradient(180deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 2px, transparent 4px);
+            mix-blend-mode: overlay;
+        }
+
         .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 40px;
-            background-color: var(--container-bg);
-            box-shadow: var(--card-shadow);
-            border-radius: 20px;
+            max-width: 760px;
+            margin: 60px auto 40px;
+            background: var(--panel);
+            backdrop-filter: blur(14px);
+            border: 1px solid var(--line);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            border-radius: var(--radius);
             position: relative;
             overflow: hidden;
         }
-        
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--accent-color), #ff6b6b);
+
+        .term-bar {
+            display: flex; align-items: center; gap: 8px;
+            padding: 10px 16px;
+            background: rgba(0,0,0,0.35);
+            border-bottom: 1px solid var(--line);
         }
-        
-        .profile {
-            display: flex;
-            align-items: center;
-            margin-bottom: 30px;
-            gap: 20px;
-        }
-        
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .dot.r { background: #ff5f56; }
+        .dot.y { background: #ffbd2e; }
+        .dot.g { background: #27c93f; }
+        .term-title { margin-left: 10px; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.5px; }
+
+        .container-inner { padding: 36px 40px; }
+
+        .profile { display: flex; align-items: center; margin-bottom: 26px; gap: 18px; }
         .profile img {
-            width: 80px;
-            height: 80px;
+            width: 74px; height: 74px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid var(--accent-color);
-            box-shadow: 0 0 15px var(--glow-color);
-            transition: var(--transition);
+            border: 2px solid var(--cyan);
+            box-shadow: 0 0 15px rgba(46, 230, 208, 0.25);
         }
-        
-        .profile-info {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .profile-info strong {
-            font-size: 1.4em;
-            color: var(--accent-color);
-            font-weight: 600;
-        }
-        
-        .timestamp {
-            color: var(--text-color);
-            opacity: 0.7;
-            font-size: 0.9em;
-            margin-top: 5px;
-        }
-        
-        .post-content {
-            font-size: 1.1em;
-            text-align: justify;
-        }
-        
+        .profile-info { display: flex; flex-direction: column; }
+        .profile-info strong { font-size: 1.15em; color: var(--cyan-soft); font-weight: 700; }
+        .timestamp { color: var(--muted); font-size: 0.85em; margin-top: 4px; }
+
+        .post-content { font-size: 1rem; text-align: justify; }
+
         .post-content h2 {
-            color: var(--accent-color);
-            font-size: 1.8em;
-            margin-bottom: 20px;
-            font-weight: 700;
+            font-family: var(--pixel);
+            font-weight: 400;
+            color: var(--cyan-soft);
+            font-size: 1.9em;
+            letter-spacing: 0.5px;
+            margin-bottom: 22px;
             position: relative;
             display: inline-block;
+            text-shadow: 0 0 8px rgba(46,230,208,0.35);
         }
-        
         .post-content h2::after {
             content: '';
             position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 50%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent-color), transparent);
+            bottom: -8px; left: 0;
+            width: 50%; height: 2px;
+            background: linear-gradient(90deg, var(--cyan), transparent);
             border-radius: 3px;
         }
-        
-        .post-content p {
-            margin-bottom: 20px;
-            line-height: 1.8;
-        }
-        
+
+        .post-content p { margin-bottom: 20px; line-height: 1.8; color: var(--text); }
+
         .controls {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            display: flex;
-            gap: 10px;
-            z-index: 100;
+            position: fixed; top: 20px; right: 20px;
+            display: flex; gap: 10px; z-index: 100;
         }
-        
         .control-btn {
             padding: 10px 15px;
-            border: none;
+            border: 1px solid var(--line);
             border-radius: 50px;
-            background-color: var(--accent-color);
-            color: white;
-            cursor: pointer;
-            transition: var(--transition);
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            box-shadow: 0 2px 10px var(--glow-color);
-        }
-        
-        .control-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px var(--glow-color);
-        }
-        
-        .back-btn {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 50px;
-            background-color: rgba(0, 0, 0, 0.1);
+            background: var(--panel);
             backdrop-filter: blur(10px);
-            color: var(--text-color);
+            color: var(--cyan);
             cursor: pointer;
             transition: var(--transition);
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 5px;
+            font-weight: 600;
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .control-btn:hover { transform: translateY(-2px); border-color: var(--cyan); background: rgba(46,230,208,0.08); }
+
+        .back-btn {
+            position: fixed; top: 20px; left: 20px;
+            padding: 10px 15px;
+            border: 1px solid var(--line);
+            border-radius: 50px;
+            background: var(--panel);
+            backdrop-filter: blur(10px);
+            color: var(--cyan);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            display: flex; align-items: center; gap: 6px;
             z-index: 100;
+            text-decoration: none;
         }
-        
-        .back-btn:hover {
-            background-color: var(--accent-color);
-            color: white;
-        }
-        
+        .back-btn:hover { background: rgba(46,230,208,0.1); border-color: var(--cyan); }
+
         @media (max-width: 768px) {
-            .container {
-                padding: 30px;
-                margin: 20px auto;
-            }
-            
-            .profile {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .post-content h2 {
-                font-size: 1.5em;
-            }
-            
-            .controls {
-                top: 15px;
-                right: 15px;
-            }
-            
-            .back-btn {
-                top: 15px;
-                left: 15px;
-            }
+            .container { margin: 70px auto 20px; }
+            .container-inner { padding: 26px 24px; }
+            .profile { flex-direction: column; text-align: center; }
+            .post-content h2 { font-size: 1.5em; }
+            .controls { top: 15px; right: 15px; }
+            .back-btn { top: 15px; left: 15px; }
         }
-        
+
         @media (max-width: 480px) {
-            .container {
-                padding: 20px;
-            }
-            
-            .post-content {
-                font-size: 1em;
-            }
-            
-            .control-btn, .back-btn {
-                padding: 8px 12px;
-                font-size: 0.9em;
-            }
+            .container-inner { padding: 20px; }
+            .post-content { font-size: 0.95em; }
+            .control-btn, .back-btn { padding: 8px 12px; font-size: 0.78rem; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
         }
     </style>
 </head>
 <body>
-    <button class="back-btn" onclick="window.location.href='index.html'">
-        ← Back
-    </button>
-    
+    <div class="bg-grid"></div>
+    <div class="bg-glow"></div>
+
+    <a href="index" class="back-btn">← Back</a>
+
     <div class="controls">
-        <button class="control-btn" id="themeSwitcher">
-            <span class="light-icon">☀️</span>
-            <span class="dark-icon" style="display:none">🌙</span>
-        </button>
+        <button class="control-btn" id="themeSwitcher">◈ Theme</button>
     </div>
-    
+
     <div class="container">
-        <div class="profile">
-            <img src="mr.jpg" alt="Profile picture of Qusai Allan">
-            <div class="profile-info">
-                <strong>Qusai Allan</strong>
-                <span class="timestamp">July 16, 2025</span>
+        <div class="term-bar">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="term-title">necro@root:~/journal/entry_002.log</span>
+        </div>
+        <div class="container-inner">
+            <div class="profile">
+                <img src="mr.jpg" alt="Profile picture of Qusai Allan">
+                <div class="profile-info">
+                    <strong>Qusai Allan</strong>
+                    <span class="timestamp">July 16, 2025</span>
+                </div>
+            </div>
+
+            <div class="post-content">
+                <h2>The Weight of Unluck: A Life Lived in Shadows</h2>
+                <p>Since the day I was born, it feels as though misfortune has been stitched into the fabric of my existence. Every corner of my life seems touched by an invisible curse—opportunities vanish before they arrive, friendships fade like whispers in the wind, and joy remains a distant mirage, always just out of reach. There is no fun, no job worth calling purpose, no friends who stay, and no life that feels truly mine. My health wavers like the tide, never stable, never predictable. Interests come and go like passing clouds, but nothing sticks, nothing brings meaning. Each day is not lived—it's endured.</p>
+                <p>The world buzzes around me, vibrant and alive, while I remain numb, watching from the outside like a ghost haunting my own life. All I want some days is for the clock to stop ticking, for the silence to be broken—not by noise, but by peace. But even that feels too far to reach.</p>
+                <p>I've become a spectator in my own story, watching as others move through life with purpose and connection while I remain anchored in this limbo of unluck. The simplest tasks feel monumental, and every small victory is quickly overshadowed by the next wave of misfortune. It's exhausting to keep pretending that everything might change tomorrow when history has shown me otherwise.</p>
+                <p>Yet somehow, I continue. Not because I want to, but because I must. There's a stubborn ember inside that refuses to be extinguished, no matter how strong the winds of misfortune blow. Maybe that's all I am—not a person living, but a will persisting against all odds.</p>
             </div>
         </div>
-        
-        <div class="post-content">
-            <h2>The Weight of Unluck: A Life Lived in Shadows</h2>
-            <p>Since the day I was born, it feels as though misfortune has been stitched into the fabric of my existence. Every corner of my life seems touched by an invisible curse—opportunities vanish before they arrive, friendships fade like whispers in the wind, and joy remains a distant mirage, always just out of reach. There is no fun, no job worth calling purpose, no friends who stay, and no life that feels truly mine. My health wavers like the tide, never stable, never predictable. Interests come and go like passing clouds, but nothing sticks, nothing brings meaning. Each day is not lived—it's endured.</p>
-            <p>The world buzzes around me, vibrant and alive, while I remain numb, watching from the outside like a ghost haunting my own life. All I want some days is for the clock to stop ticking, for the silence to be broken—not by noise, but by peace. But even that feels too far to reach.</p>
-            <p>I've become a spectator in my own story, watching as others move through life with purpose and connection while I remain anchored in this limbo of unluck. The simplest tasks feel monumental, and every small victory is quickly overshadowed by the next wave of misfortune. It's exhausting to keep pretending that everything might change tomorrow when history has shown me otherwise.</p>
-            <p>Yet somehow, I continue. Not because I want to, but because I must. There's a stubborn ember inside that refuses to be extinguished, no matter how strong the winds of misfortune blow. Maybe that's all I am—not a person living, but a will persisting against all odds.</p>
-        </div>
     </div>
-    
+
     <script>
-        // Theme switcher
-        const themeSwitcher = document.getElementById('themeSwitcher');
-        const lightIcon = themeSwitcher.querySelector('.light-icon');
-        const darkIcon = themeSwitcher.querySelector('.dark-icon');
-        const body = document.body;
-        
-        // Check for saved theme preference
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            body.setAttribute('data-theme', 'dark');
-            lightIcon.style.display = 'none';
-            darkIcon.style.display = 'inline';
+        // ===== Theme cycling (matches rest of site) =====
+        const themes = {
+            cyan:   { cyan: '#2ee6d0', cyanSoft: '#7dfbe9', magenta: '#ff3ea5' },
+            matrix: { cyan: '#39ff14', cyanSoft: '#9dffa0', magenta: '#ffd60a' },
+            crimson:{ cyan: '#ff3860', cyanSoft: '#ff9fb1', magenta: '#00e0ff' }
+        };
+        const themeKeys = Object.keys(themes);
+        const root = document.documentElement;
+
+        function applyTheme(key) {
+            const t = themes[key];
+            root.style.setProperty('--cyan', t.cyan);
+            root.style.setProperty('--cyan-soft', t.cyanSoft);
+            root.style.setProperty('--magenta', t.magenta);
+            localStorage.setItem('necro-theme', key);
         }
-        
-        themeSwitcher.addEventListener('click', () => {
-            if (body.getAttribute('data-theme') === 'dark') {
-                body.removeAttribute('data-theme');
-                localStorage.setItem('theme', 'light');
-                lightIcon.style.display = 'inline';
-                darkIcon.style.display = 'none';
-            } else {
-                body.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-                lightIcon.style.display = 'none';
-                darkIcon.style.display = 'inline';
-            }
+
+        let saved = localStorage.getItem('necro-theme');
+        if (!saved || !themes[saved]) saved = 'cyan';
+        applyTheme(saved);
+
+        document.getElementById('themeSwitcher').addEventListener('click', () => {
+            const idx = (themeKeys.indexOf(saved) + 1) % themeKeys.length;
+            saved = themeKeys[idx];
+            applyTheme(saved);
         });
-        
-        // Disable right-click context menu
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-        });
-        
-        // Disable keyboard shortcuts
-        document.addEventListener('keydown', function(e) {
-            // Block common inspection shortcuts
-            if (e.key === 'F12' || 
-                (e.ctrlKey && e.shiftKey && e.key === 'I') || 
-                (e.ctrlKey && e.shiftKey && e.key === 'J') || 
-                (e.ctrlKey && e.shiftKey && e.key === 'C') ||
-                (e.ctrlKey && e.key === 'U')) {
-                e.preventDefault();
-            }
+
+        // ===== Content-protection flavor (non-blocking) =====
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            const blocked = (e.key === 'F12') ||
+                ((e.ctrlKey || e.metaKey) && e.shiftKey && ['I','J','C'].includes(e.key.toUpperCase())) ||
+                ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'u');
+            if (blocked) e.preventDefault();
         });
     </script>
 </body>

@@ -2,449 +2,374 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Qusai Ali Allan | Professional Profile</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#04070a">
+  <meta name="color-scheme" content="dark">
+  <title>profile.log // Qusai Ali Allan</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --primary: #0a66c2;
-      --primary-dark: #004182;
-      --text-primary: #1d2226;
-      --text-secondary: #595e62;
-      --background: #f3f6f8;
-      --card-bg: #ffffff;
-      --border: #e0e2e5;
-      --shadow: 0 1px 3px rgba(0,0,0,0.12);
-      --section-spacing: 2rem;
+      --bg: #04070a;
+      --bg-deep: #010302;
+      --panel: rgba(8, 16, 18, 0.85);
+      --line: rgba(46, 230, 208, 0.18);
+      --cyan: #2ee6d0;
+      --cyan-soft: #7dfbe9;
+      --magenta: #ff3ea5;
+      --amber: #ffb703;
+      --text: #d9f6f0;
+      --muted: #5f8b85;
+      --radius: 14px;
+      --mono: 'JetBrains Mono', ui-monospace, monospace;
+      --pixel: 'VT323', monospace;
+      --section-spacing: 1.6rem;
     }
 
-    [data-theme="dark"] {
-      --primary: #70b5f9;
-      --primary-dark: #4e97d9;
-      --text-primary: #f5f5f5;
-      --text-secondary: #b0b3b8;
-      --background: #1d2226;
-      --card-bg: #2d3a44;
-      --border: #3d4b56;
-      --shadow: 0 1px 3px rgba(0,0,0,0.3);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body { height: 100%; }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background-color: var(--background);
-      color: var(--text-primary);
+      font-family: var(--mono);
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.6;
-      padding: 0;
+      position: relative;
+      overflow-x: hidden;
+      padding-bottom: 40px;
     }
 
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 2rem;
+    .bg-grid {
+      position: fixed; inset: 0; z-index: -2;
+      background-color: var(--bg-deep);
+      background-image:
+        linear-gradient(rgba(46, 230, 208, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(46, 230, 208, 0.06) 1px, transparent 1px);
+      background-size: 34px 34px;
     }
+    .bg-glow {
+      position: fixed; inset: 0; z-index: -1;
+      background:
+        radial-gradient(circle at 15% 8%, rgba(46, 230, 208, 0.10) 0%, transparent 45%),
+        radial-gradient(circle at 85% 95%, rgba(255, 62, 165, 0.08) 0%, transparent 45%);
+    }
+    body::after {
+      content: '';
+      position: fixed; inset: 0; z-index: 45; pointer-events: none;
+      background: repeating-linear-gradient(180deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 2px, transparent 4px);
+      mix-blend-mode: overlay;
+    }
+
+    .container { max-width: 980px; margin: 0 auto; padding: 1.6rem; text-align: center; }
+
+    /* Shared "card" look for header + sections */
+    .profile-header, .section {
+      background: var(--panel);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+      margin-bottom: var(--section-spacing);
+      text-align: left;
+      overflow: hidden;
+    }
+
+    .card-bar {
+      display: flex; align-items: center; gap: 6px;
+      padding: 9px 14px;
+      background: rgba(0,0,0,0.35);
+      border-bottom: 1px solid var(--line);
+      font-size: 0.68rem;
+      color: var(--muted);
+    }
+    .card-bar .dot { width: 8px; height: 8px; border-radius: 50%; }
+    .card-bar .dot.r { background: #ff5f56; }
+    .card-bar .dot.y { background: #ffbd2e; }
+    .card-bar .dot.g { background: #27c93f; }
+    .card-bar span.file { margin-left: 6px; }
 
     /* Header Section */
-    .profile-header {
+    .profile-header-body {
       display: flex;
-      background-color: var(--card-bg);
-      border-radius: 12px;
-      padding: 2.5rem;
-      margin-bottom: var(--section-spacing);
-      box-shadow: var(--shadow);
-      position: relative;
+      padding: 2rem;
+      gap: 2rem;
+      align-items: flex-start;
     }
 
+    .profile-image-wrap {
+      position: relative;
+      width: 130px; height: 130px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      padding: 3px;
+      background: conic-gradient(from 0deg, var(--cyan), var(--magenta), var(--cyan));
+    }
     .profile-image {
-      width: 150px;
-      height: 150px;
+      width: 100%; height: 100%;
       border-radius: 50%;
       object-fit: cover;
-      border: 5px solid rgba(255,255,255,0.1);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      margin-right: 2rem;
+      border: 3px solid var(--bg-deep);
+      display: block;
     }
 
-    .profile-info {
-      flex: 1;
-    }
+    .profile-info { flex: 1; min-width: 0; }
 
     .profile-name {
-      font-size: 2rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      color: var(--text-primary);
+      font-family: var(--pixel);
+      font-weight: 400;
+      font-size: clamp(1.9rem, 6vw, 2.3rem);
+      letter-spacing: 1px;
+      color: var(--cyan-soft);
+      text-shadow: 0 0 10px rgba(46,230,208,0.4);
+      margin-bottom: 4px;
     }
 
     .profile-title {
-      font-size: 1.25rem;
-      color: var(--primary);
-      font-weight: 500;
-      margin-bottom: 0.75rem;
+      font-size: 1rem;
+      color: var(--cyan);
+      font-weight: 600;
+      margin-bottom: 10px;
     }
 
     .profile-location {
-      display: flex;
-      align-items: center;
-      color: var(--text-secondary);
-      margin-bottom: 1.5rem;
-      font-size: 0.95rem;
+      display: flex; align-items: center; gap: 6px;
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+      font-size: 0.85rem;
     }
 
-    .profile-location i {
-      margin-right: 0.5rem;
-    }
+    .profile-summary { color: var(--muted); margin-bottom: 1.4rem; font-size: 0.88rem; }
 
-    .profile-buttons {
-      display: flex;
-      gap: 1rem;
-    }
+    .profile-buttons { display: flex; gap: 0.8rem; flex-wrap: wrap; }
 
     .btn {
-      padding: 0.75rem 1.5rem;
-      border-radius: 24px;
-      font-weight: 500;
+      padding: 0.65rem 1.3rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.82rem;
       cursor: pointer;
-      transition: all 0.3s ease;
-      border: none;
+      transition: all 0.25s ease;
+      border: 1px solid var(--line);
       display: inline-flex;
       align-items: center;
-      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      font-family: var(--mono);
     }
 
     .btn-primary {
-      background-color: var(--primary);
-      color: white;
+      background: linear-gradient(135deg, var(--cyan), var(--magenta));
+      color: #04070a;
+      border: none;
     }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(46,230,208,0.25); }
 
-    .btn-primary:hover {
-      background-color: var(--primary-dark);
-      transform: translateY(-1px);
-    }
-
-    .btn-secondary {
-      background-color: transparent;
-      color: var(--primary);
-      border: 1px solid var(--primary);
-    }
-
-    .btn-secondary:hover {
-      background-color: rgba(10, 102, 194, 0.1);
-      border: 1px solid var(--primary-dark);
-    }
+    .btn-secondary { background: transparent; color: var(--cyan); }
+    .btn-secondary:hover { background: rgba(46,230,208,0.08); border-color: var(--cyan); }
 
     /* Sections */
-    .section {
-      background-color: var(--card-bg);
-      border-radius: 12px;
-      padding: 2rem;
-      margin-bottom: var(--section-spacing);
-      box-shadow: var(--shadow);
-    }
+    .section-inner { padding: 1.8rem 2rem 2rem; }
 
     .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1.5rem;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 0.75rem;
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 1.3rem;
+      padding-bottom: 0.7rem;
+      border-bottom: 1px solid var(--line);
     }
 
     .section-title {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--text-primary);
+      font-family: var(--pixel);
+      font-weight: 400;
+      font-size: 1.4rem;
+      letter-spacing: 0.5px;
+      color: var(--cyan-soft);
     }
+    .section-title i { color: var(--cyan); margin-right: 8px; }
 
-    .section-content {
-      padding: 0.5rem 0;
-    }
+    .section-content p { color: var(--muted); margin-bottom: 0.9rem; font-size: 0.9rem; }
 
     /* Skills Section */
     .skills-container {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.1rem;
     }
 
     .skill-card {
-      background: rgba(10, 102, 194, 0.05);
-      border-radius: 8px;
-      padding: 1.5rem;
-      border: 1px solid var(--border);
-      transition: transform 0.3s ease;
+      background: rgba(255,255,255,0.02);
+      border-radius: 10px;
+      padding: 1.3rem;
+      border: 1px solid var(--line);
+      transition: transform 0.25s ease, border-color 0.25s ease;
     }
-
-    .skill-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
+    .skill-card:hover { transform: translateY(-4px); border-color: var(--cyan); }
 
     .skill-title {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      color: var(--primary);
-      display: flex;
-      align-items: center;
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.9rem;
+      color: var(--cyan);
+      display: flex; align-items: center;
     }
+    .skill-title i { margin-right: 0.7rem; }
 
-    .skill-title i {
-      margin-right: 0.75rem;
-    }
-
-    .skill-list {
-      list-style-type: none;
-    }
-
+    .skill-list { list-style-type: none; }
     .skill-list li {
       position: relative;
-      padding-left: 1.5rem;
-      margin-bottom: 0.75rem;
-      color: var(--text-secondary);
+      padding-left: 1.3rem;
+      margin-bottom: 0.65rem;
+      color: var(--muted);
+      font-size: 0.85rem;
     }
-
-    .skill-list li:before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      color: var(--primary);
-      font-weight: bold;
-    }
+    .skill-list li:before { content: "›"; position: absolute; left: 0; color: var(--magenta); font-weight: bold; }
 
     .skill-link {
-      display: inline-flex;
-      align-items: center;
-      margin-top: 1rem;
-      color: var(--primary);
-      font-weight: 500;
-      transition: color 0.3s ease;
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 0.8rem;
+      color: var(--cyan);
+      font-weight: 600;
+      font-size: 0.82rem;
+      text-decoration: none;
+      transition: color 0.25s ease;
     }
-
-    .skill-link:hover {
-      color: var(--primary-dark);
-    }
-
-    .skill-link i {
-      margin-left: 0.5rem;
-    }
+    .skill-link:hover { color: var(--magenta); }
 
     /* Experience Section */
     .experience-item {
-      margin-bottom: 2rem;
-      padding-bottom: 1.5rem;
-      border-bottom: 1px solid var(--border);
+      margin-bottom: 1.6rem;
+      padding-bottom: 1.3rem;
+      border-bottom: 1px solid var(--line);
     }
-
-    .experience-item:last-child {
-      border-bottom: none;
-      margin-bottom: 0;
-      padding-bottom: 0;
-    }
+    .experience-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
 
     .experience-header {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 0.75rem;
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px;
+      margin-bottom: 0.6rem;
     }
+    .experience-title { font-size: 1.05rem; font-weight: 700; color: var(--cyan-soft); }
+    .experience-date { color: var(--muted); font-size: 0.8rem; }
+    .experience-company { font-weight: 600; color: var(--muted); margin-bottom: 0.6rem; font-size: 0.85rem; }
+    .experience-description { color: var(--muted); margin-bottom: 0.6rem; font-size: 0.87rem; }
 
-    .experience-title {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .experience-date {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-    }
-
-    .experience-company {
-      font-weight: 500;
-      color: var(--text-secondary);
-      margin-bottom: 0.75rem;
-    }
-
-    .experience-description {
-      color: var(--text-secondary);
-      margin-bottom: 0.75rem;
-    }
-
-    /* Education Section */
-    .education-item {
-      display: flex;
-      margin-bottom: 1.5rem;
-    }
-
-    .education-icon {
-      font-size: 1.5rem;
-      color: var(--primary);
-      margin-right: 1rem;
-    }
-
-    .education-content {
-      flex: 1;
-    }
-
-    .education-degree {
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-    }
-
-    .education-school {
-      color: var(--text-secondary);
-      margin-bottom: 0.25rem;
-    }
-
-    .education-date {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-    }
+    /* Education */
+    .education-item { display: flex; gap: 1rem; margin-bottom: 1.3rem; }
+    .education-icon { font-size: 1.3rem; color: var(--cyan); flex-shrink: 0; }
+    .education-content { flex: 1; }
+    .education-degree { font-weight: 700; margin-bottom: 0.2rem; color: var(--text); font-size: 0.92rem; }
+    .education-school { color: var(--muted); margin-bottom: 0.2rem; font-size: 0.85rem; }
+    .education-date { color: var(--muted); font-size: 0.8rem; }
 
     /* Certifications */
-    .certification-item {
-      margin-bottom: 1.5rem;
-    }
+    .certification-item { margin-bottom: 1.3rem; }
+    .certification-title { font-weight: 700; margin-bottom: 0.2rem; color: var(--cyan); text-decoration: none; display: inline-block; font-size: 0.9rem; }
+    .certification-title:hover { color: var(--magenta); }
+    .certification-date { color: var(--muted); font-size: 0.8rem; }
 
-    .certification-title {
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-    }
-
-    .certification-date {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-    }
-
-    /* Gaming Section */
-    .gaming-item {
-      margin-bottom: 1.5rem;
-    }
-
-    .gaming-title {
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-
-    .gaming-description {
-      color: var(--text-secondary);
-    }
+    /* Gaming */
+    .gaming-item { margin-bottom: 1.3rem; }
+    .gaming-title { font-weight: 700; margin-bottom: 0.4rem; color: var(--cyan-soft); font-size: 0.95rem; }
+    .gaming-description { color: var(--muted); font-size: 0.87rem; }
 
     /* Responsive */
     @media (max-width: 768px) {
-      .container {
-        padding: 1rem;
-      }
+      .container { padding: 1rem; }
+      .profile-header-body { flex-direction: column; align-items: center; text-align: center; padding: 1.5rem; }
+      .profile-image-wrap { margin-bottom: 1rem; width: 110px; height: 110px; }
+      .profile-buttons { justify-content: center; }
+      .skills-container { grid-template-columns: 1fr; }
+      .section-inner { padding: 1.4rem; }
+      .experience-header { flex-direction: column; }
+    }
 
-      .profile-header {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        padding: 1.5rem;
-      }
-
-      .profile-image {
-        margin-right: 0;
-        margin-bottom: 1.5rem;
-        width: 120px;
-        height: 120px;
-      }
-
-      .profile-buttons {
-        justify-content: center;
-      }
-
-      .skills-container {
-        grid-template-columns: 1fr;
-      }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
     }
   </style>
 </head>
 <body>
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
+
   <div class="container">
     <!-- Profile Header -->
     <header class="profile-header">
-      <img src="selfie.JPG" alt="Qusai Ali Allan" class="profile-image">
-      <div class="profile-info">
-        <h1 class="profile-name">Qusai Ali Allan</h1>
-        <h2 class="profile-title">Creative Professional | Photographer | Content Creator</h2>
-        <div class="profile-location">
-          <i class="fas fa-map-marker-alt"></i>
-          <span>Amman, Jordan</span>
+      <div class="card-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="file">whoami.log</span></div>
+      <div class="profile-header-body">
+        <div class="profile-image-wrap">
+          <img src="selfie.JPG" alt="Qusai Ali Allan" class="profile-image">
         </div>
-        <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">Multidisciplinary creative with expertise in visual storytelling, content creation, and digital community management. Combining artistic vision with technical proficiency to craft compelling narratives across multiple media formats.</p>
-        <div class="profile-buttons">
-          <button class="btn btn-primary" onclick="toggleTheme()">
-            <i class="fas fa-moon"></i> Toggle Theme
-          </button>
-          <a href="index.html" class="btn btn-secondary">
-            <i class="fas fa-home"></i> Back to Home
-          </a>
+        <div class="profile-info">
+          <h1 class="profile-name">Qusai Ali Allan</h1>
+          <h2 class="profile-title">Creative Professional | Photographer | Content Creator</h2>
+          <div class="profile-location">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Amman, Jordan</span>
+          </div>
+          <p class="profile-summary">Multidisciplinary creative with expertise in visual storytelling, content creation, and digital community management. Combining artistic vision with technical proficiency to craft compelling narratives across multiple media formats.</p>
+          <div class="profile-buttons">
+            <button class="btn btn-primary" id="themeToggle"><i class="fas fa-palette"></i> Cycle Theme</button>
+            <a href="index" class="btn btn-secondary"><i class="fas fa-home"></i> Back to Home</a>
+          </div>
         </div>
       </div>
     </header>
 
     <!-- About Section -->
     <section class="section">
-      <div class="section-header">
-        <h2 class="section-title"><i class="fas fa-user"></i> Professional Summary</h2>
-      </div>
-      <div class="section-content">
-        <p>Versatile creative professional with diverse expertise spanning photography, content creation, digital community management, and visual storytelling. Combines technical proficiency with artistic vision to produce compelling narratives across multiple media formats. Adept at capturing authentic moments through lifestyle and portrait photography while crafting impactful written content that resonates with audiences.</p>
-        <p>Experienced in managing online communities and administering gaming platforms, demonstrating strong technical aptitude and leadership capabilities. Committed to continuous skill development and creative innovation, with a proven ability to adapt to evolving digital landscapes and emerging media trends.</p>
+      <div class="card-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="file">summary.txt</span></div>
+      <div class="section-inner">
+        <div class="section-header"><h2 class="section-title"><i class="fas fa-user"></i>Professional Summary</h2></div>
+        <div class="section-content">
+          <p>Versatile creative professional with diverse expertise spanning photography, content creation, digital community management, and visual storytelling. Combines technical proficiency with artistic vision to produce compelling narratives across multiple media formats. Adept at capturing authentic moments through lifestyle and portrait photography while crafting impactful written content that resonates with audiences.</p>
+          <p>Experienced in managing online communities and administering gaming platforms, demonstrating strong technical aptitude and leadership capabilities. Committed to continuous skill development and creative innovation, with a proven ability to adapt to evolving digital landscapes and emerging media trends.</p>
+        </div>
       </div>
     </section>
 
     <!-- Core Competencies Section -->
     <section class="section">
-      <div class="section-header">
-        <h2 class="section-title"><i class="fas fa-star"></i> Core Competencies</h2>
-      </div>
-      <div class="section-content">
-        <div class="skills-container">
-          <div class="skill-card">
-            <h3 class="skill-title"><i class="fas fa-camera"></i> Visual Storytelling</h3>
-            <ul class="skill-list">
-              <li>Professional-grade photography with creative composition</li>
-              <li>Advanced photo editing and post-processing</li>
-              <li>Visual narrative development</li>
-              <li>Lighting and scene composition expertise</li>
-            </ul>
-            <a href="https://1drv.ms/f/s!AjI1eAlvEOSXgaQQrLKDgKEgi478OA?e=l4QYZh" target="_blank" class="skill-link">
-              View Photography Portfolio
-              <i class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
-          
-          <div class="skill-card">
-            <h3 class="skill-title"><i class="fas fa-pen-fancy"></i> Content Creation</h3>
-            <ul class="skill-list">
-              <li>Concise, impactful quote writing</li>
-              <li>Creative copywriting for digital media</li>
-              <li>Short-form video production</li>
-              <li>Social media content strategy</li>
-            </ul>
-            <a href="https://www.instagram.com/hnk.jo" target="_blank" class="skill-link">
-              View Content Examples
-              <i class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
-          
-          <div class="skill-card">
-            <h3 class="skill-title"><i class="fas fa-gamepad"></i> Gaming & Community</h3>
-            <ul class="skill-list">
-              <li>Online community management</li>
-              <li>Game server administration</li>
-              <li>Player relations and conflict resolution</li>
-              <li>Technical troubleshooting</li>
-            </ul>
+      <div class="card-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="file">competencies.dat</span></div>
+      <div class="section-inner">
+        <div class="section-header"><h2 class="section-title"><i class="fas fa-star"></i>Core Competencies</h2></div>
+        <div class="section-content">
+          <div class="skills-container">
+            <div class="skill-card">
+              <h3 class="skill-title"><i class="fas fa-camera"></i> Visual Storytelling</h3>
+              <ul class="skill-list">
+                <li>Professional-grade photography with creative composition</li>
+                <li>Advanced photo editing and post-processing</li>
+                <li>Visual narrative development</li>
+                <li>Lighting and scene composition expertise</li>
+              </ul>
+              <a href="https://1drv.ms/f/s!AjI1eAlvEOSXgaQQrLKDgKEgi478OA?e=l4QYZh" target="_blank" rel="noopener noreferrer" class="skill-link">
+                View Photography Portfolio <i class="fas fa-external-link-alt"></i>
+              </a>
+            </div>
+            <div class="skill-card">
+              <h3 class="skill-title"><i class="fas fa-pen-fancy"></i> Content Creation</h3>
+              <ul class="skill-list">
+                <li>Concise, impactful quote writing</li>
+                <li>Creative copywriting for digital media</li>
+                <li>Short-form video production</li>
+                <li>Social media content strategy</li>
+              </ul>
+              <a href="https://www.instagram.com/hnk.jo" target="_blank" rel="noopener noreferrer" class="skill-link">
+                View Content Examples <i class="fas fa-external-link-alt"></i>
+              </a>
+            </div>
+            <div class="skill-card">
+              <h3 class="skill-title"><i class="fas fa-gamepad"></i> Gaming & Community</h3>
+              <ul class="skill-list">
+                <li>Online community management</li>
+                <li>Game server administration</li>
+                <li>Player relations and conflict resolution</li>
+                <li>Technical troubleshooting</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -452,91 +377,88 @@
 
     <!-- Professional Experience -->
     <section class="section">
-      <div class="section-header">
-        <h2 class="section-title"><i class="fas fa-briefcase"></i> Professional Experience</h2>
-      </div>
-      <div class="section-content">
-        <div class="experience-item">
-          <div class="experience-header">
-            <h3 class="experience-title">Visual Content Creator</h3>
-            <span class="experience-date">2017 - Present</span>
+      <div class="card-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="file">experience.log</span></div>
+      <div class="section-inner">
+        <div class="section-header"><h2 class="section-title"><i class="fas fa-briefcase"></i>Professional Experience</h2></div>
+        <div class="section-content">
+          <div class="experience-item">
+            <div class="experience-header">
+              <h3 class="experience-title">Visual Content Creator</h3>
+              <span class="experience-date">2017 - Present</span>
+            </div>
+            <p class="experience-company">Freelance</p>
+            <p class="experience-description">
+              Develop compelling visual content for diverse clients, specializing in lifestyle and portrait photography.
+              Combine technical camera expertise with artistic vision to capture authentic moments. Provide complete
+              post-production services including color grading, retouching, and digital enhancement.
+            </p>
+            <ul class="skill-list">
+              <li>Produced 200+ professional photo sessions with consistently positive client feedback</li>
+              <li>Mastered advanced lighting techniques for various environments and conditions</li>
+              <li>Developed efficient workflow for high-volume editing without quality compromise</li>
+            </ul>
           </div>
-          <p class="experience-company">Freelance</p>
-          <p class="experience-description">
-            Develop compelling visual content for diverse clients, specializing in lifestyle and portrait photography. 
-            Combine technical camera expertise with artistic vision to capture authentic moments. Provide complete 
-            post-production services including color grading, retouching, and digital enhancement.
-          </p>
-          <ul class="skill-list">
-            <li>Produced 200+ professional photo sessions with consistently positive client feedback</li>
-            <li>Mastered advanced lighting techniques for various environments and conditions</li>
-            <li>Developed efficient workflow for high-volume editing without quality compromise</li>
-          </ul>
-        </div>
 
-        <div class="experience-item">
-          <div class="experience-header">
-            <h3 class="experience-title">Digital Community Administrator</h3>
-            <span class="experience-date">2009 - Present</span>
+          <div class="experience-item">
+            <div class="experience-header">
+              <h3 class="experience-title">Digital Community Administrator</h3>
+              <span class="experience-date">2009 - Present</span>
+            </div>
+            <p class="experience-company">Online Gaming Communities</p>
+            <p class="experience-description">
+              Managed and moderated online gaming communities, overseeing player interactions and maintaining
+              positive engagement environments. Handled technical administration of game servers and implemented
+              community guidelines.
+            </p>
+            <ul class="skill-list">
+              <li>Administered multiplayer game servers with 500+ concurrent users</li>
+              <li>Developed conflict resolution protocols that reduced community disputes by 40%</li>
+              <li>Implemented technical solutions to enhance server performance and stability</li>
+              <li>Mentored new administrators in community management best practices</li>
+            </ul>
           </div>
-          <p class="experience-company">Online Gaming Communities</p>
-          <p class="experience-description">
-            Managed and moderated online gaming communities, overseeing player interactions and maintaining 
-            positive engagement environments. Handled technical administration of game servers and implemented 
-            community guidelines.
-          </p>
-          <ul class="skill-list">
-            <li>Administered multiplayer game servers with 500+ concurrent users</li>
-            <li>Developed conflict resolution protocols that reduced community disputes by 40%</li>
-            <li>Implemented technical solutions to enhance server performance and stability</li>
-            <li>Mentored new administrators in community management best practices</li>
-          </ul>
-        </div>
 
-        <div class="experience-item">
-          <div class="experience-header">
-            <h3 class="experience-title">Content Curator & Writer</h3>
-            <span class="experience-date">2018 - Present</span>
+          <div class="experience-item">
+            <div class="experience-header">
+              <h3 class="experience-title">Content Curator & Writer</h3>
+              <span class="experience-date">2018 - Present</span>
+            </div>
+            <p class="experience-company">HNK.JO (Personal Brand)</p>
+            <p class="experience-description">
+              Created and published original written content focused on personal growth and philosophical reflection.
+              Developed a distinctive voice that resonates with a dedicated audience across social platforms.
+            </p>
+            <ul class="skill-list">
+              <li>Grew Instagram following to 5,000+ engaged followers</li>
+              <li>Developed content strategy that achieved 15% average engagement rate</li>
+              <li>Collaborated with brands to integrate sponsored content organically</li>
+            </ul>
           </div>
-          <p class="experience-company">HNK.JO (Personal Brand)</p>
-          <p class="experience-description">
-            Created and published original written content focused on personal growth and philosophical reflection. 
-            Developed a distinctive voice that resonates with a dedicated audience across social platforms.
-          </p>
-          <ul class="skill-list">
-            <li>Grew Instagram following to 5,000+ engaged followers</li>
-            <li>Developed content strategy that achieved 15% average engagement rate</li>
-            <li>Collaborated with brands to integrate sponsored content organically</li>
-          </ul>
         </div>
       </div>
     </section>
 
     <!-- Education Section -->
     <section class="section">
-      <div class="section-header">
-        <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Education</h2>
-      </div>
-      <div class="section-content">
-        <div class="education-item">
-          <div class="education-icon">
-            <i class="fas fa-university"></i>
+      <div class="card-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="file">education.dat</span></div>
+      <div class="section-inner">
+        <div class="section-header"><h2 class="section-title"><i class="fas fa-graduation-cap"></i>Education</h2></div>
+        <div class="section-content">
+          <div class="education-item">
+            <div class="education-icon"><i class="fas fa-university"></i></div>
+            <div class="education-content">
+              <h3 class="education-degree">Bachelor of Arts in English Literature</h3>
+              <p class="education-school">Applied Science University</p>
+              <p class="education-date">2022 - 2027 (Expected)</p>
+            </div>
           </div>
-          <div class="education-content">
-            <h3 class="education-degree">Bachelor of Arts in English Literature</h3>
-            <p class="education-school">Applied Science University</p>
-            <p class="education-date">2022 - 2027 (Expected)</p>
-          </div>
-        </div>
-        
-        <div class="education-item">
-          <div class="education-icon">
-            <i class="fas fa-school"></i>
-          </div>
-          <div class="education-content">
-            <h3 class="education-degree">High School Diploma</h3>
-            <p class="education-school">Al Ittihad High School</p>
-            <p class="education-date">2012 - 2017</p>
+          <div class="education-item">
+            <div class="education-icon"><i class="fas fa-school"></i></div>
+            <div class="education-content">
+              <h3 class="education-degree">High School Diploma</h3>
+              <p class="education-school">Al Ittihad High School</p>
+              <p class="education-date">2012 - 2017</p>
+            </div>
           </div>
         </div>
       </div>
@@ -544,94 +466,91 @@
 
     <!-- Certifications Section -->
     <section class="section">
-      <div class="section-header">
-        <h2 class="section-title"><i class="fas fa-certificate"></i> Certifications & Achievements</h2>
-      </div>
-      <div class="section-content">
-        <div class="certification-item">
-          <a href="https://1drv.ms/b/s!AjI1eAlvEOSXgaQJQIRNH8qofiTqdQ?e=oIBgrT" target="_blank" class="certification-title">
-            Certificate of Appreciation - Reading Event "Between the Lines"
-          </a>
-          <p class="certification-date">November 2022 | Applied Science University</p>
-        </div>
-        
-        <div class="certification-item">
-          <a href="https://1drv.ms/b/s!AjI1eAlvEOSXgaQKUY_Nze8KVkwSUQ?e=Qxk3UV" target="_blank" class="certification-title">
-            Public Speaking Competition Participant
-          </a>
-          <p class="certification-date">January 2023 | Applied Science University</p>
-        </div>
-        
-        <div class="certification-item">
-          <h3 class="certification-title">Community Service Recognition</h3>
-          <p class="certification-date">2022-2023 | University Community Initiatives</p>
-          <p>Actively participated in various university community service programs, demonstrating leadership and commitment to social betterment.</p>
+      <div class="card-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="file">certifications.log</span></div>
+      <div class="section-inner">
+        <div class="section-header"><h2 class="section-title"><i class="fas fa-certificate"></i>Certifications & Achievements</h2></div>
+        <div class="section-content">
+          <div class="certification-item">
+            <a href="https://1drv.ms/b/s!AjI1eAlvEOSXgaQJQIRNH8qofiTqdQ?e=oIBgrT" target="_blank" rel="noopener noreferrer" class="certification-title">
+              Certificate of Appreciation - Reading Event "Between the Lines"
+            </a>
+            <p class="certification-date">November 2022 | Applied Science University</p>
+          </div>
+          <div class="certification-item">
+            <a href="https://1drv.ms/b/s!AjI1eAlvEOSXgaQKUY_Nze8KVkwSUQ?e=Qxk3UV" target="_blank" rel="noopener noreferrer" class="certification-title">
+              Public Speaking Competition Participant
+            </a>
+            <p class="certification-date">January 2023 | Applied Science University</p>
+          </div>
+          <div class="certification-item">
+            <h3 class="certification-title" style="color:var(--text);">Community Service Recognition</h3>
+            <p class="certification-date">2022-2023 | University Community Initiatives</p>
+            <p style="color:var(--muted); font-size:0.87rem; margin-top:0.3rem;">Actively participated in various university community service programs, demonstrating leadership and commitment to social betterment.</p>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Gaming Experience Section -->
     <section class="section">
-      <div class="section-header">
-        <h2 class="section-title"><i class="fas fa-gamepad"></i> Gaming & Community Management</h2>
-      </div>
-      <div class="section-content">
-        <div class="gaming-item">
-          <h3 class="gaming-title">Online Gaming Community Leadership</h3>
-          <p class="gaming-description">
-            Since 2009, I have cultivated extensive experience in online gaming communities, developing specialized 
-            expertise in community management and technical administration. My journey began as a passionate gamer 
-            and evolved into leadership roles where I oversaw player interactions, managed conflicts, and maintained 
-            positive community environments.
-          </p>
-        </div>
-        
-        <div class="gaming-item">
-          <h3 class="gaming-title">Key Responsibilities & Achievements</h3>
-          <ul class="skill-list">
-            <li>Administered multiplayer game servers with populations exceeding 500 concurrent users</li>
-            <li>Developed and enforced community guidelines that improved user experience metrics by 35%</li>
-            <li>Implemented technical solutions to optimize server performance and minimize downtime</li>
-            <li>Mentored and trained new administrators in community management best practices</li>
-            <li>Designed conflict resolution protocols that reduced community disputes by 40%</li>
-            <li>Organized in-game events that increased community engagement by 25%</li>
-          </ul>
-        </div>
-        
-        <div class="gaming-item">
-          <h3 class="gaming-title">Technical Skills Developed</h3>
-          <ul class="skill-list">
-            <li>Server configuration and maintenance</li>
-            <li>Performance monitoring and optimization</li>
-            <li>User permissions and access control</li>
-            <li>Automation of administrative tasks</li>
-            <li>Troubleshooting technical issues</li>
-            <li>Database management for player statistics</li>
-          </ul>
+      <div class="card-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="file">gaming.log</span></div>
+      <div class="section-inner">
+        <div class="section-header"><h2 class="section-title"><i class="fas fa-gamepad"></i>Gaming & Community Management</h2></div>
+        <div class="section-content">
+          <div class="gaming-item">
+            <h3 class="gaming-title">Online Gaming Community Leadership</h3>
+            <p class="gaming-description">
+              Since 2009, I have cultivated extensive experience in online gaming communities, developing specialized
+              expertise in community management and technical administration. My journey began as a passionate gamer
+              and evolved into leadership roles where I oversaw player interactions, managed conflicts, and maintained
+              positive community environments.
+            </p>
+          </div>
+          <div class="gaming-item">
+            <h3 class="gaming-title">Key Responsibilities & Achievements</h3>
+            <ul class="skill-list">
+              <li>Administered multiplayer game servers with populations exceeding 500 concurrent users</li>
+              <li>Developed and enforced community guidelines that improved user experience metrics by 35%</li>
+              <li>Implemented technical solutions to optimize server performance and minimize downtime</li>
+              <li>Mentored and trained new administrators in community management best practices</li>
+              <li>Designed conflict resolution protocols that reduced community disputes by 40%</li>
+              <li>Organized in-game events that increased community engagement by 25%</li>
+            </ul>
+          </div>
+          <div class="gaming-item">
+            <h3 class="gaming-title">Technical Skills Developed</h3>
+            <ul class="skill-list">
+              <li>Server configuration and maintenance</li>
+              <li>Performance monitoring and optimization</li>
+              <li>User permissions and access control</li>
+              <li>Automation of administrative tasks</li>
+              <li>Troubleshooting technical issues</li>
+              <li>Database management for player statistics</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Personal Attributes -->
     <section class="section">
-      <div class="section-header">
-        <h2 class="section-title"><i class="fas fa-brain"></i> Personal Attributes</h2>
-      </div>
-      <div class="section-content">
-        <div class="skills-container">
-          <div class="skill-card">
-            <h3 class="skill-title"><i class="fas fa-heart"></i> Resilience</h3>
-            <p>Overcame significant personal challenges through determination and self-reflection. Transformed adversity into motivation for personal growth and now use these experiences to support others facing similar struggles.</p>
-          </div>
-          
-          <div class="skill-card">
-            <h3 class="skill-title"><i class="fas fa-lightbulb"></i> Creativity</h3>
-            <p>Consistently generate innovative solutions and artistic concepts. Combine technical skills with imaginative thinking to produce unique visual and written content that stands out.</p>
-          </div>
-          
-          <div class="skill-card">
-            <h3 class="skill-title"><i class="fas fa-users"></i> Leadership</h3>
-            <p>Demonstrated ability to guide teams and communities toward common goals. Foster collaboration and maintain positive environments even in high-pressure situations.</p>
+      <div class="card-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="file">attributes.dat</span></div>
+      <div class="section-inner">
+        <div class="section-header"><h2 class="section-title"><i class="fas fa-brain"></i>Personal Attributes</h2></div>
+        <div class="section-content">
+          <div class="skills-container">
+            <div class="skill-card">
+              <h3 class="skill-title"><i class="fas fa-heart"></i> Resilience</h3>
+              <p style="color:var(--muted); font-size:0.85rem;">Overcame significant personal challenges through determination and self-reflection. Transformed adversity into motivation for personal growth and now use these experiences to support others facing similar struggles.</p>
+            </div>
+            <div class="skill-card">
+              <h3 class="skill-title"><i class="fas fa-lightbulb"></i> Creativity</h3>
+              <p style="color:var(--muted); font-size:0.85rem;">Consistently generate innovative solutions and artistic concepts. Combine technical skills with imaginative thinking to produce unique visual and written content that stands out.</p>
+            </div>
+            <div class="skill-card">
+              <h3 class="skill-title"><i class="fas fa-users"></i> Leadership</h3>
+              <p style="color:var(--muted); font-size:0.85rem;">Demonstrated ability to guide teams and communities toward common goals. Foster collaboration and maintain positive environments even in high-pressure situations.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -639,41 +558,37 @@
   </div>
 
   <script>
-    // Theme toggle functionality
-    function toggleTheme() {
-      const body = document.body;
-      const currentTheme = body.getAttribute('data-theme');
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      body.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-      
-      // Update button icon
-      const themeIcon = document.querySelector('.btn-primary i');
-      themeIcon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    // ===== Theme cycling (matches rest of site) =====
+    const themes = {
+      cyan:   { cyan: '#2ee6d0', cyanSoft: '#7dfbe9', magenta: '#ff3ea5' },
+      matrix: { cyan: '#39ff14', cyanSoft: '#9dffa0', magenta: '#ffd60a' },
+      crimson:{ cyan: '#ff3860', cyanSoft: '#ff9fb1', magenta: '#00e0ff' }
+    };
+    const themeKeys = Object.keys(themes);
+    const root = document.documentElement;
+
+    function applyTheme(key) {
+      const t = themes[key];
+      root.style.setProperty('--cyan', t.cyan);
+      root.style.setProperty('--cyan-soft', t.cyanSoft);
+      root.style.setProperty('--magenta', t.magenta);
+      localStorage.setItem('necro-theme', key);
     }
 
-    // Load saved theme
-    document.addEventListener('DOMContentLoaded', () => {
-      const savedTheme = localStorage.getItem('theme') || 'light';
-      document.body.setAttribute('data-theme', savedTheme);
-      
-      // Set correct icon for current theme
-      const themeIcon = document.querySelector('.btn-primary i');
-      if (savedTheme === 'dark') {
-        themeIcon.className = 'fas fa-sun';
-      }
+    let saved = localStorage.getItem('necro-theme');
+    if (!saved || !themes[saved]) saved = 'cyan';
+    applyTheme(saved);
+
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      const idx = (themeKeys.indexOf(saved) + 1) % themeKeys.length;
+      saved = themeKeys[idx];
+      applyTheme(saved);
     });
 
-    // Disable right-click context menu
-    window.addEventListener('contextmenu', function(e) {
-      e.preventDefault();
-    });
-
-    // Disable Ctrl+U shortcut
-    window.addEventListener('keydown', function(e) {
-      if (e.ctrlKey && e.key === 'u') {
-        e.preventDefault();
-      }
+    // ===== Content protection flavor (non-blocking) =====
+    window.addEventListener('contextmenu', e => e.preventDefault());
+    window.addEventListener('keydown', e => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'u') e.preventDefault();
     });
   </script>
 </body>
