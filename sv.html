@@ -2,51 +2,302 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NS Servers</title>
-    <link rel="stylesheet" href="sv_styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#04070a">
+    <meta name="color-scheme" content="dark">
+    <title>servers.log // NS &amp; ModRiot Game Servers</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #04070a;
+            --bg-deep: #010302;
+            --panel: rgba(8, 16, 18, 0.85);
+            --line: rgba(46, 230, 208, 0.18);
+            --cyan: #2ee6d0;
+            --cyan-soft: #7dfbe9;
+            --magenta: #ff3ea5;
+            --amber: #ffb703;
+            --text: #d9f6f0;
+            --muted: #5f8b85;
+            --radius: 12px;
+            --mono: 'JetBrains Mono', ui-monospace, monospace;
+            --pixel: 'VT323', monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        html, body { height: 100%; }
+
+        body {
+            font-family: var(--mono);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+            padding-bottom: 60px;
+        }
+
+        .bg-grid {
+            position: fixed; inset: 0; z-index: -2;
+            background-color: var(--bg-deep);
+            background-image:
+                linear-gradient(rgba(46, 230, 208, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(46, 230, 208, 0.06) 1px, transparent 1px);
+            background-size: 34px 34px;
+        }
+        .bg-glow {
+            position: fixed; inset: 0; z-index: -1;
+            background:
+                radial-gradient(circle at 15% 8%, rgba(46, 230, 208, 0.10) 0%, transparent 45%),
+                radial-gradient(circle at 85% 95%, rgba(255, 62, 165, 0.08) 0%, transparent 45%);
+        }
+        body::after {
+            content: '';
+            position: fixed; inset: 0; z-index: 45; pointer-events: none;
+            background: repeating-linear-gradient(180deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 2px, transparent 4px);
+            mix-blend-mode: overlay;
+        }
+
+        header {
+            position: relative;
+            padding: 2.2rem 20px 1.8rem;
+            text-align: center;
+            border-bottom: 1px solid var(--line);
+            background: rgba(4, 7, 10, 0.6);
+            backdrop-filter: blur(10px);
+        }
+
+        .back-button {
+            position: absolute; left: 16px; top: 50%;
+            transform: translateY(-50%);
+            background: var(--panel);
+            border: 1px solid var(--line);
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.8rem;
+            padding: 8px 14px;
+            border-radius: 8px;
+            transition: all 0.25s ease;
+        }
+        .back-button:hover { background: rgba(46,230,208,0.1); border-color: var(--cyan); }
+
+        .terminal-path { font-size: 0.72rem; color: var(--muted); margin-bottom: 8px; }
+        .terminal-path .ps1 { color: var(--cyan); }
+
+        h1 {
+            font-family: var(--pixel);
+            font-weight: 400;
+            font-size: clamp(1.8rem, 6vw, 2.4rem);
+            letter-spacing: 1px;
+            color: var(--cyan-soft);
+            text-shadow: 0 0 10px rgba(46,230,208,0.45);
+        }
+
+        .section-wrap { max-width: 1100px; margin: 0 auto; padding: 0 1.2rem; }
+
+        .section-title {
+            font-family: var(--pixel);
+            font-weight: 400;
+            font-size: 1.5rem;
+            letter-spacing: 0.5px;
+            margin: 2.2rem 0 1.1rem;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .section-title.online { color: var(--cyan-soft); }
+        .section-title.offline { color: var(--muted); }
+        .section-title::before { content: '> '; color: var(--cyan); }
+
+        .status-dot {
+            width: 9px; height: 9px; border-radius: 50%;
+            display: inline-block;
+        }
+        .status-dot.online { background: var(--cyan); box-shadow: 0 0 8px var(--cyan); animation: pulse 1.4s ease-in-out infinite; }
+        .status-dot.offline { background: var(--muted); }
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+        .server-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .server-card {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+        .server-card.is-online:hover {
+            transform: translateY(-4px);
+            border-color: var(--cyan);
+            box-shadow: 0 12px 30px rgba(46,230,208,0.15);
+        }
+        .server-card.is-offline { opacity: 0.55; }
+        .server-card.is-offline:hover { opacity: 0.75; }
+
+        .card-bar {
+            display: flex; align-items: center; gap: 6px;
+            padding: 8px 12px;
+            background: rgba(0,0,0,0.35);
+            border-bottom: 1px solid var(--line);
+            font-size: 0.68rem;
+            color: var(--muted);
+        }
+        .card-bar .dot { width: 8px; height: 8px; border-radius: 50%; }
+        .card-bar .dot.r { background: #ff5f56; }
+        .card-bar .dot.y { background: #ffbd2e; }
+        .card-bar .dot.g { background: #27c93f; }
+        .card-bar .status-pill {
+            margin-left: auto;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            padding: 2px 8px;
+            border-radius: 999px;
+            border: 1px solid currentColor;
+        }
+        .status-pill.online { color: var(--cyan); }
+        .status-pill.offline { color: var(--muted); }
+
+        .card-image {
+            position: relative;
+            height: 150px;
+            overflow: hidden;
+            border-bottom: 1px solid var(--line);
+            filter: saturate(0.7) brightness(0.85);
+        }
+        .card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease, filter 0.5s ease; }
+        .server-card.is-online:hover .card-image img { transform: scale(1.06); filter: saturate(1.1) brightness(1); }
+
+        .card-content {
+            padding: 1.1rem 1.2rem 1.3rem;
+            display: flex; align-items: center; justify-content: space-between; gap: 12px;
+        }
+
+        .server-name { font-weight: 600; font-size: 0.88rem; color: var(--text); }
+
+        .join-button {
+            background: linear-gradient(to right, var(--cyan), var(--magenta));
+            color: #04070a;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 0.3px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-decoration: none;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .join-button:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(46,230,208,0.25); }
+
+        .join-button.disabled {
+            background: rgba(255,255,255,0.05);
+            color: var(--muted);
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        .join-button.disabled:hover { transform: none; box-shadow: none; }
+
+        footer {
+            text-align: center;
+            padding: 2rem 20px 0;
+            color: var(--muted);
+            font-size: 0.75rem;
+        }
+
+        @media (max-width: 640px) {
+            .back-button { position: static; transform: none; margin-bottom: 12px; display: inline-block; }
+            header { text-align: center; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>NS & MODRIOT Game Servers</h1>
-        <div class="server-list">
-            <div class="server">
-                <img src="basebuilder.jpg" alt="CS 1.6 Server 1">
-                <p><a href="steam://connect/178.63.16.211:27215">CS1.6| BASE BUILDER</a></p>
-            </div>
-            <div class="server">
-                <img src="classic.jpg" alt="CS 1.6 Server 1">
-                <p><a href="steam://connect/178.63.16.211:27095">CS1.6| CLASSIC OLD SCHOOL</a></p>
-            </div>
-            <div class="server">
-                <img src="dr.jpg" alt="CS 1.6 Server 1">
-                <p><a href="steam://connect/178.63.16.211:27085">CS1.6| DEATH RUN</a></p>
-            </div>
-            <div class="server">
-                <img src="hns.jpg" alt="CS 1.6 Server 1">
-                <p><a href="steam://connect/178.63.16.211:27100">CS1.6| HIDE AND SEEK</a></p>
-            </div>
-            <div class="server">
-                <img src="private.jpg" alt="CS 1.6 Server 2">
-                <p><a href="steam://connect/173.199.107.158:27055">CS1.6| ADMINS ONLY</a></p>
-            </div>
-            <div class="server">
-                <img src="tdm.jpg" alt="CS 1.6 Server 2">
-                <p><a href="steam://connect/178.63.16.211:27090">CS1.6| TRAINING DEATH MATCH</a></p>
-            </div>
-            <div class="server">
-                <img src="ttt.jpg" alt="CS 1.6 Server 2">
-                <p><a href="steam://connect/178.63.16.211:27105">CS1.6| TROUBLE TOWN</a></p>
-            </div>
-            <div class="server">
-                <img src="l4d.jpg" alt="Left 4 Dead Server">
-                <p><a href="steam://connect/178.63.16.211:27215">L4D| HARDCORE</a></p>
-            </div>
-            <div class="server">
-                <img src="sven.png" alt="Sven Co-op Server 1">
-                <p><a href="steam://connect/178.63.16.211:27143">SC| ANTI RUSH #1</a></p>
-            </div>
-        </div>
+    <div class="bg-grid"></div>
+    <div class="bg-glow"></div>
+
+    <header>
+        <a href="index" class="back-button">&lt; back</a>
+        <p class="terminal-path"><span class="ps1">necro@root</span>:~$ cat servers.log</p>
+        <h1>NS &amp; ModRiot Game Servers</h1>
+    </header>
+
+    <div class="section-wrap">
+        <h2 class="section-title online"><span class="status-dot online"></span>Online</h2>
+        <div class="server-grid" id="onlineGrid"></div>
+
+        <h2 class="section-title offline"><span class="status-dot offline"></span>Offline</h2>
+        <div class="server-grid" id="offlineGrid"></div>
     </div>
+
+    <footer>© Necro's Hub — Server Status Board</footer>
+
+    <script>
+        const servers = [
+            { name: 'CS1.6| LEGENDLEAGUES JAILBREAK', img: 'cslljb.png', ip: '51.38.36.119:27015', online: true },
+            { name: 'CS1.6| ZOMBIE PLAGUE', img: 'csllzp.png', ip: '51.38.36.119:27010', online: true },
+            { name: 'CS1.6| ADMINS ONLY (10 Slots)', img: 'csprivate.png', ip: '173.199.107.158:27055', online: true },
+            { name: 'CS1.6| BASE BUILDER', img: 'basebuilder.jpg', ip: '178.63.16.211:27215', online: false },
+            { name: 'CS1.6| CLASSIC OLD SCHOOL', img: 'classic.jpg', ip: '178.63.16.211:27095', online: false },
+            { name: 'CS1.6| DEATH RUN', img: 'dr.jpg', ip: '178.63.16.211:27085', online: false },
+            { name: 'CS1.6| HIDE AND SEEK', img: 'hns.jpg', ip: '178.63.16.211:27100', online: false },
+            { name: 'CS1.6| TRAINING DEATH MATCH', img: 'tdm.jpg', ip: '178.63.16.211:27090', online: false },
+            { name: 'CS1.6| TROUBLE TOWN', img: 'ttt.jpg', ip: '178.63.16.211:27105', online: false },
+            { name: 'L4D| HARDCORE', img: 'l4d.jpg', ip: '178.63.16.211:27215', online: false },
+            { name: 'SC| ANTI RUSH #1', img: 'sven.png', ip: '178.63.16.211:27143', online: false }
+        ];
+
+        function renderCard(server) {
+            const statusClass = server.online ? 'online' : 'offline';
+            const joinHref = server.online ? `steam://connect/${server.ip}` : '#';
+            const joinClasses = server.online ? 'join-button' : 'join-button disabled';
+            const joinLabel = server.online ? 'Join' : 'Offline';
+
+            return `
+                <div class="server-card is-${statusClass}">
+                    <div class="card-bar">
+                        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+                        <span class="status-pill ${statusClass}">${server.online ? 'ONLINE' : 'OFFLINE'}</span>
+                    </div>
+                    <div class="card-image"><img src="${server.img}" alt="${server.name} thumbnail"></div>
+                    <div class="card-content">
+                        <span class="server-name">${server.name}</span>
+                        <a href="${joinHref}" class="${joinClasses}" ${server.online ? '' : 'tabindex="-1" aria-disabled="true"'}>${joinLabel}</a>
+                    </div>
+                </div>`;
+        }
+
+        const onlineServers = servers.filter(s => s.online);
+        const offlineServers = servers.filter(s => !s.online);
+
+        document.getElementById('onlineGrid').innerHTML = onlineServers.map(renderCard).join('');
+        document.getElementById('offlineGrid').innerHTML = offlineServers.map(renderCard).join('');
+
+        // ===== Anti right-click & keyboard shortcut protection =====
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            const key = e.key.toLowerCase();
+            const blocked =
+                e.key === 'F12' ||
+                (e.ctrlKey && e.shiftKey && ['i', 'j', 'c', 'k'].includes(key)) ||
+                (e.metaKey && e.altKey && ['i', 'j', 'c'].includes(key)) ||
+                ((e.ctrlKey || e.metaKey) && ['u', 's', 'p'].includes(key));
+            if (blocked) e.preventDefault();
+        });
+        document.addEventListener('dragstart', e => e.preventDefault());
+    </script>
 </body>
 </html>
