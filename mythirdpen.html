@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#04070a">
+    <meta name="color-scheme" content="dark">
+    <title>entry.log // The Girl I Met at ASU</title>
+    <meta name="referrer" content="no-referrer">
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #04070a;
+            --bg-deep: #010302;
+            --panel: rgba(8, 16, 18, 0.85);
+            --line: rgba(46, 230, 208, 0.18);
+            --cyan: #2ee6d0;
+            --cyan-soft: #7dfbe9;
+            --magenta: #ff3ea5;
+            --amber: #ffb703;
+            --text: #d9f6f0;
+            --muted: #5f8b85;
+            --radius: 16px;
+            --mono: 'JetBrains Mono', ui-monospace, monospace;
+            --pixel: 'VT323', monospace;
+            --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        html, body { height: 100%; }
+
+        body {
+            font-family: var(--mono);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .bg-grid {
+            position: fixed; inset: 0; z-index: -2;
+            background-color: var(--bg-deep);
+            background-image:
+                linear-gradient(rgba(46, 230, 208, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(46, 230, 208, 0.06) 1px, transparent 1px);
+            background-size: 34px 34px;
+        }
+        .bg-glow {
+            position: fixed; inset: 0; z-index: -1;
+            background:
+                radial-gradient(circle at 15% 8%, rgba(46, 230, 208, 0.10) 0%, transparent 45%),
+                radial-gradient(circle at 85% 95%, rgba(255, 62, 165, 0.08) 0%, transparent 45%);
+        }
+        body::after {
+            content: '';
+            position: fixed; inset: 0; z-index: 45; pointer-events: none;
+            background: repeating-linear-gradient(180deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 2px, transparent 4px);
+            mix-blend-mode: overlay;
+        }
+
+        .container {
+            max-width: 760px;
+            margin: 60px auto 40px;
+            background: var(--panel);
+            backdrop-filter: blur(14px);
+            border: 1px solid var(--line);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            border-radius: var(--radius);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .term-bar {
+            display: flex; align-items: center; gap: 8px;
+            padding: 10px 16px;
+            background: rgba(0,0,0,0.35);
+            border-bottom: 1px solid var(--line);
+        }
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .dot.r { background: #ff5f56; }
+        .dot.y { background: #ffbd2e; }
+        .dot.g { background: #27c93f; }
+        .term-title { margin-left: 10px; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.5px; }
+
+        .container-inner { padding: 36px 40px; }
+
+        .profile { display: flex; align-items: center; margin-bottom: 26px; gap: 18px; }
+        .profile img {
+            width: 74px; height: 74px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--cyan);
+            box-shadow: 0 0 15px rgba(46, 230, 208, 0.25);
+        }
+        .profile-info { display: flex; flex-direction: column; }
+        .profile-info strong { font-size: 1.15em; color: var(--cyan-soft); font-weight: 700; }
+        .timestamp { color: var(--muted); font-size: 0.85em; margin-top: 4px; }
+
+        .post-content { font-size: 1rem; text-align: justify; }
+
+        .post-content h2 {
+            font-family: var(--pixel);
+            font-weight: 400;
+            color: var(--cyan-soft);
+            font-size: 1.9em;
+            letter-spacing: 0.5px;
+            margin-bottom: 22px;
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 0 8px rgba(46,230,208,0.35);
+        }
+        .post-content h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px; left: 0;
+            width: 50%; height: 2px;
+            background: linear-gradient(90deg, var(--cyan), transparent);
+            border-radius: 3px;
+        }
+
+        .post-content p { margin-bottom: 18px; line-height: 1.8; color: var(--text); }
+        .post-content p.closing-line {
+            color: var(--cyan-soft);
+            font-style: italic;
+            text-align: center;
+            margin-top: 26px;
+            font-size: 1.05em;
+            text-shadow: 0 0 6px rgba(46,230,208,0.3);
+        }
+
+        /* Memory timeline */
+        .memory-log {
+            margin-top: 34px;
+            padding-top: 26px;
+            border-top: 1px solid var(--line);
+        }
+        .memory-log-title {
+            font-family: var(--pixel);
+            font-weight: 400;
+            font-size: 1.3rem;
+            letter-spacing: 0.5px;
+            color: var(--cyan-soft);
+            margin-bottom: 16px;
+            text-align: left;
+        }
+        .memory-log-title::before { content: '> '; color: var(--cyan); }
+
+        .memory-item {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 14px;
+            align-items: baseline;
+            padding: 10px 0;
+            border-left: 2px solid var(--line);
+            padding-left: 16px;
+            margin-bottom: 4px;
+            text-align: left;
+            transition: border-color 0.25s ease;
+        }
+        .memory-item:hover { border-left-color: var(--cyan); }
+        .memory-date {
+            color: var(--muted);
+            font-size: 0.75rem;
+            white-space: nowrap;
+        }
+        .memory-date::before { content: '● '; color: var(--magenta); }
+        .memory-label {
+            color: var(--text);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .controls {
+            position: fixed; top: 20px; right: 20px;
+            display: flex; gap: 10px; z-index: 100;
+        }
+        .control-btn {
+            padding: 10px 15px;
+            border: 1px solid var(--line);
+            border-radius: 50px;
+            background: var(--panel);
+            backdrop-filter: blur(10px);
+            color: var(--cyan);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .control-btn:hover { transform: translateY(-2px); border-color: var(--cyan); background: rgba(46,230,208,0.08); }
+
+        .back-btn {
+            position: fixed; top: 20px; left: 20px;
+            padding: 10px 15px;
+            border: 1px solid var(--line);
+            border-radius: 50px;
+            background: var(--panel);
+            backdrop-filter: blur(10px);
+            color: var(--cyan);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            display: flex; align-items: center; gap: 6px;
+            z-index: 100;
+            text-decoration: none;
+        }
+        .back-btn:hover { background: rgba(46,230,208,0.1); border-color: var(--cyan); }
+
+        @media (max-width: 768px) {
+            .container { margin: 70px auto 20px; }
+            .container-inner { padding: 26px 24px; }
+            .profile { flex-direction: column; text-align: center; }
+            .post-content h2 { font-size: 1.5em; }
+            .controls { top: 15px; right: 15px; }
+            .back-btn { top: 15px; left: 15px; }
+        }
+
+        @media (max-width: 480px) {
+            .container-inner { padding: 20px; }
+            .post-content { font-size: 0.95em; }
+            .control-btn, .back-btn { padding: 8px 12px; font-size: 0.78rem; }
+            .memory-item { grid-template-columns: 1fr; gap: 2px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="bg-glow"></div>
+
+    <a href="index" class="back-btn">← Back</a>
+
+    <div class="controls">
+        <button class="control-btn" id="themeSwitcher">◈ Theme</button>
+    </div>
+
+    <div class="container">
+        <div class="term-bar">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="term-title">necro@root:~/journal/entry_003.log</span>
+        </div>
+        <div class="container-inner">
+            <div class="profile">
+                <img src="mr.jpg" alt="Profile picture of Qusai Allan">
+                <div class="profile-info">
+                    <strong>Qusai Allan</strong>
+                    <span class="timestamp">A chapter from ASU, 2023 – 2026</span>
+                </div>
+            </div>
+
+            <div class="post-content">
+                <h2>The Girl I Met at ASU</h2>
+
+                <p>I met a girl at ASU University.</p>
+                <p>At first, we were only friends. We laughed together. We studied together. We walked around the university. Every day, I was happy when I saw her.</p>
+                <p>Our friendship stayed strong for more than three years. She was not only my friend. She was my safe place. She knew my smile, my silence, and my dreams.</p>
+                <p>One day, our friendship became love.</p>
+                <p>We stayed together for one year and a half. Those days were beautiful. The university looked brighter. Every road was special because she walked with me. Every message made me smile. Every goodbye was hard because I wanted one more minute with her.</p>
+                <p>I thought our story would never end.</p>
+                <p>But one day, everything changed.</p>
+                <p>She said goodbye.</p>
+                <p>There was no big fight. There was no clear reason. There was no answer that made sense.</p>
+                <p>I asked myself many times, "Why?"</p>
+                <p>The only answer was silence.</p>
+                <p>After that day, ASU was not the same. The classrooms were still there. The trees were still green. The sun still came every morning. But my heart was different.</p>
+                <p>Sometimes I saw the places where we laughed. Sometimes I remembered the words we said. The memories stayed, but she was gone.</p>
+                <p>I learned that love can come quietly, and it can leave quietly too.</p>
+                <p>I still wish her happiness.</p>
+                <p>Maybe some stories are not made to last forever.</p>
+                <p>Maybe some people come into our lives to teach us how to love, how to smile, and how to be strong after pain.</p>
+                <p>She became a memory.</p>
+                <p>But she will always be a beautiful chapter in my life.</p>
+                <p class="closing-line">And every time I walk through ASU, my heart whispers,<br>"Thank you for the memories."</p>
+            </div>
+
+            <div class="memory-log">
+                <div class="memory-log-title">memories.log</div>
+                <div class="memory-item">
+                    <span class="memory-date">05 JAN 2023 · 12:37</span>
+                    <span class="memory-label">First photo together, in lecture</span>
+                </div>
+                <div class="memory-item">
+                    <span class="memory-date">15 JAN 2023 · 11:24</span>
+                    <span class="memory-label">First hug</span>
+                </div>
+                <div class="memory-item">
+                    <span class="memory-date">15 MAY 2025</span>
+                    <span class="memory-label">Best hugs</span>
+                </div>
+                <div class="memory-item">
+                    <span class="memory-date">18 JUN 2025</span>
+                    <span class="memory-label">Best memory</span>
+            </div>
+        </div>
+                <div class="memory-item">
+                    <span class="memory-date">15 JUN 2026</span>
+                    <span class="memory-label">Break Up</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== Theme cycling (matches rest of site) =====
+        const themes = {
+            cyan:   { cyan: '#2ee6d0', cyanSoft: '#7dfbe9', magenta: '#ff3ea5' },
+            matrix: { cyan: '#39ff14', cyanSoft: '#9dffa0', magenta: '#ffd60a' },
+            crimson:{ cyan: '#ff3860', cyanSoft: '#ff9fb1', magenta: '#00e0ff' }
+        };
+        const themeKeys = Object.keys(themes);
+        const root = document.documentElement;
+
+        function applyTheme(key) {
+            const t = themes[key];
+            root.style.setProperty('--cyan', t.cyan);
+            root.style.setProperty('--cyan-soft', t.cyanSoft);
+            root.style.setProperty('--magenta', t.magenta);
+            localStorage.setItem('necro-theme', key);
+        }
+
+        let saved = localStorage.getItem('necro-theme');
+        if (!saved || !themes[saved]) saved = 'cyan';
+        applyTheme(saved);
+
+        document.getElementById('themeSwitcher').addEventListener('click', () => {
+            const idx = (themeKeys.indexOf(saved) + 1) % themeKeys.length;
+            saved = themeKeys[idx];
+            applyTheme(saved);
+        });
+
+        // ===== Content-protection flavor (non-blocking) =====
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            const blocked = (e.key === 'F12') ||
+                ((e.ctrlKey || e.metaKey) && e.shiftKey && ['I','J','C'].includes(e.key.toUpperCase())) ||
+                ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'u');
+            if (blocked) e.preventDefault();
+        });
+    </script>
+</body>
+</html>

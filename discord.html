@@ -2,241 +2,283 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#04070a">
+    <meta name="color-scheme" content="dark">
     <link rel="icon" type="image/png" href="disc.png">
-    <title>Connect on Discord | nec_1999</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Whitney:wght@500;600&display=swap" rel="stylesheet">
+    <title>connect.log // Discord</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <style>
         :root {
-            --discord-blurple: #5865F2;
-            --discord-dark: #36393F;
-            --discord-darker: #2F3136;
-            --discord-darkest: #202225;
-            --discord-light: #DCDDDE;
-            --discord-lighter: #FFFFFF;
-            --discord-green: #3BA55C;
-            --discord-red: #ED4245;
+            --bg: #04070a;
+            --bg-deep: #010302;
+            --panel: rgba(8, 16, 18, 0.85);
+            --line: rgba(46, 230, 208, 0.18);
+            --cyan: #2ee6d0;
+            --cyan-soft: #7dfbe9;
+            --magenta: #ff3ea5;
+            --amber: #ffb703;
+            --text: #d9f6f0;
+            --muted: #5f8b85;
+            --radius: 14px;
+            --mono: 'JetBrains Mono', ui-monospace, monospace;
+            --pixel: 'VT323', monospace;
         }
-        
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        html, body { height: 100%; }
+
         body {
-            font-family: 'Whitney', 'Roboto', sans-serif;
+            font-family: var(--mono);
+            background: var(--bg);
+            color: var(--text);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            margin: 0;
-            background-color: var(--discord-dark);
-            background-image: radial-gradient(circle at 22% 30%, rgba(88, 101, 242, 0.1) 0%, transparent 30%),
-                              radial-gradient(circle at 78% 70%, rgba(59, 165, 92, 0.1) 0%, transparent 30%);
-            color: var(--discord-light);
+            min-height: 100dvh;
+            padding: 24px 16px;
             line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
         }
-        
-        .container {
-            text-align: center;
-            background-color: var(--discord-darker);
-            padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            max-width: 600px;
-            width: 90%;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+
+        .bg-grid {
+            position: fixed; inset: 0; z-index: -2;
+            background-color: var(--bg-deep);
+            background-image:
+                linear-gradient(rgba(46, 230, 208, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(46, 230, 208, 0.06) 1px, transparent 1px);
+            background-size: 34px 34px;
+        }
+        .bg-glow {
+            position: fixed; inset: 0; z-index: -1;
+            background:
+                radial-gradient(circle at 20% 15%, rgba(46, 230, 208, 0.10) 0%, transparent 45%),
+                radial-gradient(circle at 80% 90%, rgba(255, 62, 165, 0.08) 0%, transparent 45%);
+        }
+        body::after {
+            content: '';
+            position: fixed; inset: 0; z-index: 45; pointer-events: none;
+            background: repeating-linear-gradient(180deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 2px, transparent 4px);
+            mix-blend-mode: overlay;
+        }
+
+        .term {
+            width: 100%;
+            max-width: 560px;
+            background: var(--panel);
+            backdrop-filter: blur(14px);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 40px rgba(46,230,208,0.05);
+            overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
-        .container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        .term:hover { transform: translateY(-4px); box-shadow: 0 24px 70px rgba(0,0,0,0.65), 0 0 50px rgba(46,230,208,0.08); }
+
+        .term-bar {
+            display: flex; align-items: center; gap: 8px;
+            padding: 10px 14px;
+            background: rgba(0,0,0,0.35);
+            border-bottom: 1px solid var(--line);
         }
-        
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .dot.r { background: #ff5f56; }
+        .dot.y { background: #ffbd2e; }
+        .dot.g { background: #27c93f; }
+        .term-title { margin-left: 10px; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.5px; }
+        .back-button {
+            margin-left: auto;
+            background: transparent;
+            border: 1px solid var(--line);
+            color: var(--cyan);
+            border-radius: 6px;
+            width: 28px; height: 28px;
+            display: flex; align-items: center; justify-content: center;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.25s ease;
+        }
+        .back-button:hover { background: rgba(46,230,208,0.1); }
+
+        .term-body { padding: 2.4rem 2rem; text-align: center; }
+
         .logo {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 1.5rem;
-            filter: drop-shadow(0 0 10px rgba(88, 101, 242, 0.4));
+            width: 74px; height: 74px;
+            margin-bottom: 1.4rem;
+            filter: drop-shadow(0 0 12px rgba(46, 230, 208, 0.4));
         }
-        
+
         h1 {
-            color: var(--discord-lighter);
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            font-weight: 600;
+            font-family: var(--pixel);
+            font-weight: 400;
+            font-size: clamp(1.6rem, 6vw, 2rem);
+            letter-spacing: 1px;
+            color: var(--cyan-soft);
+            text-shadow: 0 0 10px rgba(46,230,208,0.4);
+            margin-bottom: 1.4rem;
         }
-        
-        .username-container {
-            position: relative;
-            margin: 2rem 0;
-        }
-        
+
+        .prompt-line { font-size: 0.78rem; color: var(--muted); margin-bottom: 1.6rem; }
+        .prompt-line .ps1 { color: var(--cyan); }
+
+        .username-container { position: relative; margin: 1.6rem 0; }
+
         .username-display {
-            font-family: 'Consolas', 'Monaco', monospace;
-            font-size: 1.8rem;
-            background-color: var(--discord-darkest);
-            padding: 1.2rem 2rem;
+            font-family: var(--mono);
+            font-size: 1.5rem;
+            font-weight: 600;
+            background: var(--bg-deep);
+            padding: 1.1rem 1.8rem;
             border-radius: 8px;
             display: inline-block;
-            color: var(--discord-lighter);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text);
+            border: 1px solid var(--line);
             transition: all 0.3s ease;
             cursor: pointer;
             position: relative;
             overflow: hidden;
         }
-        
-        .username-display:hover {
-            background-color: rgba(88, 101, 242, 0.1);
-            border-color: var(--discord-blurple);
-        }
-        
-        .username-display:active {
-            transform: scale(0.98);
-        }
-        
+        .username-display::before { content: '$ '; color: var(--cyan); }
+        .username-display:hover { border-color: var(--cyan); background: rgba(46,230,208,0.06); }
+        .username-display:active { transform: scale(0.98); }
+
         .username-display::after {
             content: "Click to copy";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(88, 101, 242, 0.9);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            position: absolute; inset: 0;
+            background: rgba(46, 230, 208, 0.92);
+            color: #04070a;
+            font-weight: 700;
+            display: flex; align-items: center; justify-content: center;
             opacity: 0;
             transition: opacity 0.3s ease;
-            font-size: 1rem;
+            font-size: 0.95rem;
         }
-        
-        .username-display:hover::after {
-            opacity: 1;
-        }
-        
+        .username-display:hover::after { opacity: 1; }
+
         .copy-success {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background-color: var(--discord-green);
-            color: white;
-            padding: 0.3rem 0.6rem;
+            position: absolute; top: -10px; right: -10px;
+            background: var(--magenta);
+            color: #04070a;
+            padding: 0.3rem 0.7rem;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
+            font-weight: 700;
             opacity: 0;
             transform: translateY(10px);
             transition: all 0.3s ease;
             z-index: 10;
         }
-        
-        .copy-success.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
+        .copy-success.show { opacity: 1; transform: translateY(0); }
+
         .divider {
             height: 1px;
-            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+            background: linear-gradient(to right, transparent, var(--line), transparent);
             margin: 2rem 0;
         }
-        
+
         .server-invite {
-            display: inline-block;
-            margin-top: 1.5rem;
-            padding: 0.8rem 1.5rem;
-            background-color: var(--discord-blurple);
-            color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 0.6rem;
+            padding: 0.8rem 1.6rem;
+            background: linear-gradient(135deg, var(--cyan), var(--magenta));
+            color: #04070a;
             text-decoration: none;
-            border-radius: 4px;
-            font-weight: 500;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 0.3px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        
-        .server-invite:hover {
-            background-color: #4752C4;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-        
-        .server-invite i {
-            margin-right: 8px;
-        }
-        
+        .server-invite:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(46,230,208,0.25); }
+
         .creation-date {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.78rem;
+            color: var(--muted);
             margin-top: 2rem;
         }
-        
+
         @media (max-width: 600px) {
-            .container {
-                padding: 1.5rem;
-            }
-            
-            h1 {
-                font-size: 1.5rem;
-            }
-            
-            .username-display {
-                font-size: 1.4rem;
-                padding: 1rem 1.5rem;
-            }
+            .term-body { padding: 1.8rem 1.4rem; }
+            h1 { font-size: 1.4rem; }
+            .username-display { font-size: 1.1rem; padding: 0.9rem 1.3rem; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png" alt="Discord Logo" class="logo">
-        <h1>Connect with me on Discord</h1>
-        
-        <p>Click below to copy my username:</p>
-        
-        <div class="username-container">
-            <div class="username-display" id="copyButton" data-clipboard-text="nec_1999">
-                nec_1999
-            </div>
-            <div class="copy-success" id="copySuccess">
-                Copied!
-            </div>
+    <div class="bg-grid"></div>
+    <div class="bg-glow"></div>
+
+    <div class="term">
+        <div class="term-bar">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="term-title">necro@root:~/discord</span>
+            <a href="index" class="back-button" title="Back to Home">←</a>
         </div>
-        
-        <div class="divider"></div>
-        
-        <p>You can also join my Discord server:</p>
-        <a href="https://discord.gg/w8nrqPb8vG" class="server-invite" target="_blank">
-            <i class="fab fa-discord"></i> Join NS Server
-        </a>
-        
-        <div class="creation-date">
-            Channel created: September 22, 2017 * Inactive *
+        <div class="term-body">
+            <img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png" alt="Discord Logo" class="logo">
+            <h1>Connect on Discord</h1>
+            <p class="prompt-line"><span class="ps1">necro@root</span>:~$ echo $USERNAME</p>
+
+            <div class="username-container">
+                <div class="username-display" id="copyButton" data-clipboard-text="nec_1999">nec_1999</div>
+                <div class="copy-success" id="copySuccess">Copied!</div>
+            </div>
+
+            <div class="divider"></div>
+
+            <p style="color:var(--muted); font-size:0.85rem; margin-bottom:0.6rem;">Or join the server directly:</p>
+            <a href="https://discord.gg/w8nrqPb8vG" class="server-invite" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-discord"></i> Join NS Server
+            </a>
+
+            <div class="creation-date">Channel created: September 22, 2017 · inactive</div>
         </div>
     </div>
 
-    <!-- Include Clipboard.js library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
-
     <script>
-        // Initialize Clipboard.js
+        // ===== Clipboard =====
         new ClipboardJS('#copyButton').on('success', function(e) {
             e.clearSelection();
-            
-            // Show success message
             const copySuccess = document.getElementById('copySuccess');
             copySuccess.classList.add('show');
-            
-            // Hide after 2 seconds
-            setTimeout(() => {
-                copySuccess.classList.remove('show');
-            }, 2000);
+            setTimeout(() => copySuccess.classList.remove('show'), 2000);
         });
-        
-        // Fallback for mobile touch feedback
+
         document.getElementById('copyButton').addEventListener('touchstart', function() {
-            this.style.backgroundColor = 'rgba(88, 101, 242, 0.2)';
+            this.style.background = 'rgba(46, 230, 208, 0.12)';
         });
-        
         document.getElementById('copyButton').addEventListener('touchend', function() {
-            this.style.backgroundColor = '';
+            this.style.background = '';
+        });
+
+        // ===== Anti right-click & keyboard shortcut protection =====
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            const key = e.key.toLowerCase();
+            const blocked =
+                e.key === 'F12' ||
+                (e.ctrlKey && e.shiftKey && ['i', 'j', 'c', 'k'].includes(key)) ||
+                (e.metaKey && e.altKey && ['i', 'j', 'c'].includes(key)) ||
+                ((e.ctrlKey || e.metaKey) && ['u', 's', 'p'].includes(key));
+            if (blocked) e.preventDefault();
+        });
+        document.addEventListener('dragstart', e => e.preventDefault());
+        document.addEventListener('selectstart', e => {
+            if (!e.target.closest('.username-display')) e.preventDefault();
         });
     </script>
 </body>

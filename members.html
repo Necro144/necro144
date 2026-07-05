@@ -1,697 +1,341 @@
-<html>
-      <link rel="icon" type="image/png" href="lambda.png">
-<html style="height: 100%">
-                <body style="margin: 0; height: 100%; display: flex;flex-direction: column;align-items: center;justify-content: center">
-                    <font size=3><p><font color=yellow>OWNER</font color>
-<font color=red>BANNED</font color> <font color=green>SUPPORT</font color>
-<font color=blue>UNBANNED</font color>
-<font color=grey>RETIRED</font color> <font color=cyan>ACTIVITY</font color></p></font size>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#04070a">
+    <meta name="color-scheme" content="dark">
+    <link rel="icon" type="image/png" href="lambda.png">
+    <title>members.log // Community Roster</title>
 
-<table>
-  <tr>
-    <th><font color=white><center>User ID</center></th>
-    <th><font color=white><center>High Staff Since</center></th>
-    <th><font color=white><center>Submited Country</center></th>
-    <th><font color=white><center>Current Server Rank</center></th>
-  </tr>
-  <tr>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <td><font color=white><b>刀ec[尺]o /A/</a></td>
-    <td><font color=white><script>
-/*
-Count up from any date script-
-By JavaScript Kit (www.javascriptkit.com)
-Over 200+ free scripts here!
-*/
+    <style>
+        :root {
+            --bg: #04070a;
+            --bg-deep: #010302;
+            --panel: rgba(8, 16, 18, 0.85);
+            --line: rgba(46, 230, 208, 0.18);
+            --cyan: #2ee6d0;
+            --cyan-soft: #7dfbe9;
+            --magenta: #ff3ea5;
+            --amber: #ffb703;
+            --blue: #4dabf7;
+            --grey: #8a9a97;
+            --text: #d9f6f0;
+            --muted: #5f8b85;
+            --radius: 12px;
+            --mono: 'JetBrains Mono', ui-monospace, monospace;
+            --pixel: 'VT323', monospace;
+        }
 
-var montharray=new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        html, body { height: 100%; }
 
-function countup(yr,m,d){
-var today=new Date()
-var todayy=today.getYear()
-if (todayy < 1000)
-todayy+=1900
-var todaym=today.getMonth()
-var todayd=today.getDate()
-var todaystring=montharray[todaym]+" "+todayd+", "+todayy
-var paststring=montharray[m-1]+" "+d+", "+yr
-var difference=(Math.round((Date.parse(todaystring)-Date.parse(paststring))/(24*60*60*1000))*1)
-difference+=" days"
-document.write(" "+difference+" as Moderator")
-}
-//enter the count up date using the format year/month/day
-countup(2014,01,01)
-</script></td>
-    <td><font color=white>Amman, Jordan</td>
-    <td><font color=yellow>Owner & Moderator</td>
-  </tr>
+        body {
+            font-family: var(--mono);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+            padding-bottom: 60px;
+        }
 
-  <tr>
+        .bg-grid {
+            position: fixed; inset: 0; z-index: -2;
+            background-color: var(--bg-deep);
+            background-image:
+                linear-gradient(rgba(46, 230, 208, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(46, 230, 208, 0.06) 1px, transparent 1px);
+            background-size: 34px 34px;
+        }
+        .bg-glow {
+            position: fixed; inset: 0; z-index: -1;
+            background:
+                radial-gradient(circle at 15% 8%, rgba(46, 230, 208, 0.10) 0%, transparent 45%),
+                radial-gradient(circle at 85% 95%, rgba(255, 62, 165, 0.08) 0%, transparent 45%);
+        }
+        body::after {
+            content: '';
+            position: fixed; inset: 0; z-index: 45; pointer-events: none;
+            background: repeating-linear-gradient(180deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 2px, transparent 4px);
+            mix-blend-mode: overlay;
+        }
 
-    <td><font color=white><b>ღΒUFORD ツ</a></td>
-    <td><font color=white><script>
-/*
-Count up from any date script-
-By JavaScript Kit (www.javascriptkit.com)
-Over 200+ free scripts here!
-*/
+        header {
+            position: relative;
+            padding: 2.2rem 20px 1.6rem;
+            text-align: center;
+            border-bottom: 1px solid var(--line);
+            background: rgba(4, 7, 10, 0.6);
+            backdrop-filter: blur(10px);
+        }
 
-var montharray=new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
+        .back-button {
+            position: absolute; left: 16px; top: 50%;
+            transform: translateY(-50%);
+            background: var(--panel);
+            border: 1px solid var(--line);
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.8rem;
+            padding: 8px 14px;
+            border-radius: 8px;
+            transition: all 0.25s ease;
+        }
+        .back-button:hover { background: rgba(46,230,208,0.1); border-color: var(--cyan); }
 
-function countup(yr,m,d){
-var today=new Date()
-var todayy=today.getYear()
-if (todayy < 1000)
-todayy+=1900
-var todaym=today.getMonth()
-var todayd=today.getDate()
-var todaystring=montharray[todaym]+" "+todayd+", "+todayy
-var paststring=montharray[m-1]+" "+d+", "+yr
-var difference=(Math.round((Date.parse(todaystring)-Date.parse(paststring))/(24*60*60*1000))*1)
-difference+=" days"
-document.write(" "+difference+" as Member")
-}
-//enter the count up date using the format year/month/day
-countup(2015,01,01)
-</script></td>
-    <td><font color=white>Saudi Arabia</td>
-    <td><font color=green>SUPPORTER</td>
-  </tr>
-  <tr>
-    <td><font color=white><b>Mila</a></td>
-    <td><font color=white><script>
-/*
-Count up from any date script-
-By JavaScript Kit (www.javascriptkit.com)
-Over 200+ free scripts here!
-*/
+        .terminal-path { font-size: 0.72rem; color: var(--muted); margin-bottom: 8px; }
+        .terminal-path .ps1 { color: var(--cyan); }
 
-var montharray=new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
+        h1 {
+            font-family: var(--pixel);
+            font-weight: 400;
+            font-size: clamp(1.8rem, 6vw, 2.3rem);
+            letter-spacing: 1px;
+            color: var(--cyan-soft);
+            text-shadow: 0 0 10px rgba(46,230,208,0.45);
+        }
 
-function countup(yr,m,d){
-var today=new Date()
-var todayy=today.getYear()
-if (todayy < 1000)
-todayy+=1900
-var todaym=today.getMonth()
-var todayd=today.getDate()
-var todaystring=montharray[todaym]+" "+todayd+", "+todayy
-var paststring=montharray[m-1]+" "+d+", "+yr
-var difference=(Math.round((Date.parse(todaystring)-Date.parse(paststring))/(24*60*60*1000))*1)
-difference+=" days"
-document.write(" "+difference+" as ex Mods")
-}
-//enter the count up date using the format year/month/day
-countup(2017,02,010)
-</script></td>
-    <td><font color=white>Republic of Macedonia</td>
-    <td><font color=red>INACTIVE</td>
-  </tr>
-    <tr>
-    <td><font color=white>Natsheh</td>
-    <td><font color=white>2015</td>		
-    <td><font color=white>Tel Aviv, Palestine</td>	
-    <td><font color=blue>BARELY ACTIVE</td>	
-  </tr>
-  <tr>
-    <td><font color=white><b> Razer</a></td>
-    <td><font color=white><script>
-/*
-Count up from any date script-
-By JavaScript Kit (www.javascriptkit.com)
-Over 200+ free scripts here!
-*/
+        .legend {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 18px;
+            max-width: 800px; margin: 1.2rem auto 0;
+            font-size: 0.72rem;
+        }
+        .legend span { display: flex; align-items: center; gap: 6px; color: var(--muted); }
+        .legend .swatch { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
 
-var montharray=new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
+        .table-wrap {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1.2rem;
+        }
 
-function countup(yr,m,d){
-var today=new Date()
-var todayy=today.getYear()
-if (todayy < 1000)
-todayy+=1900
-var todaym=today.getMonth()
-var todayd=today.getDate()
-var todaystring=montharray[todaym]+" "+todayd+", "+todayy
-var paststring=montharray[m-1]+" "+d+", "+yr
-var difference=(Math.round((Date.parse(todaystring)-Date.parse(paststring))/(24*60*60*1000))*1)
-difference+=" days"
-document.write(" "+difference+" as Member")
-}
-//enter the count up date using the format year/month/day
-countup(2015,01,01)
-</script></td>
-    <td><font color=white>Philippines</td>
-    <td><font color=red>INACTIVE</td>
-  </tr>
-  <tr>
-    <td><font color=white>Hikmat</td>
-    <td><font color=white><script>
-/*
-Count up from any date script-
-By JavaScript Kit (www.javascriptkit.com)
-Over 200+ free scripts here!
-*/
+        .section-title {
+            font-family: var(--pixel);
+            font-weight: 400;
+            font-size: 1.5rem;
+            color: var(--cyan-soft);
+            letter-spacing: 0.5px;
+            margin: 2rem 0 1rem;
+            text-align: left;
+        }
+        .section-title::before { content: '> '; color: var(--cyan); }
+        .table-wrap .section-title:first-child { margin-top: 0; }
 
-var montharray=new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
+        .roster-table-container {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            overflow-x: auto;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+        }
 
-function countup(yr,m,d){
-var today=new Date()
-var todayy=today.getYear()
-if (todayy < 1000)
-todayy+=1900
-var todaym=today.getMonth()
-var todayd=today.getDate()
-var todaystring=montharray[todaym]+" "+todayd+", "+todayy
-var paststring=montharray[m-1]+" "+d+", "+yr
-var difference=(Math.round((Date.parse(todaystring)-Date.parse(paststring))/(24*60*60*1000))*1)
-difference+=" days"
-document.write(" "+difference+" as Member")
-}
-//enter the count up date using the format year/month/day
-countup(2015,05,28)
-</script></td>
-    <td><font color=white>Palestine</td>
-    <td><font color=red>INACTIVE</td>
-  </tr>
-  <tr>
-    <td><font color=white>Zozo</td>
-    <td><font color=white><script>
-/*
-Count up from any date script-
-By JavaScript Kit (www.javascriptkit.com)
-Over 200+ free scripts here!
-*/
+        table { width: 100%; border-collapse: collapse; min-width: 640px; }
 
-var montharray=new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
+        thead th {
+            background: rgba(46, 230, 208, 0.06);
+            color: var(--cyan);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.72rem;
+            padding: 14px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--line);
+            white-space: nowrap;
+        }
 
-function countup(yr,m,d){
-var today=new Date()
-var todayy=today.getYear()
-if (todayy < 1000)
-todayy+=1900
-var todaym=today.getMonth()
-var todayd=today.getDate()
-var todaystring=montharray[todaym]+" "+todayd+", "+todayy
-var paststring=montharray[m-1]+" "+d+", "+yr
-var difference=(Math.round((Date.parse(todaystring)-Date.parse(paststring))/(24*60*60*1000))*1)
-difference+=" days"
-document.write(" "+difference+" as Member")
-}
-//enter the count up date using the format year/month/day
-countup(2015,06,01)
-</script></td>
-    <td><font color=white>Az Zarqa, Jordan</td>
-    <td><font color=red>INACTIVE</td>
-  </tr>
-  <tr>
-    <td><font color=white><b> Mka</a></td>
-    <td><font color=white>2016</td>
-    <td><font color=white>ERROR</td>
-    <td><font color=red>INACTIVE</td>
-  </tr>
-  <tr>
-    <td><font color=white><b> GhAsSseNNN </a></td>
-    <td><font color=white>2016</td>	
-    <td><font color=white>ERROR</td>	
-    <td><font color=red>INACTIVE</td>	
-  </tr>
-  <tr>
-    <td><font color=white><b> Admin X-Ran /A/ </a></td>
-    <td><font color=white>2016</td>
-    <td><font color=white>Amman, Jordan</td>		
-    <td><font color=red>INACTIVE</td>		
-  </tr>
-  <tr>
-    <td><font color=white><b> Explosion </a></td>
-    <td><font color=white>2017</td>
-    <td><font color=white>Pakistan</td>		
-    <td><font color=red>INACTIVE</td>		
-  </tr>
-    <tr>
-    <td><font color=white><b> Ahmad </a></td>
-    <td><font color=white>2017</td>
-    <td><font color=white>Palestine</td>		
-    <td><font color=red>INACTIVE</td>	
-  </tr>
-    <tr>
-    <td><font color=white><b> Killa </a></td>
-    <td><font color=white>2017</td>
-    <td><font color=white>Unknown</td>		
-    <td><font color=red>INACTIVE</td>	
-  </tr>
-    <tr>
-    <td><font color=white><b> KaideN </a></td>
-    <td><font color=white>2017</td>
-    <td><font color=white>ERROR</td>		
-    <td><font color=red>INACTIVE</td>		
-  </tr>
-    <tr>
-    <td><font color=white><b> Rucker </a></td>
-    <td><font color=white>2017</td>
-    <td><font color=white>ERROR</td>		
-    <td><font color=red>INACTIVE</td>	
-  </tr>
-    <tr>
-    <td><font color=white><b> LtRed </a></td> 
-    <td><font color=white>2017</td>
-    <td><font color=white>New Delhi, Delhi, India</td>		
-    <td><font color=red>INACTIVE</td>	
-  </tr>
-    <td><font color=white><b> Kusha </a></td>
-    <td><font color=white>2017</td>
-    <td><font color=white>ERROR</td>		
-    <td><font color=red>INACTIVE</td>	
-  </tr>
-    <tr>
-    <td><font color=white><b> Ahmad </a></td>
-    <td><font color=white>2017</td>
-    <td><font color=white>Palestine</td>		
-    <td><font color=red>INACTIVE</td>	
-  </tr>
-    <tr>
-    <td><font color=white><b> VåňBűřêň </a></td>
-    <td><font color=white>2017</td>
-    <td><font color=white>Amman, Jordan</td>		
-    <td><font color=red>INACTIVE</td>	
-  </tr>
-    <tr>
-    <td><font color=white><b> 7*A*M*O*D*A </a></td>
-    <td><font color=white><script>
-/*
-Count up from any date script-
-By JavaScript Kit (www.javascriptkit.com)
-Over 200+ free scripts here!
-*/
+        tbody td {
+            padding: 12px 16px;
+            font-size: 0.85rem;
+            border-bottom: 1px solid rgba(46, 230, 208, 0.08);
+            white-space: nowrap;
+        }
+        tbody tr:last-child td { border-bottom: none; }
+        tbody tr:hover { background: rgba(46, 230, 208, 0.04); }
 
-var montharray=new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
+        .member-name { font-weight: 600; color: var(--text); }
+        .member-name::before { content: '/ '; color: var(--muted); }
+        .member-since { color: var(--muted); font-size: 0.8rem; }
+        .member-country { color: var(--cyan-soft); }
 
-function countup(yr,m,d){
-var today=new Date()
-var todayy=today.getYear()
-if (todayy < 1000)
-todayy+=1900
-var todaym=today.getMonth()
-var todayd=today.getDate()
-var todaystring=montharray[todaym]+" "+todayd+", "+todayy
-var paststring=montharray[m-1]+" "+d+", "+yr
-var difference=(Math.round((Date.parse(todaystring)-Date.parse(paststring))/(24*60*60*1000))*1)
-difference+=" days"
-document.write(" "+difference+" as  Admin")
-}
-//enter the count up date using the format year/month/day
-countup(2017,7,7)
-</script></td>
-    <td><font color=white>Palestine</td>		
-    <td><font color=cyan>BARELY ACTIVE</font color></td>	
-  </tr>
-  </tr>
-    <tr>
-    <td><font color=white><b> Angel </a></td>
-    <td><font color=white>2018</td>
-    <td><font color=white>ERROR</td>		
-    <td><font color=red>INACTIVE</td>	
-  </tr>
-    <tr>
-    <td><font color=white><b> Ac!D^ ◕ ◡ ◕ </a></td>
-    <td><font color=white><script>
-/*
-Count up from any date script-
-By JavaScript Kit (www.javascriptkit.com)
-Over 200+ free scripts here!
-*/
+        .rank-tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 999px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            border: 1px solid currentColor;
+        }
 
-var montharray=new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
+        footer {
+            text-align: center;
+            padding: 2rem 20px 0;
+            color: var(--muted);
+            font-size: 0.75rem;
+        }
 
-function countup(yr,m,d){
-var today=new Date()
-var todayy=today.getYear()
-if (todayy < 1000)
-todayy+=1900
-var todaym=today.getMonth()
-var todayd=today.getDate()
-var todaystring=montharray[todaym]+" "+todayd+", "+todayy
-var paststring=montharray[m-1]+" "+d+", "+yr
-var difference=(Math.round((Date.parse(todaystring)-Date.parse(paststring))/(24*60*60*1000))*1)
-difference+=" days"
-document.write(" "+difference+" as Member")
-}
-//enter the count up date using the format year/month/day
-countup(2018,3,27)
-</script></td>
-    <td><font color=white>Algeria</td>		
-    <td><font color=red>INACTIVE</td>		
-  </tr></tr>
-    <td><font color=white><b> FiNe </a></td>
-    <td><font color=white><script>
-/*
-Count up from any date script-
-By JavaScript Kit (www.javascriptkit.com)
-Over 200+ free scripts here!
-*/
+        @media (max-width: 640px) {
+            .back-button { position: static; transform: none; margin-bottom: 12px; display: inline-block; }
+            header { text-align: center; }
+        }
 
-var montharray=new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="bg-glow"></div>
 
-function countup(yr,m,d){
-var today=new Date()
-var todayy=today.getYear()
-if (todayy < 1000)
-todayy+=1900
-var todaym=today.getMonth()
-var todayd=today.getDate()
-var todaystring=montharray[todaym]+" "+todayd+", "+todayy
-var paststring=montharray[m-1]+" "+d+", "+yr
-var difference=(Math.round((Date.parse(todaystring)-Date.parse(paststring))/(24*60*60*1000))*1)
-difference+=" days"
-document.write(" "+difference+" as Member")
-}
-//enter the count up date using the format year/month/day
-countup(2018,4,01)
-</script></td>
-    <td><font color=white>Jeddah, Saudi Arabia</td>		
-    <td><font color=red>INACTIVE</td>	
+    <header>
+        <a href="index" class="back-button">&lt; back</a>
+        <p class="terminal-path"><span class="ps1">necro@root</span>:~$ cat members.log</p>
+        <h1>Community Roster</h1>
+        <div class="legend">
+            <span><i class="swatch" style="background:var(--amber)"></i>Owner</span>
+            <span><i class="swatch" style="background:var(--magenta)"></i>Banned / Inactive</span>
+            <span><i class="swatch" style="background:var(--cyan)"></i>Support / Active</span>
+            <span><i class="swatch" style="background:var(--blue)"></i>Unbanned</span>
+            <span><i class="swatch" style="background:var(--grey)"></i>Retired</span>
+            <span><i class="swatch" style="background:var(--cyan-soft)"></i>Barely Active</span>
+        </div>
+    </header>
 
-    <tr>
-    <td><font color=white><b>MrEagle</a></td>
-    <td><font color=white><script>
-/*
-Count up from any date script-
-By JavaScript Kit (www.javascriptkit.com)
-Over 200+ free scripts here!
-*/
+    <div class="table-wrap">
+        <h2 class="section-title">Active Roster</h2>
+        <div class="roster-table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Member Since</th>
+                        <th>Country</th>
+                        <th>Rank</th>
+                    </tr>
+                </thead>
+                <tbody id="membersBody"></tbody>
+            </table>
+        </div>
 
-var montharray=new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
+        <h2 class="section-title">Banned Users</h2>
+        <div class="roster-table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Banned Since</th>
+                        <th>Country</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="bannedBody"></tbody>
+            </table>
+        </div>
+    </div>
 
-function countup(yr,m,d){
-var today=new Date()
-var todayy=today.getYear()
-if (todayy < 1000)
-todayy+=1900
-var todaym=today.getMonth()
-var todayd=today.getDate()
-var todaystring=montharray[todaym]+" "+todayd+", "+todayy
-var paststring=montharray[m-1]+" "+d+", "+yr
-var difference=(Math.round((Date.parse(todaystring)-Date.parse(paststring))/(24*60*60*1000))*1)
-difference+=" days"
-document.write(" "+difference+" as <font color=white>Member</font color>")
-}
-//enter the count up date using the format year/month/day
-countup(2018,04,04)
-</script></td>
-    <td><font color=white>Stockholm, Sweden</td>		
-    <td><font color=cyan>BARELY ACTIVE</td>	
-  </tr>
-  <tr>
-    <td><font color=white><b>jessi</a></td>
-    <td><font color=white><script>
-/*
-Count up from any date script-
-By JavaScript Kit (www.javascriptkit.com)
-Over 200+ free scripts here!
-*/
+    <footer>© Necro's Hub — Community Roster Archive</footer>
 
-var montharray=new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
+    <script>
+        const RANK_COLORS = {
+            amber: 'var(--amber)',
+            magenta: 'var(--magenta)',
+            cyan: 'var(--cyan)',
+            blue: 'var(--blue)',
+            grey: 'var(--grey)',
+            cyansoft: 'var(--cyan-soft)'
+        };
 
-function countup(yr,m,d){
-var today=new Date()
-var todayy=today.getYear()
-if (todayy < 1000)
-todayy+=1900
-var todaym=today.getMonth()
-var todayd=today.getDate()
-var todaystring=montharray[todaym]+" "+todayd+", "+todayy
-var paststring=montharray[m-1]+" "+d+", "+yr
-var difference=(Math.round((Date.parse(todaystring)-Date.parse(paststring))/(24*60*60*1000))*1)
-difference+=" days"
-document.write(" "+difference+" as Admin</font color>")
-}
-//enter the count up date using the format year/month/day
-countup(2018,06,05)
-</script></td>
-    <td><font color=white>Palestine</td>
-    <td><font color=red>INACTIVE</td>
-  </tr>
+        // date: [year, month(1-12), day] for a live "days since" counter, or null for a static label
+        const members = [
+            { name: '刀ec[尺]o /A/', date: [2014,1,1], suffix: 'as Moderator', country: 'Amman, Jordan', rank: 'Owner & Moderator', color: 'amber' },
+            { name: 'ღΒUFORD ツ', date: [2015,1,1], suffix: 'as Member', country: 'Saudi Arabia', rank: 'SUPPORTER', color: 'cyan' },
+            { name: 'Mila', date: [2017,2,10], suffix: 'as ex Mod', country: 'Republic of Macedonia', rank: 'INACTIVE', color: 'magenta' },
+            { name: 'Natsheh', static: 'Since 2015', country: 'Tel Aviv, Palestine', rank: 'BARELY ACTIVE', color: 'blue' },
+            { name: 'Razer', date: [2015,1,1], suffix: 'as Member', country: 'Philippines', rank: 'INACTIVE', color: 'magenta' },
+            { name: 'Hikmat', date: [2015,5,28], suffix: 'as Member', country: 'Palestine', rank: 'INACTIVE', color: 'magenta' },
+            { name: 'Zozo', date: [2015,6,1], suffix: 'as Member', country: 'Az Zarqa, Jordan', rank: 'INACTIVE', color: 'magenta' },
+            { name: 'Mka', static: 'Since 2016', country: 'Unknown', rank: 'INACTIVE', color: 'magenta' },
+            { name: 'GhAsSseNNN', static: 'Since 2016', country: 'Unknown', rank: 'INACTIVE', color: 'magenta' },
+            { name: 'Admin X-Ran /A/', static: 'Since 2016', country: 'Amman, Jordan', rank: 'INACTIVE', color: 'magenta' },
+            { name: 'Explosion', static: 'Since 2017', country: 'Pakistan', rank: 'INACTIVE', color: 'magenta' },
+            { name: 'Ahmad', static: 'Since 2017', country: 'Palestine', rank: 'INACTIVE', color: 'magenta' },
+            { name: 'Killa', static: 'Since 2017', country: 'Unknown', rank: 'INACTIVE', color: 'magenta' },
+            { name: 'KaideN', static: 'Since 2017', country: 'Unknown', rank: 'INACTIVE', color: 'magenta' },
+            { name: 'Rucker', static: 'Since 2017', country: 'Unknown', rank: 'INACTIVE', color: 'magenta' },
+            { name: 'LtRed', static: 'Since 2017', country: 'New Delhi, India', rank: 'INACTIVE', color: 'magenta' },
+            { name: 'Kusha', static: 'Since 2017', country: 'Unknown', rank: 'INACTIVE', color: 'magenta' },
+            { name: 'VåňBűřêň', static: 'Since 2017', country: 'Amman, Jordan', rank: 'INACTIVE', color: 'magenta' },
+            { name: '7*A*M*O*D*A', date: [2017,7,7], suffix: 'as Admin', country: 'Palestine', rank: 'BARELY ACTIVE', color: 'cyansoft' },
+            { name: 'Angel', static: 'Since 2018', country: 'Unknown', rank: 'INACTIVE', color: 'magenta' },
+            { name: 'Ac!D^ ◕ ◡ ◕', date: [2018,3,27], suffix: 'as Member', country: 'Algeria', rank: 'INACTIVE', color: 'magenta' },
+            { name: 'FiNe', date: [2018,4,1], suffix: 'as Member', country: 'Jeddah, Saudi Arabia', rank: 'INACTIVE', color: 'magenta' },
+            { name: 'MrEagle', date: [2018,4,4], suffix: 'as Member', country: 'Stockholm, Sweden', rank: 'BARELY ACTIVE', color: 'cyansoft' },
+            { name: 'jessi', date: [2018,6,5], suffix: 'as Admin', country: 'Palestine', rank: 'INACTIVE', color: 'magenta' },
+            { name: 'ALSHABA71G', date: [2018,6,6], suffix: 'as Member', country: 'Palestine', rank: 'RETIRED', color: 'grey' },
+            { name: 'AyZz', date: [2018,6,24], suffix: 'as Member', country: 'Palestine', rank: 'RETIRED', color: 'grey' },
+            { name: 'Spix', date: [2018,7,26], suffix: 'as Member', country: 'Palestine', rank: 'RETIRED', color: 'grey' }
+        ];
 
-    <tr>
-    <td><font color=white><b>ALSHABA71G</a></td>
-    <td><font color=white><script>
-/*
-Count up from any date script-
-By JavaScript Kit (www.javascriptkit.com)
-Over 200+ free scripts here!
-*/
+        const banned = [
+            { name: 'Guccy', date: [2018,6,6], suffix: 'since application', country: 'France' },
+            { name: '»™ALeXaNDeR™«', date: [2018,3,31], suffix: 'since application', country: 'Palestine' },
+            { name: 'EFA', date: [2018,1,5], suffix: 'since application', country: 'Palestine' },
+            { name: '|wHx| 1*1=11', date: [2016,6,7], suffix: 'since application', country: 'Amman, Jordan' }
+        ];
 
-var montharray=new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
+        function daysSince(y, m, d) {
+            const past = new Date(y, m - 1, d);
+            const today = new Date();
+            const diff = Math.round((today - past) / (24 * 60 * 60 * 1000));
+            return diff;
+        }
 
-function countup(yr,m,d){
-var today=new Date()
-var todayy=today.getYear()
-if (todayy < 1000)
-todayy+=1900
-var todaym=today.getMonth()
-var todayd=today.getDate()
-var todaystring=montharray[todaym]+" "+todayd+", "+todayy
-var paststring=montharray[m-1]+" "+d+", "+yr
-var difference=(Math.round((Date.parse(todaystring)-Date.parse(paststring))/(24*60*60*1000))*1)
-difference+=" days"
-document.write(" "+difference+" as <font color=white>Member</font color>")
-}
-//enter the count up date using the format year/month/day
-countup(2018,06,06)
-</script></td>
-    <td><font color=white>Palestine</td>		
-    <td><font color=grey>RETIRED</td>	
-  </tr>
-    <tr>
-    <td><font color=white><b> AyZz</a></td>
-    <td><font color=white><script>
-/*
-Count up from any date script-
-By JavaScript Kit (www.javascriptkit.com)
-Over 200+ free scripts here!
-*/
+        function renderRow({ name, date, suffix, static: staticLabel, country, rank, color }) {
+            const sinceText = date
+                ? `${daysSince(...date).toLocaleString()} days ${suffix}`
+                : staticLabel;
+            return `
+                <tr>
+                    <td class="member-name">${name}</td>
+                    <td class="member-since">${sinceText}</td>
+                    <td class="member-country">${country}</td>
+                    <td><span class="rank-tag" style="color:${RANK_COLORS[color]}">${rank}</span></td>
+                </tr>`;
+        }
 
-var montharray=new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
+        function renderBannedRow({ name, date, suffix, country }) {
+            const sinceText = `${daysSince(...date).toLocaleString()} days ${suffix}`;
+            return `
+                <tr>
+                    <td class="member-name">${name}</td>
+                    <td class="member-since">${sinceText}</td>
+                    <td class="member-country">${country}</td>
+                    <td><span class="rank-tag" style="color:var(--magenta)">BANNED</span></td>
+                </tr>`;
+        }
 
-function countup(yr,m,d){
-var today=new Date()
-var todayy=today.getYear()
-if (todayy < 1000)
-todayy+=1900
-var todaym=today.getMonth()
-var todayd=today.getDate()
-var todaystring=montharray[todaym]+" "+todayd+", "+todayy
-var paststring=montharray[m-1]+" "+d+", "+yr
-var difference=(Math.round((Date.parse(todaystring)-Date.parse(paststring))/(24*60*60*1000))*1)
-difference+=" days"
-document.write(" "+difference+" as  member")
-}
-//enter the count up date using the format year/month/day
-countup(2018,6,24)
-</script></td>
-    <td><font color=white>Palestine</td>		
-    <td><font color=grey>RETIRED</td>	
-  </tr>
-  <tr>
-    <td><font color=white><b>Spix</a></td>
-    <td><font color=white><script>
-/*
-Count up from any date script-
-By JavaScript Kit (www.javascriptkit.com)
-Over 200+ free scripts here!
-*/
+        document.getElementById('membersBody').innerHTML = members.map(renderRow).join('');
+        document.getElementById('bannedBody').innerHTML = banned.map(renderBannedRow).join('');
 
-var montharray=new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
-
-function countup(yr,m,d){
-var today=new Date()
-var todayy=today.getYear()
-if (todayy < 1000)
-todayy+=1900
-var todaym=today.getMonth()
-var todayd=today.getDate()
-var todaystring=montharray[todaym]+" "+todayd+", "+todayy
-var paststring=montharray[m-1]+" "+d+", "+yr
-var difference=(Math.round((Date.parse(todaystring)-Date.parse(paststring))/(24*60*60*1000))*1)
-difference+=" days"
-document.write(" "+difference+" as Member")
-}
-//enter the count up date using the format year/month/day
-countup(2018,7,26)
-</script></td>	
-    <td><font color=white>Palestine</td>	
-    <td><font color=grey>RETIRED</td>	
-  </tr>
-  <tr>
-    <th><font color=white><center>BANNED USERS ID</center></th>
-    <th><font color=white><center>High Staff Since</center></th>
-    <th><font color=white><center>Submited Country</center></th>
-    <th><font color=white><center>Previous Server Rank</center></th>
-</tr>
-    <tr>
-    <td><font color=white><b>Guccy</a></td>
-    <td><font color=white><script>
-/*
-Count up from any date script-
-By JavaScript Kit (www.javascriptkit.com)
-Over 200+ free scripts here!
-*/
-
-var montharray=new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
-
-function countup(yr,m,d){
-var today=new Date()
-var todayy=today.getYear()
-if (todayy < 1000)
-todayy+=1900
-var todaym=today.getMonth()
-var todayd=today.getDate()
-var todaystring=montharray[todaym]+" "+todayd+", "+todayy
-var paststring=montharray[m-1]+" "+d+", "+yr
-var difference=(Math.round((Date.parse(todaystring)-Date.parse(paststring))/(24*60*60*1000))*1)
-difference+=" days"
-document.write(" "+difference+" as <font color=red>Since their application</font color>")
-}
-//enter the count up date using the format year/month/day
-countup(2018,06,06)
-</script></td>
-
-    <td><font color=white>France</td>		
-    <td><font color=red>BANNED</td>		
-  </tr>
-
-    <td><font color=white><b> »™ALeXaNDeR™« </a></td>
-    <td><font color=white><script>
-/*
-Count up from any date script-
-By JavaScript Kit (www.javascriptkit.com)
-Over 200+ free scripts here!
-*/
-
-var montharray=new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
-
-function countup(yr,m,d){
-var today=new Date()
-var todayy=today.getYear()
-if (todayy < 1000)
-todayy+=1900
-var todaym=today.getMonth()
-var todayd=today.getDate()
-var todaystring=montharray[todaym]+" "+todayd+", "+todayy
-var paststring=montharray[m-1]+" "+d+", "+yr
-var difference=(Math.round((Date.parse(todaystring)-Date.parse(paststring))/(24*60*60*1000))*1)
-difference+=" days"
-document.write(" "+difference+" <font color=red>Since their application")
-}
-//enter the count up date using the format year/month/day
-countup(2018,3,31)
-</script></td>
-    <td><font color=white>Palestine</td>
-    <td><font color=red>BANNED</td>
-    <tr>
-  </tr>
-    <td><font color=white><b> EFA </a></td>
-    <td><font color=white><script>
-/*
-Count up from any date script-
-By JavaScript Kit (www.javascriptkit.com)
-Over 200+ free scripts here!
-*/
-
-var montharray=new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
-
-function countup(yr,m,d){
-var today=new Date()
-var todayy=today.getYear()
-if (todayy < 1000)
-todayy+=1900
-var todaym=today.getMonth()
-var todayd=today.getDate()
-var todaystring=montharray[todaym]+" "+todayd+", "+todayy
-var paststring=montharray[m-1]+" "+d+", "+yr
-var difference=(Math.round((Date.parse(todaystring)-Date.parse(paststring))/(24*60*60*1000))*1)
-difference+=" days"
-document.write(" "+difference+" <font color=red>Since their application")
-}
-//enter the count up date using the format year/month/day
-countup(2018,01,05)
-</script></td>
-    <td><font color=white>Palestine</td>
-    <td><font color=red>BANNED</td>
-  <tr>
-    <td><font color=white><b> |wHx| 1*1=11</a></td>
-    <td><font color=white><script>
-/*
-Count up from any date script-
-By JavaScript Kit (www.javascriptkit.com)
-Over 200+ free scripts here!
-*/
-
-var montharray=new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
-
-function countup(yr,m,d){
-var today=new Date()
-var todayy=today.getYear()
-if (todayy < 1000)
-todayy+=1900
-var todaym=today.getMonth()
-var todayd=today.getDate()
-var todaystring=montharray[todaym]+" "+todayd+", "+todayy
-var paststring=montharray[m-1]+" "+d+", "+yr
-var difference=(Math.round((Date.parse(todaystring)-Date.parse(paststring))/(24*60*60*1000))*1)
-difference+=" days"
-document.write(" "+difference+" <font color=red>Since their application")
-}
-//enter the count up date using the format year/month/day
-countup(2016,6,07)
-</script></td>
-    <td><font color=white>Amman, Jordan</td>
-    <td><font color=white><font color=red>BANNED</font color></td>
-  </tr>
-  <tr>
-    <tr>
-    <td><font color=white><b></a></td>
-    <td><font color=white> </td>
-    <td><font color=white> </td>		
-    <td><font color=white> </td>	
-  </tr>
-</table>
-
-</body>
-</html>
-
-<style>
-  /* Style for normal links */
-  a {
-    color: yellow; /* Change this to your desired color */
-    text-decoration: none;
-  }
-
-  /* Style for external links */
-  a[href^="http"]:not([href*="your-website-domain.com"]),
-  a[href^="https"]:not([href*="your-website-domain.com"]) {
-    color: yellow; /* Change this to your desired color for external links */
-    text-decoration: none;
-  }
-</style>
-<script>
-  // Disable right-click context menu
-  window.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
-  });
-
-  // Disable Ctrl+U shortcut
-  window.addEventListener('keydown', function(e) {
-    if (e.ctrlKey && e.key === 'u') {
-      e.preventDefault();
-    }
-  });
-
-  // Disable all keyboard shortcuts
-  window.addEventListener('keydown', function(e) {
-    e.preventDefault();
-  });
-</script>
-
-<body bgcolor="black">
+        // ===== Anti right-click & keyboard shortcut protection =====
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            const key = e.key.toLowerCase();
+            const blocked =
+                e.key === 'F12' ||
+                (e.ctrlKey && e.shiftKey && ['i', 'j', 'c', 'k'].includes(key)) ||
+                (e.metaKey && e.altKey && ['i', 'j', 'c'].includes(key)) ||
+                ((e.ctrlKey || e.metaKey) && ['u', 's', 'p'].includes(key));
+            if (blocked) e.preventDefault();
+        });
+        document.addEventListener('dragstart', e => e.preventDefault());
+    </script>
 </body>
 </html>

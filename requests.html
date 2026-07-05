@@ -1,236 +1,240 @@
-<style>
-.button {
-  background-color: #8B0000; /* Dark red background color */
-  border: none; /* No border */
-  color: white; /* White text color */
-  padding: 10px 20px; /* Padding around the text */
-  text-align: center; /* Centered text */
-  text-decoration: none; /* No underline */
-  display: inline-block; /* Display as a block element */
-  font-size: 16px; /* Font size */
-  border-radius: 4px; /* Rounded corners */
-  cursor: pointer; /* Cursor on hover */
-  transition: background-color 0.3s ease; /* Smooth color transition */
-}
-
-.button:hover {
-  background-color: #6B0000; /* Darker red background color on hover */
-}
-</style>
-</head>
-<body>
-    <link rel="icon" type="image/png" href="lambda.png">
-<a href="index.html" class="button"> < Main Page </a>
-
-</body>
-
-<!DOCTYPE html><center>
-<body style="background-color:black;"> ​
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<style>
-table, th, td {
-  border: 2.1px solid white;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#04070a">
+    <meta name="color-scheme" content="dark">
+    <link rel="icon" type="image/png" href="lambda.png">
+    <title>staff.log // Server Staff</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #04070a;
+            --bg-deep: #010302;
+            --panel: rgba(8, 16, 18, 0.85);
+            --line: rgba(46, 230, 208, 0.18);
+            --cyan: #2ee6d0;
+            --cyan-soft: #7dfbe9;
+            --magenta: #ff3ea5;
+            --amber: #ffb703;
+            --text: #d9f6f0;
+            --muted: #5f8b85;
+            --radius: 12px;
+            --mono: 'JetBrains Mono', ui-monospace, monospace;
+            --pixel: 'VT323', monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        html, body { height: 100%; }
+
+        body {
+            font-family: var(--mono);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+            padding-bottom: 60px;
+        }
+
+        .bg-grid {
+            position: fixed; inset: 0; z-index: -2;
+            background-color: var(--bg-deep);
+            background-image:
+                linear-gradient(rgba(46, 230, 208, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(46, 230, 208, 0.06) 1px, transparent 1px);
+            background-size: 34px 34px;
+        }
+        .bg-glow {
+            position: fixed; inset: 0; z-index: -1;
+            background:
+                radial-gradient(circle at 15% 8%, rgba(46, 230, 208, 0.10) 0%, transparent 45%),
+                radial-gradient(circle at 85% 95%, rgba(255, 62, 165, 0.08) 0%, transparent 45%);
+        }
+        body::after {
+            content: '';
+            position: fixed; inset: 0; z-index: 45; pointer-events: none;
+            background: repeating-linear-gradient(180deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 2px, transparent 4px);
+            mix-blend-mode: overlay;
+        }
+
+        header {
+            position: relative;
+            padding: 2.2rem 20px 1.6rem;
+            text-align: center;
+            border-bottom: 1px solid var(--line);
+            background: rgba(4, 7, 10, 0.6);
+            backdrop-filter: blur(10px);
+        }
+
+        .back-button {
+            position: absolute; left: 16px; top: 50%;
+            transform: translateY(-50%);
+            background: var(--panel);
+            border: 1px solid var(--line);
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.8rem;
+            padding: 8px 14px;
+            border-radius: 8px;
+            transition: all 0.25s ease;
+        }
+        .back-button:hover { background: rgba(46,230,208,0.1); border-color: var(--cyan); }
+
+        .terminal-path { font-size: 0.72rem; color: var(--muted); margin-bottom: 8px; }
+        .terminal-path .ps1 { color: var(--cyan); }
+
+        h1 {
+            font-family: var(--pixel);
+            font-weight: 400;
+            font-size: clamp(1.8rem, 6vw, 2.3rem);
+            letter-spacing: 1px;
+            color: var(--cyan-soft);
+            text-shadow: 0 0 10px rgba(46,230,208,0.45);
+        }
+
+        .table-wrap { max-width: 1100px; margin: 2rem auto; padding: 0 1.2rem; }
+
+        .roster-table-container {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            overflow-x: auto;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+        }
+
+        table { width: 100%; border-collapse: collapse; min-width: 680px; }
+
+        thead th {
+            background: rgba(46, 230, 208, 0.06);
+            color: var(--cyan);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.72rem;
+            padding: 14px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--line);
+            white-space: nowrap;
+        }
+
+        tbody td {
+            padding: 12px 16px;
+            font-size: 0.85rem;
+            border-bottom: 1px solid rgba(46, 230, 208, 0.08);
+            white-space: nowrap;
+        }
+        tbody tr:last-child td { border-bottom: none; }
+        tbody tr:hover { background: rgba(46, 230, 208, 0.04); }
+
+        .member-name { font-weight: 600; color: var(--text); }
+        .member-name::before { content: '/ '; color: var(--muted); }
+        .member-since { color: var(--muted); font-size: 0.8rem; }
+        .member-country { color: var(--cyan-soft); }
+        .member-server { color: var(--muted); font-size: 0.78rem; }
+
+        .rank-tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 999px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            border: 1px solid currentColor;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 20px 0;
+            color: var(--muted);
+            font-size: 0.75rem;
+        }
+
+        @media (max-width: 640px) {
+            .back-button { position: static; transform: none; margin-bottom: 12px; display: inline-block; }
+            header { text-align: center; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
+        }
+    </style>
 </head>
 <body>
+    <div class="bg-grid"></div>
+    <div class="bg-glow"></div>
 
+    <header>
+        <a href="index" class="back-button">&lt; back</a>
+        <p class="terminal-path"><span class="ps1">necro@root</span>:~$ cat staff.log</p>
+        <h1>Server Staff</h1>
+    </header>
 
+    <div class="table-wrap">
+        <div class="roster-table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nickname</th>
+                        <th>Since</th>
+                        <th>Country</th>
+                        <th>Rank</th>
+                        <th>Server</th>
+                    </tr>
+                </thead>
+                <tbody id="staffBody"></tbody>
+            </table>
+        </div>
+    </div>
 
+    <footer>© Necro's Hub — Server Staff Archive</footer>
 
-<table style="width:90%">
+    <script>
+        const staff = [
+            { name: 'Néć[Ř]ø /A/', date: [2013,6,15], country: 'JORDAN', rank: 'Founder', color: 'var(--amber)', server: 'CS1.6 MODRIOT + NS SERVERS' },
+            { name: 'クサイ', date: [2015,6,15], country: 'JORDAN', rank: 'Co-Owner', color: 'var(--amber)', server: 'CS1.6 MODRIOT + NS SERVERS' },
+            { name: '7*A*M*O*D*A', date: [2017,7,7], country: 'PALESTINE', rank: 'Admin', color: 'var(--cyan)', server: 'CERTAIN SERVERS' },
+            { name: 'FxR3x', date: [2022,9,24], country: 'PALESTINE', rank: 'SUSPENDED', color: 'var(--magenta)', server: 'CURRENTLY NON-ADMIN' },
+            { name: '♕ ＩｔｚＫｏＮＮＮ ♕', date: [2022,9,25], country: 'PALESTINE', rank: 'SUSPENDED', color: 'var(--magenta)', server: 'CURRENTLY NON-ADMIN' },
+            { name: '|Ns| MrEagle', date: [2022,10,16], country: 'SWEDEN', rank: 'Admin', color: 'var(--cyan)', server: 'NS SERVERS' }
+        ];
 
-  <tr>
-    <th><font color=white><center>|| NICKNAME ||</center></th>
-    <th><font color=white><center>|| SINCE ||</center></th>
-    <th><font color=white><center>|| Country ||</center></th>
-    <th><font color=white><center>|| Rank ||</center></th>
-    <th><font color=white><center>|| Server ||</center></th>
-  </tr>
-  <tr>
+        function daysSince(y, m, d) {
+            const past = new Date(y, m - 1, d);
+            const today = new Date();
+            return Math.round((today - past) / (24 * 60 * 60 * 1000));
+        }
 
-    
-    <td><font color=white>Néć[Ř]ø /A/</a></td>
-    <td><font color=white><script>
-/*
-Count up from any date script-
-By JavaScript Kit (www.javascriptkit.com)
-Over 200+ free scripts here!
-*/
+        function renderRow({ name, date, country, rank, color, server }) {
+            return `
+                <tr>
+                    <td class="member-name">${name}</td>
+                    <td class="member-since">${daysSince(...date).toLocaleString()} days</td>
+                    <td class="member-country">${country}</td>
+                    <td><span class="rank-tag" style="color:${color}">${rank}</span></td>
+                    <td class="member-server">${server}</td>
+                </tr>`;
+        }
 
-var montharray=new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
+        document.getElementById('staffBody').innerHTML = staff.map(renderRow).join('');
 
-function countup(yr,m,d){
-var today=new Date()
-var todayy=today.getYear()
-if (todayy < 1000)
-todayy+=1900
-var todaym=today.getMonth()
-var todayd=today.getDate()
-var todaystring=montharray[todaym]+" "+todayd+", "+todayy
-var paststring=montharray[m-1]+" "+d+", "+yr
-var difference=(Math.round((Date.parse(todaystring)-Date.parse(paststring))/(24*60*60*1000))*1)
-difference+=" days"
-document.write(" "+difference+" ")
-}
-//enter the count up date using the format year/month/day
-countup(2013,06,15)
-</script></td>
-    <td><font color=blue>JORDAN</td>
-    <td><font color=green>Founder</td>
-    <td><font color=cyan>〈〈 CS1.6 MODRIOT + NS SERVERS 〉〉</td>
-  </tr>
-
-  
-  
-      
-    <td><font color=white>クサイ</a></td>
-    <td><font color=white><script>
-
-var montharray=new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
-
-function countup(yr,m,d){
-var today=new Date()
-var todayy=today.getYear()
-if (todayy < 1000)
-todayy+=1900
-var todaym=today.getMonth()
-var todayd=today.getDate()
-var todaystring=montharray[todaym]+" "+todayd+", "+todayy
-var paststring=montharray[m-1]+" "+d+", "+yr
-var difference=(Math.round((Date.parse(todaystring)-Date.parse(paststring))/(24*60*60*1000))*1)
-difference+=" days"
-document.write(" "+difference+" ")
-}
-//enter the count up date using the format year/month/day
-countup(2015,06,15)
-</script></td>
-    <td><font color=blue>JORDAN</td>
-    <td><font color=green>co-Owner</td>
-    <td><font color=cyan>〈〈 CS1.6 MODRIOT + NS SERVERS 〉〉</td>
-  </tr>
-
-    
-    
-    
-
-
-
-
-  <tr>
-
-    <td><font color=white>7*A*M*O*D*A</a></td>
-    <td><font color=white><script>
-
-
-var montharray=new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
-
-function countup(yr,m,d){
-var today=new Date()
-var todayy=today.getYear()
-if (todayy < 1000)
-todayy+=1900
-var todaym=today.getMonth()
-var todayd=today.getDate()
-var todaystring=montharray[todaym]+" "+todayd+", "+todayy
-var paststring=montharray[m-1]+" "+d+", "+yr
-var difference=(Math.round((Date.parse(todaystring)-Date.parse(paststring))/(24*60*60*1000))*1)
-difference+=" days"
-document.write(" "+difference+" ")
-}
-//enter the count up date using the format year/month/day
-countup(2017,07,07)
-</script></td>
-    <td><font color=blue>PALESTINE</td>
-    <td><font color=green>Admin</td>
-    <td><font color=cyan>〈〈 CERTAIN SERVERS 〉〉</td>
-  </tr>
-
-
-    
-    <td><font color=white>FxR3x</a></td>
-    <td><font color=white><script>
-
-var montharray=new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
-
-function countup(yr,m,d){
-var today=new Date()
-var todayy=today.getYear()
-if (todayy < 1000)
-todayy+=1900
-var todaym=today.getMonth()
-var todayd=today.getDate()
-var todaystring=montharray[todaym]+" "+todayd+", "+todayy
-var paststring=montharray[m-1]+" "+d+", "+yr
-var difference=(Math.round((Date.parse(todaystring)-Date.parse(paststring))/(24*60*60*1000))*1)
-difference+=" days"
-document.write(" "+difference+" ")
-}
-//enter the count up date using the format year/month/day
-countup(2022,09,24)
-</script></td>
-    <td><font color=blue>PALESTINE</td>
-    <td><font color=red>SUSPENDED</td>
-    <td><font color=cyan>〈〈 CURRENTLY NON-ADMIN 〉〉</td>
-      
-      
-      
-  </tr>
-
-
-    
-    <td><font color=white>♕ ＩｔｚＫｏＮＮＮ ♕</a></td>
-    <td><font color=white><script>
-
-
-var montharray=new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
-
-function countup(yr,m,d){
-var today=new Date()
-var todayy=today.getYear()
-if (todayy < 1000)
-todayy+=1900
-var todaym=today.getMonth()
-var todayd=today.getDate()
-var todaystring=montharray[todaym]+" "+todayd+", "+todayy
-var paststring=montharray[m-1]+" "+d+", "+yr
-var difference=(Math.round((Date.parse(todaystring)-Date.parse(paststring))/(24*60*60*1000))*1)
-difference+=" days"
-document.write(" "+difference+" ")
-}
-//enter the count up date using the format year/month/day
-countup(2022,09,25)
-</script></td>
-    <td><font color=blue>PALESTINE</td>
-    <td><font color=red>SUSPENDED</td>
-    <td><font color=cyan>〈〈 CURRENTLY NON-ADMIN 〉〉</td>
-  </tr>
-
-
-    
-    <td><font color=white>|Ns| MrEagle</a></td>
-    <td><font color=white><script>
-
-
-var montharray=new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
-
-function countup(yr,m,d){
-var today=new Date()
-var todayy=today.getYear()
-if (todayy < 1000)
-todayy+=1900
-var todaym=today.getMonth()
-var todayd=today.getDate()
-var todaystring=montharray[todaym]+" "+todayd+", "+todayy
-var paststring=montharray[m-1]+" "+d+", "+yr
-var difference=(Math.round((Date.parse(todaystring)-Date.parse(paststring))/(24*60*60*1000))*1)
-difference+=" days"
-document.write(" "+difference+" ")
-}
-//enter the count up date using the format year/month/day
-countup(2022,10,16)
-</script></td>
-    <td><font color=blue>SWEDEN</td>
-    <td><font color=green>ADMIN</td>
-    <td><font color=cyan>〈〈 NS SERVERS 〉〉</td>
+        // ===== Anti right-click & keyboard shortcut protection =====
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            const key = e.key.toLowerCase();
+            const blocked =
+                e.key === 'F12' ||
+                (e.ctrlKey && e.shiftKey && ['i', 'j', 'c', 'k'].includes(key)) ||
+                (e.metaKey && e.altKey && ['i', 'j', 'c'].includes(key)) ||
+                ((e.ctrlKey || e.metaKey) && ['u', 's', 'p'].includes(key));
+            if (blocked) e.preventDefault();
+        });
+        document.addEventListener('dragstart', e => e.preventDefault());
+    </script>
+</body>
+</html>
