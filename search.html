@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Student Files">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#4361ee">
+    <meta name="description" content="Search and access your student files library">
+    
+    <title>Advanced Search</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon2.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="favicon2.ico">
+    
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlN0dWRlbnQgRmlsZXMgTGlicmFyeSIsCiAgInNob3J0X25hbWUiOiAiU3R1ZGVudCBGaWxlcyIsCiAgImRlc2NyaXB0aW9uIjogIlNlYXJjaCBhbmQgYWNjZXNzIHlvdXIgc3R1ZGVudCBmaWxlcyIsCiAgInN0YXJ0X3VybCI6ICIvIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjZmZmZmZmIiwKICAidGhlbWVfY29sb3IiOiAiIzQzNjFlZSIsCiAgIm9yaWVudGF0aW9uIjogInBvcnRyYWl0IiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiZmF2aWNvbjIuaWNvIiwKICAgICAgInNpemVzIjogIjE5MngxOTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICB9CiAgXQp9">
+    
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-light: #5a75f5;
+            --primary-dark: #3651d4;
+            --secondary: #7209b7;
+            --accent: #4cc9f0;
+            --success: #06d6a0;
+            --danger: #ef476f;
+            --warning: #ffd60a;
+            
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --glass-shadow: rgba(0, 0, 0, 0.1);
+            
+            --text-primary: #1a1a2e;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            
+            --bg-gradient-start: #667eea;
+            --bg-gradient-end: #764ba2;
+            
+            --border-radius-sm: 12px;
+            --border-radius-md: 16px;
+            --border-radius-lg: 24px;
+            
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            min-height: 100vh;
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .bg-animation::before,
+        .bg-animation::after {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.3;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .bg-animation::before {
+            background: var(--primary);
+            top: -250px;
+            right: -250px;
+            animation-delay: 0s;
+        }
+
+        .bg-animation::after {
+            background: var(--secondary);
+            bottom: -250px;
+            left: -250px;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(50px, 50px) scale(1.1); }
+            50% { transform: translate(100px, -50px) scale(0.9); }
+            75% { transform: translate(-50px, 100px) scale(1.05); }
+        }
+
+        /* Container */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Logo & Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInDown 0.6s ease-out;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 2px solid var(--glass-border);
+            border-radius: var(--border-radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 8px 32px var(--glass-shadow);
+        }
+
+        .logo i {
+            font-size: 36px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header p {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+
+        /* Search Box */
+        .search-container {
+            width: 100%;
+            margin-bottom: 30px;
+            animation: fadeInUp 0.6s ease-out 0.2s both;
+        }
+
+        .search-box {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 2px solid var(--glass-border);
+            border-radius: var(--border-radius-lg);
+            padding: 8px;
+            box-shadow: 0 8px 32px var(--glass-shadow);
+            transition: var(--transition);
+        }
+
+        .search-box:focus-within {
+            border-color: white;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .search-input-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 12px;
+        }
+
+        .search-icon {
+            font-size: 20px;
+            color: var(--primary);
+        }
+
+        .search-input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            font-size: 16px;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            outline: none;
+        }
+
+        .search-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--border-radius-sm);
+            font-size: 15px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            width: 100%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 2px solid var(--glass-border);
+            border-radius: var(--border-radius-md);
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px var(--glass-shadow);
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .stats-bar.show {
+            display: block;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+
+        /* Sort Controls */
+        .controls-container {
+            width: 100%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 2px solid var(--glass-border);
+            border-radius: var(--border-radius-md);
+            padding: 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px var(--glass-shadow);
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .controls-container.show {
+            display: block;
+        }
+
+        .control-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .control-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .control-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            min-width: 60px;
+        }
+
+        .control-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .control-btn {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.5);
+            border: 2px solid transparent;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .control-btn.active {
+            background: white;
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* View Toggle */
+        .view-toggle {
+            display: flex;
+            gap: 8px;
+        }
+
+        .view-btn {
+            width: 36px;
+            height: 36px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+
+        /* Results Container */
+        .results-container {
+            width: 100%;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .results-header {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 2px solid var(--glass-border);
+            border-radius: var(--border-radius-md);
+            padding: 16px 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 8px 32px var(--glass-shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .results-count {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .results-count span {
+            color: var(--primary);
+        }
+
+        /* Files Grid */
+        .files-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .file-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 2px solid var(--glass-border);
+            border-radius: var(--border-radius-md);
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 16px var(--glass-shadow);
+        }
+
+        .file-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            border-color: white;
+        }
+
+        .file-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 12px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: white;
+        }
+
+        .file-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+            word-break: break-word;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .file-meta {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* Files List */
+        .files-list {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 2px solid var(--glass-border);
+            border-radius: var(--border-radius-md);
+            overflow: hidden;
+            box-shadow: 0 8px 32px var(--glass-shadow);
+        }
+
+        .list-header {
+            display: grid;
+            grid-template-columns: 50px 1fr 100px 120px;
+            gap: 12px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.3);
+            border-bottom: 2px solid var(--glass-border);
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .list-row {
+            display: grid;
+            grid-template-columns: 50px 1fr 100px 120px;
+            gap: 12px;
+            padding: 14px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: var(--transition);
+            align-items: center;
+        }
+
+        .list-row:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .list-row:last-child {
+            border-bottom: none;
+        }
+
+        .list-icon-wrapper {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+        }
+
+        .list-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .list-size {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .list-date {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: white;
+        }
+
+        .empty-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .empty-state h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .empty-state p {
+            font-size: 16px;
+            opacity: 0.9;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        /* Loading State */
+        .loading-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: white;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 20px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-state p {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        /* Error State */
+        .error-state {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 2px solid var(--glass-border);
+            border-radius: var(--border-radius-md);
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 8px 32px var(--glass-shadow);
+        }
+
+        .error-icon {
+            font-size: 60px;
+            color: var(--danger);
+            margin-bottom: 16px;
+        }
+
+        .error-state h3 {
+            font-size: 20px;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .error-state p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        /* File Type Colors */
+        .icon-pdf { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        .icon-folder { background: linear-gradient(135deg, #f39c12, #d68910); }
+        .icon-image { background: linear-gradient(135deg, #3498db, #2980b9); }
+        .icon-video { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
+        .icon-document { background: linear-gradient(135deg, #2ecc71, #27ae60); }
+        .icon-spreadsheet { background: linear-gradient(135deg, #1abc9c, #16a085); }
+        .icon-presentation { background: linear-gradient(135deg, #e67e22, #d35400); }
+        .icon-archive { background: linear-gradient(135deg, #f1c40f, #f39c12); }
+        .icon-audio { background: linear-gradient(135deg, #1abc9c, #16a085); }
+        .icon-text { background: linear-gradient(135deg, #95a5a6, #7f8c8d); }
+        .icon-default { background: linear-gradient(135deg, #34495e, #2c3e50); }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 16px;
+            }
+
+            .header h1 {
+                font-size: 28px;
+            }
+
+            .logo {
+                width: 70px;
+                height: 70px;
+            }
+
+            .files-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 12px;
+            }
+
+            .list-header,
+            .list-row {
+                grid-template-columns: 40px 1fr 80px;
+            }
+
+            .list-date {
+                display: none;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .control-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .control-label {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .search-actions {
+                width: 100%;
+            }
+
+            .btn {
+                flex: 1;
+                justify-content: center;
+            }
+
+            .files-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+        }
+
+        /* iOS Safe Area */
+        @supports (padding: max(0px)) {
+            .container {
+                padding-left: max(20px, env(safe-area-inset-left));
+                padding-right: max(20px, env(safe-area-inset-right));
+                padding-bottom: max(20px, env(safe-area-inset-bottom));
+            }
+        }
+
+        /* Prevent text selection on double-tap */
+        .file-card, .list-row, .btn, .control-btn {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h1>Student Files Library</h1>
+            <p>Search your files quickly and easily</p>
+        </div>
+
+        <!-- Search Container -->
+        <div class="search-container">
+            <div class="search-box">
+                <div class="search-input-wrapper">
+                    <i class="fas fa-search search-icon"></i>
+                    <input 
+                        type="text" 
+                        class="search-input" 
+                        id="searchInput" 
+                        placeholder="Search for subjects, files, or keywords..."
+                        autocomplete="off"
+                    >
+                </div>
+                <div class="search-actions">
+                    <button class="btn btn-primary" id="searchBtn">
+                        <i class="fas fa-search"></i>
+                        Search
+                    </button>
+                    <button class="btn btn-secondary" id="clearBtn" style="display: none;">
+                        <i class="fas fa-times"></i>
+                        Clear
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Bar (Hidden initially) -->
+        <div class="stats-bar" id="statsBar">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number" id="totalFiles">0</span>
+                    <span class="stat-label">Total Files</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="totalSize">0 MB</span>
+                    <span class="stat-label">Total Size</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="resultsCount">0</span>
+                    <span class="stat-label">Results</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls (Hidden initially) -->
+        <div class="controls-container" id="controlsContainer">
+            <div class="control-row">
+                <span class="control-label">Sort by:</span>
+                <div class="control-buttons">
+                    <button class="control-btn active" data-sort="date">
+                        <i class="fas fa-calendar"></i> Date
+                    </button>
+                    <button class="control-btn" data-sort="name">
+                        <i class="fas fa-font"></i> Name
+                    </button>
+                    <button class="control-btn" data-sort="size">
+                        <i class="fas fa-weight-hanging"></i> Size
+                    </button>
+                    <button class="control-btn" data-sort="type">
+                        <i class="fas fa-file"></i> Type
+                    </button>
+                </div>
+            </div>
+            <div class="control-row">
+                <span class="control-label">Order:</span>
+                <div class="control-buttons">
+                    <button class="control-btn active" data-order="desc">
+                        <i class="fas fa-arrow-down"></i> Newest
+                    </button>
+                    <button class="control-btn" data-order="asc">
+                        <i class="fas fa-arrow-up"></i> Oldest
+                    </button>
+                </div>
+            </div>
+            <div class="control-row">
+                <span class="control-label">View:</span>
+                <div class="view-toggle">
+                    <button class="control-btn view-btn active" data-view="grid">
+                        <i class="fas fa-th"></i>
+                    </button>
+                    <button class="control-btn view-btn" data-view="list">
+                        <i class="fas fa-list"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Container (Hidden initially) -->
+        <div class="results-container" id="resultsContainer" style="display: none;">
+            <div class="results-header">
+                <div class="results-count">
+                    Found <span id="resultNumber">0</span> results
+                </div>
+            </div>
+            <div id="filesContent"></div>
+        </div>
+
+        <!-- Empty State (Initial) -->
+        <div class="empty-state" id="emptyState">
+            <div class="empty-icon">
+                <i class="fas fa-search"></i>
+            </div>
+            <h3>Start Your Search</h3>
+            <p>Enter a subject name or keyword above to find your files</p>
+        </div>
+    </div>
+
+    <script>
+        // ========================================
+        // CONFIGURATION
+        // ========================================
+        // Make sure your Google Apps Script is:
+        // 1. Deployed as a web app
+        // 2. Set to "Anyone" can access
+        // 3. Using the latest version
+        // 
+        // To get your script URL:
+        // 1. Open your Google Apps Script project
+        // 2. Click "Deploy" > "Manage deployments"
+        // 3. Copy the Web app URL
+        // ========================================
+        
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz9_c0Hr4aOusP5Wskn9fIw6UO6m8k4Esps3wJqKvZv2LQf6qcNFqP99cgU5UFOskVHsQ/exec';
+        
+        // State
+        let allFiles = [];
+        let filteredFiles = [];
+        let currentSearch = '';
+        let currentSort = 'date';
+        let currentOrder = 'desc';
+        let currentView = 'grid';
+        let hasSearched = false;
+
+        // DOM Elements
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const statsBar = document.getElementById('statsBar');
+        const controlsContainer = document.getElementById('controlsContainer');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const emptyState = document.getElementById('emptyState');
+        const filesContent = document.getElementById('filesContent');
+
+        // Utility Functions
+        function formatFileSize(bytes) {
+            if (!bytes || bytes === 0) return '0 B';
+            const k = 1024;
+            const sizes = ['B', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        function formatDate(dateString) {
+            if (!dateString) return 'Unknown';
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffTime = Math.abs(now - date);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            if (diffDays < 1) return 'Today';
+            if (diffDays === 1) return 'Yesterday';
+            if (diffDays < 7) return `${diffDays} days ago`;
+            if (diffDays < 30) return `${Math.floor(diffDays / 7)} weeks ago`;
+            if (diffDays < 365) return `${Math.floor(diffDays / 30)} months ago`;
+            return date.toLocaleDateString();
+        }
+
+        function getFileIconHTML(iconType) {
+            const icons = {
+                'pdf': 'fa-file-pdf',
+                'folder': 'fa-folder',
+                'image': 'fa-image',
+                'video': 'fa-video',
+                'document': 'fa-file-word',
+                'spreadsheet': 'fa-file-excel',
+                'presentation': 'fa-file-powerpoint',
+                'archive': 'fa-file-zipper',
+                'audio': 'fa-file-audio',
+                'text': 'fa-file-lines'
+            };
+            return `<i class="fas ${icons[iconType] || 'fa-file'}"></i>`;
+        }
+
+        function getIconClass(iconType) {
+            return `icon-${iconType || 'default'}`;
+        }
+
+        // Sort Functions
+        function sortFiles(files) {
+            const sorted = [...files];
+            
+            sorted.sort((a, b) => {
+                let compareValue = 0;
+                
+                switch (currentSort) {
+                    case 'name':
+                        compareValue = a.name.localeCompare(b.name);
+                        break;
+                    case 'size':
+                        compareValue = (a.size || 0) - (b.size || 0);
+                        break;
+                    case 'type':
+                        compareValue = a.icon.localeCompare(b.icon);
+                        break;
+                    case 'date':
+                    default:
+                        compareValue = new Date(a.dateUploaded) - new Date(b.dateUploaded);
+                        break;
+                }
+                
+                return currentOrder === 'asc' ? compareValue : -compareValue;
+            });
+            
+            return sorted;
+        }
+
+        // Render Functions
+        function updateStats(files) {
+            const totalSize = files.reduce((sum, file) => sum + (file.size || 0), 0);
+            
+            document.getElementById('totalFiles').textContent = allFiles.length;
+            document.getElementById('totalSize').textContent = formatFileSize(totalSize);
+            document.getElementById('resultsCount').textContent = files.length;
+            document.getElementById('resultNumber').textContent = files.length;
+        }
+
+        function renderGrid(files) {
+            if (files.length === 0) {
+                return `
+                    <div class="empty-state">
+                        <div class="empty-icon"><i class="fas fa-folder-open"></i></div>
+                        <h3>No Files Found</h3>
+                        <p>Try adjusting your search terms</p>
+                    </div>
+                `;
+            }
+
+            return `
+                <div class="files-grid">
+                    ${files.map(file => `
+                        <div class="file-card" onclick="openFile('${file.url}')">
+                            <div class="file-icon ${getIconClass(file.icon)}">
+                                ${getFileIconHTML(file.icon)}
+                            </div>
+                            <div class="file-name" title="${file.name.replace(/"/g, '&quot;')}">${file.name}</div>
+                            <div class="file-meta">${formatFileSize(file.size || 0)}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function renderList(files) {
+            if (files.length === 0) {
+                return `
+                    <div class="empty-state">
+                        <div class="empty-icon"><i class="fas fa-folder-open"></i></div>
+                        <h3>No Files Found</h3>
+                        <p>Try adjusting your search terms</p>
+                    </div>
+                `;
+            }
+
+            return `
+                <div class="files-list">
+                    <div class="list-header">
+                        <div></div>
+                        <div>Name</div>
+                        <div>Size</div>
+                        <div>Date</div>
+                    </div>
+                    ${files.map(file => `
+                        <div class="list-row" onclick="openFile('${file.url}')">
+                            <div class="list-icon-wrapper ${getIconClass(file.icon)}">
+                                ${getFileIconHTML(file.icon)}
+                            </div>
+                            <div class="list-name" title="${file.name.replace(/"/g, '&quot;')}">${file.name}</div>
+                            <div class="list-size">${formatFileSize(file.size || 0)}</div>
+                            <div class="list-date">${formatDate(file.dateUploaded)}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function renderFiles(files) {
+            const sorted = sortFiles(files);
+            updateStats(sorted);
+            
+            if (currentView === 'grid') {
+                filesContent.innerHTML = renderGrid(sorted);
+            } else {
+                filesContent.innerHTML = renderList(sorted);
+            }
+        }
+
+        // Search Functions
+        async function performSearch() {
+            currentSearch = searchInput.value.trim();
+            
+            if (!currentSearch) {
+                alert('Please enter a search term');
+                return;
+            }
+
+            hasSearched = true;
+            clearBtn.style.display = 'inline-flex';
+            
+            // Show loading
+            emptyState.style.display = 'none';
+            resultsContainer.style.display = 'block';
+            filesContent.innerHTML = `
+                <div class="loading-state">
+                    <div class="spinner"></div>
+                    <p>Searching files...</p>
+                </div>
+            `;
+
+            try {
+                const params = new URLSearchParams({
+                    search: currentSearch,
+                    sort: currentSort,
+                    order: currentOrder,
+                    t: Date.now()
+                });
+                
+                const response = await fetch(`${SCRIPT_URL}?${params.toString()}`, {
+                    method: 'GET',
+                    mode: 'cors',
+                    cache: 'no-cache',
+                    redirect: 'follow'
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                
+                const text = await response.text();
+                const data = JSON.parse(text);
+                
+                if (data && data.success && Array.isArray(data.files)) {
+                    allFiles = data.files;
+                    
+                    // Filter files based on search
+                    const searchLower = currentSearch.toLowerCase();
+                    filteredFiles = allFiles.filter(file => 
+                        file.name.toLowerCase().includes(searchLower) ||
+                        file.icon.toLowerCase().includes(searchLower) ||
+                        file.mimeType.toLowerCase().includes(searchLower)
+                    );
+                    
+                    // Show controls and stats
+                    statsBar.classList.add('show');
+                    controlsContainer.classList.add('show');
+                    
+                    // Render results
+                    renderFiles(filteredFiles);
+                } else {
+                    throw new Error('Invalid data format received from server');
+                }
+                
+            } catch (error) {
+                console.error('Search error:', error);
+                
+                let errorMessage = error.message;
+                let troubleshooting = '';
+                
+                if (error.message === 'Failed to fetch') {
+                    errorMessage = 'Unable to connect to the file server';
+                    troubleshooting = `
+                        <div style="margin-top: 16px; padding: 16px; background: rgba(255,255,255,0.5); border-radius: 12px; text-align: left;">
+                            <strong style="display: block; margin-bottom: 8px;">Possible solutions:</strong>
+                            <ul style="margin: 0; padding-left: 20px; font-size: 13px; color: var(--text-secondary);">
+                                <li>Check your internet connection</li>
+                                <li>Try refreshing the page</li>
+                                <li>Contact the admin 0799760271</li>
+                            </ul>
+                        </div>
+                    `;
+                }
+                
+                filesContent.innerHTML = `
+                    <div class="error-state">
+                        <div class="error-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                        <h3>Search Failed</h3>
+                        <p>${errorMessage}</p>
+                        ${troubleshooting}
+                        <button class="btn btn-primary" onclick="performSearch()" style="margin-top: 16px;">
+                            <i class="fas fa-redo"></i> Try Again
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        function clearSearch() {
+            searchInput.value = '';
+            currentSearch = '';
+            hasSearched = false;
+            filteredFiles = [];
+            allFiles = [];
+            
+            clearBtn.style.display = 'none';
+            resultsContainer.style.display = 'none';
+            statsBar.classList.remove('show');
+            controlsContainer.classList.remove('show');
+            emptyState.style.display = 'block';
+        }
+
+        function openFile(url) {
+            window.open(url, '_blank');
+        }
+
+        // Control Functions
+        function setSort(sortBy) {
+            currentSort = sortBy;
+            updateControlButtons();
+            if (hasSearched && filteredFiles.length > 0) {
+                renderFiles(filteredFiles);
+            }
+        }
+
+        function setOrder(order) {
+            currentOrder = order;
+            updateControlButtons();
+            if (hasSearched && filteredFiles.length > 0) {
+                renderFiles(filteredFiles);
+            }
+        }
+
+        function setView(view) {
+            currentView = view;
+            updateControlButtons();
+            if (hasSearched && filteredFiles.length > 0) {
+                renderFiles(filteredFiles);
+            }
+        }
+
+        function updateControlButtons() {
+            document.querySelectorAll('[data-sort]').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.sort === currentSort);
+            });
+            
+            document.querySelectorAll('[data-order]').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.order === currentOrder);
+            });
+            
+            document.querySelectorAll('[data-view]').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.view === currentView);
+            });
+        }
+
+        // Event Listeners
+        searchBtn.addEventListener('click', performSearch);
+        clearBtn.addEventListener('click', clearSearch);
+        
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') performSearch();
+        });
+
+        // Control button listeners
+        document.querySelectorAll('[data-sort]').forEach(btn => {
+            btn.addEventListener('click', () => setSort(btn.dataset.sort));
+        });
+
+        document.querySelectorAll('[data-order]').forEach(btn => {
+            btn.addEventListener('click', () => setOrder(btn.dataset.order));
+        });
+
+        document.querySelectorAll('[data-view]').forEach(btn => {
+            btn.addEventListener('click', () => setView(btn.dataset.view));
+        });
+
+        // PWA Support
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('data:text/javascript;base64,c2VsZi5hZGRFdmVudExpc3RlbmVyKCdpbnN0YWxsJywgZnVuY3Rpb24oZXZlbnQpIHt9KTs=')
+                    .catch(() => {}); // Silent fail for service worker
+            });
+        }
+
+        // iOS standalone mode detection
+        if (window.navigator.standalone) {
+            document.body.style.paddingTop = '20px';
+        }
+
+        // Make functions globally available
+        window.openFile = openFile;
+        window.performSearch = performSearch;
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4DE6YQ7Q2M"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-4DE6YQ7Q2M');
+    </script>
+</body>
+</html>
