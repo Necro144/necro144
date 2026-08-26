@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Drive Uploader</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      margin: 0;
+      height: 100vh;
+      width: 100vw;
+      background: #0f172a;
+    }
+
+    .frame-wrapper {
+      width: 100%;
+      height: 100vh;
+      background: transparent;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: stretch;
+    }
+
+    iframe {
+      flex: 1;
+      border: none;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+    }
+
+    .loading {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #94a3b8;
+      font-weight: 500;
+      background: #0f172a;
+      z-index: 5;
+    }
+
+    .spinner {
+      width: 48px;
+      height: 48px;
+      border: 4px solid rgba(99, 102, 241, 0.25);
+      border-top-color: #6366f1;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 1rem;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="frame-wrapper">
+      <!-- Loader -->
+      <div id="loader" class="loading">
+        <div class="spinner"></div>
+        <p>Loading secure upload interface...</p>
+      </div>
+
+      <!-- Iframe loading your Google Apps Script Web App -->
+      <iframe id="uploadFrame"
+        src=""
+        title="Upload Portal"
+        onload="document.getElementById('loader').style.display='none';">
+      </iframe>
+    </div>
+  </main>
+
+  <script>
+    // ---- Your Google Apps Script /exec URL here ----
+    const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwiV1gfDGGaPAqOnGcTb9wh-jAxBvNQNIAff2WM2qHTtjZQ0t5L1zB107VATRgkDrKnxQ/exec";
+
+    // ---- Load iframe ----
+    document.getElementById("uploadFrame").src = WEBAPP_URL;
+  </script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4DE6YQ7Q2M"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-4DE6YQ7Q2M');
+  </script>
+</body>
+</html>
