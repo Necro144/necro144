@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Premium Photo Session Booking - Amman</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        :root {
+            --primary: #007AFF;
+            --primary-dark: #0055CC;
+            --bg: #F2F2F7;
+            --card: #FFFFFF;
+            --text: #1C1C1E;
+            --muted: #8E8E93;
+            --border: #D1D1D6;
+            --success: #34C759;
+            --warning: #FF9500;
+            --danger: #FF3B30;
+            --radius: 16px;
+            --shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        [data-theme="dark"] {
+            --bg: #1C1C1E;
+            --card: #2C2C2E;
+            --text: #F2F2F7;
+            --border: #3A3A3C;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            padding: 16px 0 40px;
+            min-height: 100vh;
+            transition: background 0.3s;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 12px 16px;
+            background: var(--card);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-brand .logo {
+            font-size: 28px;
+        }
+
+        .header-brand .brand-text {
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .header-actions button {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 8px 12px;
+            font-size: 14px;
+            cursor: pointer;
+            color: var(--text);
+            transition: all 0.2s;
+        }
+
+        .header-actions button:hover {
+            background: var(--border);
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 16px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            transition: background 0.3s;
+        }
+
+        .card h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card h2 .badge-count {
+            font-size: 12px;
+            background: var(--primary);
+            color: white;
+            padding: 2px 10px;
+            border-radius: 20px;
+            margin-left: auto;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .form-group label .required {
+            color: var(--danger);
+        }
+
+        .form-group label .optional {
+            color: var(--muted);
+            font-weight: 400;
+            font-size: 12px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: 15px;
+            background: var(--bg);
+            color: var(--text);
+            transition: border-color 0.2s;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.15);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        /* Photo Selection */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .photo-option {
+            position: relative;
+        }
+
+        .photo-option input[type="radio"] {
+            display: none;
+        }
+
+        .photo-option label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px 8px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: var(--bg);
+            text-align: center;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .photo-option input[type="radio"]:checked+label {
+            border-color: var(--primary);
+            background: rgba(0, 122, 255, 0.08);
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.15);
+        }
+
+        .photo-option label .price {
+            font-size: 12px;
+            color: var(--muted);
+            font-weight: 400;
+            margin-top: 2px;
+        }
+
+        .photo-option label .badge {
+            font-size: 10px;
+            background: var(--success);
+            color: white;
+            padding: 1px 8px;
+            border-radius: 20px;
+            margin-top: 4px;
+        }
+
+        .photo-option label .badge.popular {
+            background: var(--warning);
+        }
+
+        /* Checkbox Grid */
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .checkbox-grid label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 8px 10px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg);
+            transition: all 0.2s;
+        }
+
+        .checkbox-grid label:hover {
+            border-color: var(--primary);
+        }
+
+        .checkbox-grid input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--primary);
+        }
+
+        /* Price Display */
+        .price-display {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 16px 0;
+        }
+
+        .price-display .amount {
+            font-size: 36px;
+            font-weight: 700;
+        }
+
+        .price-display .label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .price-display .breakdown {
+            font-size: 13px;
+            opacity: 0.85;
+            margin-top: 6px;
+        }
+
+        /* Payment Info */
+        .payment-info {
+            background: var(--bg);
+            padding: 14px 16px;
+            border-radius: 10px;
+            margin: 12px 0;
+            font-size: 13px;
+        }
+
+        .payment-info .payment-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .payment-info .payment-row:last-child {
+            border-bottom: none;
+        }
+
+        .payment-info .payment-row .label {
+            color: var(--muted);
+        }
+
+        .payment-info .payment-row .value {
+            font-weight: 600;
+        }
+
+        .payment-info .highlight {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 8px;
+        }
+
+        .submit-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 122, 255, 0.3);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Success Message */
+        .success-message {
+            background: var(--success);
+            color: white;
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-message .icon {
+            font-size: 48px;
+            margin-bottom: 8px;
+        }
+
+        .success-message .ref {
+            font-size: 13px;
+            opacity: 0.85;
+            margin-top: 6px;
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Location Tip */
+        .location-tip {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .location-tip .emoji {
+            font-size: 14px;
+        }
+
+        /* Google Maps Paste */
+        .maps-paste {
+            display: flex;
+            gap: 8px;
+        }
+
+        .maps-paste input {
+            flex: 1;
+        }
+
+        .maps-paste button {
+            padding: 12px 16px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            color: var(--text);
+            white-space: nowrap;
+            font-size: 13px;
+        }
+
+        .maps-paste button:hover {
+            background: var(--border);
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--text);
+            color: var(--bg);
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+            max-width: 90%;
+            text-align: center;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+
+        /* Portfolio Link */
+        .portfolio-link {
+            display: block;
+            text-align: center;
+            padding: 12px;
+            margin-top: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px dashed var(--border);
+            border-radius: 12px;
+            transition: all 0.2s;
+        }
+
+        .portfolio-link:hover {
+            border-color: var(--primary);
+            background: rgba(0, 122, 255, 0.05);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .photo-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 6px;
+            }
+
+            .photo-option label {
+                padding: 8px 4px;
+                font-size: 12px;
+            }
+
+            .checkbox-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 10px;
+                align-items: stretch;
+            }
+
+            .header-actions {
+                justify-content: center;
+            }
+
+            .card {
+                padding: 16px;
+            }
+
+            .price-display .amount {
+                font-size: 28px;
+            }
+
+            .maps-paste {
+                flex-direction: column;
+            }
+
+            .maps-paste button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .photo-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .container {
+                padding: 0 10px;
+            }
+
+            .card {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Toast Notification -->
+        <div class="toast" id="toast"></div>
+
+        <!-- Header -->
+        <div class="header">
+            <div class="header-brand">
+                <span class="logo">📸</span>
+                <span class="brand-text">Premium Photo</span>
+            </div>
+            <div class="header-actions">
+                <button onclick="window.location.href='portfolio.html'">🖼️ Portfolio</button>
+                <button id="themeToggle">🌙</button>
+            </div>
+        </div>
+
+        <!-- Booking Form -->
+        <div class="card" id="bookingCard">
+            <h2>📋 Book Your Session</h2>
+
+            <form id="bookingForm">
+                <!-- Personal Info -->
+                <div class="form-group">
+                    <label>Full Name <span class="required">*</span></label>
+                    <input type="text" id="fullName" placeholder="Enter your full name" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>WhatsApp Number <span class="required">*</span></label>
+                        <input type="tel" id="whatsapp" placeholder="07XXXXXXXX" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Alternative Number <span class="optional">(Optional)</span></label>
+                        <input type="tel" id="altPhone" placeholder="07XXXXXXXX">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <select id="gender">
+                            <option value="">Select</option>
+                            <option value="Male">👨 Male</option>
+                            <option value="Female">👩 Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Number of People <span class="required">*</span></label>
+                        <input type="number" id="people" min="1" max="10" value="1" required>
+                    </div>
+                </div>
+
+                <!-- Session Details -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Session Hours <span class="required">*</span></label>
+                        <select id="hours" required>
+                            <option value="1">1 Hour (10 JOD)</option>
+                            <option value="2">2 Hours (20 JOD)</option>
+                            <option value="3">3 Hours (30 JOD)</option>
+                            <option value="4">4 Hours (40 JOD)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Session Type</label>
+                        <select id="sessionType">
+                            <option value="Portrait">Portrait</option>
+                            <option value="Couple">Couple</option>
+                            <option value="Family">Family</option>
+                            <option value="Event">Event</option>
+                            <option value="Graduation">Graduation</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Location -->
+                <div class="form-group">
+                    <label>Your Location in Amman <span class="required">*</span></label>
+                    <select id="location" required>
+                        <option value="">Select your area</option>
+                        <option value="Sports City">🏟️ Sports City (Base Price)</option>
+                        <option value="Abdoun">🏠 Abdoun (+2 JOD)</option>
+                        <option value="Shmeisani">🏢 Shmeisani (+2 JOD)</option>
+                        <option value="Jabal Amman">🏛️ Jabal Amman (+2 JOD)</option>
+                        <option value="Sweifieh">🛍️ Sweifieh (+2 JOD)</option>
+                        <option value="Khalda">🏘️ Khalda (+3 JOD)</option>
+                        <option value="Tla' Al Ali">🏡 Tla' Al Ali (+3 JOD)</option>
+                        <option value="Al-Rabiah">🌳 Al-Rabiah (+3 JOD)</option>
+                        <option value="Other">📍 Other (Gas fees apply)</option>
+                    </select>
+                    <div class="location-tip">
+                        <span class="emoji">📍</span> Base: Sports City | Extra fees for other areas
+                    </div>
+                </div>
+
+                <!-- Google Maps Link -->
+                <div class="form-group">
+                    <label>Google Maps Location <span class="optional">(Paste link for faster arrival)</span></label>
+                    <div class="maps-paste">
+                        <input type="url" id="mapsLink" placeholder="https://maps.app.goo.gl/...">
+                        <button type="button" onclick="pasteMapsLink()">📋 Paste</button>
+                    </div>
+                    <div class="location-tip">
+                        <span class="emoji">🗺️</span> Paste your Google Maps location for accurate navigation
+                    </div>
+                </div>
+
+                <!-- Photo Selection -->
+                <div class="form-group">
+                    <label>How Many Edited Photos? <span class="required">*</span></label>
+                    <p style="font-size:13px;color:var(--muted);margin-bottom:10px;">
+                        💰 <strong>1.5 JOD per photo</strong> — 4K Enhanced, Clean Skin, Professional Coloring (Lightroom + Photoshop)
+                    </p>
+                    <div class="photo-grid" id="photoGrid">
+                        <div class="photo-option">
+                            <input type="radio" name="photos" value="5" id="photo5" checked>
+                            <label for="photo5">
+                                5
+                                <span class="price">7.5 JOD</span>
+                            </label>
+                        </div>
+                        <div class="photo-option">
+                            <input type="radio" name="photos" value="10" id="photo10">
+                            <label for="photo10">
+                                10
+                                <span class="price">15 JOD</span>
+                            </label>
+                        </div>
+                        <div class="photo-option">
+                            <input type="radio" name="photos" value="15" id="photo15">
+                            <label for="photo15">
+                                15
+                                <span class="price">22.5 JOD</span>
+                            </label>
+                        </div>
+                        <div class="photo-option">
+                            <input type="radio" name="photos" value="20" id="photo20">
+                            <label for="photo20">
+                                20
+                                <span class="price">30 JOD</span>
+                            </label>
+                        </div>
+                        <div class="photo-option">
+                            <input type="radio" name="photos" value="30" id="photo30">
+                            <label for="photo30">
+                                30
+                                <span class="price">45 JOD</span>
+                            </label>
+                        </div>
+                        <div class="photo-option">
+                            <input type="radio" name="photos" value="all" id="photoAll">
+                            <label for="photoAll">
+                                All Good
+                                <span class="price">Best Value</span>
+                                <span class="badge popular">🔥</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Date & Time -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Preferred Date <span class="required">*</span></label>
+                        <input type="date" id="preferredDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Preferred Time <span class="required">*</span></label>
+                        <input type="time" id="preferredTime" required>
+                        <div class="location-tip">⏰ Working hours: 3 PM - 2 AM</div>
+                    </div>
+                </div>
+
+                <!-- Notes -->
+                <div class="form-group">
+                    <label>Special Requests / Notes</label>
+                    <textarea id="notes" placeholder="Any special requests, location details, or questions..."></textarea>
+                </div>
+
+                <!-- Price Display -->
+                <div class="price-display" id="priceDisplay">
+                    <div class="label">Estimated Total</div>
+                    <div class="amount" id="totalAmount">JOD 17.50</div>
+                    <div class="breakdown" id="priceBreakdown">Session: 10 JOD | Location: 0 JOD | Photos: 7.5 JOD</div>
+                </div>
+
+                <!-- Payment Info -->
+                <div class="payment-info">
+                    <div style="font-weight:600;margin-bottom:8px;">💳 Payment Details</div>
+                    <div class="payment-row">
+                        <span class="label">Total Amount</span>
+                        <span class="value highlight" id="paymentTotal">JOD 17.50</span>
+                    </div>
+                    <div class="payment-row">
+                        <span class="label">Deposit (50%)</span>
+                        <span class="value highlight" id="depositAmount">JOD 8.75</span>
+                    </div>
+                    <div class="payment-row">
+                        <span class="label">Remaining (50%)</span>
+                        <span class="value" id="remainingAmount">JOD 8.75</span>
+                    </div>
+                    <div class="payment-row" style="border-bottom:none;padding-top:4px;">
+                        <span class="label">📱 CliQ</span>
+                        <span class="value" style="font-weight:700;color:var(--primary);">alanq99</span>
+                    </div>
+                    <div class="payment-row" style="border-bottom:none;">
+                        <span class="label">🏦 Bank of Jordan</span>
+                        <span class="value" style="font-weight:700;color:var(--primary);">Ask for details</span>
+                    </div>
+                </div>
+
+                <div style="background:var(--bg);padding:12px 16px;border-radius:10px;margin:12px 0;font-size:13px;border-left:4px solid var(--warning);">
+                    <strong>📌 Important:</strong> 50% deposit required before arrival. Once confirmed, I will come to your location.
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">📤 Book Session</button>
+            </form>
+
+            <!-- Success Message -->
+            <div class="success-message" id="successMessage">
+                <div class="icon">✅</div>
+                <h3 style="margin-bottom:6px;">Booking Confirmed!</h3>
+                <p>I'll contact you on WhatsApp within 30 minutes.</p>
+                <p style="margin-top:8px;font-size:15px;">💳 Deposit: JOD <span id="successDeposit">8.75</span></p>
+                <p style="margin-top:4px;font-size:13px;">📱 CliQ: <strong>alanq99</strong></p>
+                <div class="ref">Reference: <span id="bookingRef">BK-XXXXXXXX</span></div>
+            </div>
+
+            <!-- Portfolio Link -->
+            <a href="portfolio.html" class="portfolio-link">🖼️ View My Portfolio →</a>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // CONFIGURATION - REPLACE WITH YOUR URL
+        // ============================================
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz1J3sR9rzeHc8uY9MxSIuEc4dYLW4W6KlxRJZGbuZHi8_1mnk066U1jMYo_6vdOC-Y/exec';
+
+        // ============================================
+        // THEME TOGGLE
+        // ============================================
+        const themeToggle = document.getElementById('themeToggle');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+        const savedTheme = localStorage.getItem('theme') || (prefersDark.matches ? 'dark' : 'light');
+
+        if (savedTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            themeToggle.textContent = '☀️';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            if (isDark) {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                themeToggle.textContent = '🌙';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                themeToggle.textContent = '☀️';
+            }
+        });
+
+        // ============================================
+        // PRICE CALCULATOR
+        // ============================================
+        const locationPrices = {
+            'Sports City': 0,
+            'Abdoun': 2,
+            'Shmeisani': 2,
+            'Jabal Amman': 2,
+            'Sweifieh': 2,
+            'Khalda': 3,
+            "Tla' Al Ali": 3,
+            'Al-Rabiah': 3,
+            'Other': 2
+        };
+
+        const hourPrices = { 1: 10, 2: 20, 3: 30, 4: 40 };
+        const PHOTO_PRICE = 1.5;
+
+        function calculatePrice() {
+            const hours = parseInt(document.getElementById('hours').value);
+            const location = document.getElementById('location').value;
+            const photosValue = document.querySelector('input[name="photos"]:checked')?.value || '5';
+
+            const sessionPrice = hourPrices[hours] || 10;
+            const locationFee = locationPrices[location] || 0;
+
+            let photoCount = parseInt(photosValue);
+            if (photosValue === 'all') photoCount = 30;
+            const photoPrice = photoCount * PHOTO_PRICE;
+
+            const total = sessionPrice + locationFee + photoPrice;
+            const deposit = total / 2;
+            const remaining = total - deposit;
+
+            // Update display
+            document.getElementById('totalAmount').textContent = `JOD ${total.toFixed(2)}`;
+            document.getElementById('priceBreakdown').textContent =
+                `Session: ${sessionPrice} JOD | Location: ${locationFee > 0 ? `+${locationFee} JOD` : '0 JOD'} | Photos (${photoCount}): ${photoPrice.toFixed(2)} JOD`;
+            document.getElementById('paymentTotal').textContent = `JOD ${total.toFixed(2)}`;
+            document.getElementById('depositAmount').textContent = `JOD ${deposit.toFixed(2)}`;
+            document.getElementById('remainingAmount').textContent = `JOD ${remaining.toFixed(2)}`;
+            document.getElementById('successDeposit').textContent = deposit.toFixed(2);
+
+            return { total, sessionPrice, locationFee, photoPrice, photoCount, deposit, remaining };
+        }
+
+        // Event listeners for price updates
+        document.getElementById('hours').addEventListener('change', calculatePrice);
+        document.getElementById('location').addEventListener('change', calculatePrice);
+        document.querySelectorAll('input[name="photos"]').forEach(el => {
+            el.addEventListener('change', calculatePrice);
+        });
+        calculatePrice();
+
+        // ============================================
+        // SET DEFAULTS
+        // ============================================
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        document.getElementById('preferredDate').value = tomorrow.toISOString().split('T')[0];
+        document.getElementById('preferredTime').value = '16:00';
+
+        // ============================================
+        // GENERATE BOOKING REFERENCE
+        // ============================================
+        function generateBookingRef() {
+            const date = new Date();
+            const random = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+            return `BK-${date.getFullYear()}${String(date.getMonth() + 1).padStart(2, '0')}${String(date.getDate()).padStart(2, '0')}-${random}`;
+        }
+
+        // ============================================
+        // PASTE MAPS LINK
+        // ============================================
+        function pasteMapsLink() {
+            try {
+                navigator.clipboard.readText().then(text => {
+                    document.getElementById('mapsLink').value = text;
+                    showToast('✅ Maps link pasted!');
+                }).catch(() => {
+                    // Fallback for mobile
+                    const input = document.getElementById('mapsLink');
+                    input.focus();
+                    document.execCommand('paste');
+                    showToast('📋 Please paste the link');
+                });
+            } catch (e) {
+                showToast('📋 Please paste manually');
+            }
+        }
+
+        // ============================================
+        // TOAST NOTIFICATION
+        // ============================================
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // ============================================
+        // FORM SUBMISSION
+        // ============================================
+        document.getElementById('bookingForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="loading-spinner"></span> Submitting...';
+
+            const bookingRef = generateBookingRef();
+            document.getElementById('bookingRef').textContent = bookingRef;
+
+            const photosValue = document.querySelector('input[name="photos"]:checked')?.value || '5';
+            let photoCount = parseInt(photosValue);
+            if (photosValue === 'all') photoCount = 30;
+
+            const priceData = calculatePrice();
+
+            const formData = {
+                bookingRef: bookingRef,
+                name: document.getElementById('fullName').value.trim(),
+                whatsapp: document.getElementById('whatsapp').value.trim(),
+                altPhone: document.getElementById('altPhone').value.trim() || 'None',
+                gender: document.getElementById('gender').value || 'Not specified',
+                people: document.getElementById('people').value,
+                hours: document.getElementById('hours').value,
+                location: document.getElementById('location').value,
+                sessionType: document.getElementById('sessionType').value || 'Not specified',
+                photos: photosValue,
+                photoCount: photoCount,
+                mapsLink: document.getElementById('mapsLink').value.trim() || 'Not provided',
+                preferredTime: document.getElementById('preferredTime').value,
+                preferredDate: document.getElementById('preferredDate').value,
+                notes: document.getElementById('notes').value.trim() || 'None',
+                sessionPrice: priceData.sessionPrice,
+                locationFee: priceData.locationFee,
+                photoPrice: priceData.photoPrice,
+                totalPrice: priceData.total,
+                deposit: priceData.deposit,
+                remaining: priceData.remaining,
+                paymentMethod: 'CliQ: alanq99 / Bank of Jordan'
+            };
+
+            // Validation
+            if (!formData.name || !formData.whatsapp || !formData.location) {
+                alert('Please fill in all required fields.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = '📤 Book Session';
+                return;
+            }
+
+            if (!formData.whatsapp.match(/^[0-9]{10,15}$/)) {
+                alert('Please enter a valid phone number (10-15 digits).');
+                submitBtn.disabled = false;
+                submitBtn.textContent = '📤 Book Session';
+                return;
+            }
+
+            try {
+                console.log('📤 Sending:', formData);
+
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+                console.log('📥 Response:', result);
+
+                if (result.success) {
+                    document.getElementById('bookingForm').style.display = 'none';
+                    document.getElementById('successMessage').classList.add('show');
+                    showToast('✅ Booking confirmed!');
+                } else {
+                    throw new Error(result.message || 'Unknown error');
+                }
+
+            } catch (error) {
+                console.error('❌ Error:', error);
+
+                // Fallback with no-cors
+                try {
+                    await fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(formData)
+                    });
+                    document.getElementById('bookingForm').style.display = 'none';
+                    document.getElementById('successMessage').classList.add('show');
+                    showToast('✅ Booking confirmed!');
+                } catch (fallbackError) {
+                    alert('❌ Submission failed. Please try again or contact us on WhatsApp.\n\nError: ' + error
+                    .message);
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = '📤 Book Session';
+                }
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = '📤 Book Session';
+            }
+        });
+    </script>
+	
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4DE6YQ7Q2M"></script>
+</body>
+</html>
