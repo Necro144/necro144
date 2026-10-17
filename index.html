@@ -7,16 +7,17 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-KG1SF91F87');
 </script>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#04070a" />
 <meta name="color-scheme" content="dark" />
+<meta name="description" content="Necro's Hub: photography sessions, web design and tech services." />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="apple-mobile-web-app-title" content="Necro's Hub" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect fill='%2304070a' width='180' height='180' rx='40'/%3E%3Ctext x='90' y='125' font-size='100' text-anchor='middle' fill='%232ee6d0' font-weight='900' font-family='monospace'%3EN%3C/text%3E%3C/svg%3E" />
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect fill='%2304070a' width='180' height='180' rx='40'/%3E%3Ctext x='90' y='125' font-size='100' text-anchor='middle' fill='%232ee6d0' font-weight='900' font-family='monospace'%3EN%3C/text%3E%3C/svg%3E" />
 <title>Necro's Hub // terminal</title>
 
@@ -35,24 +36,28 @@
   --magenta: #ff3ea5;
   --amber: #ffb703;
   --text: #d9f6f0;
-  --muted: #5f8b85;
+  --muted: #6f9b95;
   --radius: 12px;
   --mono: 'JetBrains Mono', ui-monospace, monospace;
   --pixel: 'VT323', monospace;
 }
 
-*, *::before, *::after { box-sizing: border-box; -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; }
-html, body { margin: 0; height: 100%; font-family: var(--mono); }
+*, *::before, *::after { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; min-height: 100%; font-family: var(--mono); }
+html { scroll-behavior: smooth; }
 
 body {
   background: var(--bg);
   color: var(--text);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
-  padding-top: env(safe-area-inset-top);
-  padding-bottom: env(safe-area-inset-bottom);
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
   position: relative;
+  line-height: 1.6;
 }
+
+:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
 
 .bg-grid {
   position: fixed; inset: 0; z-index: -2;
@@ -97,7 +102,7 @@ body::after {
 }
 .icon-btn {
   position: absolute; left: 16px;
-  width: 42px; height: 42px;
+  width: 44px; height: 44px;
   display: grid; place-items: center;
   background: var(--panel);
   color: var(--cyan);
@@ -107,6 +112,7 @@ body::after {
   transition: transform 0.2s ease, background 0.3s ease;
   touch-action: manipulation;
   font-size: 1.1rem;
+  font-family: inherit;
 }
 .icon-btn:hover { background: rgba(46,230,208,0.12); }
 .icon-btn:active { transform: scale(0.95); }
@@ -119,22 +125,26 @@ body::after {
   transition: opacity 0.3s ease;
   z-index: 30;
   backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
 .drawer-backdrop.show { opacity: 1; pointer-events: auto; }
 .drawer {
   position: fixed; inset: 0 auto 0 0;
   width: min(84vw, 320px);
-  background: var(--panel);
+  background: rgba(8, 16, 18, 0.96);
   border-right: 1px solid var(--line);
   transform: translateX(-100%);
-  transition: transform 0.3s ease;
+  visibility: hidden;
+  transition: transform 0.3s ease, visibility 0s linear 0.3s;
   display: flex; flex-direction: column;
   backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   z-index: 40;
   overflow-y: auto;
   text-align: left;
+  padding-top: env(safe-area-inset-top, 0px);
 }
-.drawer.open { transform: translateX(0); }
+.drawer.open { transform: translateX(0); visibility: visible; transition: transform 0.3s ease, visibility 0s; }
 .drawer__header {
   padding: 20px 16px;
   display: flex; align-items: center; gap: 14px;
@@ -151,6 +161,7 @@ body::after {
 .drawer__brand { font-weight: 700; font-size: 15px; color: var(--cyan-soft); }
 .drawer__sub { color: var(--muted); font-size: 11px; }
 .drawer__nav { padding: 14px; display: grid; gap: 8px; }
+.drawer__sep { border: 0; border-top: 1px solid var(--line); margin: 6px 2px; width: 100%; }
 .nav-link {
   display: flex; align-items: center; gap: 12px;
   padding: 13px 12px;
@@ -158,7 +169,7 @@ body::after {
   text-decoration: none; color: var(--text);
   border: 1px solid transparent;
   font-size: 0.85rem;
-  transition: all 0.2s ease;
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
 .nav-link::before { content: '>'; color: var(--cyan); font-weight: 700; }
 .nav-link:hover, .nav-link:active {
@@ -177,7 +188,7 @@ body::after {
 
 /* ===== Main ===== */
 main {
-  padding: 24px 18px 100px;
+  padding: 24px 18px calc(110px + env(safe-area-inset-bottom, 0px));
   display: flex; flex-direction: column;
   align-items: center;
   gap: 16px;
@@ -202,18 +213,20 @@ main {
   overflow: hidden;
 }
 .hero .prompt {
-  font-size: 0.72rem; color: var(--muted); text-align: left; margin-bottom: 10px;
+  font-size: 0.72rem; color: var(--muted); text-align: left; margin: 0 0 10px;
 }
 .hero .prompt .ps1 { color: var(--cyan); }
 .hero h1 {
   margin: 0 0 8px;
   font-family: var(--pixel);
+  font-weight: 400;
   font-size: clamp(28px, 8vw, 34px);
   letter-spacing: 1px;
   color: var(--cyan-soft);
   text-shadow: 0 0 10px rgba(46,230,208,0.4);
 }
 .hero p { margin: 0; color: var(--muted); font-size: 0.85rem; }
+.hero p.prompt { margin-bottom: 10px; }
 .blink-cursor {
   display: inline-block; width: 8px; height: 1em;
   background: var(--cyan); margin-left: 3px;
@@ -229,6 +242,7 @@ main {
 .sale__tag {
   font-family: var(--pixel);
   font-size: 1.6rem;
+  line-height: 1.2;
   color: var(--magenta);
   border: 1px solid var(--magenta);
   border-radius: 8px;
@@ -239,7 +253,7 @@ main {
 
 .action {
   width: 100%;
-  display: flex; align-items: center; justify-content: space-between;
+  display: flex; align-items: center;
   gap: 14px;
   padding: 16px 18px;
   background: var(--panel);
@@ -247,13 +261,14 @@ main {
   border-radius: var(--radius);
   text-decoration: none;
   color: var(--text);
-  transition: all 0.2s ease;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
   text-align: left;
 }
-.action::before { content: '$'; color: var(--cyan); font-weight: 700; margin-right: 4px; }
+.action::before { content: '$'; color: var(--cyan); font-weight: 700; flex-shrink: 0; }
+.action > div { flex: 1; min-width: 0; }
 .action b { font-weight: 600; font-size: 0.9rem; display: block; }
 .action small { color: var(--muted); font-size: 0.75rem; }
-.action span { color: var(--cyan); font-size: 1.1rem; flex-shrink: 0; }
+.action > span { color: var(--cyan); font-size: 1.1rem; flex-shrink: 0; }
 .action:hover { border-color: var(--cyan); background: rgba(46,230,208,0.05); transform: translateY(-2px); }
 .action:active { transform: translateY(0) scale(0.98); }
 
@@ -263,9 +278,10 @@ main {
 /* ===== Bottom bar ===== */
 .bottombar {
   position: fixed; left: 0; right: 0; bottom: 0;
-  padding: 14px max(16px, env(safe-area-inset-left)) calc(14px + env(safe-area-inset-bottom));
+  padding: 14px max(16px, env(safe-area-inset-left, 0px)) calc(14px + env(safe-area-inset-bottom, 0px));
   background: rgba(4,7,10,0.85);
   backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-top: 1px solid var(--line);
   z-index: 25;
   display: flex; justify-content: center;
@@ -281,13 +297,18 @@ main {
   border-radius: 10px;
   text-decoration: none;
   letter-spacing: 0.3px;
+  transition: transform 0.15s ease, filter 0.2s ease;
 }
+.bottombar .primary:hover { filter: brightness(1.1); }
 .bottombar .primary:active { transform: scale(0.98); }
 
 /* ===== Add to home screen tip ===== */
 .a2hs {
-  position: fixed; left: 16px; right: 16px; bottom: 86px;
-  background: var(--panel);
+  position: fixed; left: 50%; bottom: calc(86px + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 480px;
+  background: rgba(8, 16, 18, 0.96);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 14px;
@@ -295,8 +316,6 @@ main {
   align-items: center;
   gap: 12px;
   z-index: 26;
-  max-width: 480px;
-  margin: 0 auto;
   text-align: left;
 }
 .a2hs.show { display: flex; }
@@ -304,7 +323,7 @@ main {
 .a2hs-text { font-size: 0.78rem; color: var(--text); flex: 1; }
 .btn-dismiss {
   background: transparent; border: 1px solid var(--line); color: var(--muted);
-  border-radius: 8px; padding: 6px 10px; font-size: 0.72rem; cursor: pointer;
+  border-radius: 8px; padding: 8px 12px; font-size: 0.72rem; cursor: pointer; font-family: inherit;
 }
 
 /* ===== Access denied overlay ===== */
@@ -323,14 +342,15 @@ main {
   text-align: center;
   max-width: 280px;
 }
-.no-context-msg h3 { font-family: var(--pixel); font-size: 1.4rem; color: var(--magenta); margin: 0 0 8px; letter-spacing: 1px; }
+.no-context-msg h3 { font-family: var(--pixel); font-weight: 400; font-size: 1.4rem; color: var(--magenta); margin: 0 0 8px; letter-spacing: 1px; }
 .no-context-msg p { margin: 0; font-size: 0.78rem; color: var(--muted); }
 
 @media (max-width: 380px) {
   .sale { flex-direction: column; text-align: center; }
 }
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
 }
 </style>
 </head>
@@ -340,14 +360,14 @@ main {
   <div class="bg-glow"></div>
 
   <header class="topbar">
-    <button class="icon-btn" id="menuBtn" aria-label="Menu">☰</button>
+    <button class="icon-btn" id="menuBtn" type="button" aria-label="Open menu" aria-controls="drawer" aria-expanded="false">☰</button>
     <div class="title">NECRO'S HUB</div>
   </header>
 
   <div class="drawer-backdrop" id="backdrop"></div>
-  <aside class="drawer" id="drawer" role="navigation">
+  <aside class="drawer" id="drawer" aria-label="Site menu" aria-hidden="true">
     <div class="drawer__header">
-      <div class="avatar">N</div>
+      <div class="avatar" aria-hidden="true">N</div>
       <div>
         <div class="drawer__brand">Necro's Hub</div>
         <div class="drawer__sub">creative_services.exe</div>
@@ -357,7 +377,7 @@ main {
       <a class="nav-link" href="photo_work_must_read">Photo Sessions<span class="nav-badge">-50%</span></a>
       <a class="nav-link" href="main_index">NECRO144's Main Page</a>
       <a class="nav-link" href="https://asubank.org/" target="_blank" rel="noopener noreferrer">ASU Test Banks</a>
-      <hr style="border:0;border-top:1px solid var(--line);margin:6px 2px;">
+      <hr class="drawer__sep">
       <a class="nav-link" href="port">Photography Work Samples</a>
     </nav>
   </aside>
@@ -365,7 +385,7 @@ main {
   <main>
     <section class="card hero">
       <p class="prompt"><span class="ps1">guest@necro</span>:~$ ./welcome.sh</p>
-      <h1>Welcome<span class="blink-cursor"></span></h1>
+      <h1>Welcome<span class="blink-cursor" aria-hidden="true"></span></h1>
       <p>|Ns| 刀ec[尺]o /A/'s Hub.</p>
     </section>
 
@@ -375,13 +395,13 @@ main {
     </section>
 
     <a class="action" href="photo_work_must_read">
-      <div><b>Book Photo Sessions</b><small>Pick a date, pay, done.</small></div><span>›</span>
+      <div><b>Book Photo Sessions</b><small>Pick a date, pay, done.</small></div><span aria-hidden="true">›</span>
     </a>
     <a class="action" href="main_index">
-      <div><b>Social Media</b><small>Follow, DM, and see work.</small></div><span>›</span>
+      <div><b>Social Media</b><small>Follow, DM, and see work.</small></div><span aria-hidden="true">›</span>
     </a>
     <a class="action" href="https://asubank.org/" target="_blank" rel="noopener noreferrer">
-      <div><b>ASU Test Banks</b><small>Study smarter with curated notes.</small></div><span>↗</span>
+      <div><b>ASU Test Banks</b><small>Study smarter with curated notes.</small></div><span aria-hidden="true">↗</span>
     </a>
 
     <section class="card">
@@ -394,13 +414,13 @@ main {
     <a class="primary" href="photo_work_must_read">📅 Book Now — 50% OFF</a>
   </footer>
 
-  <div class="a2hs" id="a2hs">
-    <div class="a2hs-icon">📱</div>
+  <div class="a2hs" id="a2hs" role="dialog" aria-label="Add to home screen tip">
+    <div class="a2hs-icon" aria-hidden="true">📱</div>
     <div class="a2hs-text"><strong>Add to Home Screen</strong><br>Tap Share ⬆ then "Add to Home Screen" for the full app experience</div>
-    <button id="a2hsClose" class="btn-dismiss">Dismiss</button>
+    <button id="a2hsClose" class="btn-dismiss" type="button">Dismiss</button>
   </div>
 
-  <div class="no-context" id="noContext">
+  <div class="no-context" id="noContext" role="alert">
     <div class="no-context-msg">
       <h3>ACCESS BLOCKED</h3>
       <p>Right-click and keyboard shortcuts are disabled for content protection.</p>
@@ -408,6 +428,27 @@ main {
   </div>
 
 <script>
+// ===== Safe storage helpers (private mode / blocked storage) =====
+const store = {
+  get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+  set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+};
+
+// ===== Shared theme (set on the main page) =====
+(function () {
+  const themes = {
+    cyan:    { cyan: '#2ee6d0', cyanSoft: '#7dfbe9', magenta: '#ff3ea5' },
+    matrix:  { cyan: '#39ff14', cyanSoft: '#9dffa0', magenta: '#ffd60a' },
+    crimson: { cyan: '#ff3860', cyanSoft: '#ff9fb1', magenta: '#00e0ff' }
+  };
+  const t = themes[store.get('necro-theme')];
+  if (!t) return;
+  const r = document.documentElement.style;
+  r.setProperty('--cyan', t.cyan);
+  r.setProperty('--cyan-soft', t.cyanSoft);
+  r.setProperty('--magenta', t.magenta);
+})();
+
 // ===== Drawer Navigation =====
 const drawer = document.getElementById('drawer');
 const backdrop = document.getElementById('backdrop');
@@ -416,16 +457,34 @@ const menuBtn = document.getElementById('menuBtn');
 function openDrawer() {
   drawer.classList.add('open');
   backdrop.classList.add('show');
+  drawer.setAttribute('aria-hidden', 'false');
+  menuBtn.setAttribute('aria-expanded', 'true');
   document.body.style.overflow = 'hidden';
+  const first = drawer.querySelector('a');
+  if (first) setTimeout(() => first.focus(), 50);
 }
 function closeDrawer() {
+  if (!drawer.classList.contains('open')) return;
   drawer.classList.remove('open');
   backdrop.classList.remove('show');
+  drawer.setAttribute('aria-hidden', 'true');
+  menuBtn.setAttribute('aria-expanded', 'false');
   document.body.style.overflow = '';
+  menuBtn.focus();
 }
-menuBtn.addEventListener('click', openDrawer);
+menuBtn.addEventListener('click', () => drawer.classList.contains('open') ? closeDrawer() : openDrawer());
 backdrop.addEventListener('click', closeDrawer);
 window.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+
+// Swipe left to close
+(function () {
+  let startX = null;
+  drawer.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+  drawer.addEventListener('touchend', e => {
+    if (startX !== null && startX - e.changedTouches[0].clientX > 60) closeDrawer();
+    startX = null;
+  }, { passive: true });
+})();
 
 // ===== Content protection flavor (non-blocking) =====
 const noContextEl = document.getElementById('noContext');
@@ -437,36 +496,36 @@ function showContextBlock() {
 }
 document.addEventListener('contextmenu', e => { e.preventDefault(); showContextBlock(); });
 document.addEventListener('keydown', e => {
+  const k = e.key.toLowerCase();
+  const mod = e.ctrlKey || e.metaKey;
   const blocked = (e.key === 'F12') ||
-    ((e.ctrlKey || e.metaKey) && ['s','p','u'].includes(e.key.toLowerCase())) ||
-    ((e.ctrlKey || e.metaKey) && e.shiftKey && ['I','J','C'].includes(e.key.toUpperCase()));
+    (mod && ['s', 'p', 'u'].includes(k)) ||
+    (mod && e.shiftKey && ['i', 'j', 'c'].includes(k));
   if (blocked) { e.preventDefault(); showContextBlock(); }
 });
 
-// ===== Add to Home Screen (iOS) =====
-(function() {
-  const isiOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+// ===== Add to Home Screen (iOS Safari) =====
+(function () {
+  const ua = navigator.userAgent;
+  const isiOS = /iphone|ipad|ipod/i.test(ua);
   const isStandalone = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
-  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  const isSafari = /safari/i.test(ua) && !/crios|fxios|edgios|chrome|android/i.test(ua);
   const tip = document.getElementById('a2hs');
   const closeBtn = document.getElementById('a2hsClose');
-  const dismissed = localStorage.getItem('a2hs-dismissed');
 
-  if (isiOS && isSafari && !isStandalone && !dismissed) {
+  if (isiOS && isSafari && !isStandalone && !store.get('a2hs-dismissed')) {
     setTimeout(() => tip.classList.add('show'), 2000);
   }
   closeBtn.addEventListener('click', () => {
     tip.classList.remove('show');
-    localStorage.setItem('a2hs-dismissed', 'true');
+    store.set('a2hs-dismissed', 'true');
   });
 })();
 
 // ===== Haptics =====
-function haptic() { if (window.navigator && window.navigator.vibrate) window.navigator.vibrate(10); }
-menuBtn.addEventListener('click', haptic);
+menuBtn.addEventListener('click', () => {
+  if (navigator.vibrate) navigator.vibrate(10);
+});
 </script>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-4DE6YQ7Q2M"></script>
-
 </body>
 </html>

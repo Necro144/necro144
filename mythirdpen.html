@@ -145,6 +145,22 @@
             text-shadow: 0 0 6px rgba(46,230,208,0.3);
         }
 
+        .update-block {
+            margin-top: 34px;
+            padding-top: 26px;
+            border-top: 1px dashed var(--line);
+        }
+        .update-title {
+            font-family: var(--pixel);
+            font-weight: 400;
+            font-size: 1.5rem;
+            color: var(--magenta);
+            margin-bottom: 16px;
+            text-align: left;
+        }
+        .update-title::before { content: '> '; }
+        .update-title span { color: var(--muted); font-size: 1rem; margin-left: 8px; }
+
         /* Memory timeline */
         .memory-log {
             margin-top: 34px;
@@ -164,7 +180,7 @@
 
         .memory-item {
             display: grid;
-            grid-template-columns: 150px 1fr;
+            grid-template-columns: 175px 1fr;
             gap: 14px;
             align-items: baseline;
             padding: 10px 0;
@@ -296,6 +312,20 @@
                 <p class="closing-line">And every time I walk through ASU, my heart whispers,<br>"Thank you for the memories."</p>
             </div>
 
+
+            <div class="post-content update-block">
+                <div class="update-title">UPDATE<span>// 16 OCT 2026</span></div>
+                <p>After my graduation, she tried to contact her friends. She asked about me. She wanted to know how I was doing.</p>
+                <p>At the end of June 2026, she texted me. She promised me she would be okay and good. She promised she would never leave. She promised to change for the better.</p>
+                <p>I believed her.</p>
+                <p>Around 10 October 2026, she changed. She talked less with me. The messages became short. The silence came back.</p>
+                <p>On 16 October 2026, I asked her, "What's going on?"</p>
+                <p>She replied, "It's best to break up."</p>
+                <p>Again, there was no logic. There was no single good reason.</p>
+                <p>She promised never to leave. Then she left again.</p>
+                <p class="closing-line">Some promises are only words.<br>But I am still grateful for the good she gave me.</p>
+            </div>
+
             <div class="memory-log">
                 <div class="memory-log-title">memories.log</div>
                 <div class="memory-item">
@@ -313,11 +343,27 @@
                 <div class="memory-item">
                     <span class="memory-date">18 JUN 2025</span>
                     <span class="memory-label">Best memory</span>
-            </div>
-        </div>
+                </div>
                 <div class="memory-item">
                     <span class="memory-date">15 JUN 2026</span>
-                    <span class="memory-label">Break Up</span>
+                    <span class="memory-label">Break up</span>
+                </div>
+                <div class="memory-item">
+                    <span class="memory-date">AFTER GRADUATION</span>
+                    <span class="memory-label">She asked her friends how I was</span>
+                </div>
+                <div class="memory-item">
+                    <span class="memory-date">END OF JUN 2026</span>
+                    <span class="memory-label">She texted me: promised to be okay, never leave, and change</span>
+                </div>
+                <div class="memory-item">
+                    <span class="memory-date">~10 OCT 2026</span>
+                    <span class="memory-label">She changed and talked less</span>
+                </div>
+                <div class="memory-item">
+                    <span class="memory-date">16 OCT 2026</span>
+                    <span class="memory-label">"It's best to break up." No reason</span>
+                </div>
             </div>
         </div>
     </div>
