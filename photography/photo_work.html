@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    document.body.style.transform = "scale(2.1)";
+    document.body.style.transformOrigin = "0 0";
+    document.body.style.width = "46.77%";  // Adjusted for correct scaling
+    document.body.style.height = "76.67%"; // Adjusted for correct scaling
+    document.body.style.overflow = "auto"; // Allow scrolling
+  });
+</script>
+
+<head>
+<meta charset="UTF-8" />
+<title>Photo Session Details - Necro’s Hub</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0a0a0a" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Necro’s Hub" />
+<link rel="apple-touch-icon" href="icons/apple-touch-icon-180.png" />
+<link rel="manifest" href="manifest.webmanifest" />
+
+<style>
+:root {
+  --bg: #0a0a0a;
+  --surface: #121212;
+  --surface-2: #171717;
+  --text: #f5f5f5;
+  --muted: #b8b8b8;
+  --brand: #ff5722;
+  --brand-pressed: #e04d1e;
+  --accent: #ffd700;
+  --border: #222;
+  --shadow: 0 8px 24px rgba(0,0,0,.4);
+  --radius: 18px;
+  --tap: -2px;
+}
+
+/* Base */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.4 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* App shell */
+.app {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 50dvh;
+  overflow: hidden;
+}
+
+.topbar {
+  position: sticky; top: 0;
+  padding: calc(10px + env(safe-area-inset-top)) 14px 10px;
+  background: linear-gradient(180deg, rgba(18,18,18,.95), rgba(18,18,18,.75));
+  backdrop-filter: saturate(140%) blur(10px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 12px;
+  z-index: 20;
+}
+.icon-btn {
+  border: 0; background: var(--surface-2);
+  width: 38px; height: 38px; border-radius: 12px;
+  display: grid; place-items: center; color: var(--text);
+}
+.title { font-weight: 700; font-size: 18px; }
+
+/* Drawer */
+.drawer-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.4);
+  opacity: 0; pointer-events: none;
+  transition: opacity .2s ease;
+  z-index: 30;
+}
+.drawer {
+  position: fixed; inset: 0 auto 0 0;
+  width: min(86vw, 320px);
+  background: #0e0e0e;
+  border-right: 1px solid var(--border);
+  transform: translateX(-100%);
+  transition: transform .25s ease;
+  z-index: 40;
+  display: flex; flex-direction: column;
+  padding-top: env(safe-area-inset-top);
+}
+.drawer.open { transform: translateX(0); }
+.drawer-backdrop.show { opacity: 1; pointer-events: auto; }
+.drawer__header {
+  padding: 18px 16px 12px;
+  display: flex; align-items: center; gap: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.avatar {
+  width: 40px; height: 40px; border-radius: 12px; background: #222;
+  display: grid; place-items: center; font-weight: 700; color: var(--accent);
+}
+.drawer__brand { font-weight: 700; }
+.drawer__nav { padding: 10px; display: grid; gap: 6px; }
+.nav-link {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 12px; border-radius: 14px; color: var(--text);
+  text-decoration: none;
+}
+.nav-link:hover { background: #141414; }
+.nav-badge {
+  margin-left: auto; background: var(--brand); color: #fff;
+  padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 700;
+}
+
+/* Content */
+main {
+  padding: 14px;
+  display: grid; gap: 14px;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px;
+}
+.sale-banner {
+  background: var(--brand);
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  padding: 1rem;
+  border-radius: var(--radius);
+}
+.bilingual { display: flex; flex-direction: column; gap: 12px; }
+.english { text-align: left; }
+.arabic { direction: rtl; text-align: right; }
+
+/* Table */
+.price-table {
+  width: 100%; border-collapse: collapse;
+  margin: 15px 0; font-size: 1rem;
+}
+.price-table th, .price-table td {
+  border: 1px solid var(--border);
+  padding: 12px 15px;
+}
+.old-price {
+  text-decoration: line-through; color: gray; margin-right: 8px;
+}
+
+/* Bottom bar */
+.bottombar {
+  position: sticky; bottom: 0;
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+  background: linear-gradient(0deg, rgba(12,12,12,.95), rgba(12,12,12,.75));
+  border-top: 1px solid var(--border);
+}
+.primary {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  background: var(--brand); color: #fff; text-decoration: none; height: 48px;
+  border-radius: 14px; font-weight: 800;
+}
+  /* Ensure cards stack flush with grid gap only */
+main {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px; /* This is the only spacing */
+}
+
+.card,
+.sale {
+  margin: 0;        /* kill default section spacing */
+  padding: 16px;
+  display: block;
+}
+
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <!-- Drawer -->
+  <div class="drawer-backdrop" id="backdrop"></div>
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer__header">
+      <div class="avatar">N</div>
+      <div>
+        <div class="drawer__brand">Necro’s Hub</div>
+        <div style="color:var(--muted);font-size:12px">Creative Services</div>
+      </div>
+    </div>
+    <nav class="drawer__nav">
+      <a class="nav-link" href="/">🏠 Home</a>
+      <a class="nav-link" href="/photography/photo_work.html">📷 Photo Sessions <span class="nav-badge">-50%</span></a>
+      <a class="nav-link" href="/main_index">🌐 Social Media</a>
+    </nav>
+  </aside>
+
+  <!-- Top bar -->
+  <header class="topbar">
+    <button class="icon-btn" id="menuBtn">☰</button>
+    <div class="title">Photo Sessions</div>
+  </header>
+
+  <!-- Content -->
+  <main>
+    <section class="sale-banner">🎉 50% OFF Everything – Limited Time Offer! 🎉</section>
+
+    <section class="card">
+      <h2>Service Overview | نظرة عامة على الخدمة</h2>
+      <div class="bilingual">
+        <div class="english">Professional photography sessions in Amman with high-quality editing.</div>
+        <div class="arabic">جلسات تصوير احترافية في عمّان مع تعديلات عالية الجودة.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Pricing Structure | هيكل الأسعار</h2>
+      <div class="table-wrapper">
+        <table class="price-table">
+          <thead>
+            <tr><th>Service | الخدمة</th><th>Price | السعر</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1 hour session | ساعة واحدة</td><td><span class="old-price">20 JOD</span> 10 JOD</td></tr>
+            <tr><td>2 hours session | ساعتين</td><td><span class="old-price">30 JOD</span> 15 JOD</td></tr>
+            <tr><td>3 hours session (max) | 3 ساعات</td><td><span class="old-price">40 JOD</span> 20 JOD</td></tr>
+            <tr><td>Lens kit rental | استئجار طقم العدسات</td><td><span class="old-price">15 JOD</span> 7.5 JOD</td></tr>
+            <tr><td>Photoshop/Face edit (per photo) | تعديل لكل صورة</td><td><span class="old-price">5 JOD</span> 2.5 JOD</td></tr>
+            <tr><td>Taxi/Transport | المواصلات</td><td><span class="old-price">5–10 JOD</span> 2.5–5 JOD</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- Bottom bar -->
+  <footer class="bottombar">
+    <a class="primary" href="/photography/photo_work_must_read">📅 Book Your Session</a>
+  </footer>
+</div>
+
+<script>
+const drawer = document.getElementById('drawer');
+const backdrop = document.getElementById('backdrop');
+const menuBtn = document.getElementById('menuBtn');
+function openDrawer() { drawer.classList.add('open'); backdrop.classList.add('show'); }
+function closeDrawer() { drawer.classList.remove('open'); backdrop.classList.remove('show'); }
+menuBtn.addEventListener('click', openDrawer);
+backdrop.addEventListener('click', closeDrawer);
+</script>
+</body>
+</html>

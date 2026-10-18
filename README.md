@@ -36,3 +36,22 @@ Thanks for stopping by!
 ---
 
 > 💡 *Built with passion, caffeine, and questionable sleep schedules.*
+
+## Structure
+
+| Folder | Contents |
+|---|---|
+| `/` | `index.html`, `main_index.html`, `404.html` (redirects old URLs), `CNAME`, `sitemap.xml`, Google verification files |
+| `about/` | Profile, persona, gaming history pages |
+| `community/` | NS clan: join, admins, bans, members, staff, Discord, demos, logs |
+| `nsp/members/` | nSP member profile pages |
+| `nsp/reports/` | nSP reports, strikes, archived reports |
+| `servers/` | Server list and per-mode pages (classic, deathrun, HNS, TTT, Horror Hunt…) |
+| `steam/` | Steam profile copies and toplists |
+| `photography/` | Photography sessions, portfolio, terms, `work_samples/` |
+| `writing/` | Pen entries, poems, presentations |
+| `tools/` | Calculators, editor, search, redirect pages |
+| `archive/` | Old test pages and duplicate demo pages |
+| `assets/` | `css/`, `js/`, `img/`, `vendor/` |
+
+Old URLs (e.g. `/banned`) redirect to their new location through `404.html`.
