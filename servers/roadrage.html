@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KG1SF91F87"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-KG1SF91F87');
+</script>
+<script>document.documentElement.classList.add('js');</script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)" />
+<meta name="color-scheme" content="light dark" />
+<meta name="description" content="BHOP RAGE - a bunny-hop, knife and turbo-ability mod for Counter-Strike 1.6. The complete guide: movement, abilities, classes, shop, races, tags, binds, commands and rules." />
+<meta property="og:title" content="BHOP RAGE - CS 1.6 mod guide" />
+<meta property="og:description" content="Insane bhop physics, knife rage and turbo abilities for Counter-Strike 1.6." />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Necro's Hub" />
+<link rel="canonical" href="/servers/roadrage" />
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect fill='%2304070a' width='180' height='180' rx='40'/%3E%3Ctext x='90' y='125' font-size='100' text-anchor='middle' fill='%232ee6d0' font-weight='900' font-family='monospace'%3EN%3C/text%3E%3C/svg%3E" />
+<title>BHOP RAGE - CS 1.6 mod guide - Necro's Hub</title>
+
+
+<script>
+(function(){try{var t=localStorage.getItem('rage-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+<style>
+:root{
+  --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --subtle:#f6f8fa; --subtle2:#eef1f4;
+  --link:#0969da; --header:#f6f8fa; --code:rgba(129,139,152,.16); --sel:#ddf4ff;
+  --note:#0969da; --tip:#1a7f37; --imp:#8250df; --warn:#9a6700; --bad:#d1242f;
+  --ghost:#d1242f; --inv:#0969da; --gold:#9a6700;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  color-scheme:light;
+}
+:root[data-theme="dark"]{
+  --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --subtle:#151b23; --subtle2:#1c232d;
+  --link:#4493f8; --header:#010409; --code:rgba(101,108,118,.25); --sel:#143054;
+  --note:#4493f8; --tip:#3fb950; --imp:#ab7df8; --warn:#d29922; --bad:#f85149;
+  --ghost:#f85149; --inv:#4493f8; --gold:#d29922;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme]){
+    --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --subtle:#151b23; --subtle2:#1c232d;
+    --link:#4493f8; --header:#010409; --code:rgba(101,108,118,.25); --sel:#143054;
+    --note:#4493f8; --tip:#3fb950; --imp:#ab7df8; --warn:#d29922; --bad:#f85149;
+    --ghost:#f85149; --inv:#4493f8; --gold:#d29922; color-scheme:dark;
+  }
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--link);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--link);outline-offset:2px;border-radius:4px}
+::selection{background:var(--sel)}
+section[id],[id^="gl-"]{scroll-margin-top:76px}
+
+/* ===== Header ===== */
+.gh-header{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:12px;height:56px;padding:0 16px;padding-top:env(safe-area-inset-top,0px);background:var(--header);border-bottom:1px solid var(--border)}
+.gh-header .bar{position:absolute;left:0;bottom:-1px;height:2px;width:0;background:var(--link)}
+.crumb{display:flex;align-items:center;gap:8px;color:var(--fg);font-size:14px;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.crumb:hover{text-decoration:none}
+.crumb .a{color:var(--link)}
+.crumb .sl{color:var(--muted)}
+.crumb b{font-weight:600}
+.spacer{flex:1}
+.hbtn,.hlink{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:32px;padding:0 12px;font:500 13px/1 var(--sans);color:var(--fg);background:var(--bg);border:1px solid var(--border);border-radius:6px;cursor:pointer;white-space:nowrap}
+.hbtn:hover,.hlink:hover{background:var(--subtle2);text-decoration:none}
+.menu-btn{padding:0 10px;font-size:16px}
+@media(max-width:600px){.hlink{display:none}.crumb .a,.crumb .sl{display:none}.gh-header{padding-left:12px;padding-right:12px;gap:8px}}
+
+/* ===== Layout ===== */
+.layout{max-width:1280px;margin:0 auto;padding:24px 16px 64px;display:grid;grid-template-columns:minmax(0,1fr);gap:24px}
+@media(min-width:1012px){.layout{grid-template-columns:268px minmax(0,1fr);gap:32px;padding:24px 24px 64px}.menu-btn{display:none}}
+
+/* ===== Sidebar / TOC ===== */
+.sidebar{font-size:14px}
+.side-title{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;padding:0 8px 8px}
+.sidebar nav{display:flex;flex-direction:column}
+.drawer__group{padding:14px 8px 4px;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.nav-link{display:block;padding:5px 8px;margin:1px 0;color:var(--fg);border-radius:6px;border-left:2px solid transparent}
+.nav-link:hover{background:var(--subtle2);text-decoration:none}
+.nav-link.active{background:var(--subtle);font-weight:600;border-left-color:var(--link);color:var(--link)}
+.side-sep{border:0;border-top:1px solid var(--border);margin:12px 0;width:100%}
+.backdrop{display:none}
+@media(min-width:1012px){
+  .sidebar{position:sticky;top:80px;align-self:start;max-height:calc(100vh - 96px);overflow-y:auto;padding-right:8px}
+}
+@media(max-width:1011px){
+  .sidebar{position:fixed;inset:0 auto 0 0;width:min(86vw,320px);z-index:70;background:var(--bg);border-right:1px solid var(--border);padding:16px 12px calc(24px + env(safe-area-inset-bottom,0px));overflow-y:auto;transform:translateX(-100%);visibility:hidden;transition:transform .25s ease,visibility 0s linear .25s;box-shadow:0 8px 24px rgba(1,4,9,.4)}
+  .sidebar.open{transform:none;visibility:visible;transition:transform .25s ease,visibility 0s}
+  .backdrop{position:fixed;inset:0;background:rgba(1,4,9,.55);z-index:60;opacity:0;pointer-events:none;transition:opacity .25s ease;display:block}
+  .backdrop.show{opacity:1;pointer-events:auto}
+}
+
+/* ===== README box ===== */
+.doc{min-width:0;border:1px solid var(--border);border-radius:6px;background:var(--bg)}
+.file-head{display:flex;align-items:center;gap:8px;padding:10px 16px;background:var(--subtle);border-bottom:1px solid var(--border);border-radius:6px 6px 0 0;font-size:14px;font-weight:600}
+.file-head .muted{font-weight:400;margin-left:auto}
+.doc-body{padding:24px 16px 32px}
+@media(min-width:768px){.doc-body{padding:32px 48px 48px}}
+
+.doc-body>.sec{margin-top:40px}
+.hero{text-align:left}
+.hero h1{margin:0 0 16px;padding-bottom:.3em;font-size:2em;font-weight:600;line-height:1.25;border-bottom:1px solid var(--border)}
+.hero p{margin:0 0 16px}
+
+h2,h3,h4{position:relative;font-weight:600;line-height:1.25;margin:24px 0 16px}
+.sec>h2{margin:4px 0 16px;padding-bottom:.3em;font-size:1.5em;border-bottom:1px solid var(--border)}
+h3{font-size:1.25em}
+h4{font-size:1em}
+.sec>h3:first-of-type{margin-top:20px}
+.kicker{display:block;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px}
+.anchor{position:absolute;left:-24px;padding-right:6px;color:var(--muted);font-weight:400;font-size:.85em;opacity:0;text-decoration:none}
+h2:hover .anchor,h3:hover .anchor,.anchor:focus{opacity:1}
+.anchor:hover{text-decoration:none;color:var(--link)}
+@media(max-width:767px){.anchor{display:none}}
+
+p{margin:0 0 16px}
+.lead{font-size:1.125em;color:var(--fg)}
+.muted{color:var(--muted)}
+small.muted{font-size:.8em;font-weight:400}
+ul,ol{margin:0 0 16px;padding-left:2em}
+li{margin:.25em 0}
+li>ul,li>ol{margin:.25em 0 0}
+b,strong{font-weight:600}
+hr{border:0;border-top:1px solid var(--border);margin:24px 0}
+.clr-g{color:var(--tip)} .clr-r{color:var(--bad)} .clr-v{color:var(--imp)}
+
+/* ===== Badges / tags ===== */
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 16px}
+.badge{display:inline-block;padding:2px 10px;font-size:12px;font-weight:500;line-height:20px;border:1px solid var(--note);color:var(--note);border-radius:2em;white-space:nowrap}
+a.badge:hover{background:var(--subtle2);text-decoration:none}
+.badge.a{border-color:var(--warn);color:var(--warn)}
+.badge.m{border-color:var(--imp);color:var(--imp)}
+.tag{display:inline-block;padding:0 8px;font-size:12px;font-weight:500;line-height:18px;border:1px solid var(--border);border-radius:2em;white-space:nowrap;color:var(--muted)}
+.tag.t{color:var(--bad);border-color:var(--bad)}
+.tag.ct{color:var(--note);border-color:var(--note)}
+.tag.all{color:var(--warn);border-color:var(--warn)}
+.tag.dead{color:var(--imp);border-color:var(--imp)}
+.tag.lv{color:var(--muted)}
+
+/* ===== Tables ===== */
+.tablewrap{overflow-x:auto;margin:0 0 16px;-webkit-overflow-scrolling:touch}
+.tablewrap table{border-collapse:collapse;border-spacing:0;width:100%;font-size:14px}
+.tablewrap th,.tablewrap td{padding:6px 13px;border:1px solid var(--border);vertical-align:top;text-align:left}
+.tablewrap th{font-weight:600;background:var(--subtle);white-space:nowrap}
+.tablewrap tbody tr:nth-child(even){background:var(--subtle)}
+.tablewrap td:first-child{font-weight:600}
+.tablewrap td:first-child code{font-weight:400;white-space:nowrap}
+.tablewrap td.num{white-space:nowrap;text-align:right;font-variant-numeric:tabular-nums}
+.tablewrap td{min-width:64px}
+
+/* ===== Code ===== */
+code,.kbd{font-family:var(--mono);font-size:85%;padding:.2em .4em;background:var(--code);border-radius:6px}
+.kbd{border:1px solid var(--border);border-bottom-width:2px;background:var(--subtle)}
+.codeblock{position:relative;margin:0 0 16px;padding:16px 76px 16px 16px;font-family:var(--mono);font-size:85%;line-height:1.5;background:var(--subtle);border:1px solid var(--border);border-radius:6px;white-space:pre;overflow-x:auto}
+.codeblock .c{color:var(--muted)}
+.copy{position:absolute;top:8px;right:8px;height:28px;padding:0 10px;font:500 12px/1 var(--sans);color:var(--fg);background:var(--bg);border:1px solid var(--border);border-radius:6px;cursor:pointer}
+.copy:hover{background:var(--subtle2)}
+.copy.done{color:#fff;background:var(--tip);border-color:var(--tip)}
+.tree{margin:0 0 16px;padding:16px;font-family:var(--mono);font-size:85%;line-height:1.55;white-space:pre;overflow-x:auto;background:var(--subtle);border:1px solid var(--border);border-radius:6px}
+.tree b{color:var(--link)} .tree i{color:var(--muted);font-style:normal}
+
+/* ===== Callouts (GitHub alerts) ===== */
+.callout{margin:0 0 16px;padding:8px 16px;border-left:.25em solid var(--note)}
+.callout p{margin:0 0 8px}
+.callout p:last-child{margin-bottom:0}
+.callout .ct{display:block;margin-bottom:4px;font-weight:600;color:var(--note)}
+.callout.warn{border-left-color:var(--warn)} .callout.warn .ct{color:var(--warn)}
+.callout.bad{border-left-color:var(--bad)} .callout.bad .ct{color:var(--bad)}
+
+/* ===== Cards ===== */
+.grid2,.grid3{display:grid;gap:16px;margin:0 0 16px}
+.grid2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid3{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:860px){.grid3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.grid2,.grid3{grid-template-columns:1fr}}
+.mini{padding:12px 16px;background:var(--subtle);border:1px solid var(--border);border-radius:6px}
+.mini h4{margin:0 0 6px;font-size:1em}
+.mini p,.mini ul,.mini ol{font-size:14px;margin:0 0 8px}
+.mini>:last-child{margin-bottom:0}
+.mini li{margin:.15em 0}
+.mini.ghost{border-top:3px solid var(--ghost)} .mini.ghost h4{color:var(--ghost)}
+.mini.inv{border-top:3px solid var(--inv)} .mini.inv h4{color:var(--inv)}
+.mini.gold{border-top:3px solid var(--gold)} .mini.gold h4{color:var(--gold)}
+.mini .big{display:block;margin-bottom:2px;font-size:1.75rem;font-weight:600;line-height:1.2;color:var(--link)}
+
+/* ===== Timeline ===== */
+.stepper,.doc ul.stepper{list-style:none;margin:0 0 16px;padding:0 0 0 20px;border-left:2px solid var(--border)}
+.stepper li{position:relative;margin:0;padding:0 0 16px 16px}
+.stepper li:last-child{padding-bottom:0}
+.stepper li::before{content:"";position:absolute;left:-27px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--note)}
+.stepper li.m::before{border-color:var(--imp)} .stepper li.a::before{border-color:var(--warn)}
+.stepper .t{display:block;font-weight:600}
+
+/* ===== HUD mock ===== */
+.screen{position:relative;height:300px;margin:0 0 8px;border:1px solid #30363d;border-radius:6px;overflow:hidden;background:radial-gradient(circle at 50% 40%,#0b1613 0%,#020605 75%)}
+.screen .hudbox{position:absolute;font:12px/1.5 var(--mono);white-space:pre}
+.screen .tl{left:12px;top:28px;color:#ff8c8c}
+.screen .tc{left:50%;top:10px;transform:translateX(-50%);color:#ebd796;text-align:center}
+.screen .cc{left:50%;bottom:40px;transform:translateX(-50%);color:#ff8c8c;text-align:center}
+.screen .radar{position:absolute;left:8px;top:8px;width:16px;height:16px;border-radius:50%;border:1px solid #2c8f4e;background:rgba(44,143,78,.25)}
+.screen .cross{position:absolute;left:50%;top:42%;width:14px;height:14px;margin:-7px 0 0 -7px;border:1px solid #ff4d4d;border-radius:50%;opacity:.8}
+.screen .tag-note{position:absolute;font:11px/1.4 var(--sans);color:#d29922;border:1px solid #9e6a03;border-radius:6px;padding:1px 6px;background:rgba(0,0,0,.7)}
+@media(max-width:600px){.screen .hudbox{font-size:10px}}
+
+/* ===== Filters ===== */
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+.pill{height:32px;padding:0 12px;font:500 13px/1 var(--sans);color:var(--fg);background:var(--bg);border:1px solid var(--border);border-radius:2em;cursor:pointer}
+.pill:hover{background:var(--subtle2)}
+.pill[aria-pressed="true"]{background:var(--link);border-color:var(--link);color:#fff}
+.search{display:block;width:100%;height:36px;margin:0 0 8px;padding:0 12px;font:14px var(--sans);color:var(--fg);background:var(--bg);border:1px solid var(--border);border-radius:6px}
+.search:focus{outline:2px solid var(--link);outline-offset:-1px;border-color:var(--link)}
+.count{display:block;margin-bottom:8px;font-size:12px;color:var(--muted)}
+
+/* ===== Accordions ===== */
+details.acc{margin:0 0 8px;border:1px solid var(--border);border-radius:6px}
+details.acc summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px 16px;font-weight:600;font-size:15px;border-radius:6px}
+details.acc summary::-webkit-details-marker{display:none}
+details.acc summary::before{content:"";flex:none;width:0;height:0;border-left:6px solid var(--muted);border-top:5px solid transparent;border-bottom:5px solid transparent;transition:transform .15s ease}
+details.acc[open] summary::before{transform:rotate(90deg)}
+details.acc summary:hover{background:var(--subtle)}
+details.acc[open] summary{border-bottom:1px solid var(--border);border-radius:6px 6px 0 0;background:var(--subtle)}
+details.acc .body{padding:12px 16px 4px}
+
+/* ===== Glossary ===== */
+.azbar{display:flex;flex-wrap:wrap;gap:4px;margin:0 0 16px}
+.azbar a,.azbar span{display:inline-grid;place-items:center;width:32px;height:32px;font-size:14px;font-weight:600;border-radius:6px}
+.azbar a{border:1px solid var(--border);color:var(--link)}
+.azbar a:hover{background:var(--subtle2);text-decoration:none}
+.azbar span{color:var(--muted);opacity:.45}
+.gl{display:grid;grid-template-columns:40px minmax(0,1fr);gap:0 12px;padding:12px 0;border-top:1px solid var(--border)}
+.gl .L{font-size:1.75rem;font-weight:600;line-height:1.1;color:var(--muted)}
+.gl dl{margin:0}
+.gl dt{font-weight:600}
+.gl dd{margin:0 0 8px;color:var(--fg)}
+
+/* ===== Footer / helpers ===== */
+.foot{margin-top:32px;padding-top:16px;border-top:1px solid var(--border);font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px 16px}
+.totop{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:40;display:none;width:40px;height:40px;place-items:center;font-size:18px;color:var(--fg);background:var(--bg);border:1px solid var(--border);border-radius:50%;cursor:pointer;box-shadow:0 1px 3px rgba(1,4,9,.2)}
+.totop.show{display:grid}
+.totop:hover{background:var(--subtle2)}
+
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+@media print{.gh-header,.sidebar,.backdrop,.totop,.copy{display:none!important}.layout{display:block;padding:0}.doc{border:0}.doc-body{padding:0}}
+
+</style>
+</head>
+<body>
+<header class="gh-header">
+  <button class="hbtn menu-btn" id="menuBtn" type="button" aria-label="Open table of contents" aria-controls="drawer" aria-expanded="false">&#9776;</button>
+  <a class="crumb" href="/main_index"><span class="a">Necro's Hub</span><span class="sl">/</span><b>bhop-rage</b></a>
+  <span class="spacer"></span>
+  <a class="hlink" href="/main_index">Back to hub</a>
+  <button class="hbtn" id="themeBtn" type="button" aria-label="Switch light or dark theme">Theme</button>
+  <div class="bar" id="bar"></div>
+</header>
+
+<div class="backdrop" id="backdrop"></div>
+<div class="layout">
+  <aside class="sidebar" id="drawer" aria-label="Table of contents">
+    <div class="side-title">On this page</div>
+    <nav>
+      <div class="drawer__group">Start here</div><a class="nav-link" href="#sec-tldr">Quick Start</a><a class="nav-link" href="#sec-what">What is BHOP RAGE?</a><a class="nav-link" href="#sec-round">How a Round Works</a><div class="drawer__group">Movement</div><a class="nav-link" href="#sec-bhop">Bunny Hopping</a><a class="nav-link" href="#sec-combo">Combos and Speed Gains</a><a class="nav-link" href="#sec-lj">Long Jumps</a><a class="nav-link" href="#sec-abil">Abilities and Energy</a><div class="drawer__group">Combat</div><a class="nav-link" href="#sec-knife">Knife Rage</a><a class="nav-link" href="#sec-class">Classes</a><a class="nav-link" href="#sec-shop">Shop</a><div class="drawer__group">World</div><a class="nav-link" href="#sec-zones">Zones and Races</a><a class="nav-link" href="#sec-cars">Map Cars</a><div class="drawer__group">Progression</div><a class="nav-link" href="#sec-prog">XP and Levels</a><a class="nav-link" href="#sec-tags">Rank Tags</a><a class="nav-link" href="#sec-skins">Knife Skins</a><a class="nav-link" href="#sec-records">Records and Leaderboards</a><div class="drawer__group">Interface</div><a class="nav-link" href="#sec-hud">HUD Guide</a><a class="nav-link" href="#sec-menu">Menus</a><a class="nav-link" href="#sec-binds">Key Binds</a><a class="nav-link" href="#sec-cmds">All Commands</a><div class="drawer__group">Community</div><a class="nav-link" href="#sec-rules">Rules</a><a class="nav-link" href="#sec-faq">FAQ</a><a class="nav-link" href="#sec-tips">Tips and Strategy</a><div class="drawer__group">Reference</div><a class="nav-link" href="#sec-owners">For Server Owners</a><a class="nav-link" href="#sec-glossary">Glossary A-Z</a>
+      <hr class="side-sep">
+      <a class="nav-link" href="/">Necro's Hub (home)</a>
+      <a class="nav-link" href="/main_index">NECRO144's Main Page</a>
+    </nav>
+  </aside>
+
+  <main class="doc">
+    <div class="file-head"><span>&#128214; README.md</span><span class="muted">v1.1.0 &middot; In development</span></div>
+    <div class="doc-body">
+
+<section class="hero" id="top">
+  <h1>BHOP RAGE</h1>
+  <p class="lead">Insane bunny-hop physics, knife rage and turbo abilities for Counter-Strike 1.6 - the complete guide, from your first hop to the leaderboard.</p>
+  <p>Running by <b>Néć[Ř]ø /A/</b></p>
+  <div class="badges"><span class="badge">v1.1.0</span><span class="badge a">In development</span><span class="badge m">AMX Mod X 1.8.2</span></div>
+  <div class="badges"><a class="badge" href="#sec-tldr">Quick Start</a><a class="badge" href="#sec-class">Classes</a><a class="badge" href="#sec-shop">Shop</a><a class="badge" href="#sec-binds">Key Binds</a><a class="badge" href="#sec-cmds">Commands</a><a class="badge" href="#sec-rules">Rules</a></div>
+</section>
+
+<section class="sec" id="sec-tldr">
+<span class="kicker">01 START HERE</span>
+<h2>Quick Start</h2>
+
+<p class="lead">Hold jump, strafe with your mouse, and watch the speedometer climb. Kill with the knife, level up, unlock classes and abilities, and spend your money in the shop. That’s BHOP RAGE.</p>
+<ol>
+<li><b>Bind your abilities.</b> Say <code>/rage</code> → <i>Abilities &amp; binds help</i>, or copy the <a href="#sec-binds">binds below</a>.</li>
+<li><b>Bunny hop.</b> Hold <b>SPACE</b> and strafe (A/D + mouse) in the air. Each hop keeps your speed and adds a little more.</li>
+<li><b>Time it for more.</b> Pressing jump the exact moment you land is a <b>perfect hop</b>: the biggest speed gain and bonus XP.</li>
+<li><b>Knife only.</b> Hits in the air hit harder, kills give XP, a speed boost and a combo.</li>
+<li><b>Pick a class</b> with <code>/class</code> and open the <b>shop</b> with <code>/shop</code>.</li>
+<li><b>Race.</b> On maps with zones: leave the start, hit every checkpoint, cross the finish. <code>/restart</code> anytime.</li>
+</ol>
+<div class="callout "><span class="ct">One console tweak</span><p>Set <code>cl_forwardspeed 9999; cl_sidespeed 9999; cl_backspeed 9999</code> once. The default 400 caps how much class and kill speed bonuses can help you.</p></div>
+
+</section>
+
+<section class="sec" id="sec-what">
+<span class="kicker">02 START HERE</span>
+<h2>What is BHOP RAGE?</h2>
+
+<p><b>BHOP RAGE</b> is a fast, chaotic, skill-based movement mod for <b>Counter-Strike 1.6</b>, written from scratch for <b>AMX Mod X 1.8.2</b> as eight small plugins. It mixes bunny hopping, trick jumping, speedrunning and arcade-style knife fights.</p>
+<div class="badges"><span class="badge">CS 1.6</span><span class="badge">AMX Mod X 1.8.2</span><span class="badge">No client download</span><span class="badge a">v1.1.0</span><span class="badge m">Knife only</span></div>
+<div class="grid2">
+<div class="mini inv"><h4>Movement</h4><ul><li>Auto bhop with skill-based speed gains</li><li>Combos, perfect hops, long-jump records</li><li>Dash, double jump, super jump, air dash</li><li>Launch pads, nitro rings, speed pads</li><li>Time trials with checkpoints</li></ul></div>
+<div class="mini ghost"><h4>Rage</h4><ul><li>Knife-only fights, air-hit bonuses, knockback</li><li>Kill streaks, kill combos, speed boosts</li><li>9 classes unlocked by level</li><li>15-item shop, Shockwave to Noclip</li><li>Rank tags, knife skins, leaderboards</li></ul></div>
+</div>
+
+</section>
+
+<section class="sec" id="sec-round">
+<span class="kicker">03 START HERE</span>
+<h2>How a Round Works</h2>
+
+<ul class="stepper">
+<li><span class="t">Spawn</span>You get a knife (and the C4 on bomb maps). Your class is applied: HP, armor, speed, gravity.</li>
+<li class="m"><span class="t">First 10 seconds</span>Changing class with <code>/class</code> applies instantly. After that it waits for your next spawn.</li>
+<li><span class="t">Hop and fight</span>Build speed, chain hops, use abilities (they cost <b>energy</b>, which refills by itself).</li>
+<li class="a"><span class="t">Kills and tricks</span>Knife kills, air kills, streaks, long jumps, speed milestones and tricks all give <b>XP</b>.</li>
+<li><span class="t">Money</span>CS money is your shop currency - buy health, noclip, invisibility, shockwaves and more.</li>
+<li class="m"><span class="t">Round end</span>Shop limits reset next round. XP, records, class, skin and tag are saved.</li>
+</ul>
+
+</section>
+
+<section class="sec" id="sec-bhop">
+<span class="kicker">04 MOVEMENT</span>
+<h2>Bunny Hopping</h2>
+
+<p class="lead">Holding jump makes you hop again the instant you land. Air control is the engine’s own, so real strafing skill still matters.</p>
+<h3>How to gain speed</h3>
+<ol><li>Hold <b>SPACE</b>.</li><li>In the air, hold <b>A</b> and turn the mouse left smoothly; next hop hold <b>D</b> and turn right.</li><li>Don’t hold <b>W</b> while airborne - it kills air acceleration.</li></ol>
+<p>Normal CS clamps bhop speed to about 1.2× your run speed. BHOP RAGE removes that clamp and the landing slowdown.</p>
+
+</section>
+
+<section class="sec" id="sec-combo">
+<span class="kicker">05 MOVEMENT</span>
+<h2>Combos and Speed Gains</h2>
+<div class="tablewrap"><table><thead><tr><th>Hop type</th><th>How</th><th>Default gain</th></tr></thead><tbody><tr><td>Perfect</td><td>press jump within 0.03 s of landing</td><td>+6% speed, +2 XP</td></tr><tr><td>Good</td><td>press jump yourself within 0.25 s</td><td>+3% speed</td></tr><tr><td>Held</td><td>just holding jump (autobhop)</td><td>+1% speed</td></tr></tbody></table></div>
+<p>Gains only start above <b>200 u/s</b> and stop at the server cap (default <b>3500 u/s</b>, unlimited on <code>bhop_</code> maps with the <i>insane</i> preset). Staying on the ground longer than 0.25 s resets your <b>combo</b>. Every 10 combo hops pays XP.</p>
+<h3>Speed milestones</h3><p>Reaching 500, 750, 1000, 1250, 1500, 2000, 2500 and 3000 u/s pays XP once per map each. Your best speed ever is a personal record and on the leaderboard.</p>
+
+</section>
+
+<section class="sec" id="sec-lj">
+<span class="kicker">06 MOVEMENT</span>
+<h2>Long Jumps</h2>
+
+<p>A single jump that lands within 24 units of the take-off height is measured (hull width +32 included). From <b>230 units</b> it counts: XP, personal best and the server record. Jumps helped by abilities, pads or knockback don’t count.</p>
+
+</section>
+
+<section class="sec" id="sec-abil">
+<span class="kicker">07 MOVEMENT</span>
+<h2>Abilities and Energy</h2>
+<div class="tablewrap"><table><thead><tr><th>Ability</th><th>Unlock</th><th>Energy</th><th>Cooldown</th><th>What it does</th></tr></thead><tbody><tr><td>Dash</td><td>Lv 1</td><td>25</td><td>3 s</td><td>Burst forward where you look (650 u/s). Walls stop you - no clipping.</td></tr><tr><td>Knife Dash</td><td>Lv 1</td><td>30</td><td>4 s</td><td>Stronger forward lunge (900 u/s). Knife must be out.</td></tr><tr><td>Double Jump</td><td>Lv 2</td><td>-</td><td>per jump</td><td>Press jump again in the air. Resets on landing.</td></tr><tr><td>Air Dash</td><td>Lv 3</td><td>15</td><td>1 s</td><td>Redirect your speed to where you look / steer, once per jump.</td></tr><tr><td>Super Jump</td><td>Lv 4</td><td>40</td><td>6 s</td><td>Huge upward launch with a little forward push.</td></tr></tbody></table></div>
+<p><b>Energy:</b> 100 max, refills 8 per second. Some zones disable abilities.</p>
+
+</section>
+
+<section class="sec" id="sec-knife">
+<span class="kicker">08 COMBAT</span>
+<h2>Knife Rage</h2>
+<div class="tablewrap"><table><thead><tr><th>Mechanic</th><th>Default</th></tr></thead><tbody><tr><td>Knife speed</td><td>run speed ×1.25 with the knife out</td></tr><tr><td>Air attack</td><td>your hits deal ×1.5 while you are airborne</td></tr><tr><td>Knockback</td><td>every hit throws the victim 350 u/s away and up</td></tr><tr><td>Kill boost</td><td>speed ×1.2 for 3 s after a knife kill</td></tr><tr><td>Kill combo</td><td>kills within 6 s stack bonus XP (up to ×5)</td></tr><tr><td>Air kill</td><td>killing an airborne enemy: +40 XP</td></tr><tr><td>Streak</td><td>every 3 kills without dying: announced, +30 XP</td></tr><tr><td>Fair play</td><td>no rewards for team kills; one hit per swing per victim</td></tr></tbody></table></div>
+<p>Other weapons, buying and picking up guns are blocked in knife-only mode.</p>
+
+</section>
+
+<section class="sec" id="sec-class">
+<span class="kicker">09 COMBAT</span>
+<h2>Classes</h2>
+<p>Open <code>/class</code>. Higher levels unlock stronger and stranger classes. Your choice is saved.</p><div class="tablewrap"><table><thead><tr><th>Class</th><th>Unlock</th><th>HP</th><th>Armor</th><th>Speed</th><th>Gravity</th><th>Special</th></tr></thead><tbody><tr><td>Runner</td><td>Lv 1</td><td class="num">100</td><td class="num">0</td><td>×1.10</td><td>1.00</td><td>Fast all-rounder</td></tr><tr><td>Tank</td><td>Lv 5</td><td class="num">200</td><td class="num">100</td><td>×0.85</td><td>1.10</td><td>Takes 20% less damage</td></tr><tr><td>Jumper</td><td>Lv 8</td><td class="num">90</td><td class="num">0</td><td>×1.00</td><td>0.65</td><td>Giant low-gravity hops</td></tr><tr><td>Vampire</td><td>Lv 12</td><td class="num">110</td><td class="num">0</td><td>×1.05</td><td>1.00</td><td>Heals 25% of damage dealt</td></tr><tr><td>Berserker</td><td>Lv 15</td><td class="num">80</td><td class="num">0</td><td>×1.08</td><td>1.00</td><td>+40% damage, takes +10%</td></tr><tr><td>Medic</td><td>Lv 18</td><td class="num">120</td><td class="num">50</td><td>×1.00</td><td>1.00</td><td>Regenerates 3 HP/s, -10% damage</td></tr><tr><td>Phantom</td><td>Lv 22</td><td class="num">100</td><td class="num">0</td><td>×1.12</td><td>0.90</td><td>Mostly transparent</td></tr><tr><td>Juggernaut</td><td>Lv 30</td><td class="num">300</td><td class="num">200</td><td>×0.80</td><td>1.20</td><td>-30% damage taken, 2 HP/s</td></tr><tr><td>Speed Demon</td><td>Lv 40</td><td class="num">100</td><td class="num">0</td><td>×1.25</td><td>0.85</td><td>+10% damage, 10% lifesteal</td></tr></tbody></table></div>
+<p class="muted">Server owners can change or add classes in <code>classes.ini</code>; the numbers above are the defaults.</p>
+</section>
+
+<section class="sec" id="sec-shop">
+<span class="kicker">10 COMBAT</span>
+<h2>Shop</h2>
+<p>Say <code>/shop</code> or bind <code>rage_buy &lt;item&gt;</code>. Prices are in CS money. You’re only charged if the item actually works (no money lost on a full-HP Med Kit).</p><div class="tablewrap"><table><thead><tr><th>Item</th><th>Key</th><th>Price</th><th>Lv</th><th>Limit</th><th>Effect</th></tr></thead><tbody><tr><td>Med Kit</td><td>health</td><td>$800</td><td>1</td><td>3/round</td><td>+50 HP up to your class max</td></tr><tr><td>Kevlar + Helmet</td><td>armor</td><td>$600</td><td>1</td><td>2/round</td><td>100 armor</td></tr><tr><td>Respawn</td><td>respawn</td><td>$3000</td><td>3</td><td>1/round</td><td>Back in the game - only when dead, before round end</td></tr><tr><td>Teleport</td><td>teleport</td><td>$1500</td><td>2</td><td>2/round</td><td>Jump to a random free spawn of your team</td></tr><tr><td>Invisibility</td><td>invis</td><td>$2500</td><td>6</td><td>1/round</td><td>6 s nearly invisible</td></tr><tr><td>Noclip</td><td>noclip</td><td>$3500</td><td>10</td><td>1/round</td><td>5 s through walls, <b>auto-unstuck</b> when it ends</td></tr><tr><td>Nitro Legs</td><td>speed</td><td>$1200</td><td>2</td><td>2/round</td><td>×1.5 speed for 8 s</td></tr><tr><td>Moon Boots</td><td>lowgrav</td><td>$1000</td><td>4</td><td>2/round</td><td>50% gravity for 15 s</td></tr><tr><td>Rage Shield</td><td>shield</td><td>$3000</td><td>8</td><td>1/round</td><td>4 s invulnerable, golden glow</td></tr><tr><td>Energy Drink</td><td>energy</td><td>$700</td><td>1</td><td>3/round</td><td>+100 energy</td></tr><tr><td>Cooldown Reset</td><td>cooldowns</td><td>$1500</td><td>5</td><td>2/round</td><td>Dash, Super Jump, Air Dash ready now</td></tr><tr><td>Double XP</td><td>doublexp</td><td>$4000</td><td>12</td><td>1/round</td><td>XP ×2 for 90 s</td></tr><tr><td>Sky Sneakers</td><td>airjumps</td><td>$2000</td><td>7</td><td>1/round</td><td>+2 double jumps, +1 air dash per jump this life</td></tr><tr><td>Shockwave</td><td>shockwave</td><td>$2500</td><td>9</td><td>1/round</td><td>Blast enemies within 320 u away, 15 damage</td></tr><tr><td>Mystery Box</td><td>mystery</td><td>$1500</td><td>5</td><td>1/round</td><td>A random item - never wasted</td></tr></tbody></table></div>
+<div class="callout warn"><span class="ct">Stuck after noclip?</span><p>Never. When noclip ends inside a wall the mod tries, in order: a free spot nearby → the last free spot you passed while in noclip → a free spawn point → a respawn. Stuck anywhere else? Say <code>/unstuck</code> (free, every 10 s).</p></div>
+
+</section>
+
+<section class="sec" id="sec-zones">
+<span class="kicker">11 WORLD</span>
+<h2>Zones and Races</h2>
+<div class="tablewrap"><table><thead><tr><th>Zone</th><th>What happens</th></tr></thead><tbody><tr><td>Start</td><td>Leaving it starts your timer. <code>/restart</code> brings you back.</td></tr><tr><td>Checkpoint</td><td>Must be crossed in order; shows your split time.</td></tr><tr><td>Finish</td><td>Stops the timer: personal best, map record, +100 XP.</td></tr><tr><td>Launch pad</td><td>Throws you in a set direction - once per entry.</td></tr><tr><td>Nitro ring</td><td>Multiplies your speed (once per life, cooldown or recharge).</td></tr><tr><td>Speed pad</td><td>Multiplies your horizontal speed.</td></tr><tr><td>Trick zone</td><td>XP if you pass it fast enough.</td></tr><tr><td>No-ability</td><td>Abilities are disabled inside.</td></tr><tr><td>Safe zone</td><td>No damage inside.</td></tr></tbody></table></div>
+<h3>Valid runs</h3><p>A run becomes invalid on death, noclip, team change, teleport or practice mode - and on race maps (<code>kz_</code>) when you use abilities. <b>Practice mode</b> (<code>/practice</code>) lets you save a spot with <code>/cp</code> and return with <code>/tp</code>; times aren’t recorded.</p>
+
+</section>
+
+<section class="sec" id="sec-cars">
+<span class="kicker">12 WORLD</span>
+<h2>Map Cars</h2>
+
+<p>Cars, trucks and buses on maps can be stunt objects. Depending on how the map was built, a car can be a <b>launch surface</b> (land on its roof to be thrown up), a <b>trick</b> (jump over it for XP), a <b>speed zone</b>, a <b>hazard</b> (moving trains hurt) or even a <b>patrolling vehicle</b>.</p>
+<div class="callout "><span class="ct">Why some cars do nothing</span><p>A car that is part of the map’s solid geometry isn’t an object the server can move or detect. Admins can still put a launch or trick zone on its roof.</p></div>
+
+</section>
+
+<section class="sec" id="sec-prog">
+<span class="kicker">13 PROGRESSION</span>
+<h2>XP and Levels</h2>
+<div class="tablewrap"><table><thead><tr><th>Event</th><th>XP</th><th>Repeat limit</th></tr></thead><tbody><tr><td>Speed milestone</td><td>15</td><td>each once per map</td></tr><tr><td>Bhop combo (every 10)</td><td>5</td><td>3 s</td></tr><tr><td>Long jump</td><td>10</td><td>2 s</td></tr><tr><td>Perfect hop</td><td>2</td><td>1 s</td></tr><tr><td>Trick / car jump</td><td>20</td><td>10 s</td></tr><tr><td>Race finish</td><td>100</td><td>5 s</td></tr><tr><td>Knife kill</td><td>25 (× combo)</td><td>-</td></tr><tr><td>Air kill</td><td>40</td><td>-</td></tr><tr><td>Streak</td><td>30</td><td>-</td></tr><tr><td>Map challenge</td><td>200</td><td>30 s</td></tr></tbody></table></div>
+<p>Total XP for level L is <code>100 × (L−1)^1.6</code>: Lv 2 = 100, Lv 5 ≈ 920, Lv 10 ≈ 3,370, Lv 20 ≈ 11,100, Lv 50 ≈ 50,600. Max level 50. Anti-farm: at most <b>400 XP per minute</b> (Double XP included).</p>
+
+</section>
+
+<section class="sec" id="sec-tags">
+<span class="kicker">14 PROGRESSION</span>
+<h2>Rank Tags</h2>
+
+<p>Your level gives you a chat tag: <code>[Lv 20] [Velocity Demon] Name : gg</code> - also shown on your HUD. Pick any tag you have unlocked with <code>/tag</code> (or none, or auto). Admins can hand out custom tags.</p><div class="tablewrap"><table><thead><tr><th>Lv</th><th>Tag</th><th>Lv</th><th>Tag</th></tr></thead><tbody><tr><td>1</td><td>Rookie</td><td>16</td><td>Sky Breaker</td></tr><tr><td>3</td><td>Hopper</td><td>20</td><td>Velocity Demon</td></tr><tr><td>5</td><td>Strafer</td><td>25</td><td>Sonic Ripper</td></tr><tr><td>8</td><td>Speedster</td><td>30</td><td>Rage Lord</td></tr><tr><td>10</td><td>Air Walker</td><td>40</td><td>Hyper God</td></tr><tr><td>13</td><td>Knife Rager</td><td>50</td><td>BHOP LEGEND</td></tr></tbody></table></div>
+</section>
+
+<section class="sec" id="sec-skins">
+<span class="kicker">15 PROGRESSION</span>
+<h2>Knife Skins</h2>
+
+<p>Higher levels unlock knife skins (<code>/skins</code>). If you never pick one, you automatically carry the best one you have unlocked. Tiers: Stock (Lv 1), Hopper (5), Rage Blade (15), Velocity (25), Legend (50).</p>
+<div class="callout warn"><span class="ct">Coming soon</span><p>The skin tiers currently use the stock knife model. New models will arrive in a later update - you’ll keep the tiers you unlocked.</p></div>
+
+</section>
+
+<section class="sec" id="sec-records">
+<span class="kicker">16 PROGRESSION</span>
+<h2>Records and Leaderboards</h2>
+
+<p>Say <code>/top</code>: top 10 for <b>speed</b>, <b>longest jump</b>, <b>XP</b> and <b>fastest time on this map</b>. <code>/stats</code> shows your own. New server records are announced to everyone.</p>
+
+</section>
+
+<section class="sec" id="sec-hud">
+<span class="kicker">17 INTERFACE</span>
+<h2>HUD Guide</h2>
+
+<div class="screen" aria-label="Example of the BHOP RAGE HUD">
+<div class="hudbox tl">Speed: 1342 u/s  (max 1810 / PB 2405)
+Combo: x17   Streak: 3
+Lv 20  XP 11420/12070  Energy 64
+Dash OK | Super 3.1 | KDash OK | AirDash 1 | DJ 1
+Run 00:42.31  CP 2  PB 01:10.22
+[Velocity Demon] Vampire</div>
+<div class="cross"></div>
+<span class="tag-note" style="left:12px;top:170px">everything about you</span>
+</div>
+<p class="muted">Illustration only - the numbers are an example.</p>
+<div class="tablewrap"><table><thead><tr><th>Line</th><th>Meaning</th></tr></thead><tbody><tr><td>Speed</td><td>Horizontal speed now, best this map, personal best ever</td></tr><tr><td>Combo / Streak</td><td>Hops in a row / kills without dying</td></tr><tr><td>Lv / XP / Energy</td><td>Level, XP toward the next level, ability energy</td></tr><tr><td>Cooldowns</td><td>OK = ready, otherwise seconds left; AirDash / DJ = uses left this jump</td></tr><tr><td>Run</td><td>Race timer, last checkpoint, your map PB ([PRACTICE] in practice mode)</td></tr><tr><td>Tag / Class</td><td>Your chat tag and class; XP ×2 appears while Double XP runs</td></tr></tbody></table></div>
+<p>Spectators see the HUD of the player they watch. <code>/hud</code> hides it.</p>
+</section>
+
+<section class="sec" id="sec-menu">
+<span class="kicker">18 INTERFACE</span>
+<h2>Menus</h2>
+
+<pre class="tree"><b>/rage</b>
+├─ My stats · Leaderboards · Toggle HUD · Toggle speed trail
+├─ Toggle practice mode · Abilities &amp; binds help
+└─ <b>Classes</b> · <b>Shop</b> · <b>Knife skins</b> · <b>Chat tag</b></pre>
+
+</section>
+
+<section class="sec" id="sec-binds">
+<span class="kicker">19 INTERFACE</span>
+<h2>Key Binds</h2>
+<p>Paste into your console (or <code>userconfig.cfg</code>):</p><div class="codeblock" id="bind-rage">bind mouse3 rage_dash     <span class="c">// dash</span>
+bind mouse4 rage_superjump<span class="c">// super jump</span>
+bind mouse5 rage_airdash  <span class="c">// air dash</span>
+bind f rage_knifedash     <span class="c">// knife dash</span>
+bind n rage_shop          <span class="c">// shop menu</span>
+bind j rage_menu          <span class="c">// main menu</span>
+bind v &quot;rage_buy noclip&quot;<span class="c">// quick-buy noclip</span>
+bind c &quot;rage_buy health&quot;<span class="c">// quick-buy med kit</span>
+bind x rage_unstuck       <span class="c">// unstuck</span>
+cl_forwardspeed 9999      <span class="c">// let speed bonuses work</span>
+cl_sidespeed 9999         
+cl_backspeed 9999         <button class="copy" data-target="bind-rage">copy</button></div><p>Double jump needs no bind: press jump again in the air.</p>
+</section>
+
+<section class="sec" id="sec-cmds">
+<span class="kicker">20 INTERFACE</span>
+<h2>All Commands</h2>
+<p>Chat commands start with a slash. Search or filter.</p>
+<div data-filter>
+<div class="pills">
+<button class="pill" data-side="all" aria-pressed="true">All</button>
+<button class="pill" data-side="everyone" aria-pressed="false">Everyone</button>
+<button class="pill" data-side="race" aria-pressed="false">Races</button>
+<button class="pill" data-side="bind" aria-pressed="false">Binds</button>
+<button class="pill" data-side="admin" aria-pressed="false">Admin</button>
+</div>
+<input class="search" type="search" placeholder="Search a command or what it does..." aria-label="Search commands" autocomplete="off">
+<span class="count"></span>
+<div class="tablewrap"><table><thead><tr><th>Command</th><th>For</th><th>What it does</th></tr></thead><tbody><tr data-side="everyone"><td><code>/rage</code></td><td><span class="tag all">Everyone</span></td><td>Main menu</td></tr><tr data-side="everyone"><td><code>/stats</code></td><td><span class="tag all">Everyone</span></td><td>Your level, XP and records</td></tr><tr data-side="everyone"><td><code>/top</code></td><td><span class="tag all">Everyone</span></td><td>Leaderboards</td></tr><tr data-side="everyone"><td><code>/speed</code></td><td><span class="tag all">Everyone</span></td><td>Your speed and best</td></tr><tr data-side="everyone"><td><code>/hud</code></td><td><span class="tag all">Everyone</span></td><td>Hide/show HUD</td></tr><tr data-side="everyone"><td><code>/trail</code></td><td><span class="tag all">Everyone</span></td><td>Speed trail on/off (Lv 5)</td></tr><tr data-side="everyone"><td><code>/class</code></td><td><span class="tag all">Everyone</span></td><td>Choose class</td></tr><tr data-side="everyone"><td><code>/shop</code></td><td><span class="tag all">Everyone</span></td><td>Open the shop</td></tr><tr data-side="everyone"><td><code>/skins</code></td><td><span class="tag all">Everyone</span></td><td>Choose knife skin</td></tr><tr data-side="everyone"><td><code>/tag</code></td><td><span class="tag all">Everyone</span></td><td>Choose chat tag</td></tr><tr data-side="everyone"><td><code>/unstuck</code></td><td><span class="tag all">Everyone</span></td><td>Free unstuck, 10 s cooldown</td></tr><tr data-side="everyone"><td><code>/moveinfo</code></td><td><span class="tag all">Everyone</span></td><td>Movement settings in console</td></tr><tr data-side="race"><td><code>/practice</code></td><td><span class="tag ct">Races</span></td><td>Practice mode on/off</td></tr><tr data-side="race"><td><code>/restart</code></td><td><span class="tag ct">Races</span></td><td>Back to the start zone</td></tr><tr data-side="race"><td><code>/cp</code></td><td><span class="tag ct">Races</span></td><td>Save position (practice)</td></tr><tr data-side="race"><td><code>/tp</code></td><td><span class="tag ct">Races</span></td><td>Return to saved position (practice)</td></tr><tr data-side="bind"><td><code>rage_dash</code></td><td><span class="tag t">Bind</span></td><td>Dash</td></tr><tr data-side="bind"><td><code>rage_superjump</code></td><td><span class="tag t">Bind</span></td><td>Super jump</td></tr><tr data-side="bind"><td><code>rage_airdash</code></td><td><span class="tag t">Bind</span></td><td>Air dash</td></tr><tr data-side="bind"><td><code>rage_knifedash</code></td><td><span class="tag t">Bind</span></td><td>Knife dash</td></tr><tr data-side="bind"><td><code>rage_buy &lt;item&gt;</code></td><td><span class="tag t">Bind</span></td><td>Buy an item directly</td></tr><tr data-side="admin"><td><code>rage_preset &lt;name&gt;</code></td><td><span class="tag dead">Admin</span></td><td>Apply a movement preset</td></tr><tr data-side="admin"><td><code>rage_givexp &lt;player&gt; &lt;xp&gt;</code></td><td><span class="tag dead">Admin</span></td><td>Give XP</td></tr><tr data-side="admin"><td><code>rage_resetstats &lt;player&gt;</code></td><td><span class="tag dead">Admin</span></td><td>Wipe a player’s stats</td></tr><tr data-side="admin"><td><code>rage_settag &lt;player&gt; "&lt;tag&gt;"</code></td><td><span class="tag dead">Admin</span></td><td>Custom chat tag</td></tr><tr data-side="admin"><td><code>rage_zone_p1 / p2 / add / save</code></td><td><span class="tag dead">Admin</span></td><td>Build zones in game</td></tr><tr data-side="admin"><td><code>rage_zone_show</code></td><td><span class="tag dead">Admin</span></td><td>Draw zones</td></tr><tr data-side="admin"><td><code>rage_ent_inspect</code></td><td><span class="tag dead">Admin</span></td><td>List entities near you</td></tr><tr data-side="admin"><td><code>rage_ent_scan</code></td><td><span class="tag dead">Admin</span></td><td>Log vehicle candidates</td></tr><tr data-side="admin"><td><code>rage_shop_reload / rage_reloadtags / rage_reloadcfg</code></td><td><span class="tag dead">Admin</span></td><td>Reload configs</td></tr><tr data-side="admin"><td><code>rage_class_list</code></td><td><span class="tag dead">Admin</span></td><td>Show loaded classes and skins</td></tr></tbody></table></div></div>
+</section>
+
+<section class="sec" id="sec-rules">
+<span class="kicker">21 COMMUNITY</span>
+<h2>Rules</h2>
+
+<div class="grid2">
+<div class="mini ghost"><h4>Server rules</h4><ol>
+<li><b>Respect everyone.</b> No insults, racism, harassment or threats.</li>
+<li><b>No cheating.</b> No aimbot, wallhack, speedhack or external tools.</li>
+<li><b>No exploits.</b> Report map or mod bugs to an admin.</li>
+<li><b>No spam</b> in chat or voice. <b>No advertising.</b></li>
+<li><b>Listen to the admins.</b> Appeal calmly.</li>
+</ol></div>
+<div class="mini inv"><h4>BHOP RAGE rules</h4><ol>
+<li><b>Hop scripts are allowed</b> - autobhop is built in, so <code>+jump</code> spam scripts give no advantage.</li>
+<li><b>No strafe hacks</b> or movement cheats (auto-strafers, speedhacks).</li>
+<li><b>No noclip abuse</b>: don’t camp inside walls or under the map with the shop noclip.</li>
+<li><b>No spawn killing</b> right after a respawn.</li>
+<li><b>Races:</b> no shortcuts through map bugs; records with exploits are removed.</li>
+</ol></div>
+</div>
+
+</section>
+
+<section class="sec" id="sec-faq">
+<span class="kicker">22 COMMUNITY</span>
+<h2>FAQ</h2>
+<button class="pill" id="toggleAll" type="button">Expand all</button>
+<details class="acc"><summary>Do I have to download anything?</summary><div class="body"><p>No for the mod itself. Custom knife skins, once added, download automatically from the server.</p></div></details><details class="acc"><summary>Why does my speed stop at around 400?</summary><div class="body"><p>Your client move-speed limits. Run <code>cl_forwardspeed 9999; cl_sidespeed 9999; cl_backspeed 9999</code>.</p></div></details><details class="acc"><summary>I hold jump but don’t get faster.</summary><div class="body"><p>Gains start above 200 u/s and need air strafing: A + mouse left, D + mouse right, no W in the air.</p></div></details><details class="acc"><summary>Do I lose my class when I change it?</summary><div class="body"><p>No. You can switch any time - instantly in the first 10 seconds after spawning, otherwise on your next spawn.</p></div></details><details class="acc"><summary>I bought noclip and ended in a wall.</summary><div class="body"><p>The mod moves you out automatically. If anything else traps you, say /unstuck.</p></div></details><details class="acc"><summary>Where does shop money come from?</summary><div class="body"><p>Normal CS money from kills and round wins. In knife-only mode it has no other use.</p></div></details><details class="acc"><summary>Can I choose an older tag?</summary><div class="body"><p>Yes - /tag lists every tag you have unlocked, plus Auto and None.</p></div></details><details class="acc"><summary>Is my progress saved?</summary><div class="body"><p>Yes: XP, records, class, knife skin and tag are saved by your SteamID.</p></div></details><details class="acc"><summary>Why didn’t my long jump count?</summary><div class="body"><p>It must land within 24 units of your take-off height, be at least 230 units, and not be helped by abilities or pads.</p></div></details>
+</section>
+
+<section class="sec" id="sec-tips">
+<span class="kicker">23 COMMUNITY</span>
+<h2>Tips and Strategy</h2>
+
+<ul>
+<li><b>Learn manual timing.</b> Perfect hops gain 6× more than held hops.</li>
+<li><b>Air Dash to turn corners</b> without losing a single unit of speed.</li>
+<li><b>Fight from the air.</b> Airborne hits deal ×1.5 - Dash or Super Jump into a fight.</li>
+<li><b>Chain kills within 6 s</b> for combo XP and to keep the kill speed boost alive.</li>
+<li><b>Buy Double XP before a race</b> - finishes pay 100 XP.</li>
+<li><b>Jumper + Moon Boots</b> = absurd air time. <b>Vampire + Rage Shield</b> = free healing.</li>
+<li><b>Shockwave</b> is best in a crowd, right before a knife dash.</li>
+</ul>
+
+</section>
+
+<section class="sec" id="sec-owners">
+<span class="kicker">24 REFERENCE</span>
+<h2>Installation and Settings</h2>
+
+<h3>Requirements</h3>
+<ul><li>CS 1.6 dedicated server, Metamod, <b>AMX Mod X 1.8.2</b> or newer.</li><li>Modules: <code>fakemeta</code>, <code>hamsandwich</code>, <code>fun</code>, <code>cstrike</code>, <code>nvault</code>.</li></ul>
+<h3>Install</h3>
+<ol><li>Copy the 8 <code>.amxx</code> files to <code>addons/amxmodx/plugins/</code> (or build them with <code>compile.sh</code> / <code>compile.bat</code>).</li>
+<li>Copy <code>configs/</code> into <code>addons/amxmodx/configs/</code> - <code>plugins-bhop_rage.ini</code> loads everything in the right order.</li>
+<li>Change map and check <code>amxx plugins</code>.</li></ol>
+<div class="codeblock" id="cfg-owner">rage_knife_only 1         <span class="c">// knife-only mode</span>
+rage_max_speed 3500       <span class="c">// 0 = unlimited</span>
+sv_airaccelerate 100      <span class="c">// air control</span>
+rage_xp_cap_per_min 400   <span class="c">// anti-farm</span>
+rage_shop_free 0          <span class="c">// 1 = free shop for testing</span>
+rage_class_change_time 10 <span class="c">// instant class switch window</span>
+rage_tags_chat 1          <span class="c">// chat prefix</span>
+rage_debug 0              <span class="c">// 1 = debug log</span><button class="copy" data-target="cfg-owner">copy</button></div><div class="tablewrap"><table><thead><tr><th>File</th><th>Controls</th></tr></thead><tbody><tr><td>bhop_rage.cfg</td><td>every cvar, documented</td></tr><tr><td>bhop_rage/maps.ini + presets/</td><td>movement preset per map prefix</td></tr><tr><td>bhop_rage/classes.ini</td><td>classes</td></tr><tr><td>bhop_rage/shop.ini</td><td>shop prices, levels, limits, effects</td></tr><tr><td>bhop_rage/ranks.ini</td><td>tag names and levels</td></tr><tr><td>bhop_rage/knife_skins.ini</td><td>knife models per level (with guide)</td></tr><tr><td>bhop_rage/zones/&lt;map&gt;.ini</td><td>zones built in game</td></tr><tr><td>bhop_rage_entities.ini</td><td>map cars / vehicle behaviour</td></tr></tbody></table></div>
+<div class="callout "><span class="ct">Load order</span><p><code>rage_tags.amxx</code> must stay last and replaces other chat-prefix plugins. Full docs ship with the source: INSTALLATION, CONFIGURATION, MAP_MAKING, KNIFE_SKINS and TESTING.</p></div>
+
+</section>
+
+<section class="sec" id="sec-glossary">
+<span class="kicker">25 REFERENCE</span>
+<h2>Glossary A-Z</h2>
+<p>The whole mod in 26 letters.</p><div class="azbar"><a href="#gl-A">A</a><a href="#gl-B">B</a><a href="#gl-C">C</a><a href="#gl-D">D</a><a href="#gl-E">E</a><span>F</span><span>G</span><span>H</span><span>I</span><a href="#gl-J">J</a><a href="#gl-K">K</a><a href="#gl-L">L</a><a href="#gl-M">M</a><a href="#gl-N">N</a><span>O</span><a href="#gl-P">P</a><span>Q</span><a href="#gl-R">R</a><a href="#gl-S">S</a><a href="#gl-T">T</a><a href="#gl-U">U</a><a href="#gl-V">V</a><span>W</span><a href="#gl-X">X</a><span>Y</span><span>Z</span></div><div class="gl" id="gl-A"><div class="L">A</div><dl><dt>Air Dash</dt><dd>Redirect your speed mid-air.</dd><dt>Autobhop</dt><dd>Holding jump re-jumps on landing.</dd></dl></div><div class="gl" id="gl-B"><div class="L">B</div><dl><dt>Berserker</dt><dd>Glass-cannon class: +40% damage.</dd></dl></div><div class="gl" id="gl-C"><div class="L">C</div><dl><dt>Checkpoint</dt><dd>A race zone you must cross in order.</dd><dt>Class</dt><dd>Your loadout of HP, speed, gravity and perks.</dd><dt>Combo</dt><dd>Hops in a row without stopping.</dd></dl></div><div class="gl" id="gl-D"><div class="L">D</div><dl><dt>Dash</dt><dd>Forward burst on mouse3.</dd><dt>Double Jump</dt><dd>A second jump in the air.</dd><dt>Double XP</dt><dd>Shop item: XP ×2 for 90 s.</dd></dl></div><div class="gl" id="gl-E"><div class="L">E</div><dl><dt>Energy</dt><dd>Fuel for abilities, refills by itself.</dd></dl></div><div class="gl" id="gl-J"><div class="L">J</div><dl><dt>Juggernaut</dt><dd>Lv 30 class: 300 HP, 200 armor.</dd></dl></div><div class="gl" id="gl-K"><div class="L">K</div><dl><dt>Knife Dash</dt><dd>A lunge with the knife out.</dd><dt>Knife skin</dt><dd>A level-unlocked knife look.</dd></dl></div><div class="gl" id="gl-L"><div class="L">L</div><dl><dt>Launch pad</dt><dd>Zone that throws you.</dd><dt>Long jump</dt><dd>A measured single jump, 230+ units.</dd></dl></div><div class="gl" id="gl-M"><div class="L">M</div><dl><dt>Milestone</dt><dd>Speed thresholds that pay XP once per map.</dd><dt>Mystery Box</dt><dd>Random shop item.</dd></dl></div><div class="gl" id="gl-N"><div class="L">N</div><dl><dt>Nitro ring</dt><dd>Zone that multiplies your speed.</dd><dt>Noclip</dt><dd>Shop item: fly through walls, auto-unstuck after.</dd></dl></div><div class="gl" id="gl-P"><div class="L">P</div><dl><dt>Perfect hop</dt><dd>Jump pressed within 0.03 s of landing.</dd><dt>Practice</dt><dd>Mode with /cp and /tp; no records.</dd><dt>Preset</dt><dd>Movement settings per map type.</dd></dl></div><div class="gl" id="gl-R"><div class="L">R</div><dl><dt>Rage Shield</dt><dd>Shop item: a few seconds invulnerable.</dd><dt>Rank tag</dt><dd>Your level title in chat.</dd></dl></div><div class="gl" id="gl-S"><div class="L">S</div><dl><dt>Shockwave</dt><dd>Shop item that blasts enemies away.</dd><dt>Streak</dt><dd>Kills without dying.</dd><dt>Super Jump</dt><dd>Huge vertical launch.</dd></dl></div><div class="gl" id="gl-T"><div class="L">T</div><dl><dt>Trick zone</dt><dd>XP for passing it fast.</dd></dl></div><div class="gl" id="gl-U"><div class="L">U</div><dl><dt>Unstuck</dt><dd>Free command that frees you from walls.</dd></dl></div><div class="gl" id="gl-V"><div class="L">V</div><dl><dt>Vampire</dt><dd>Class that heals from damage dealt.</dd></dl></div><div class="gl" id="gl-X"><div class="L">X</div><dl><dt>XP</dt><dd>Experience points that give you levels.</dd></dl></div>
+</section>
+
+      <div class="foot"><span>BHOP RAGE &middot; CS 1.6 mod guide</span><span>v1.1.0</span><a href="#top">Back to top &uarr;</a></div>
+    </div>
+  </main>
+</div>
+
+<button class="totop" id="toTop" type="button" aria-label="Back to top">&uarr;</button>
+<script>
+(function () {
+  var root = document.documentElement;
+  var store = {
+    get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  };
+
+  /* theme */
+  function isDark() {
+    var t = root.getAttribute('data-theme');
+    return t ? t === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  document.getElementById('themeBtn').addEventListener('click', function () {
+    var next = isDark() ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    store.set('rage-theme', next);
+  });
+
+  /* mobile contents drawer */
+  var drawer = document.getElementById('drawer');
+  var backdrop = document.getElementById('backdrop');
+  var menuBtn = document.getElementById('menuBtn');
+  function openDrawer() {
+    drawer.classList.add('open'); backdrop.classList.add('show');
+    menuBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDrawer() {
+    if (!drawer.classList.contains('open')) return;
+    drawer.classList.remove('open'); backdrop.classList.remove('show');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  menuBtn.addEventListener('click', function () { drawer.classList.contains('open') ? closeDrawer() : openDrawer(); });
+  backdrop.addEventListener('click', closeDrawer);
+  window.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeDrawer(); });
+  window.matchMedia('(min-width: 1012px)').addEventListener('change', closeDrawer);
+
+  /* scroll progress + back to top */
+  var bar = document.getElementById('bar');
+  var totop = document.getElementById('toTop');
+  function onScroll() {
+    var se = document.scrollingElement || root;
+    var max = se.scrollHeight - se.clientHeight;
+    bar.style.width = (max > 0 ? (se.scrollTop / max) * 100 : 0) + '%';
+    totop.classList.toggle('show', se.scrollTop > 700);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  totop.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+  /* heading anchors (h2 and h3) */
+  var used = {};
+  function slug(t) {
+    var b = t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'section';
+    var n = b, i = 2;
+    while (used[n] || document.getElementById(n)) n = b + '-' + (i++);
+    used[n] = 1; return n;
+  }
+  document.querySelectorAll('.sec > h2, .sec > h3').forEach(function (h) {
+    if (!h.id) {
+      var host = h.tagName === 'H2' ? h.parentElement : null;
+      h.id = host && host.id ? host.id + '-title' : slug(h.textContent);
+    }
+    var a = document.createElement('a');
+    a.className = 'anchor'; a.href = '#' + h.id; a.setAttribute('aria-label', 'Link to this section'); a.textContent = '#';
+    h.insertBefore(a, h.firstChild);
+  });
+
+  /* table of contents: close drawer on click + highlight the section being read */
+  var links = Array.prototype.slice.call(document.querySelectorAll('.sidebar .nav-link[href^="#"]'));
+  var byId = {};
+  links.forEach(function (a) {
+    byId[a.getAttribute('href').slice(1)] = a;
+    a.addEventListener('click', closeDrawer);
+  });
+  if ('IntersectionObserver' in window) {
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var a = byId[en.target.id];
+        if (!a) return;
+        links.forEach(function (l) { l.classList.remove('active'); });
+        a.classList.add('active');
+        if (window.matchMedia('(min-width: 1012px)').matches) {
+          var sb = drawer, r = a.getBoundingClientRect(), sr = sb.getBoundingClientRect();
+          if (r.top < sr.top || r.bottom > sr.bottom) a.scrollIntoView({ block: 'center' });
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    document.querySelectorAll('section[id]').forEach(function (s) { spy.observe(s); });
+  }
+
+  /* copy buttons */
+  function copyText(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(text).then(function () { return true; }, function () { return false; });
+    }
+    return new Promise(function (resolve) {
+      var t = document.createElement('textarea');
+      t.value = text; t.style.position = 'fixed'; t.style.opacity = '0';
+      document.body.appendChild(t); t.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(t); resolve(ok);
+    });
+  }
+  document.querySelectorAll('.copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var target = document.getElementById(btn.dataset.target);
+      if (!target) return;
+      var clone = target.cloneNode(true);
+      clone.querySelectorAll('.copy').forEach(function (b) { b.remove(); });
+      var text = clone.textContent.replace(/\u00a0/g, ' ').split('\n')
+        .map(function (l) { return l.replace(/\s+\/\/.*$/, '').trim(); })
+        .filter(Boolean).join('\n');
+      copyText(text).then(function (ok) {
+        var old = btn.textContent;
+        btn.textContent = ok ? 'Copied' : 'Press Ctrl+C';
+        btn.classList.add('done');
+        setTimeout(function () { btn.textContent = old; btn.classList.remove('done'); }, 1400);
+      });
+    });
+  });
+
+  /* live filter: pills (data-side) + search box over a table */
+  function setupFilter(rootEl) {
+    var rows = Array.prototype.slice.call(rootEl.querySelectorAll('tbody tr'));
+    var search = rootEl.querySelector('.search');
+    var pills = Array.prototype.slice.call(rootEl.querySelectorAll('.pill'));
+    var counter = rootEl.querySelector('.count');
+    var side = 'all';
+    function apply() {
+      var q = search ? search.value.trim().toLowerCase() : '';
+      var shown = 0;
+      rows.forEach(function (r) {
+        var okSide = side === 'all' || (r.dataset.side || 'all').split(' ').indexOf(side) > -1;
+        var okText = !q || r.textContent.toLowerCase().indexOf(q) > -1;
+        var vis = okSide && okText;
+        r.style.display = vis ? '' : 'none';
+        if (vis) shown++;
+      });
+      if (counter) counter.textContent = shown + ' of ' + rows.length + ' shown';
+    }
+    pills.forEach(function (p) {
+      p.addEventListener('click', function () {
+        pills.forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+        p.setAttribute('aria-pressed', 'true');
+        side = p.dataset.side; apply();
+      });
+    });
+    if (search) search.addEventListener('input', apply);
+    apply();
+  }
+  document.querySelectorAll('[data-filter]').forEach(setupFilter);
+
+  /* FAQ: expand / collapse all */
+  var toggleAll = document.getElementById('toggleAll');
+  if (toggleAll) {
+    toggleAll.addEventListener('click', function () {
+      var items = Array.prototype.slice.call(document.querySelectorAll('#sec-faq details.acc'));
+      var open = items.some(function (d) { return !d.open; });
+      items.forEach(function (d) { d.open = open; });
+      toggleAll.textContent = open ? 'Collapse all' : 'Expand all';
+    });
+  }
+
+  /* open a FAQ item or anchor target that is hidden inside a closed <details> */
+  function openHash() {
+    var id = decodeURIComponent(location.hash.slice(1));
+    var el = id && document.getElementById(id);
+    var d = el && el.closest && el.closest('details');
+    if (d) d.open = true;
+  }
+  window.addEventListener('hashchange', openHash);
+  openHash();
+})();
+
+</script>
+</body>
+</html>
