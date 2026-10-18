@@ -13,8 +13,9 @@
 <script>document.documentElement.classList.add('js');</script>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#04070a" />
-<meta name="color-scheme" content="dark" />
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)" />
+<meta name="color-scheme" content="light dark" />
 <meta name="description" content="Hidden Haunted Seek [HHS] - a horror hide-and-seek mod for Counter-Strike 1.6. The complete guide from A to Z: ghosts, investigators, skills, objectives, key binds, commands and rules." />
 <meta property="og:title" content="Hidden Haunted Seek [HHS] - CS 1.6 mod guide" />
 <meta property="og:description" content="A horror hide-and-seek mod for Counter-Strike 1.6. Release date: No ETA." />
@@ -23,568 +24,275 @@
 <meta name="apple-mobile-web-app-title" content="Necro's Hub" />
 <link rel="canonical" href="/horror_hunt" />
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect fill='%2304070a' width='180' height='180' rx='40'/%3E%3Ctext x='90' y='125' font-size='100' text-anchor='middle' fill='%232ee6d0' font-weight='900' font-family='monospace'%3EN%3C/text%3E%3C/svg%3E" />
-<title>Hidden Haunted Seek // CS 1.6 mod guide - Necro's Hub</title>
+<title>Hidden Haunted Seek - CS 1.6 mod guide - Necro's Hub</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=VT323&family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
+<script>
+(function(){try{var t=localStorage.getItem('hhs-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
 <style>
-
-:root {
-  --bg: #04070a;
-  --bg-deep: #010302;
-  --panel: rgba(8, 16, 18, 0.85);
-  --line: rgba(46, 230, 208, 0.18);
-  --cyan: #2ee6d0;
-  --cyan-soft: #7dfbe9;
-  --magenta: #ff3ea5;
-  --amber: #ffb703;
-  --text: #d9f6f0;
-  --muted: #5f8b85;
-  --radius: 12px;
-  --mono: 'JetBrains Mono', ui-monospace, monospace;
-  --pixel: 'VT323', monospace;
+:root{
+  --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --subtle:#f6f8fa; --subtle2:#eef1f4;
+  --link:#0969da; --header:#f6f8fa; --code:rgba(129,139,152,.16); --sel:#ddf4ff;
+  --note:#0969da; --tip:#1a7f37; --imp:#8250df; --warn:#9a6700; --bad:#d1242f;
+  --ghost:#d1242f; --inv:#0969da; --gold:#9a6700;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  color-scheme:light;
+}
+:root[data-theme="dark"]{
+  --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --subtle:#151b23; --subtle2:#1c232d;
+  --link:#4493f8; --header:#010409; --code:rgba(101,108,118,.25); --sel:#143054;
+  --note:#4493f8; --tip:#3fb950; --imp:#ab7df8; --warn:#d29922; --bad:#f85149;
+  --ghost:#f85149; --inv:#4493f8; --gold:#d29922;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme]){
+    --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --subtle:#151b23; --subtle2:#1c232d;
+    --link:#4493f8; --header:#010409; --code:rgba(101,108,118,.25); --sel:#143054;
+    --note:#4493f8; --tip:#3fb950; --imp:#ab7df8; --warn:#d29922; --bad:#f85149;
+    --ghost:#f85149; --inv:#4493f8; --gold:#d29922; color-scheme:dark;
+  }
 }
 
-*, *::before, *::after { box-sizing: border-box; -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; }
-html, body { margin: 0; height: 100%; font-family: var(--mono); }
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--link);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--link);outline-offset:2px;border-radius:4px}
+::selection{background:var(--sel)}
+section[id],[id^="gl-"]{scroll-margin-top:76px}
 
-body {
-  background: var(--bg);
-  color: var(--text);
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-  padding-top: env(safe-area-inset-top);
-  padding-bottom: env(safe-area-inset-bottom);
-  position: relative;
-}
+/* ===== Header ===== */
+.gh-header{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:12px;height:56px;padding:0 16px;padding-top:env(safe-area-inset-top,0px);background:var(--header);border-bottom:1px solid var(--border)}
+.gh-header .bar{position:absolute;left:0;bottom:-1px;height:2px;width:0;background:var(--link)}
+.crumb{display:flex;align-items:center;gap:8px;color:var(--fg);font-size:14px;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.crumb:hover{text-decoration:none}
+.crumb .a{color:var(--link)}
+.crumb .sl{color:var(--muted)}
+.crumb b{font-weight:600}
+.spacer{flex:1}
+.hbtn,.hlink{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:32px;padding:0 12px;font:500 13px/1 var(--sans);color:var(--fg);background:var(--bg);border:1px solid var(--border);border-radius:6px;cursor:pointer;white-space:nowrap}
+.hbtn:hover,.hlink:hover{background:var(--subtle2);text-decoration:none}
+.menu-btn{padding:0 10px;font-size:16px}
+@media(max-width:600px){.hlink{display:none}.crumb .a,.crumb .sl{display:none}.gh-header{padding-left:12px;padding-right:12px;gap:8px}}
 
-.bg-grid {
-  position: fixed; inset: 0; z-index: -2;
-  background-color: var(--bg-deep);
-  background-image:
-    linear-gradient(rgba(46, 230, 208, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(46, 230, 208, 0.06) 1px, transparent 1px);
-  background-size: 34px 34px;
-}
-.bg-glow {
-  position: fixed; inset: 0; z-index: -1;
-  background:
-    radial-gradient(circle at 15% 10%, rgba(46, 230, 208, 0.10) 0%, transparent 45%),
-    radial-gradient(circle at 85% 90%, rgba(255, 62, 165, 0.08) 0%, transparent 45%);
-}
-body::after {
-  content: '';
-  position: fixed; inset: 0; z-index: 45; pointer-events: none;
-  background: repeating-linear-gradient(180deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 2px, transparent 4px);
-  mix-blend-mode: overlay;
-}
+/* ===== Layout ===== */
+.layout{max-width:1280px;margin:0 auto;padding:24px 16px 64px;display:grid;grid-template-columns:minmax(0,1fr);gap:24px}
+@media(min-width:1012px){.layout{grid-template-columns:268px minmax(0,1fr);gap:32px;padding:24px 24px 64px}.menu-btn{display:none}}
 
-/* ===== Topbar ===== */
-.topbar {
-  position: sticky; top: 0;
-  display: flex; align-items: center; justify-content: center;
-  gap: 14px;
-  padding: 16px 20px;
-  background: rgba(4, 7, 10, 0.75);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--line);
-  z-index: 20;
+/* ===== Sidebar / TOC ===== */
+.sidebar{font-size:14px}
+.side-title{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;padding:0 8px 8px}
+.sidebar nav{display:flex;flex-direction:column}
+.drawer__group{padding:14px 8px 4px;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.nav-link{display:block;padding:5px 8px;margin:1px 0;color:var(--fg);border-radius:6px;border-left:2px solid transparent}
+.nav-link:hover{background:var(--subtle2);text-decoration:none}
+.nav-link.active{background:var(--subtle);font-weight:600;border-left-color:var(--link);color:var(--link)}
+.side-sep{border:0;border-top:1px solid var(--border);margin:12px 0;width:100%}
+.backdrop{display:none}
+@media(min-width:1012px){
+  .sidebar{position:sticky;top:80px;align-self:start;max-height:calc(100vh - 96px);overflow-y:auto;padding-right:8px}
 }
-.title {
-  font-family: var(--pixel);
-  font-weight: 400;
-  font-size: clamp(22px, 6vw, 26px);
-  letter-spacing: 2px;
-  color: var(--cyan-soft);
-  text-shadow: 0 0 10px rgba(46,230,208,0.5);
-}
-.icon-btn {
-  position: absolute; left: 16px;
-  width: 42px; height: 42px;
-  display: grid; place-items: center;
-  background: var(--panel);
-  color: var(--cyan);
-  border-radius: 10px;
-  border: 1px solid var(--line);
-  cursor: pointer;
-  transition: transform 0.2s ease, background 0.3s ease;
-  touch-action: manipulation;
-  font-size: 1.1rem;
-}
-.icon-btn:hover { background: rgba(46,230,208,0.12); }
-.icon-btn:active { transform: scale(0.95); }
-
-/* ===== Drawer ===== */
-.drawer-backdrop {
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,0.65);
-  opacity: 0; pointer-events: none;
-  transition: opacity 0.3s ease;
-  z-index: 30;
-  backdrop-filter: blur(4px);
-}
-.drawer-backdrop.show { opacity: 1; pointer-events: auto; }
-.drawer {
-  position: fixed; inset: 0 auto 0 0;
-  width: min(84vw, 320px);
-  background: var(--panel);
-  border-right: 1px solid var(--line);
-  transform: translateX(-100%);
-  transition: transform 0.3s ease;
-  display: flex; flex-direction: column;
-  backdrop-filter: blur(16px);
-  z-index: 40;
-  overflow-y: auto;
-  text-align: left;
-}
-.drawer.open { transform: translateX(0); }
-.drawer__header {
-  padding: 20px 16px;
-  display: flex; align-items: center; gap: 14px;
-  border-bottom: 1px solid var(--line);
-}
-.avatar {
-  width: 46px; height: 46px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, var(--cyan), var(--magenta));
-  display: grid; place-items: center;
-  color: #04070a; font-weight: 900; font-family: var(--pixel); font-size: 24px;
-  flex-shrink: 0;
-}
-.drawer__brand { font-weight: 700; font-size: 15px; color: var(--cyan-soft); }
-.drawer__sub { color: var(--muted); font-size: 11px; }
-.drawer__nav { padding: 14px; display: grid; gap: 8px; }
-.nav-link {
-  display: flex; align-items: center; gap: 12px;
-  padding: 13px 12px;
-  border-radius: 10px;
-  text-decoration: none; color: var(--text);
-  border: 1px solid transparent;
-  font-size: 0.85rem;
-  transition: all 0.2s ease;
-}
-.nav-link::before { content: '>'; color: var(--cyan); font-weight: 700; }
-.nav-link:hover, .nav-link:active {
-  background: rgba(46,230,208,0.08);
-  border-color: var(--line);
-}
-.nav-badge {
-  margin-left: auto;
-  background: var(--magenta);
-  color: #04070a;
-  padding: 3px 9px;
-  border-radius: 999px;
-  font-size: 11px;
-  font-weight: 700;
+@media(max-width:1011px){
+  .sidebar{position:fixed;inset:0 auto 0 0;width:min(86vw,320px);z-index:70;background:var(--bg);border-right:1px solid var(--border);padding:16px 12px calc(24px + env(safe-area-inset-bottom,0px));overflow-y:auto;transform:translateX(-100%);visibility:hidden;transition:transform .25s ease,visibility 0s linear .25s;box-shadow:0 8px 24px rgba(1,4,9,.4)}
+  .sidebar.open{transform:none;visibility:visible;transition:transform .25s ease,visibility 0s}
+  .backdrop{position:fixed;inset:0;background:rgba(1,4,9,.55);z-index:60;opacity:0;pointer-events:none;transition:opacity .25s ease;display:block}
+  .backdrop.show{opacity:1;pointer-events:auto}
 }
 
-/* ===== Main ===== */
-main {
-  padding: 24px 18px 100px;
-  display: flex; flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  max-width: 560px;
-  margin: 0 auto;
-  width: 100%;
-  text-align: center;
-}
+/* ===== README box ===== */
+.doc{min-width:0;border:1px solid var(--border);border-radius:6px;background:var(--bg)}
+.file-head{display:flex;align-items:center;gap:8px;padding:10px 16px;background:var(--subtle);border-bottom:1px solid var(--border);border-radius:6px 6px 0 0;font-size:14px;font-weight:600}
+.file-head .muted{font-weight:400;margin-left:auto}
+.doc-body{padding:24px 16px 32px}
+@media(min-width:768px){.doc-body{padding:32px 48px 48px}}
 
-.card {
-  width: 100%;
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 22px;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
-}
+.doc-body>.sec{margin-top:40px}
+.hero{text-align:left}
+.hero h1{margin:0 0 16px;padding-bottom:.3em;font-size:2em;font-weight:600;line-height:1.25;border-bottom:1px solid var(--border)}
+.hero p{margin:0 0 16px}
 
-.hero {
-  background: linear-gradient(135deg, rgba(46,230,208,0.08), rgba(255,62,165,0.04));
-  position: relative;
-  overflow: hidden;
-}
-.hero .prompt {
-  font-size: 0.72rem; color: var(--muted); text-align: left; margin-bottom: 10px;
-}
-.hero .prompt .ps1 { color: var(--cyan); }
-.hero h1 {
-  margin: 0 0 8px;
-  font-family: var(--pixel);
-  font-size: clamp(28px, 8vw, 34px);
-  letter-spacing: 1px;
-  color: var(--cyan-soft);
-  text-shadow: 0 0 10px rgba(46,230,208,0.4);
-}
-.hero p { margin: 0; color: var(--muted); font-size: 0.85rem; }
-.blink-cursor {
-  display: inline-block; width: 8px; height: 1em;
-  background: var(--cyan); margin-left: 3px;
-  animation: blink 1s step-end infinite; vertical-align: -2px;
-}
-@keyframes blink { 50% { opacity: 0; } }
+h2,h3,h4{position:relative;font-weight:600;line-height:1.25;margin:24px 0 16px}
+.sec>h2{margin:4px 0 16px;padding-bottom:.3em;font-size:1.5em;border-bottom:1px solid var(--border)}
+h3{font-size:1.25em}
+h4{font-size:1em}
+.sec>h3:first-of-type{margin-top:20px}
+.kicker{display:block;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px}
+.anchor{position:absolute;left:-24px;padding-right:6px;color:var(--muted);font-weight:400;font-size:.85em;opacity:0;text-decoration:none}
+h2:hover .anchor,h3:hover .anchor,.anchor:focus{opacity:1}
+.anchor:hover{text-decoration:none;color:var(--link)}
+@media(max-width:767px){.anchor{display:none}}
 
-.sale {
-  display: flex; align-items: center; justify-content: center; gap: 14px;
-  background: rgba(255, 62, 165, 0.08);
-  border-color: rgba(255, 62, 165, 0.25);
-}
-.sale__tag {
-  font-family: var(--pixel);
-  font-size: 1.6rem;
-  color: var(--magenta);
-  border: 1px solid var(--magenta);
-  border-radius: 8px;
-  padding: 2px 10px;
-  text-shadow: 0 0 8px rgba(255,62,165,0.5);
-}
-.sale__text { font-size: 0.85rem; color: var(--text); }
+p{margin:0 0 16px}
+.lead{font-size:1.125em;color:var(--fg)}
+.muted{color:var(--muted)}
+small.muted{font-size:.8em;font-weight:400}
+ul,ol{margin:0 0 16px;padding-left:2em}
+li{margin:.25em 0}
+li>ul,li>ol{margin:.25em 0 0}
+b,strong{font-weight:600}
+hr{border:0;border-top:1px solid var(--border);margin:24px 0}
+.clr-g{color:var(--tip)} .clr-r{color:var(--bad)} .clr-v{color:var(--imp)}
 
-.action {
-  width: 100%;
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 14px;
-  padding: 16px 18px;
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  text-decoration: none;
-  color: var(--text);
-  transition: all 0.2s ease;
-  text-align: left;
-}
-.action::before { content: '$'; color: var(--cyan); font-weight: 700; margin-right: 4px; }
-.action b { font-weight: 600; font-size: 0.9rem; display: block; }
-.action small { color: var(--muted); font-size: 0.75rem; }
-.action span { color: var(--cyan); font-size: 1.1rem; flex-shrink: 0; }
-.action:hover { border-color: var(--cyan); background: rgba(46,230,208,0.05); transform: translateY(-2px); }
-.action:active { transform: translateY(0) scale(0.98); }
+/* ===== Badges / tags ===== */
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 16px}
+.badge{display:inline-block;padding:2px 10px;font-size:12px;font-weight:500;line-height:20px;border:1px solid var(--note);color:var(--note);border-radius:2em;white-space:nowrap}
+a.badge:hover{background:var(--subtle2);text-decoration:none}
+.badge.a{border-color:var(--warn);color:var(--warn)}
+.badge.m{border-color:var(--imp);color:var(--imp)}
+.tag{display:inline-block;padding:0 8px;font-size:12px;font-weight:500;line-height:18px;border:1px solid var(--border);border-radius:2em;white-space:nowrap;color:var(--muted)}
+.tag.t{color:var(--bad);border-color:var(--bad)}
+.tag.ct{color:var(--note);border-color:var(--note)}
+.tag.all{color:var(--warn);border-color:var(--warn)}
+.tag.dead{color:var(--imp);border-color:var(--imp)}
+.tag.lv{color:var(--muted)}
 
-.card h2 { font-family: var(--pixel); font-weight: 400; font-size: 1.3rem; color: var(--cyan-soft); letter-spacing: 1px; margin: 0 0 8px; }
-.card p.muted { margin: 0; color: var(--muted); font-size: 0.8rem; }
+/* ===== Tables ===== */
+.tablewrap{overflow-x:auto;margin:0 0 16px;-webkit-overflow-scrolling:touch}
+.tablewrap table{border-collapse:collapse;border-spacing:0;width:100%;font-size:14px}
+.tablewrap th,.tablewrap td{padding:6px 13px;border:1px solid var(--border);vertical-align:top;text-align:left}
+.tablewrap th{font-weight:600;background:var(--subtle);white-space:nowrap}
+.tablewrap tbody tr:nth-child(even){background:var(--subtle)}
+.tablewrap td:first-child{font-weight:600}
+.tablewrap td:first-child code{font-weight:400;white-space:nowrap}
+.tablewrap td.num{white-space:nowrap;text-align:right;font-variant-numeric:tabular-nums}
+.tablewrap td{min-width:64px}
 
-/* ===== Bottom bar ===== */
-.bottombar {
-  position: fixed; left: 0; right: 0; bottom: 0;
-  padding: 14px max(16px, env(safe-area-inset-left)) calc(14px + env(safe-area-inset-bottom));
-  background: rgba(4,7,10,0.85);
-  backdrop-filter: blur(14px);
-  border-top: 1px solid var(--line);
-  z-index: 25;
-  display: flex; justify-content: center;
-}
-.bottombar .primary {
-  display: flex; align-items: center; justify-content: center; gap: 10px;
-  width: 100%; max-width: 480px;
-  padding: 14px;
-  background: linear-gradient(135deg, var(--cyan), var(--magenta));
-  color: #04070a;
-  font-weight: 700;
-  font-size: 0.85rem;
-  border-radius: 10px;
-  text-decoration: none;
-  letter-spacing: 0.3px;
-}
-.bottombar .primary:active { transform: scale(0.98); }
+/* ===== Code ===== */
+code,.kbd{font-family:var(--mono);font-size:85%;padding:.2em .4em;background:var(--code);border-radius:6px}
+.kbd{border:1px solid var(--border);border-bottom-width:2px;background:var(--subtle)}
+.codeblock{position:relative;margin:0 0 16px;padding:16px 76px 16px 16px;font-family:var(--mono);font-size:85%;line-height:1.5;background:var(--subtle);border:1px solid var(--border);border-radius:6px;white-space:pre;overflow-x:auto}
+.codeblock .c{color:var(--muted)}
+.copy{position:absolute;top:8px;right:8px;height:28px;padding:0 10px;font:500 12px/1 var(--sans);color:var(--fg);background:var(--bg);border:1px solid var(--border);border-radius:6px;cursor:pointer}
+.copy:hover{background:var(--subtle2)}
+.copy.done{color:#fff;background:var(--tip);border-color:var(--tip)}
+.tree{margin:0 0 16px;padding:16px;font-family:var(--mono);font-size:85%;line-height:1.55;white-space:pre;overflow-x:auto;background:var(--subtle);border:1px solid var(--border);border-radius:6px}
+.tree b{color:var(--link)} .tree i{color:var(--muted);font-style:normal}
 
-/* ===== Add to home screen tip ===== */
-.a2hs {
-  position: fixed; left: 16px; right: 16px; bottom: 86px;
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 14px;
-  display: none;
-  align-items: center;
-  gap: 12px;
-  z-index: 26;
-  max-width: 480px;
-  margin: 0 auto;
-  text-align: left;
-}
-.a2hs.show { display: flex; }
-.a2hs-icon { font-size: 1.4rem; }
-.a2hs-text { font-size: 0.78rem; color: var(--text); flex: 1; }
-.btn-dismiss {
-  background: transparent; border: 1px solid var(--line); color: var(--muted);
-  border-radius: 8px; padding: 6px 10px; font-size: 0.72rem; cursor: pointer;
-}
+/* ===== Callouts (GitHub alerts) ===== */
+.callout{margin:0 0 16px;padding:8px 16px;border-left:.25em solid var(--note)}
+.callout p{margin:0 0 8px}
+.callout p:last-child{margin-bottom:0}
+.callout .ct{display:block;margin-bottom:4px;font-weight:600;color:var(--note)}
+.callout.warn{border-left-color:var(--warn)} .callout.warn .ct{color:var(--warn)}
+.callout.bad{border-left-color:var(--bad)} .callout.bad .ct{color:var(--bad)}
 
-/* ===== Access denied overlay ===== */
-.no-context {
-  position: fixed; inset: 0; display: none;
-  align-items: center; justify-content: center;
-  background: rgba(0,0,0,0.85);
-  z-index: 9999;
-}
-.no-context.show { display: flex; }
-.no-context-msg {
-  background: var(--panel);
-  border: 1px solid var(--magenta);
-  border-radius: var(--radius);
-  padding: 24px;
-  text-align: center;
-  max-width: 280px;
-}
-.no-context-msg h3 { font-family: var(--pixel); font-size: 1.4rem; color: var(--magenta); margin: 0 0 8px; letter-spacing: 1px; }
-.no-context-msg p { margin: 0; font-size: 0.78rem; color: var(--muted); }
+/* ===== Cards ===== */
+.grid2,.grid3{display:grid;gap:16px;margin:0 0 16px}
+.grid2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid3{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:860px){.grid3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.grid2,.grid3{grid-template-columns:1fr}}
+.mini{padding:12px 16px;background:var(--subtle);border:1px solid var(--border);border-radius:6px}
+.mini h4{margin:0 0 6px;font-size:1em}
+.mini p,.mini ul,.mini ol{font-size:14px;margin:0 0 8px}
+.mini>:last-child{margin-bottom:0}
+.mini li{margin:.15em 0}
+.mini.ghost{border-top:3px solid var(--ghost)} .mini.ghost h4{color:var(--ghost)}
+.mini.inv{border-top:3px solid var(--inv)} .mini.inv h4{color:var(--inv)}
+.mini.gold{border-top:3px solid var(--gold)} .mini.gold h4{color:var(--gold)}
+.mini .big{display:block;margin-bottom:2px;font-size:1.75rem;font-weight:600;line-height:1.2;color:var(--link)}
 
-@media (max-width: 380px) {
-  .sale { flex-direction: column; text-align: center; }
-}
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
-}
+/* ===== Timeline ===== */
+.stepper,.doc ul.stepper{list-style:none;margin:0 0 16px;padding:0 0 0 20px;border-left:2px solid var(--border)}
+.stepper li{position:relative;margin:0;padding:0 0 16px 16px}
+.stepper li:last-child{padding-bottom:0}
+.stepper li::before{content:"";position:absolute;left:-27px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--note)}
+.stepper li.m::before{border-color:var(--imp)} .stepper li.a::before{border-color:var(--warn)}
+.stepper .t{display:block;font-weight:600}
 
-/* ================================================================
-   Reference-page additions (built on top of the hub styles above)
-   ================================================================ */
-html, body { height: auto; min-height: 100%; }
-html { scroll-behavior: smooth; }
-section[id] { scroll-margin-top: 84px; }
+/* ===== HUD mock ===== */
+.screen{position:relative;height:300px;margin:0 0 8px;border:1px solid #30363d;border-radius:6px;overflow:hidden;background:radial-gradient(circle at 50% 40%,#0b1613 0%,#020605 75%)}
+.screen .hudbox{position:absolute;font:12px/1.5 var(--mono);white-space:pre}
+.screen .tl{left:12px;top:28px;color:#ff8c8c}
+.screen .tc{left:50%;top:10px;transform:translateX(-50%);color:#ebd796;text-align:center}
+.screen .cc{left:50%;bottom:40px;transform:translateX(-50%);color:#ff8c8c;text-align:center}
+.screen .radar{position:absolute;left:8px;top:8px;width:16px;height:16px;border-radius:50%;border:1px solid #2c8f4e;background:rgba(44,143,78,.25)}
+.screen .cross{position:absolute;left:50%;top:42%;width:14px;height:14px;margin:-7px 0 0 -7px;border:1px solid #ff4d4d;border-radius:50%;opacity:.8}
+.screen .tag-note{position:absolute;font:11px/1.4 var(--sans);color:#d29922;border:1px solid #9e6a03;border-radius:6px;padding:1px 6px;background:rgba(0,0,0,.7)}
+@media(max-width:600px){.screen .hudbox{font-size:10px}}
 
-/* topbar: scroll progress */
-.topbar .bar {
-  position: absolute; left: 0; bottom: -1px; height: 2px; width: 0;
-  background: linear-gradient(90deg, var(--cyan), var(--magenta));
-  box-shadow: 0 0 8px rgba(46,230,208,0.6);
-}
-.title small { display: block; font-size: 0.55em; letter-spacing: 3px; color: var(--muted); text-shadow: none; line-height: 1; margin-top: 2px; text-align: center; }
+/* ===== Filters ===== */
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+.pill{height:32px;padding:0 12px;font:500 13px/1 var(--sans);color:var(--fg);background:var(--bg);border:1px solid var(--border);border-radius:2em;cursor:pointer}
+.pill:hover{background:var(--subtle2)}
+.pill[aria-pressed="true"]{background:var(--link);border-color:var(--link);color:#fff}
+.search{display:block;width:100%;height:36px;margin:0 0 8px;padding:0 12px;font:14px var(--sans);color:var(--fg);background:var(--bg);border:1px solid var(--border);border-radius:6px}
+.search:focus{outline:2px solid var(--link);outline-offset:-1px;border-color:var(--link)}
+.count{display:block;margin-bottom:8px;font-size:12px;color:var(--muted)}
 
-/* drawer: grouped table of contents */
-.drawer__group {
-  padding: 12px 14px 0; color: var(--muted);
-  font-size: 0.66rem; letter-spacing: 2px; text-transform: uppercase;
-}
-.drawer__nav { gap: 4px; }
-.nav-link { padding: 10px 12px; font-size: 0.8rem; }
-.nav-link.active { background: rgba(46,230,208,0.10); border-color: var(--cyan); color: var(--cyan-soft); }
+/* ===== Accordions ===== */
+details.acc{margin:0 0 8px;border:1px solid var(--border);border-radius:6px}
+details.acc summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px 16px;font-weight:600;font-size:15px;border-radius:6px}
+details.acc summary::-webkit-details-marker{display:none}
+details.acc summary::before{content:"";flex:none;width:0;height:0;border-left:6px solid var(--muted);border-top:5px solid transparent;border-bottom:5px solid transparent;transition:transform .15s ease}
+details.acc[open] summary::before{transform:rotate(90deg)}
+details.acc summary:hover{background:var(--subtle)}
+details.acc[open] summary{border-bottom:1px solid var(--border);border-radius:6px 6px 0 0;background:var(--subtle)}
+details.acc .body{padding:12px 16px 4px}
 
-/* layout */
-main.doc { max-width: 940px; align-items: stretch; text-align: left; gap: 18px; }
-.doc .card h2 { font-size: clamp(1.35rem, 4.5vw, 1.7rem); margin: 0 0 4px; }
-.doc .card h3 { font-family: var(--pixel); font-weight: 400; font-size: 1.2rem; color: var(--cyan-soft); letter-spacing: 1px; margin: 22px 0 8px; }
-.doc .card h3:first-of-type { margin-top: 14px; }
-.doc p, .doc li { font-size: 0.84rem; line-height: 1.7; }
-.doc p { margin: 0 0 10px; }
-.doc ul, .doc ol { margin: 0 0 12px; padding-left: 20px; }
-.doc li { margin-bottom: 4px; }
-.doc li::marker { color: var(--cyan); }
-.doc b, .doc strong { color: var(--cyan-soft); font-weight: 600; }
-.doc .muted { color: var(--muted); }
-.kicker { font-size: 0.68rem; color: var(--magenta); letter-spacing: 3px; margin-bottom: 4px; display: block; }
-.lead { font-size: 0.92rem !important; color: var(--text); }
+/* ===== Glossary ===== */
+.azbar{display:flex;flex-wrap:wrap;gap:4px;margin:0 0 16px}
+.azbar a,.azbar span{display:inline-grid;place-items:center;width:32px;height:32px;font-size:14px;font-weight:600;border-radius:6px}
+.azbar a{border:1px solid var(--border);color:var(--link)}
+.azbar a:hover{background:var(--subtle2);text-decoration:none}
+.azbar span{color:var(--muted);opacity:.45}
+.gl{display:grid;grid-template-columns:40px minmax(0,1fr);gap:0 12px;padding:12px 0;border-top:1px solid var(--border)}
+.gl .L{font-size:1.75rem;font-weight:600;line-height:1.1;color:var(--muted)}
+.gl dl{margin:0}
+.gl dt{font-weight:600}
+.gl dd{margin:0 0 8px;color:var(--fg)}
 
-/* badges */
-.badges { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 2px; }
-.badge {
-  display: inline-block; border: 1px solid var(--line); border-radius: 999px;
-  padding: 3px 11px; font-size: 0.68rem; color: var(--cyan-soft);
-  background: rgba(46,230,208,0.06); white-space: nowrap;
-}
-.badge.m { color: #ff9ad0; border-color: rgba(255,62,165,0.35); background: rgba(255,62,165,0.07); }
-.badge.a { color: var(--amber); border-color: rgba(255,183,3,0.35); background: rgba(255,183,3,0.07); }
+/* ===== Footer / helpers ===== */
+.foot{margin-top:32px;padding-top:16px;border-top:1px solid var(--border);font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px 16px}
+.totop{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:40;display:none;width:40px;height:40px;place-items:center;font-size:18px;color:var(--fg);background:var(--bg);border:1px solid var(--border);border-radius:50%;cursor:pointer;box-shadow:0 1px 3px rgba(1,4,9,.2)}
+.totop.show{display:grid}
+.totop:hover{background:var(--subtle2)}
 
-/* grids and mini cards */
-.grid2, .grid3 { display: grid; gap: 12px; margin: 12px 0; }
-.grid2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.grid3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-@media (max-width: 760px) { .grid3 { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 560px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
-.mini {
-  border: 1px solid var(--line); border-radius: 10px; padding: 14px 15px;
-  background: rgba(255,255,255,0.02);
-}
-.mini h4 { margin: 0 0 6px; font-family: var(--pixel); font-weight: 400; font-size: 1.15rem; letter-spacing: 1px; color: var(--cyan-soft); }
-.mini p, .mini li { font-size: 0.78rem; margin-bottom: 4px; }
-.mini.ghost { border-color: rgba(255,62,165,0.35); background: rgba(255,62,165,0.05); }
-.mini.ghost h4 { color: #ff8cc8; }
-.mini.inv { border-color: rgba(46,230,208,0.35); background: rgba(46,230,208,0.05); }
-.mini.gold { border-color: rgba(255,183,3,0.35); background: rgba(255,183,3,0.05); }
-.mini.gold h4 { color: var(--amber); }
-.mini .big { font-family: var(--pixel); font-size: 1.9rem; line-height: 1; color: var(--cyan); display: block; margin-bottom: 4px; }
-
-/* callouts */
-.callout {
-  border-left: 3px solid var(--cyan); background: rgba(46,230,208,0.06);
-  border-radius: 0 10px 10px 0; padding: 12px 14px; margin: 12px 0;
-}
-.callout p { margin: 0; font-size: 0.8rem; }
-.callout .ct { font-family: var(--pixel); font-size: 1.05rem; letter-spacing: 1px; color: var(--cyan-soft); display: block; margin-bottom: 2px; }
-.callout.warn { border-left-color: var(--amber); background: rgba(255,183,3,0.07); }
-.callout.warn .ct { color: var(--amber); }
-.callout.bad { border-left-color: var(--magenta); background: rgba(255,62,165,0.07); }
-.callout.bad .ct { color: #ff8cc8; }
-
-/* tables */
-.tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; margin: 10px 0 14px; background: rgba(0,0,0,0.25); }
-.tablewrap table { border-collapse: collapse; width: 100%; font-size: 0.74rem; min-width: 480px; }
-.tablewrap th {
-  text-align: left; font-weight: 600; color: var(--cyan); letter-spacing: 0.5px; white-space: nowrap;
-  padding: 9px 12px; border-bottom: 1px solid var(--line); background: rgba(46,230,208,0.05);
-}
-.tablewrap td { padding: 8px 12px; border-bottom: 1px solid rgba(46,230,208,0.08); vertical-align: top; color: var(--text); line-height: 1.55; }
-.tablewrap tr:last-child td { border-bottom: 0; }
-.tablewrap tbody tr:hover td { background: rgba(46,230,208,0.04); }
-.tablewrap td:first-child { color: var(--cyan-soft); font-weight: 600; min-width: 96px; }
-.tablewrap td:first-child code { white-space: nowrap; }
-.tablewrap td.num { white-space: nowrap; text-align: right; font-variant-numeric: tabular-nums; }
-.tag { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 0.64rem; font-weight: 600; border: 1px solid var(--line); white-space: nowrap; }
-.tag.t { color: #ff9ad0; border-color: rgba(255,62,165,0.4); }
-.tag.ct { color: var(--cyan-soft); border-color: rgba(46,230,208,0.4); }
-.tag.all { color: var(--amber); border-color: rgba(255,183,3,0.4); }
-.tag.dead { color: #b9a6ff; border-color: rgba(185,166,255,0.4); }
-.tag.lv { color: var(--muted); }
-
-/* inline code + code blocks with copy */
-code, .kbd {
-  font-family: var(--mono); font-size: 0.78em; color: var(--cyan-soft);
-  background: rgba(0,0,0,0.45); border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px;
-}
-.codeblock {
-  position: relative; background: rgba(0,0,0,0.5); border: 1px solid var(--line);
-  border-radius: 10px; padding: 12px 70px 12px 14px; margin: 10px 0 14px;
-  font-size: 0.76rem; line-height: 1.8; color: var(--cyan-soft); white-space: pre-wrap; word-break: break-word;
-}
-.codeblock .c { color: var(--muted); }
-.copy {
-  position: absolute; top: 8px; right: 8px; cursor: pointer;
-  background: var(--panel); color: var(--cyan); border: 1px solid var(--line);
-  border-radius: 8px; padding: 5px 10px; font-family: var(--mono); font-size: 0.68rem;
-}
-.copy:hover { background: rgba(46,230,208,0.12); }
-.copy.done { color: #04070a; background: var(--cyan); }
-
-/* timeline */
-.stepper { list-style: none; margin: 14px 0; padding: 0 0 0 22px; border-left: 1px dashed var(--line); }
-.stepper li { position: relative; padding: 0 0 16px 16px; margin: 0; }
-.doc ul.stepper { padding: 0 0 0 22px; margin: 14px 0; }
-.doc .stepper li { margin: 0; padding: 0 0 16px 16px; }
-.stepper li::before {
-  content: ''; position: absolute; left: -29px; top: 6px; width: 12px; height: 12px;
-  border-radius: 50%; background: var(--bg); border: 2px solid var(--cyan); box-shadow: 0 0 8px rgba(46,230,208,0.5);
-}
-.stepper li.m::before { border-color: var(--magenta); box-shadow: 0 0 8px rgba(255,62,165,0.5); }
-.stepper li.a::before { border-color: var(--amber); box-shadow: 0 0 8px rgba(255,183,3,0.5); }
-.stepper .t { font-family: var(--pixel); font-size: 1.1rem; color: var(--cyan-soft); letter-spacing: 1px; display: block; }
-
-/* mock screen */
-.screen {
-  position: relative; height: 300px; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; margin: 12px 0;
-  background: radial-gradient(circle at 50% 40%, #0b1613 0%, #020605 75%);
-}
-.screen::after { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(180deg, rgba(255,255,255,0.03) 0 1px, transparent 2px 4px); pointer-events: none; }
-.screen .hudbox { position: absolute; font-size: 0.7rem; line-height: 1.5; white-space: pre; }
-.screen .tl { left: 12px; top: 28px; color: #ff8c8c; }
-.screen .tc { left: 50%; top: 10px; transform: translateX(-50%); color: #ebd796; text-align: center; }
-.screen .cc { left: 50%; bottom: 40px; transform: translateX(-50%); color: #ff8c8c; text-align: center; }
-.screen .radar { position: absolute; left: 8px; top: 8px; width: 16px; height: 16px; border-radius: 50%; border: 1px solid #2c8f4e; background: rgba(44,143,78,0.25); }
-.screen .cross { position: absolute; left: 50%; top: 42%; width: 14px; height: 14px; margin: -7px 0 0 -7px; border: 1px solid #ff4d4d; border-radius: 50%; opacity: 0.8; }
-.screen .tag-note { position: absolute; font-size: 0.6rem; color: var(--amber); border: 1px solid rgba(255,183,3,0.4); border-radius: 6px; padding: 1px 6px; background: rgba(0,0,0,0.6); }
-
-/* filters */
-.pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
-.pill {
-  cursor: pointer; font-family: var(--mono); font-size: 0.7rem; color: var(--text);
-  background: var(--panel); border: 1px solid var(--line); border-radius: 999px; padding: 6px 13px;
-}
-.pill[aria-pressed="true"] { background: rgba(46,230,208,0.14); border-color: var(--cyan); color: var(--cyan-soft); }
-.search {
-  width: 100%; margin: 6px 0 8px; padding: 11px 13px; font-family: var(--mono); font-size: 0.8rem; color: var(--text);
-  background: rgba(0,0,0,0.45); border: 1px solid var(--line); border-radius: 10px; outline: none;
-}
-.search:focus { border-color: var(--cyan); box-shadow: 0 0 0 2px rgba(46,230,208,0.15); }
-.count { font-size: 0.7rem; color: var(--muted); margin-bottom: 6px; display: block; }
-
-/* accordions */
-details.acc { border: 1px solid var(--line); border-radius: 10px; margin: 8px 0; background: rgba(255,255,255,0.02); }
-details.acc summary {
-  list-style: none; cursor: pointer; padding: 12px 14px; font-size: 0.84rem; font-weight: 600; color: var(--cyan-soft);
-  display: flex; align-items: center; gap: 10px;
-}
-details.acc summary::-webkit-details-marker { display: none; }
-details.acc summary::before { content: '+'; color: var(--cyan); font-weight: 700; width: 12px; }
-details.acc[open] summary::before { content: '-'; }
-details.acc[open] summary { border-bottom: 1px solid var(--line); }
-details.acc .body { padding: 12px 14px 4px; }
-
-/* menu tree */
-.tree { font-size: 0.76rem; line-height: 1.8; color: var(--text); white-space: pre; overflow-x: auto; background: rgba(0,0,0,0.4); border: 1px solid var(--line); border-radius: 10px; padding: 14px; }
-.tree b { color: var(--cyan-soft); }
-.tree i { color: var(--muted); font-style: normal; }
-
-/* glossary */
-.azbar { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 14px; }
-.azbar a { text-decoration: none; color: var(--cyan); border: 1px solid var(--line); border-radius: 8px; padding: 4px 9px; font-family: var(--pixel); font-size: 1.05rem; }
-.azbar a:hover { background: rgba(46,230,208,0.12); }
-.azbar span { color: var(--muted); border: 1px solid transparent; padding: 4px 9px; font-family: var(--pixel); font-size: 1.05rem; opacity: 0.4; }
-.gl { display: grid; grid-template-columns: 42px 1fr; gap: 6px 12px; margin-bottom: 4px; padding-top: 10px; border-top: 1px solid rgba(46,230,208,0.1); }
-.gl .L { font-family: var(--pixel); font-size: 2rem; color: var(--magenta); line-height: 1; }
-.gl dl { margin: 0; }
-.gl dt { font-weight: 600; color: var(--cyan-soft); font-size: 0.82rem; margin-top: 2px; }
-.gl dd { margin: 0 0 6px; font-size: 0.78rem; color: var(--text); line-height: 1.6; }
-
-/* floating helpers */
-.totop {
-  position: fixed; right: 16px; bottom: 88px; z-index: 24; width: 42px; height: 42px; display: none; place-items: center;
-  background: var(--panel); color: var(--cyan); border: 1px solid var(--line); border-radius: 10px; cursor: pointer; font-size: 1.1rem;
-  backdrop-filter: blur(10px);
-}
-.totop.show { display: grid; }
-.bottombar .primary.static { cursor: default; font-family: var(--pixel); font-size: 1.25rem; letter-spacing: 3px; padding: 11px; }
-
-/* reveal animation (only when JS is running) */
-.js .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.5s ease, transform 0.5s ease; }
-.js .reveal.in { opacity: 1; transform: none; }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .js .reveal { opacity: 1; transform: none; transition: none; } }
-@media print { .topbar, .bottombar, .totop, .drawer, .drawer-backdrop, .a2hs { display: none !important; } .card { box-shadow: none; } }
-
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+@media print{.gh-header,.sidebar,.backdrop,.totop,.copy{display:none!important}.layout{display:block;padding:0}.doc{border:0}.doc-body{padding:0}}
 </style>
 </head>
-
 <body>
-  <div class="bg-grid"></div>
-  <div class="bg-glow"></div>
+<header class="gh-header">
+  <button class="hbtn menu-btn" id="menuBtn" type="button" aria-label="Open table of contents" aria-controls="drawer" aria-expanded="false">&#9776;</button>
+  <a class="crumb" href="main_index"><span class="a">Necro's Hub</span><span class="sl">/</span><b>hidden-haunted-seek</b></a>
+  <span class="spacer"></span>
+  <a class="hlink" href="main_index">Back to hub</a>
+  <button class="hbtn" id="themeBtn" type="button" aria-label="Switch light or dark theme">Theme</button>
+  <div class="bar" id="bar"></div>
+</header>
 
-  <header class="topbar">
-    <button class="icon-btn" id="menuBtn" aria-label="Menu">&#9776;</button>
-    <div class="title">HIDDEN HAUNTED SEEK<small>CS 1.6 MOD // NECRO'S HUB</small></div>
-    <div class="bar" id="bar"></div>
-  </header>
-
-  <div class="drawer-backdrop" id="backdrop"></div>
-  <aside class="drawer" id="drawer" role="navigation">
-    <div class="drawer__header">
-      <div class="avatar">N</div>
-      <div>
-        <div class="drawer__brand">Hidden Haunted Seek</div>
-        <div class="drawer__sub">hhs_guide.exe</div>
-      </div>
-    </div>
-    <nav class="drawer__nav">
+<div class="backdrop" id="backdrop"></div>
+<div class="layout">
+  <aside class="sidebar" id="drawer" aria-label="Table of contents">
+    <div class="side-title">On this page</div>
+    <nav>
       <div class="drawer__group">Start here</div><a class="nav-link" href="#sec-tldr">Quick Start</a><a class="nav-link" href="#sec-what">What is HHS?</a><a class="nav-link" href="#sec-round">How a Round Works</a><a class="nav-link" href="#sec-win">How to Win</a><div class="drawer__group">The Ghosts</div><a class="nav-link" href="#sec-ghost">Playing a Ghost</a><a class="nav-link" href="#sec-gclass">Ghost Classes</a><a class="nav-link" href="#sec-gabil">Abilities and Powers</a><a class="nav-link" href="#sec-gweak">Evolution and States</a><div class="drawer__group">The Investigators</div><a class="nav-link" href="#sec-inv">Playing an Investigator</a><a class="nav-link" href="#sec-skills">Stamina Skills</a><a class="nav-link" href="#sec-tools">Tools, Roles, Perks</a><a class="nav-link" href="#sec-team">Teamwork</a><div class="drawer__group">The Night</div><a class="nav-link" href="#sec-systems">Survival Systems</a><a class="nav-link" href="#sec-objectives">Objectives and Doors</a><a class="nav-link" href="#sec-night">Light, Dark, Weather</a><a class="nav-link" href="#sec-events">Tasks and Events</a><a class="nav-link" href="#sec-thunder">Thunder at Dawn</a><a class="nav-link" href="#sec-ult">Ultimates</a><div class="drawer__group">Progression</div><a class="nav-link" href="#sec-prog">XP, Levels, Titles</a><a class="nav-link" href="#sec-talents">Talents</a><a class="nav-link" href="#sec-ach">Achievements</a><div class="drawer__group">Interface</div><a class="nav-link" href="#sec-hud">HUD Guide</a><a class="nav-link" href="#sec-menu">Menus and Settings</a><a class="nav-link" href="#sec-binds">Key Binds</a><a class="nav-link" href="#sec-cmds">All Commands</a><div class="drawer__group">Community</div><a class="nav-link" href="#sec-rules">Rules</a><a class="nav-link" href="#sec-faq">FAQ</a><a class="nav-link" href="#sec-tips">Tips and Strategy</a><div class="drawer__group">Reference</div><a class="nav-link" href="#sec-owners">For Server Owners</a><a class="nav-link" href="#sec-glossary">Glossary A-Z</a>
-      <hr style="border:0;border-top:1px solid var(--line);margin:8px 2px;">
+      <hr class="side-sep">
       <a class="nav-link" href="/">Necro's Hub (home)</a>
       <a class="nav-link" href="main_index">NECRO144's Main Page</a>
     </nav>
   </aside>
 
   <main class="doc">
+    <div class="file-head"><span>&#128214; README.md</span><span class="muted">v0.6.0 &middot; In development</span></div>
+    <div class="doc-body">
 
-<section class="card hero reveal" id="top">
-  <p class="prompt"><span class="ps1">guest@necro</span>:~$ cat HHS_README.txt</p>
-  <h1>Hidden Haunted Seek<span class="blink-cursor"></span></h1>
-  <p class="lead" style="color:var(--text)">A horror hide-and-seek mod for Counter-Strike 1.6 - the complete guide, from A to Z. For newcomers who just joined, and for players who want a reference.</p>
-  <p style="margin-top:10px">running by <b>Néć[Ř]ø /A/</b></p>
+
+<section class="hero" id="top">
+  <h1>Hidden Haunted Seek</h1>
+  <p class="lead">A horror hide-and-seek mod for Counter-Strike 1.6 - the complete guide, from A to Z. For newcomers who just joined, and for players who want a reference.</p>
+  <p>Running by <b>Néć[Ř]ø /A/</b></p>
   <div class="badges"><span class="badge">v0.6.0</span><span class="badge a">In development</span><span class="badge m">Release date: No ETA</span></div>
-  <div class="badges"><a class="badge" href="#sec-tldr" style="text-decoration:none">Quick Start</a><a class="badge" href="#sec-ghost" style="text-decoration:none">Ghosts</a><a class="badge" href="#sec-inv" style="text-decoration:none">Investigators</a><a class="badge" href="#sec-binds" style="text-decoration:none">Key Binds</a><a class="badge" href="#sec-cmds" style="text-decoration:none">Commands</a><a class="badge" href="#sec-rules" style="text-decoration:none">Rules</a></div>
+  <div class="badges"><a class="badge" href="#sec-tldr">Quick Start</a><a class="badge" href="#sec-ghost">Ghosts</a><a class="badge" href="#sec-inv">Investigators</a><a class="badge" href="#sec-binds">Key Binds</a><a class="badge" href="#sec-cmds">Commands</a><a class="badge" href="#sec-rules">Rules</a></div>
 </section>
 
-<section class="card reveal" id="sec-tldr">
-<span class="kicker">// 01 START HERE</span>
+<section class="sec" id="sec-tldr">
+<span class="kicker">01 START HERE</span>
 <h2>Quick Start</h2>
 
 <p class="lead">You join a dark horror map. Every round, one player in every four becomes a <b>Ghost</b> - invisible, silent and hungry. Everyone else is an <b>Investigator</b> with a flashlight, a laser and a few tricks. Find the ghosts before they find you.</p>
@@ -592,14 +300,14 @@ details.acc .body { padding: 12px 14px 4px; }
 <li><b>Check your side.</b> The top-left of your screen says <b>GHOST</b> or <b>INVESTIGATOR</b>. Roles rotate every round, so everyone gets a turn as a Ghost.</li>
 <li><b>Use the menu.</b> Press <b>M</b> (Choose Team) or say <code>/menu</code>; <b>B</b> opens the weapons shop. A menu never opens by itself and closes after 20 seconds.</li>
 <li><b>Ghost?</b> You are invisible. Follow the PREY line on your HUD and hunt the humans.</li>
-<li><b>Investigator?</b> Press <b>F</b> for your flashlight. A <b style="color:#33ff33">green</b> laser means nothing is there; a <b style="color:#ff4d4d">red</b> laser means a Ghost is in your sights - fire!</li>
+<li><b>Investigator?</b> Press <b>F</b> for your flashlight. A <b class="clr-g">green</b> laser means nothing is there; a <b class="clr-r">red</b> laser means a Ghost is in your sights - fire!</li>
 <li><b>Win</b> by banishing every ghost, surviving until <b>dawn</b>, lighting all three candles, or shattering the Ghost Anchor. Ghosts win by killing every Investigator.</li>
 <li><b>Level up</b> to unlock Ghost classes, weapons, roles and perks. Say <code>/howto</code> for the in-game guide.</li>
 </ol>
 <div class="callout "><span class="ct">No downloads</span><p>Everything runs on the server. You do not need to install anything - no models, sounds or maps.</p></div>
 </section>
-<section class="card reveal" id="sec-what">
-<span class="kicker">// 02 THE MOD</span>
+<section class="sec" id="sec-what">
+<span class="kicker">02 THE MOD</span>
 <h2>What is Hidden Haunted Seek?</h2>
 
 <p><b>Hidden Haunted Seek</b> (<b>HHS</b>) is a horror hide-and-seek game mode for <b>Counter-Strike 1.6</b>, written as an AMX Mod X plugin by <b>Néć[Ř]ø /A/</b>. It is designed for dark, atmospheric horror maps and for roughly 8 to 16 players.</p>
@@ -610,8 +318,8 @@ details.acc .body { padding: 12px 14px 4px; }
 </div>
 <div class="tablewrap"><table><thead><tr><th></th><th>Ghost</th><th>Investigator</th></tr></thead><tbody><tr><td>Appearance</td><td>Fully invisible (other Ghosts see a coloured aura)</td><td>Normal player</td></tr><tr><td>Health</td><td>150 (Reaper 250, Berserker 100)</td><td>500 (Thick Skin +25)</td></tr><tr><td>Weapons</td><td>Knife only (and it hits hard)</td><td>Pistols, SMGs, HE; shotguns, rifles, snipers unlock with level</td></tr><tr><td>Light</td><td>Private coloured flashlight + slight night vision</td><td>Battery flashlight, laser sight, EMF detector</td></tr><tr><td>Resources</td><td>Energy</td><td>Stamina and sanity</td></tr><tr><td>Special</td><td>9 classes, 7 abilities, 15 powers, evolution</td><td>8 roles, 4 perks, 17 skills, a weapons shop, Ghost Vision goggles (Lv 20)</td></tr><tr><td>Goal</td><td>Kill every Investigator</td><td>Banish all ghosts / survive until dawn / candles / anchor</td></tr></tbody></table></div>
 </section>
-<section class="card reveal" id="sec-round">
-<span class="kicker">// 03 THE FLOW</span>
+<section class="sec" id="sec-round">
+<span class="kicker">03 THE FLOW</span>
 <h2>How a Round Works</h2>
 
 <ul class="stepper">
@@ -626,8 +334,8 @@ details.acc .body { padding: 12px 14px 4px; }
 </ul>
 
 </section>
-<section class="card reveal" id="sec-win">
-<span class="kicker">// 04 THE GOAL</span>
+<section class="sec" id="sec-win">
+<span class="kicker">04 THE GOAL</span>
 <h2>How to Win</h2>
 
 <div class="grid2">
@@ -635,8 +343,8 @@ details.acc .body { padding: 12px 14px 4px; }
 </div>
 <div class="callout warn"><span class="ct">Good to know</span><p>Candles and the anchor only appear with at least 6 players, and a round uses one or the other (the anchor in about 3 rounds out of 10). Respawn waves bring fallen players back during the round, so a round is rarely over after the first deaths.</p></div>
 </section>
-<section class="card reveal" id="sec-ghost">
-<span class="kicker">// 05 THE GHOSTS</span>
+<section class="sec" id="sec-ghost">
+<span class="kicker">05 THE GHOSTS</span>
 <h2>Playing a Ghost</h2>
 
 <p class="lead">You are the thing in the dark. Nobody can see you, nobody can hear you - until you make a mistake.</p>
@@ -647,33 +355,33 @@ details.acc .body { padding: 12px 14px 4px; }
 <h3>You are not perfectly hidden</h3>
 <ul><li>You <b>shimmer into view</b> for half a second when you attack or get hurt.</li><li>Standing still for ~6 seconds leaves <b>cold mist</b> at your feet.</li><li><b>Salt traps</b>, <b>wards</b>, <b>Spirit Scans</b>, <b>marks</b>, <b>Holy Grenades</b> and <b>lightning</b> expose you.</li><li><b>EMF detectors</b> beep when you are near, and the <b>lights flicker</b> when you are very close.</li><li>A <b>laser sight</b> that touches you turns red - even when you are disguised with Mimic.</li></ul>
 </section>
-<section class="card reveal" id="sec-gclass">
-<span class="kicker">// 06 THE GHOSTS</span>
+<section class="sec" id="sec-gclass">
+<span class="kicker">06 THE GHOSTS</span>
 <h2>Ghost Classes</h2>
 
 <p>Pick your class in the menu. You can change class during the first 40 seconds of a round; after that, the change waits for your next spawn.</p>
 <div class="tablewrap"><table><thead><tr><th>Class</th><th>Unlock</th><th>Speed</th><th>HP</th><th>What it does</th></tr></thead><tbody><tr><td>Speed Killer</td><td>Lv 1</td><td class="num">350</td><td class="num">150</td><td>Knife damage +50%. Fast and simple.</td></tr><tr><td>Gravity Killer</td><td>Lv 1</td><td class="num">310</td><td class="num">150</td><td>Low gravity - huge jumps over everything.</td></tr><tr><td>Blinker</td><td>Lv 3</td><td class="num">310</td><td class="num">150</td><td>Blink costs only 10 energy with a 3 s cooldown and reaches farther.</td></tr><tr><td>Phantom</td><td>Lv 5</td><td class="num">320</td><td class="num">150</td><td>Double energy regeneration and a bigger energy pool (+20).</td></tr><tr><td>Stalker</td><td>Lv 7</td><td class="num">330</td><td class="num">150</td><td>Detectors only reach half as far, you shimmer half as long, cold mist takes twice as long.</td></tr><tr><td>Reaper</td><td>Lv 10</td><td class="num">300</td><td class="num">250</td><td>Extra HP and a heavier knife (+25%).</td></tr><tr><td>Banshee</td><td>Lv 12</td><td class="num">290</td><td class="num">150</td><td>Scare hits EVERY Investigator within 700 units and costs 30% less.</td></tr><tr><td>Berserker</td><td>Lv 15</td><td class="num">380</td><td class="num">100</td><td>Knife damage x2 - a real glass cannon.</td></tr><tr><td>Nightcrawler</td><td>Lv 12</td><td class="num">310</td><td class="num">150</td><td>HOLD E at a wall to climb it (costs energy); jump to leap off. Move where you look.</td></tr></tbody></table></div>
 </section>
-<section class="card reveal" id="sec-gabil">
-<span class="kicker">// 07 THE GHOSTS</span>
+<section class="sec" id="sec-gabil">
+<span class="kicker">07 THE GHOSTS</span>
 <h2>Abilities and Energy Powers</h2>
 
-<p><b>Abilities</b> are your 7 core tricks (open with <code>/ab</code>). <b>Energy powers</b> are 15 more tools in four groups (open with <code>/powers</code>). Bind your favourites - see <a href="#sec-binds" style="color:var(--cyan)">Key Binds</a>.</p>
+<p><b>Abilities</b> are your 7 core tricks (open with <code>/ab</code>). <b>Energy powers</b> are 15 more tools in four groups (open with <code>/powers</code>). Bind your favourites - see <a href="#sec-binds">Key Binds</a>.</p>
 <h3>Abilities</h3>
 <div class="tablewrap"><table><thead><tr><th>Ability</th><th>Energy</th><th>Cooldown</th><th>Effect</th></tr></thead><tbody><tr><td>Blackout</td><td class="num">50</td><td class="num">30 s</td><td>Every Investigator's flashlight dies and the whole map goes dark for 5 seconds.</td></tr><tr><td>Scare</td><td class="num">25</td><td class="num">15 s</td><td>The nearest Investigator in range is flashed, shaken and loses 20 sanity. (Banshees hit everyone within 700 units for 15 each.)</td></tr><tr><td>Fear Aura</td><td class="num">40</td><td class="num">35 s</td><td>For 8 s everyone within 400 units loses 6 sanity every second.</td></tr><tr><td>Whisper Decoy</td><td class="num">20</td><td class="num">12 s</td><td>A creepy sound plays where you aim - lure them away.</td></tr><tr><td>Phantom Steps</td><td class="num">25</td><td class="num">20 s</td><td>A trail of fake footsteps walks away in front of you.</td></tr><tr><td>Mimic</td><td class="num">35</td><td class="num">25 s</td><td>For 6 s Investigators see you as one of them. Attacking or being hit breaks it - and a laser on you still turns RED.</td></tr><tr><td>Blink</td><td class="num">30</td><td class="num">10 s</td><td>A short teleport forward (400 units).</td></tr></tbody></table></div><h3>Self</h3><div class="tablewrap"><table><thead><tr><th>Power</th><th>Energy</th><th>Cooldown</th><th>Effect</th></tr></thead><tbody><tr><td>Feed</td><td class="num">40</td><td class="num">15 s</td><td>Heal yourself +50 HP.</td></tr><tr><td>Overdrive</td><td class="num">50</td><td class="num">60 s</td><td>8 s: +12% speed, double energy regeneration and 40% shorter cooldowns.</td></tr><tr><td>Shadow Veil</td><td class="num">45</td><td class="num">40 s</td><td>6 s (+1.5 s per Shadow Mastery rank): detectors can't find you, you don't shimmer and leave no mist.</td></tr><tr><td>Hunt Mode</td><td class="num">30</td><td class="num">20 s</td><td>12 s: your HUD tracks the most frightened Investigator.</td></tr><tr><td>Rift</td><td class="num">30</td><td class="num">25 s</td><td>Teleport beside the nearest Ghost ally.</td></tr></tbody></table></div><h3>Traps and zones</h3><div class="tablewrap"><table><thead><tr><th>Power</th><th>Energy</th><th>Cooldown</th><th>Effect</th></tr></thead><tbody><tr><td>Spirit Snare</td><td class="num">25</td><td class="num">25 s</td><td>A hidden trap (only Ghosts see it). Slows an Investigator for 4 s and costs 10 sanity.</td></tr><tr><td>Chill Zone</td><td class="num">40</td><td class="num">30 s</td><td>A 6 s patch of floor: Investigators standing in it are slowed.</td></tr><tr><td>Fog Bomb</td><td class="num">35</td><td class="num">30 s</td><td>6 s: Investigators near where you aim are lost in thick fog and lose 5 sanity.</td></tr><tr><td>Haunt Door</td><td class="num">25</td><td class="num">15 s</td><td>Seal the door you look at for 20 s. Investigators can't open it - Ghosts walk through.</td></tr></tbody></table></div><h3>Mind games</h3><div class="tablewrap"><table><thead><tr><th>Power</th><th>Energy</th><th>Cooldown</th><th>Effect</th></tr></thead><tbody><tr><td>Soul Siphon</td><td class="num">35</td><td class="num">20 s</td><td>Drain stamina from nearby Investigators and turn part of it into energy for you.</td></tr><tr><td>Light Drain</td><td class="num">30</td><td class="num">25 s</td><td>Kill one Investigator's flashlight (the one in front of you) for 10 s.</td></tr><tr><td>Nightmare Decoy</td><td class="num">30</td><td class="num">25 s</td><td>8 s: a fake ghost that Investigators can see and detectors read.</td></tr><tr><td>Echo</td><td class="num">20</td><td class="num">10 s</td><td>A fake gunshot where you aim.</td></tr></tbody></table></div><h3>Team</h3><div class="tablewrap"><table><thead><tr><th>Power</th><th>Energy</th><th>Cooldown</th><th>Effect</th></tr></thead><tbody><tr><td>Grave Call</td><td class="num">90</td><td class="num">60 s</td><td>Instantly revive a fallen Ghost ally.</td></tr><tr><td>Ghost Link</td><td class="num">45</td><td class="num">20 s</td><td>Give 40 energy to the nearest Ghost ally.</td></tr></tbody></table></div>
 </section>
-<section class="card reveal" id="sec-gweak">
-<span class="kicker">// 08 THE GHOSTS</span>
+<section class="sec" id="sec-gweak">
+<span class="kicker">08 THE GHOSTS</span>
 <h2>Evolution and Special States</h2>
 
 <h3>Evolution</h3>
 <p>Every kill makes you stronger, up to three levels. It resets when you die.</p>
-<div class="tablewrap"><table><thead><tr><th>Kills</th><th>Bonus</th></tr></thead><tbody><tr><td>1st kill - Evolution 1</td><td>+8% speed and 10% of your health back.</td></tr><tr><td>2nd kill - Evolution 2</td><td>Cooldowns 25% shorter and energy regenerates 50% faster.</td></tr><tr><td>3rd kill - Evolution 3</td><td>Knife damage +20% and Soul Drain doubled. Unlocks the &lt;i&gt;Apex Ghost&lt;/i&gt; achievement.</td></tr></tbody></table></div>
+<div class="tablewrap"><table><thead><tr><th>Kills</th><th>Bonus</th></tr></thead><tbody><tr><td>1st kill - Evolution 1</td><td>+8% speed and 10% of your health back.</td></tr><tr><td>2nd kill - Evolution 2</td><td>Cooldowns 25% shorter and energy regenerates 50% faster.</td></tr><tr><td>3rd kill - Evolution 3</td><td>Knife damage +20% and Soul Drain doubled. Unlocks the <i>Apex Ghost</i> achievement.</td></tr></tbody></table></div>
 <h3>Special states</h3>
 <div class="tablewrap"><table><thead><tr><th>State</th><th>How it happens</th><th>What it does</th></tr></thead><tbody><tr><td>Last Ghost Rage</td><td>You are the final Ghost standing (and the round began with 2+ Ghosts)</td><td>+15% speed and double energy regeneration.</td></tr><tr><td>Overdrive</td><td>Energy power</td><td>+12% speed, double energy regen, cooldowns race.</td></tr><tr><td>Veiled</td><td>Shadow Veil</td><td>Detectors can't read you, no shimmer, no mist.</td></tr><tr><td>Warded</td><td>You crossed an Investigator's ward</td><td>You can't Blink or Rift for 6 s and you are exposed for 2 s.</td></tr><tr><td>Marked</td><td>An Investigator marked you</td><td>Exposed to the whole team for 10 s and you take 25% more damage.</td></tr></tbody></table></div>
 </section>
-<section class="card reveal" id="sec-inv">
-<span class="kicker">// 09 THE INVESTIGATORS</span>
+<section class="sec" id="sec-inv">
+<span class="kicker">09 THE INVESTIGATORS</span>
 <h2>Playing an Investigator</h2>
 
 <p class="lead">You are armed, you have a light - and it is very dark. Stay together, stay calm, watch the laser.</p>
@@ -681,22 +389,22 @@ details.acc .body { padding: 12px 14px 4px; }
 <p>Press <b>B</b> (or <b>M</b>, then Buy Weapons) to open the <b>Weapons Shop</b>. It lists every gun with its <b>level next to the name</b>, works <b>anywhere on the map</b> for <b>30 seconds after you spawn</b>, and every gun comes with <b>at least 100 spare rounds</b> (200 for the M249). The old buy menu, auto-buy and the buy-ammo keys are replaced by it. <b>Ammo costs stamina</b>: refill the weapon in your hands (40) or all your weapons (90) at any time, up to 200 spare rounds.</p>
 <div class="tablewrap"><table><thead><tr><th>Shop category</th><th>Weapons (level needed in brackets)</th></tr></thead><tbody><tr><td>Pistols</td><td>Glock 18 (1), USP .45 (1), P228 (1), Five-seveN (2), Dual Elites (4), Desert Eagle (8)</td></tr><tr><td>Shotguns</td><td>M3 Super 90 (6), XM1014 (10)</td></tr><tr><td>Submachine guns</td><td>TMP (1), MAC-10 (1), MP5 Navy (3), UMP 45 (6), P90 (10)</td></tr><tr><td>Assault rifles</td><td>Galil (14), FAMAS (14), AK-47 (17), M4A1 (17), SG 552 (20), AUG (20)</td></tr><tr><td>Sniper rifles</td><td>Scout (20), AWP (24), G3SG1 (26), SG 550 (26)</td></tr><tr><td>Machine gun</td><td>M249 (30)</td></tr><tr><td>Equipment</td><td>Kevlar (1), Kevlar + Helmet (3), HE grenade (1), Flashbang (12), Smoke grenade (12), Tactical shield (18)</td></tr></tbody></table></div>
 <h3>Your tools</h3>
-<ul><li><b>Flashlight (F)</b> with a battery: it drains 4% per second while on, recharges 2.5% per second while off, and flickers when low. You can pick its colour.</li><li><b>Laser sight</b> on every gun: <b style="color:#33ff33">green</b> = clear, <b style="color:#ff4d4d">red</b> = a Ghost is in your sights.</li><li><b>EMF detector</b>: the bar on your HUD shows how close the nearest Ghost is (up to 900 units). Soft beeps fade in only when one is within 500. <code>/sound</code> sets the volume.</li><li><b>Health</b>: every Investigator has <b>500 HP</b> (Thick Skin adds 25) and healing never goes above 500. The normal CS HUD stops at 255 - the mod's HUD shows your real HP.</li><li><b>Holy Grenade</b>: your HE grenade also reveals Ghosts caught in the blast and drains their energy.</li></ul>
+<ul><li><b>Flashlight (F)</b> with a battery: it drains 4% per second while on, recharges 2.5% per second while off, and flickers when low. You can pick its colour.</li><li><b>Laser sight</b> on every gun: <b class="clr-g">green</b> = clear, <b class="clr-r">red</b> = a Ghost is in your sights.</li><li><b>EMF detector</b>: the bar on your HUD shows how close the nearest Ghost is (up to 900 units). Soft beeps fade in only when one is within 500. <code>/sound</code> sets the volume.</li><li><b>Health</b>: every Investigator has <b>500 HP</b> (Thick Skin adds 25) and healing never goes above 500. The normal CS HUD stops at 255 - the mod's HUD shows your real HP.</li><li><b>Holy Grenade</b>: your HE grenade also reveals Ghosts caught in the blast and drains their energy.</li></ul>
 <h3>Sanity</h3>
 <p>Sanity keeps falling while no teammate is within about 500 units of you, and while your flashlight is off. It recovers when you stay close to teammates with your light on (Priests recover 50% faster), near your buddy, and in Salt Sanctuaries. Below 40% you start to <b>hallucinate</b> - fake footsteps, brief noise, false EMF alarms - and the screen edges get darker. Below <b>30%</b> your mind starts to <b>cost you health</b>: you lose HP every second, faster the lower your sanity gets (up to 8 HP per second at zero) - by default it stops at 1 HP and never kills you. Ghost abilities like Scare and Fear Aura attack your sanity directly, so stay together and keep your light on.</p>
 <h3>Stamina</h3>
 <p>Stamina is the fuel for your skills. You have 800 plus 10 per level (+100 with the Stamina Reserve perk). It regenerates 10 every 5 seconds - <b>1.5x faster</b> near a teammate (within 600 units), <b>1.25x</b> in light, <b>0.6x</b> alone in the dark, and 15% faster under a Full Moon. You also get <b>+50</b> for banishing a Ghost and +20 for helping light a candle.</p>
 
 </section>
-<section class="card reveal" id="sec-skills">
-<span class="kicker">// 10 THE INVESTIGATORS</span>
+<section class="sec" id="sec-skills">
+<span class="kicker">10 THE INVESTIGATORS</span>
 <h2>Stamina Skills</h2>
 
 <p>Open <code>/skills</code> (or the Stamina Skills menu). Skills are grouped as <b>Support</b>, <b>Hunting</b>, and <b>Defense and utility</b>.</p>
 <h3>Support</h3><div class="tablewrap"><table><thead><tr><th>Skill</th><th>Stamina</th><th>Cooldown</th><th>Effect</th></tr></thead><tbody><tr><td>Heal</td><td class="num">120 (60 as Medic)</td><td class="num">-</td><td>+200 HP, up to 500 maximum. A medkit sound, a green flash and a floating +HP confirm it.</td></tr><tr><td>Holy Blessing</td><td class="num">200</td><td class="num">45 s</td><td>+50 HP and +30 sanity to every ally within 450 units.</td></tr><tr><td>Courage</td><td class="num">60</td><td class="num">20 s</td><td>Sanity back to 100 and +25 flashlight battery.</td></tr><tr><td>Rally Cry</td><td class="num">140</td><td class="num">45 s</td><td>Allies within 450 units: +20% speed for 5 s and +20 sanity.</td></tr><tr><td>Salt Sanctuary</td><td class="num">110</td><td class="num">45 s</td><td>A 15 s circle (radius 180): allies gain sanity, Ghosts inside are slowed and exposed.</td></tr></tbody></table></div><h3>Hunting</h3><div class="tablewrap"><table><thead><tr><th>Skill</th><th>Stamina</th><th>Cooldown</th><th>Effect</th></tr></thead><tbody><tr><td>Spirit Scan</td><td class="num">100</td><td class="num">25 s</td><td>Every Ghost within 600 units shows as an outline for a moment.</td></tr><tr><td>Mark Ghost</td><td class="num">70</td><td class="num">25 s</td><td>Your next hit on a Ghost exposes it to the whole team for 10 s and it takes 25% more damage.</td></tr><tr><td>Exorcism Round</td><td class="num">90</td><td class="num">30 s</td><td>12 s: your shots do 40% more damage to Ghosts.</td></tr><tr><td>Sixth Sense</td><td class="num">60</td><td class="num">25 s</td><td>8 s: the HUD shows the direction of the nearest Ghost (and whether it is near or far).</td></tr></tbody></table></div><h3>Defense and utility</h3><div class="tablewrap"><table><thead><tr><th>Skill</th><th>Stamina</th><th>Cooldown</th><th>Effect</th></tr></thead><tbody><tr><td>Guardian Angel</td><td class="num">150</td><td class="num">90 s</td><td>Survive the next fatal hit on 1 HP.</td></tr><tr><td>Ward</td><td class="num">80</td><td class="num">20 s</td><td>A hidden alarm rune on the floor. A Ghost that crosses it is exposed, can't teleport for a short time, and your team is alerted.</td></tr><tr><td>Break Door</td><td class="num">60</td><td class="num">8 s</td><td>Unseal a door the Ghosts locked.</td></tr><tr><td>Light the Sky</td><td class="num">150</td><td class="num">60 s</td><td>The whole map lights up for 6 s with a huge pillar of light, a ring of suns and growing shock rings, and everyone is told who did it. Ghosts flicker into view, Investigators regain 15 sanity. (25 s team-wide wait.)</td></tr><tr><td>Adrenaline</td><td class="num">100</td><td class="num">30 s</td><td>+30% speed for 6 s.</td></tr><tr><td>Flashlight Surge</td><td class="num">80</td><td class="num">40 s</td><td>15 s of a brighter, longer-reaching flashlight that never drains.</td></tr><tr><td>Candle Focus</td><td class="num">90</td><td class="num">40 s</td><td>20 s: you light candles twice as fast.</td></tr><tr><td>Low Gravity</td><td class="num">100</td><td class="num">25 s</td><td>6 s of low gravity (0.35): jump high and cross gaps.</td></tr></tbody></table></div><div class="callout "><span class="ct">Combo</span><p>Use a second skill within 8 seconds of the first and 10% of its cost is refunded. <code>/give</code> sends stamina to your buddy or a close teammate (10% is lost on the way).</p></div>
 </section>
-<section class="card reveal" id="sec-tools">
-<span class="kicker">// 11 THE INVESTIGATORS</span>
+<section class="sec" id="sec-tools">
+<span class="kicker">11 THE INVESTIGATORS</span>
 <h2>Tools, Roles and Perks</h2>
 
 <h3>Tools</h3>
@@ -709,8 +417,8 @@ details.acc .body { padding: 12px 14px 4px; }
 <h3>Perks</h3>
 <div class="tablewrap"><table><thead><tr><th>Perk</th><th>Unlock</th><th>Effect</th></tr></thead><tbody><tr><td>Stamina Reserve</td><td>Lv 8</td><td>+100 maximum stamina and faster stamina regeneration.</td></tr><tr><td>Thick Skin</td><td>Lv 16</td><td>+25 HP on top of your 500 every life.</td></tr><tr><td>Deep Pockets</td><td>Lv 26</td><td>+2 salt traps and +1 flare each round.</td></tr><tr><td>Night Eyes</td><td>Lv 34</td><td>EMF reaches 40% farther and the flashlight battery drains 30% slower.</td></tr></tbody></table></div>
 </section>
-<section class="card reveal" id="sec-team">
-<span class="kicker">// 12 THE INVESTIGATORS</span>
+<section class="sec" id="sec-team">
+<span class="kicker">12 THE INVESTIGATORS</span>
 <h2>Teamwork</h2>
 
 <h3>Buddy system</h3>
@@ -721,8 +429,8 @@ details.acc .body { padding: 12px 14px 4px; }
 <h3>When you are dead</h3>
 <ul><li><b>Spirit Whispers</b> (open the menu while dead): warn the teammate you are watching - &quot;Ghost behind you!&quot;, &quot;Ghost on your left!&quot; and more.</li><li><b>/ping</b>: sense a ghost near the teammate you are spectating (Investigators).</li><li><b>Spirit sight</b>: dead Investigators see Ghosts as faint outlines.</li><li><b>Vote</b>: fallen players vote on the next night's modifier.</li><li><b>Revenge</b>: if a Ghost killed you, the spirit menu offers one revenge per death - your killer is exposed to the whole team for 6 seconds (<code>/revenge</code>).</li><li><b>Respawn wave</b>: the HUD counts down to the next one.</li></ul>
 </section>
-<section class="card reveal" id="sec-systems">
-<span class="kicker">// 13 THE NIGHT</span>
+<section class="sec" id="sec-systems">
+<span class="kicker">13 THE NIGHT</span>
 <h2>Survival Systems</h2>
 
 <div class="grid2">
@@ -732,8 +440,8 @@ details.acc .body { padding: 12px 14px 4px; }
 <p>At the end of every round the server rotates the Ghost role: one Ghost per 4 players, chosen from whoever was a Ghost the longest time ago (new players first). You do not need to change team yourself - and please don't (see the rules).</p>
 
 </section>
-<section class="card reveal" id="sec-events">
-<span class="kicker">// NEW IN 0.2 - THE NIGHT</span>
+<section class="sec" id="sec-events">
+<span class="kicker">NEW IN 0.2 - THE NIGHT</span>
 <h2>Tasks, Events and Streaks</h2>
 
 <p class="lead">Small goals, big moments and a few scares, so no two rounds feel the same.</p>
@@ -742,15 +450,15 @@ details.acc .body { padding: 12px 14px 4px; }
 </div>
 
 </section>
-<section class="card reveal" id="sec-thunder">
-<span class="kicker">// NEW IN 0.4 - THE NIGHT</span>
+<section class="sec" id="sec-thunder">
+<span class="kicker">NEW IN 0.4 - THE NIGHT</span>
 <h2>Thunder at Dawn</h2>
 
 <p>When the <b>sun rises</b> or the <b>round ends</b>, lightning strikes <b>1 or 3 random Investigators</b>: a bolt from the sky, a white flash, a shaking screen and a thunderclap for everyone. It is a show by default (<code>ht_thunder_dmg 0</code>).</p>
 
 </section>
-<section class="card reveal" id="sec-objectives">
-<span class="kicker">// 14 THE NIGHT</span>
+<section class="sec" id="sec-objectives">
+<span class="kicker">14 THE NIGHT</span>
 <h2>Objectives and Haunted Doors</h2>
 
 <div class="grid2">
@@ -760,8 +468,8 @@ details.acc .body { padding: 12px 14px 4px; }
 <p>A Ghost can <b>seal the door</b> it is looking at (Haunt Door). A red beam marks it, Investigators can't open it, Ghosts walk right through. It unseals by itself after about 20 seconds - or an Investigator can break it open at once with the <b>Break Door</b> skill. This works on the map's normal doors.</p>
 
 </section>
-<section class="card reveal" id="sec-night">
-<span class="kicker">// 15 THE NIGHT</span>
+<section class="sec" id="sec-night">
+<span class="kicker">15 THE NIGHT</span>
 <h2>Light, Dark and Weather</h2>
 
 <p>The night is part of the game, and it is <b>pitch dark</b>: the map is always light style <b>a</b>, with a neutral, almost black fog. Your flashlight, flares, candles and the odd lightning flash are the only light. (Server owners can switch this off with <code>ht_pitch 0</code> to get dimmed-but-visible nights, where the moon changes the darkness.)</p>
@@ -776,8 +484,8 @@ details.acc .body { padding: 12px 14px 4px; }
 <p>An admin switch (<code>ht_halloween 1</code>): <b>double XP</b>, a modifier every round, and <b>pumpkins</b> that appear around the map - touch one for XP and a small boon.</p>
 
 </section>
-<section class="card reveal" id="sec-ult">
-<span class="kicker">// 16 THE NIGHT</span>
+<section class="sec" id="sec-ult">
+<span class="kicker">16 THE NIGHT</span>
 <h2>Ultimates</h2>
 
 <p>Everyone has an ultimate meter. It fills slowly by itself, and fast from kills (+30), Last Rites (+35), lighting candles (+25), salt traps and wards (+12) and scares (+10). When it hits 100%, say <code>/ult</code> (or bind it).</p>
@@ -786,8 +494,8 @@ details.acc .body { padding: 12px 14px 4px; }
 </div>
 
 </section>
-<section class="card reveal" id="sec-prog">
-<span class="kicker">// 17 PROGRESSION</span>
+<section class="sec" id="sec-prog">
+<span class="kicker">17 PROGRESSION</span>
 <h2>XP, Levels and Titles</h2>
 
 <p>Your level, XP, class, colours, talents and settings are <b>saved automatically</b> between sessions (by your Steam ID, or your name on LAN). There are <b>60 levels</b>.</p>
@@ -803,8 +511,8 @@ details.acc .body { padding: 12px 14px 4px; }
 <p>Roles and perks also have <b>tiers</b>: Tier 1 at the unlock level, Tier 2 ten levels later and Tier 3 after twenty. <b>Each tier makes the bonus 25% stronger</b> (for example a Hunter's +15% becomes +18.75%, then +22.5%). The Role and Perk menus show your tier.</p>
 <div class="tablewrap"><table><thead><tr><th>Level</th><th>Unlock</th></tr></thead><tbody><tr><td class="num">3</td><td>Blinker class; Cyan and Blue flashlight colours</td></tr><tr><td class="num">5</td><td>Phantom class</td></tr><tr><td class="num">6</td><td>Tech role; shotguns; Purple colour</td></tr><tr><td class="num">7</td><td>Stalker class</td></tr><tr><td class="num">8</td><td>Stamina Reserve perk</td></tr><tr><td class="num">9</td><td>Orange colour</td></tr><tr><td class="num">10</td><td>Reaper class</td></tr><tr><td class="num">12</td><td>Priest role; Banshee and Nightcrawler classes</td></tr><tr><td class="num">14</td><td>Rifles</td></tr><tr><td class="num">15</td><td>Berserker class</td></tr><tr><td class="num">16</td><td>Thick Skin perk</td></tr><tr><td class="num">18</td><td>Hunter role; flash, smoke and shield</td></tr><tr><td class="num">20</td><td>Ghost Vision night-vision goggles</td></tr><tr><td class="num">24</td><td>Grappler role; snipers</td></tr><tr><td class="num">26</td><td>Deep Pockets perk</td></tr><tr><td class="num">30</td><td>M249 machine gun; Trapper role</td></tr><tr><td class="num">38</td><td>Medium role</td></tr><tr><td class="num">46</td><td>Demolisher role</td></tr><tr><td class="num">34</td><td>Night Eyes perk</td></tr><tr><td class="num">Every level</td><td>1 talent point</td></tr></tbody></table></div>
 </section>
-<section class="card reveal" id="sec-talents">
-<span class="kicker">// 18 PROGRESSION</span>
+<section class="sec" id="sec-talents">
+<span class="kicker">18 PROGRESSION</span>
 <h2>Talents</h2>
 
 <p>Every level gives you <b>1 talent point</b>. Open <code>/talents</code> and spend it on a permanent upgrade. Each talent has <b>3 ranks</b>.</p>
@@ -812,16 +520,16 @@ details.acc .body { padding: 12px 14px 4px; }
 <p class="muted">Spend 10 points in total for the <i>Talented</i> achievement.</p>
 
 </section>
-<section class="card reveal" id="sec-ach">
-<span class="kicker">// 19 PROGRESSION</span>
+<section class="sec" id="sec-ach">
+<span class="kicker">19 PROGRESSION</span>
 <h2>Achievements</h2>
 
 <p>There are <b>18 achievements</b>, each worth <b>100 XP</b>. Check yours with <code>/ach</code>.</p>
 <div class="grid3"><div class="mini"><h4>First Light</h4><p>Banish your first ghost</p></div><div class="mini"><h4>Ghostbuster</h4><p>Banish 10 ghosts</p></div><div class="mini"><h4>Exorcist</h4><p>Banish 50 ghosts</p></div><div class="mini"><h4>Soul Reaper</h4><p>Kill 25 humans as a ghost</p></div><div class="mini"><h4>Daybreak</h4><p>Survive until dawn</p></div><div class="mini"><h4>Last Rites</h4><p>Save a teammate with the Last Rites</p></div><div class="mini"><h4>Pinch of Salt</h4><p>Reveal a ghost with a salt trap</p></div><div class="mini"><h4>Third Eye</h4><p>Scan 3 ghosts at once</p></div><div class="mini"><h4>Soul Collector</h4><p>Collect a soul orb</p></div><div class="mini"><h4>Boo!</h4><p>Scare an investigator</p></div><div class="mini"><h4>Night Walker</h4><p>Reach level 10</p></div><div class="mini"><h4>Legend</h4><p>Reach level 20</p></div><div class="mini"><h4>Candlelight</h4><p>Light a candle</p></div><div class="mini"><h4>Inseparable</h4><p>Stay with your buddy for 2 minutes</p></div><div class="mini"><h4>Apex Ghost</h4><p>Reach Ghost evolution 3</p></div><div class="mini"><h4>Ultimate Power</h4><p>Unleash an ultimate</p></div><div class="mini"><h4>Talented</h4><p>Spend 10 talent points</p></div><div class="mini"><h4>Anchor Breaker</h4><p>Shatter a ghost anchor</p></div></div>
 
 </section>
-<section class="card reveal" id="sec-hud">
-<span class="kicker">// 20 INTERFACE</span>
+<section class="sec" id="sec-hud">
+<span class="kicker">20 INTERFACE</span>
 <h2>HUD Guide</h2>
 
 <p>The HUD is deliberately light. By default you see two small blocks plus the dawn timer - nothing else unless it matters.</p>
@@ -841,15 +549,15 @@ PREY: 1787 units  AHEAD-LEFT</div>
 </div>
 <p class="muted">Illustration of a Ghost's clean HUD. The numbers are only an example.</p>
 <h3>What each part means</h3>
-<div class="tablewrap"><table><thead><tr><th>Where</th><th>What</th><th>Details</th></tr></thead><tbody><tr><td>Top centre</td><td>Dawn timer</td><td>Counts down to dawn. Turns red in the last minute.</td></tr><tr><td>Top left</td><td>Who you are</td><td>Your side, class or role, level and rank title, an XP bar, your round &lt;b&gt;TASK&lt;/b&gt; and the &lt;b&gt;ULTIMATE bar&lt;/b&gt; (it blinks when you can use it - a sound and a message also tell you).</td></tr><tr><td>Centre (Ghost)</td><td>HP, Energy, Ready</td><td>READY shows how many of your 22 abilities and powers are available; anything recharging is listed with its seconds. PREY points at the nearest human. ULT is your ultimate meter.</td></tr><tr><td>Centre (Investigator)</td><td>HP, Stamina, Sanity, Light</td><td>Plus an EMF bar when a ghost is near, and your buddy's position when they are far away.</td></tr><tr><td>Centre (extras)</td><td>Only what matters</td><td>The objective with an arrow to the next candle or the anchor, LAST STAND or MOST WANTED when they apply, Sixth Sense or Hunt Mode, your buddy, your ultimate when it is ready.</td></tr></tbody></table></div>
-<p>The colour of the centre block is a warning light: it turns <b style="color:#ff7a7a">red</b> when your health is low and <b style="color:#c88cff">violet</b> when an Investigator's sanity is breaking.</p>
+<div class="tablewrap"><table><thead><tr><th>Where</th><th>What</th><th>Details</th></tr></thead><tbody><tr><td>Top centre</td><td>Dawn timer</td><td>Counts down to dawn. Turns red in the last minute.</td></tr><tr><td>Top left</td><td>Who you are</td><td>Your side, class or role, level and rank title, an XP bar, your round <b>TASK</b> and the <b>ULTIMATE bar</b> (it blinks when you can use it - a sound and a message also tell you).</td></tr><tr><td>Centre (Ghost)</td><td>HP, Energy, Ready</td><td>READY shows how many of your 22 abilities and powers are available; anything recharging is listed with its seconds. PREY points at the nearest human. ULT is your ultimate meter.</td></tr><tr><td>Centre (Investigator)</td><td>HP, Stamina, Sanity, Light</td><td>Plus an EMF bar when a ghost is near, and your buddy's position when they are far away.</td></tr><tr><td>Centre (extras)</td><td>Only what matters</td><td>The objective with an arrow to the next candle or the anchor, LAST STAND or MOST WANTED when they apply, Sixth Sense or Hunt Mode, your buddy, your ultimate when it is ready.</td></tr></tbody></table></div>
+<p>The colour of the centre block is a warning light: it turns <b class="clr-r">red</b> when your health is low and <b class="clr-v">violet</b> when an Investigator's sanity is breaking.</p>
 <h3>HUD styles</h3>
 <p>Cycle them with <code>/hud</code> (or Client Settings): <b>Clean</b> (the default), <b>Full</b> (a bar for every stat and more lines) or <b>Off</b>.</p>
 <h3>Other things on screen</h3>
 <ul><li><b>Online players</b>: once a minute, for 5 seconds, the top of the screen lists who is online, how long each player has been playing, and who joined and left last. Hide it with <code>/online</code>.</li><li><b>Round recap</b>: after every round the MVP and the highlights appear on screen. <code>/recap</code> shows it again.</li><li><b>Chat tags</b>: your level and title show next to your name - <code>[LV 12 Veteran] NAME : message</code>.</li><li><b>Real health</b>: the original CS HUD stops at 255 - the mod always shows your true HP.</li></ul>
 </section>
-<section class="card reveal" id="sec-menu">
-<span class="kicker">// 21 INTERFACE</span>
+<section class="sec" id="sec-menu">
+<span class="kicker">21 INTERFACE</span>
 <h2>Menus and Settings</h2>
 
 <p>Press <b>M</b> (the Choose Team key) or say <code>/menu</code>. The menu <b>never opens by itself</b>. It closes after <b>20 seconds</b> (<code>ht_menu_time</code>), or at once when you press <b>0</b>, which also gives the number keys back to your weapons. Every choice plays a soft click.</p>
@@ -871,8 +579,8 @@ PREY: 1787 units  AHEAD-LEFT</div>
 <p>Seven flashlight and aura colours: Red, Green, White (from the start), Cyan and Blue (Lv 3), Purple (Lv 6), Orange (Lv 9).</p>
 
 </section>
-<section class="card reveal" id="sec-binds">
-<span class="kicker">// 22 INTERFACE</span>
+<section class="sec" id="sec-binds">
+<span class="kicker">22 INTERFACE</span>
 <h2>Key Binds</h2>
 
 <p>Open the console (the <code>~</code> key) and type a line to bind a key. Because <b>roles rotate every round</b>, the best binds are the <b>universal</b> ones - the same keys work whether you are a Ghost or an Investigator.</p>
@@ -908,8 +616,8 @@ bind v ht_overdrive<button class="copy" data-target="bind-t">copy</button></div>
 <p><b>Everyone:</b> <code>menu</code> <code>ht_ult</code> <code>ht_fav</code> <code>ht_q1</code>-<code>ht_q4</code> <code>ht_comm</code> <code>ht_status</code> <code>ht_sound</code> <code>ht_hud</code> <code>ht_talents</code> <code>ht_spec</code> <code>ht_retry</code></p>
 
 </section>
-<section class="card reveal" id="sec-cmds">
-<span class="kicker">// 23 INTERFACE</span>
+<section class="sec" id="sec-cmds">
+<span class="kicker">23 INTERFACE</span>
 <h2>All Commands</h2>
 
 <p>Type these in chat (with the slash) or in the console with <code>ht_</code> in front. Search or filter by side.</p>
@@ -923,12 +631,12 @@ bind v ht_overdrive<button class="copy" data-target="bind-t">copy</button></div>
 </div>
 <input class="search" type="search" placeholder="Search a command or what it does..." aria-label="Search commands" autocomplete="off">
 <span class="count"></span>
-<div class="tablewrap"><table><thead><tr><th>Command</th><th>For</th><th>What it does</th></tr></thead><tbody><tr data-side="everyone"><td><code>/menu</code></td><td><span class="tag all">Everyone</span></td><td>Open the menu (also: bind a key to &lt;b&gt;menu&lt;/b&gt;).</td></tr><tr data-side="everyone"><td><code>/howto</code></td><td><span class="tag all">Everyone</span></td><td>The in-game guide, 19 pages.</td></tr><tr data-side="everyone"><td><code>/rules</code> <code>/modrules</code></td><td><span class="tag all">Everyone</span></td><td>Server rules and mod rules.</td></tr><tr data-side="everyone"><td><code>/binds</code> <code>/autobind</code></td><td><span class="tag all">Everyone</span></td><td>Show every bindable command / set the recommended keys for you.</td></tr><tr data-side="everyone"><td><code>/options</code></td><td><span class="tag all">Everyone</span></td><td>Open Settings &amp;amp; Help.</td></tr><tr data-side="everyone"><td><code>/server</code></td><td><span class="tag all">Everyone</span></td><td>Server Settings: reconnect, spectate, rejoin.</td></tr><tr data-side="everyone"><td><code>/retry</code> <code>/reconnect</code></td><td><span class="tag all">Everyone</span></td><td>Rejoin the server (runs the console command retry / reconnect).</td></tr><tr data-side="everyone"><td><code>/spec</code></td><td><span class="tag all">Everyone</span></td><td>Go spectate (AFK). Say it again to rejoin a random team.</td></tr><tr data-side="everyone"><td><code>/status</code></td><td><span class="tag all">Everyone</span></td><td>Tonight's moon and darkness, and how the round stands.</td></tr><tr data-side="everyone"><td><code>/rank</code> <code>/stats</code> <code>/ach</code> <code>/top</code> <code>/recap</code></td><td><span class="tag all">Everyone</span></td><td>Your level, your numbers, achievements, top players online, last round recap.</td></tr><tr data-side="everyone"><td><code>/talents</code></td><td><span class="tag all">Everyone</span></td><td>Spend your talent points.</td></tr><tr data-side="everyone"><td><code>/ult</code></td><td><span class="tag all">Everyone</span></td><td>Unleash your ultimate when the meter is full.</td></tr><tr data-side="everyone"><td><code>/fav</code> <code>/setfav</code></td><td><span class="tag all">Everyone</span></td><td>Fire your favourite skill / power, and choose which one it is.</td></tr><tr data-side="everyone"><td><code>/q1 /q2 /q3 /q4</code></td><td><span class="tag all">Everyone</span></td><td>Four quick slots that adapt to your team (see Key Binds).</td></tr><tr data-side="everyone"><td><code>/comm</code></td><td><span class="tag all">Everyone</span></td><td>Quick Comms: send a call to your team.</td></tr><tr data-side="everyone"><td><code>/candles</code></td><td><span class="tag all">Everyone</span></td><td>How many candles are lit.</td></tr><tr data-side="everyone"><td><code>/hud</code> <code>/sound</code> <code>/uisound</code> <code>/online</code> <code>/automenu</code></td><td><span class="tag all">Everyone</span></td><td>Cycle the HUD style / sound volume / menu sounds / online list / auto-open menu.</td></tr><tr data-side="ct"><td><code>/skills</code></td><td><span class="tag ct">Investigator</span></td><td>Open the stamina skills menu.</td></tr><tr data-side="ct"><td><code>/hp</code></td><td><span class="tag ct">Investigator</span></td><td>Heal (+200 HP) for stamina.</td></tr><tr data-side="ct"><td><code>/scan</code> <code>/mark</code> <code>/exorcism</code> <code>/sense</code></td><td><span class="tag ct">Investigator</span></td><td>Spirit Scan, Mark Ghost, Exorcism Round, Sixth Sense.</td></tr><tr data-side="ct"><td><code>/ward</code> <code>/angel</code> <code>/breakdoor</code></td><td><span class="tag ct">Investigator</span></td><td>Ward, Guardian Angel, Break Door.</td></tr><tr data-side="ct"><td><code>/blessing</code> <code>/rally</code> <code>/courage</code> <code>/sanctuary</code></td><td><span class="tag ct">Investigator</span></td><td>Holy Blessing, Rally Cry, Courage, Salt Sanctuary.</td></tr><tr data-side="ct"><td><code>/skyflare</code> <code>(/lightmap)</code></td><td><span class="tag ct">Investigator</span></td><td>Light the Sky.</td></tr><tr data-side="ct"><td><code>/adrenaline</code> <code>/surge</code> <code>/focus</code></td><td><span class="tag ct">Investigator</span></td><td>Adrenaline, Flashlight Surge, Candle Focus.</td></tr><tr data-side="ct"><td><code>/trap</code> <code>/flare</code></td><td><span class="tag ct">Investigator</span></td><td>Place a salt trap / light a flare.</td></tr><tr data-side="ct"><td><code>/give [amount]</code></td><td><span class="tag ct">Investigator</span></td><td>Send some of your stamina to your buddy or a close teammate.</td></tr><tr data-side="ct"><td><code>/pray</code></td><td><span class="tag ct">Investigator</span></td><td>Free: +10 sanity for you and +5 for allies within 400 units (30 s cooldown).</td></tr><tr data-side="ct"><td><code>/buddy</code> <code>/perks</code> <code>/role</code> <code>/color</code></td><td><span class="tag ct">Investigator</span></td><td>Who your buddy is; choose perk, role and flashlight colour.</td></tr><tr data-side="ct"><td><code>/nv</code> <code>(the N key)</code></td><td><span class="tag ct">Investigator</span></td><td>Ghost Vision goggles (level 20): switch on or off. Costs stamina, shows ghosts, overheats.</td></tr><tr data-side="dead"><td><code>/ping</code></td><td><span class="tag dead">Fallen</span></td><td>While dead and spectating a teammate: sense a ghost near them.</td></tr><tr data-side="dead"><td><code>/spirit</code> <code>/vote</code></td><td><span class="tag dead">Fallen</span></td><td>Spirit Whispers menu / vote on the next night's modifier.</td></tr><tr data-side="t"><td><code>/ab</code></td><td><span class="tag t">Ghost</span></td><td>Open the abilities menu.</td></tr><tr data-side="t"><td><code>/blackout</code> <code>/scare</code> <code>/fear</code></td><td><span class="tag t">Ghost</span></td><td>Blackout, Scare, Fear Aura.</td></tr><tr data-side="t"><td><code>/whisper</code> <code>/decoy</code> <code>/mimic</code> <code>/blink</code></td><td><span class="tag t">Ghost</span></td><td>Whisper Decoy, Phantom Steps, Mimic, Blink.</td></tr><tr data-side="t"><td><code>/powers</code></td><td><span class="tag t">Ghost</span></td><td>Open the energy powers menu.</td></tr><tr data-side="t"><td><code>/feed</code> <code>/overdrive</code> <code>/veil</code> <code>/hunt</code> <code>/rift</code></td><td><span class="tag t">Ghost</span></td><td>Feed, Overdrive, Shadow Veil, Hunt Mode, Rift.</td></tr><tr data-side="t"><td><code>/snare</code> <code>/chill</code> <code>/fogbomb</code> <code>/hauntdoor</code></td><td><span class="tag t">Ghost</span></td><td>Spirit Snare, Chill Zone, Fog Bomb, Haunt Door.</td></tr><tr data-side="t"><td><code>/siphon</code> <code>/lightdrain</code> <code>/nightmare</code> <code>/echo</code></td><td><span class="tag t">Ghost</span></td><td>Soul Siphon, Light Drain, Nightmare Decoy, Echo.</td></tr><tr data-side="t"><td><code>/grave</code> <code>/link</code></td><td><span class="tag t">Ghost</span></td><td>Grave Call, Ghost Link.</td></tr><tr data-side="t"><td><code>/laugh</code></td><td><span class="tag t">Ghost</span></td><td>A creepy laugh: every Investigator within 1500 units hears it and loses 3 sanity (25 s cooldown).</td></tr></tbody></table></div>
+<div class="tablewrap"><table><thead><tr><th>Command</th><th>For</th><th>What it does</th></tr></thead><tbody><tr data-side="everyone"><td><code>/menu</code></td><td><span class="tag all">Everyone</span></td><td>Open the menu (also: bind a key to <code>menu</code>).</td></tr><tr data-side="everyone"><td><code>/howto</code></td><td><span class="tag all">Everyone</span></td><td>The in-game guide, 19 pages.</td></tr><tr data-side="everyone"><td><code>/rules</code> <code>/modrules</code></td><td><span class="tag all">Everyone</span></td><td>Server rules and mod rules.</td></tr><tr data-side="everyone"><td><code>/binds</code> <code>/autobind</code></td><td><span class="tag all">Everyone</span></td><td>Show every bindable command / set the recommended keys for you.</td></tr><tr data-side="everyone"><td><code>/options</code></td><td><span class="tag all">Everyone</span></td><td>Open Settings &amp;amp; Help.</td></tr><tr data-side="everyone"><td><code>/server</code></td><td><span class="tag all">Everyone</span></td><td>Server Settings: reconnect, spectate, rejoin.</td></tr><tr data-side="everyone"><td><code>/retry</code> <code>/reconnect</code></td><td><span class="tag all">Everyone</span></td><td>Rejoin the server (runs the console command retry / reconnect).</td></tr><tr data-side="everyone"><td><code>/spec</code></td><td><span class="tag all">Everyone</span></td><td>Go spectate (AFK). Say it again to rejoin a random team.</td></tr><tr data-side="everyone"><td><code>/status</code></td><td><span class="tag all">Everyone</span></td><td>Tonight's moon and darkness, and how the round stands.</td></tr><tr data-side="everyone"><td><code>/rank</code> <code>/stats</code> <code>/ach</code> <code>/top</code> <code>/recap</code></td><td><span class="tag all">Everyone</span></td><td>Your level, your numbers, achievements, top players online, last round recap.</td></tr><tr data-side="everyone"><td><code>/talents</code></td><td><span class="tag all">Everyone</span></td><td>Spend your talent points.</td></tr><tr data-side="everyone"><td><code>/ult</code></td><td><span class="tag all">Everyone</span></td><td>Unleash your ultimate when the meter is full.</td></tr><tr data-side="everyone"><td><code>/fav</code> <code>/setfav</code></td><td><span class="tag all">Everyone</span></td><td>Fire your favourite skill / power, and choose which one it is.</td></tr><tr data-side="everyone"><td><code>/q1 /q2 /q3 /q4</code></td><td><span class="tag all">Everyone</span></td><td>Four quick slots that adapt to your team (see Key Binds).</td></tr><tr data-side="everyone"><td><code>/comm</code></td><td><span class="tag all">Everyone</span></td><td>Quick Comms: send a call to your team.</td></tr><tr data-side="everyone"><td><code>/candles</code></td><td><span class="tag all">Everyone</span></td><td>How many candles are lit.</td></tr><tr data-side="everyone"><td><code>/hud</code> <code>/sound</code> <code>/uisound</code> <code>/online</code> <code>/automenu</code></td><td><span class="tag all">Everyone</span></td><td>Cycle the HUD style / sound volume / menu sounds / online list / auto-open menu.</td></tr><tr data-side="ct"><td><code>/skills</code></td><td><span class="tag ct">Investigator</span></td><td>Open the stamina skills menu.</td></tr><tr data-side="ct"><td><code>/hp</code></td><td><span class="tag ct">Investigator</span></td><td>Heal (+200 HP) for stamina.</td></tr><tr data-side="ct"><td><code>/scan</code> <code>/mark</code> <code>/exorcism</code> <code>/sense</code></td><td><span class="tag ct">Investigator</span></td><td>Spirit Scan, Mark Ghost, Exorcism Round, Sixth Sense.</td></tr><tr data-side="ct"><td><code>/ward</code> <code>/angel</code> <code>/breakdoor</code></td><td><span class="tag ct">Investigator</span></td><td>Ward, Guardian Angel, Break Door.</td></tr><tr data-side="ct"><td><code>/blessing</code> <code>/rally</code> <code>/courage</code> <code>/sanctuary</code></td><td><span class="tag ct">Investigator</span></td><td>Holy Blessing, Rally Cry, Courage, Salt Sanctuary.</td></tr><tr data-side="ct"><td><code>/skyflare</code> <code>(/lightmap)</code></td><td><span class="tag ct">Investigator</span></td><td>Light the Sky.</td></tr><tr data-side="ct"><td><code>/adrenaline</code> <code>/surge</code> <code>/focus</code></td><td><span class="tag ct">Investigator</span></td><td>Adrenaline, Flashlight Surge, Candle Focus.</td></tr><tr data-side="ct"><td><code>/trap</code> <code>/flare</code></td><td><span class="tag ct">Investigator</span></td><td>Place a salt trap / light a flare.</td></tr><tr data-side="ct"><td><code>/give [amount]</code></td><td><span class="tag ct">Investigator</span></td><td>Send some of your stamina to your buddy or a close teammate.</td></tr><tr data-side="ct"><td><code>/pray</code></td><td><span class="tag ct">Investigator</span></td><td>Free: +10 sanity for you and +5 for allies within 400 units (30 s cooldown).</td></tr><tr data-side="ct"><td><code>/buddy</code> <code>/perks</code> <code>/role</code> <code>/color</code></td><td><span class="tag ct">Investigator</span></td><td>Who your buddy is; choose perk, role and flashlight colour.</td></tr><tr data-side="ct"><td><code>/nv</code> <code>(the N key)</code></td><td><span class="tag ct">Investigator</span></td><td>Ghost Vision goggles (level 20): switch on or off. Costs stamina, shows ghosts, overheats.</td></tr><tr data-side="dead"><td><code>/ping</code></td><td><span class="tag dead">Fallen</span></td><td>While dead and spectating a teammate: sense a ghost near them.</td></tr><tr data-side="dead"><td><code>/spirit</code> <code>/vote</code></td><td><span class="tag dead">Fallen</span></td><td>Spirit Whispers menu / vote on the next night's modifier.</td></tr><tr data-side="t"><td><code>/ab</code></td><td><span class="tag t">Ghost</span></td><td>Open the abilities menu.</td></tr><tr data-side="t"><td><code>/blackout</code> <code>/scare</code> <code>/fear</code></td><td><span class="tag t">Ghost</span></td><td>Blackout, Scare, Fear Aura.</td></tr><tr data-side="t"><td><code>/whisper</code> <code>/decoy</code> <code>/mimic</code> <code>/blink</code></td><td><span class="tag t">Ghost</span></td><td>Whisper Decoy, Phantom Steps, Mimic, Blink.</td></tr><tr data-side="t"><td><code>/powers</code></td><td><span class="tag t">Ghost</span></td><td>Open the energy powers menu.</td></tr><tr data-side="t"><td><code>/feed</code> <code>/overdrive</code> <code>/veil</code> <code>/hunt</code> <code>/rift</code></td><td><span class="tag t">Ghost</span></td><td>Feed, Overdrive, Shadow Veil, Hunt Mode, Rift.</td></tr><tr data-side="t"><td><code>/snare</code> <code>/chill</code> <code>/fogbomb</code> <code>/hauntdoor</code></td><td><span class="tag t">Ghost</span></td><td>Spirit Snare, Chill Zone, Fog Bomb, Haunt Door.</td></tr><tr data-side="t"><td><code>/siphon</code> <code>/lightdrain</code> <code>/nightmare</code> <code>/echo</code></td><td><span class="tag t">Ghost</span></td><td>Soul Siphon, Light Drain, Nightmare Decoy, Echo.</td></tr><tr data-side="t"><td><code>/grave</code> <code>/link</code></td><td><span class="tag t">Ghost</span></td><td>Grave Call, Ghost Link.</td></tr><tr data-side="t"><td><code>/laugh</code></td><td><span class="tag t">Ghost</span></td><td>A creepy laugh: every Investigator within 1500 units hears it and loses 3 sanity (25 s cooldown).</td></tr></tbody></table></div>
 </div>
 
 </section>
-<section class="card reveal" id="sec-rules">
-<span class="kicker">// 24 COMMUNITY</span>
+<section class="sec" id="sec-rules">
+<span class="kicker">24 COMMUNITY</span>
 <h2>Rules</h2>
 
 <p>Play fair and everyone has a better night. In game: <code>/rules</code> and <code>/modrules</code>.</p>
@@ -959,14 +667,14 @@ bind v ht_overdrive<button class="copy" data-target="bind-t">copy</button></div>
 </div>
 
 </section>
-<section class="card reveal" id="sec-faq">
-<span class="kicker">// 25 COMMUNITY</span>
+<section class="sec" id="sec-faq">
+<span class="kicker">25 COMMUNITY</span>
 <h2>FAQ</h2>
 <button class="pill" id="toggleAll" type="button">Expand all</button>
 <details class="acc"><summary>Do I have to download anything?</summary><div class="body"><p>No. Everything runs on the server - there are no custom models, sounds or maps to install.</p></div></details><details class="acc"><summary>Why can't I buy a rifle or an AWP?</summary><div class="body"><p>Every weapon has a level in the shop (B): rifles from 14, snipers from 20, the M249 at 30. Pistols, cheap SMGs and the HE grenade are open from level 1.</p></div></details><details class="acc"><summary>How do I buy ammo?</summary><div class="body"><p>Open the shop (B) and use the Ammo lines: the weapon in your hands costs 40 stamina, all weapons 90. Guns also come with 100+ spare rounds.</p></div></details><details class="acc"><summary>Where did the radio go?</summary><div class="body"><p>The server removes radio commands, voices ("Fire in the hole!") and radio texts. Use Quick Comms (/comm) instead.</p></div></details><details class="acc"><summary>Why did I turn into a Ghost?</summary><div class="body"><p>Either the round's automatic rotation picked you, or a Ghost killed you and you were not saved by the Last Rites in time (about 8 seconds).</p></div></details><details class="acc"><summary>How do I save someone from becoming a Ghost?</summary><div class="body"><p>Walk up to their body and stay next to it for about 3 seconds. The HUD shows the progress. They come back with half health.</p></div></details><details class="acc"><summary>How do I open the menu?</summary><div class="body"><p>Press M (Choose Team) or say /menu. You can also bind a key with <code>bind x menu</code> (or say /autobind).</p></div></details><details class="acc"><summary>The menu blocks my weapon keys!</summary><div class="body"><p>Press 0 to close it. It also closes by itself after 20 seconds.</p></div></details><details class="acc"><summary>How do I climb walls as the Nightcrawler?</summary><div class="body"><p>Pick the Nightcrawler class (level 12). Stand at a wall and HOLD E: you stick to it and crawl where you look. Press jump to leap off. Climbing drains energy.</p></div></details><details class="acc"><summary>How does the Grappler hook work?</summary><div class="body"><p>Unlock the Grappler role (level 24). Aim at something far away and press E: a rope pulls you to that point for up to 5 seconds. It costs 60 stamina plus 20 per second and has a 15 second cooldown. Release E to let go.</p></div></details><details class="acc"><summary>What does the red laser mean?</summary><div class="body"><p>A Ghost is exactly in your line of fire - shoot. A green laser means nothing is there. (A Ghost using Mimic still turns the laser red.)</p></div></details><details class="acc"><summary>What is the TASK line under my XP bar?</summary><div class="body"><p>A small goal for this round (for example banish a ghost or use three skills). Finish it for +50 XP, ultimate charge and a small refill. You get a new one every round.</p></div></details><details class="acc"><summary>What is Most Wanted?</summary><div class="body"><p>A Ghost that claims five humans in a row. It is exposed to every Investigator for 3 seconds every 20 seconds, and banishing it pays a 100 XP bounty.</p></div></details><details class="acc"><summary>How do I get night vision?</summary><div class="body"><p>At level 20 you unlock Ghost Vision goggles. Say /nv or press N. They show Ghosts as a green glow, cost 300 stamina, and overheat after about 12 seconds (then lock for 45 seconds).</p></div></details><details class="acc"><summary>Why am I losing health?</summary><div class="body"><p>Your sanity is below 30%. Low sanity drains health every second. Stand next to your teammates, switch your flashlight on, use Courage or /pray, or stand in a Salt Sanctuary.</p></div></details><details class="acc"><summary>The screen is too dark.</summary><div class="body"><p>That's the point - but flares, your flashlight, Flashlight Surge and Light the Sky help. Moon phases change the darkness each round, and the sky brightens before dawn.</p></div></details><details class="acc"><summary>The HUD is too busy / the sounds are too loud.</summary><div class="body"><p>Use /hud to switch between Clean, Full and Off, and /sound to set the sound volume (or turn the beeps off).</p></div></details><details class="acc"><summary>Is my progress saved?</summary><div class="body"><p>Yes - level, XP, class, colours, talents and settings are saved automatically by your Steam ID (or your name on LAN).</p></div></details><details class="acc"><summary>What does that bar next to my HP mean?</summary><div class="body"><p>The mod draws a bar for each stat. It is full when the stat is full. Your real HP is shown even above 255, which the normal CS HUD cannot do.</p></div></details><details class="acc"><summary>How do I go AFK or rejoin?</summary><div class="body"><p>Say /spec to go spectate. Say /spec again to come back on a random team. /retry or /reconnect rejoins the server.</p></div></details><details class="acc"><summary>Can Ghosts see each other?</summary><div class="body"><p>Yes - other Ghosts show up as a coloured aura, and Ghosts share a private flashlight colour that Investigators never see.</p></div></details><details class="acc"><summary>What happens at dawn?</summary><div class="body"><p>When the countdown ends the ghosts are banished and the Investigators win the round.</p></div></details><details class="acc"><summary>Where do I find the full guide in game?</summary><div class="body"><p>Say /howto for a 19-page guide, /binds for the key bind list and /rules for the rules.</p></div></details>
 </section>
-<section class="card reveal" id="sec-tips">
-<span class="kicker">// 26 COMMUNITY</span>
+<section class="sec" id="sec-tips">
+<span class="kicker">26 COMMUNITY</span>
 <h2>Tips and Strategy</h2>
 
 <div class="grid2">
@@ -974,8 +682,8 @@ bind v ht_overdrive<button class="copy" data-target="bind-t">copy</button></div>
 </div>
 
 </section>
-<section class="card reveal" id="sec-owners">
-<span class="kicker">// 27 FOR SERVER OWNERS</span>
+<section class="sec" id="sec-owners">
+<span class="kicker">27 FOR SERVER OWNERS</span>
 <h2>Installation and Settings</h2>
 
 <p>This section is for people who run a server. Players can skip it.</p>
@@ -1013,207 +721,197 @@ ht_darkness 55            <span class="c">// how dark the nights are (%)</span><
 </div>
 
 </section>
-<section class="card reveal" id="sec-glossary">
-<span class="kicker">// 28 A TO Z</span>
+<section class="sec" id="sec-glossary">
+<span class="kicker">28 A TO Z</span>
 <h2>Glossary</h2>
 <p>The whole mod in 26 letters.</p><div class="azbar"><a href="#gl-A">A</a><a href="#gl-B">B</a><a href="#gl-C">C</a><a href="#gl-D">D</a><a href="#gl-E">E</a><a href="#gl-F">F</a><a href="#gl-G">G</a><a href="#gl-H">H</a><a href="#gl-I">I</a><span>J</span><span>K</span><a href="#gl-L">L</a><a href="#gl-M">M</a><a href="#gl-N">N</a><a href="#gl-O">O</a><a href="#gl-P">P</a><a href="#gl-Q">Q</a><a href="#gl-R">R</a><a href="#gl-S">S</a><a href="#gl-T">T</a><a href="#gl-U">U</a><a href="#gl-V">V</a><a href="#gl-W">W</a><a href="#gl-X">X</a><span>Y</span><span>Z</span></div><div class="gl" id="gl-A"><div class="L">A</div><dl><dt>Anchor</dt><dd>A purple pillar objective. Hold your ground next to it to shatter it and win.</dd><dt>Aura</dt><dd>The coloured glow other Ghosts see on you.</dd></dl></div><div class="gl" id="gl-B"><div class="L">B</div><dl><dt>Blackout</dt><dd>Ghost ability: flashlights die and the map goes dark.</dd><dt>Bounty</dt><dd>100 XP for banishing the Most Wanted ghost.</dd><dt>Buddy</dt><dd>Your partner as an Investigator. Stay close for bonuses.</dd></dl></div><div class="gl" id="gl-C"><div class="L">C</div><dl><dt>Candles</dt><dd>Three candles - light them all at once to win.</dd><dt>Climb</dt><dd>Nightcrawler ability: hold E at a wall to crawl up it.</dd><dt>Comms</dt><dd>Quick calls to your team, with a beam and a HUD line.</dd></dl></div><div class="gl" id="gl-D"><div class="L">D</div><dl><dt>Dawn</dt><dd>The countdown that ends the night. Reach it and the Investigators win.</dd><dt>Decoy</dt><dd>A fake: Whisper Decoy (sound) and Nightmare Decoy (a fake ghost).</dd><dt>Demolisher</dt><dd>Investigator role: bigger holy grenades.</dd></dl></div><div class="gl" id="gl-E"><div class="L">E</div><dl><dt>EMF</dt><dd>The detector that tells Investigators how close a Ghost is.</dd><dt>Energy</dt><dd>A Ghost's fuel for abilities and powers.</dd><dt>Evolution</dt><dd>Ghosts get stronger with every kill, up to 3 levels.</dd></dl></div><div class="gl" id="gl-F"><div class="L">F</div><dl><dt>Flare</dt><dd>An Investigator tool that lights the dark for 25 seconds.</dd><dt>Fog Bomb</dt><dd>Ghost power that thickens the fog around Investigators.</dd></dl></div><div class="gl" id="gl-G"><div class="L">G</div><dl><dt>Grappler</dt><dd>Investigator role with a grappling hook on E.</dd><dt>Grave Call</dt><dd>Ghost power that revives a fallen Ghost.</dd><dt>Guardian Angel</dt><dd>Investigator skill: survive one fatal hit on 1 HP.</dd></dl></div><div class="gl" id="gl-H"><div class="L">H</div><dl><dt>HHS</dt><dd>Hidden Haunted Seek - this mod.</dd><dt>Haunt Door</dt><dd>Ghost power that seals a door.</dd><dt>Holy Grenade</dt><dd>Your HE grenade that also exposes Ghosts.</dd><dt>Hook</dt><dd>The Grappler's rope: pulls you to what you aim at for up to 5 seconds.</dd></dl></div><div class="gl" id="gl-I"><div class="L">I</div><dl><dt>Infection</dt><dd>A human killed by a Ghost rises as a Ghost after about 8 seconds.</dd><dt>Investigator</dt><dd>The armed, human side.</dd></dl></div><div class="gl" id="gl-L"><div class="L">L</div><dl><dt>Laser</dt><dd>Green = clear, red = a Ghost is in your sights.</dd><dt>Last Rites</dt><dd>Stay next to a body for 3 seconds to revive it and stop the infection.</dd><dt>Last Stand</dt><dd>The big moment of the final Investigator: healed, charged and every ghost exposed.</dd></dl></div><div class="gl" id="gl-M"><div class="L">M</div><dl><dt>Medium</dt><dd>Investigator role with Second Sight.</dd><dt>Mimic</dt><dd>Ghost ability: look like an Investigator for a few seconds.</dd><dt>Moon</dt><dd>Each night has a moon phase that changes the darkness and some stats.</dd><dt>Most Wanted</dt><dd>A ghost on a 5-human streak: exposed regularly, worth a bounty.</dd></dl></div><div class="gl" id="gl-N"><div class="L">N</div><dl><dt>Night Falls</dt><dd>The Ghost ultimate: 12 s of total darkness, jammed goggles, stronger ghosts.</dd><dt>Nightcrawler</dt><dd>Ghost class that climbs walls.</dd></dl></div><div class="gl" id="gl-O"><div class="L">O</div><dl><dt>Orb</dt><dd>A glowing boon left by a fallen Investigator.</dd><dt>Overdrive</dt><dd>Ghost power: faster, with cooldowns racing.</dd></dl></div><div class="gl" id="gl-P"><div class="L">P</div><dl><dt>Perk</dt><dd>A permanent Investigator bonus you unlock with levels.</dd><dt>Pitch dark</dt><dd>The map is always light style a: no light but your own.</dd><dt>Poltergeist</dt><dd>A random haunting event: failing lights, cold dread, whispers or a ghost surge.</dd><dt>Prey</dt><dd>The nearest human, shown on a Ghost's HUD.</dd></dl></div><div class="gl" id="gl-Q"><div class="L">Q</div><dl><dt>Quick slots</dt><dd>ht_q1 to ht_q4 - four binds that adapt to your side.</dd></dl></div><div class="gl" id="gl-R"><div class="L">R</div><dl><dt>Revenge</dt><dd>A fallen Investigator exposes their killer for 6 seconds, once per death.</dd><dt>Rift</dt><dd>Ghost power: teleport to a Ghost ally.</dd><dt>Role</dt><dd>An Investigator speciality: Medic, Tech, Priest or Hunter.</dd><dt>Rotation</dt><dd>Ghosts change every round automatically.</dd></dl></div><div class="gl" id="gl-S"><div class="L">S</div><dl><dt>Sanity</dt><dd>An Investigator's nerves. They drop alone and in the dark.</dd><dt>Scout</dt><dd>Investigator role: fast, quick stamina.</dd><dt>Second Sight</dt><dd>The Medium's pulse that shows ghosts as a green glow.</dd><dt>Shimmer</dt><dd>A Ghost flickers into view for a moment when it attacks.</dd><dt>Shop</dt><dd>The weapons menu on B: every gun with its level.</dd><dt>Spirit Whispers</dt><dd>Messages fallen players send to the living.</dd><dt>Stamina</dt><dd>An Investigator's fuel for skills.</dd></dl></div><div class="gl" id="gl-T"><div class="L">T</div><dl><dt>Talent</dt><dd>A permanent upgrade bought with a talent point.</dd><dt>Task</dt><dd>The small goal you get every round for bonus XP.</dd><dt>Thunder</dt><dd>Lightning that strikes 1 or 3 Investigators at dawn.</dd><dt>Tier</dt><dd>Roles and perks get 25% stronger every 10 levels after unlocking.</dd><dt>Trapper</dt><dd>Investigator role with extra salt.</dd><dt>Trick or Treat</dt><dd>A random event once per round.</dd></dl></div><div class="gl" id="gl-U"><div class="L">U</div><dl><dt>Ultimate</dt><dd>Dawn Break (Investigators) or Night Falls (Ghosts) when the meter is full.</dd></dl></div><div class="gl" id="gl-V"><div class="L">V</div><dl><dt>Veil</dt><dd>Ghost power (Shadow Veil): undetectable for a few seconds.</dd></dl></div><div class="gl" id="gl-W"><div class="L">W</div><dl><dt>Ward</dt><dd>A rune that exposes a Ghost and blocks its teleport.</dd><dt>Wave</dt><dd>A respawn wave that brings fallen players back.</dd></dl></div><div class="gl" id="gl-X"><div class="L">X</div><dl><dt>XP</dt><dd>Experience points - they give you levels.</dd></dl></div>
 </section>
 
-  </main>
-
-  <button class="totop" id="toTop" aria-label="Back to top">&#8593;</button>
-
-  <footer class="bottombar">
-    <div class="primary static">RELEASE DATE : No ETA</div>
-  </footer>
-
-  <div class="a2hs" id="a2hs">
-    <div class="a2hs-icon">&#128241;</div>
-    <div class="a2hs-text"><strong>Add to Home Screen</strong><br>Tap Share &#11014; then "Add to Home Screen" for the full app experience</div>
-    <button id="a2hsClose" class="btn-dismiss">Dismiss</button>
-  </div>
-
-  <div class="no-context" id="noContext">
-    <div class="no-context-msg">
-      <h3>ACCESS BLOCKED</h3>
-      <p>Right-click and keyboard shortcuts are disabled for content protection.</p>
+  
+      <div class="foot"><span>Hidden Haunted Seek &middot; CS 1.6 mod guide</span><span>Release date: No ETA</span><a href="#top">Back to top &uarr;</a></div>
     </div>
-  </div>
+  </main>
+</div>
 
+<button class="totop" id="toTop" type="button" aria-label="Back to top">&uarr;</button>
 <script>
-// ===== Drawer Navigation =====
-const drawer = document.getElementById('drawer');
-const backdrop = document.getElementById('backdrop');
-const menuBtn = document.getElementById('menuBtn');
-
-function openDrawer() {
-  drawer.classList.add('open');
-  backdrop.classList.add('show');
-  document.body.style.overflow = 'hidden';
-}
-function closeDrawer() {
-  drawer.classList.remove('open');
-  backdrop.classList.remove('show');
-  document.body.style.overflow = '';
-}
-menuBtn.addEventListener('click', openDrawer);
-backdrop.addEventListener('click', closeDrawer);
-window.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
-
-// ===== Content protection flavor (non-blocking) =====
-const noContextEl = document.getElementById('noContext');
-let contextTimeout;
-function showContextBlock() {
-  noContextEl.classList.add('show');
-  clearTimeout(contextTimeout);
-  contextTimeout = setTimeout(() => noContextEl.classList.remove('show'), 1800);
-}
-document.addEventListener('contextmenu', e => { e.preventDefault(); showContextBlock(); });
-document.addEventListener('keydown', e => {
-  const blocked = (e.key === 'F12') ||
-    ((e.ctrlKey || e.metaKey) && ['s','p','u'].includes(e.key.toLowerCase())) ||
-    ((e.ctrlKey || e.metaKey) && e.shiftKey && ['I','J','C'].includes(e.key.toUpperCase()));
-  if (blocked) { e.preventDefault(); showContextBlock(); }
-});
-
-// ===== Add to Home Screen (iOS) =====
-(function() {
-  const isiOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
-  const isStandalone = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
-  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-  const tip = document.getElementById('a2hs');
-  const closeBtn = document.getElementById('a2hsClose');
-  const dismissed = localStorage.getItem('a2hs-dismissed');
-
-  if (isiOS && isSafari && !isStandalone && !dismissed) {
-    setTimeout(() => tip.classList.add('show'), 2000);
-  }
-  closeBtn.addEventListener('click', () => {
-    tip.classList.remove('show');
-    localStorage.setItem('a2hs-dismissed', 'true');
-  });
-})();
-
-// ===== Haptics =====
-function haptic() { if (window.navigator && window.navigator.vibrate) window.navigator.vibrate(10); }
-menuBtn.addEventListener('click', haptic);
-
-// ===== Reference-page features =====
 (function () {
-  const doc = document.documentElement;
-  const bar = document.getElementById('bar');
-  const totop = document.getElementById('toTop');
+  var root = document.documentElement;
+  var store = {
+    get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  };
 
-  // scroll progress + back-to-top
+  /* theme */
+  function isDark() {
+    var t = root.getAttribute('data-theme');
+    return t ? t === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  document.getElementById('themeBtn').addEventListener('click', function () {
+    var next = isDark() ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    store.set('hhs-theme', next);
+  });
+
+  /* mobile contents drawer */
+  var drawer = document.getElementById('drawer');
+  var backdrop = document.getElementById('backdrop');
+  var menuBtn = document.getElementById('menuBtn');
+  function openDrawer() {
+    drawer.classList.add('open'); backdrop.classList.add('show');
+    menuBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDrawer() {
+    if (!drawer.classList.contains('open')) return;
+    drawer.classList.remove('open'); backdrop.classList.remove('show');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  menuBtn.addEventListener('click', function () { drawer.classList.contains('open') ? closeDrawer() : openDrawer(); });
+  backdrop.addEventListener('click', closeDrawer);
+  window.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeDrawer(); });
+  window.matchMedia('(min-width: 1012px)').addEventListener('change', closeDrawer);
+
+  /* scroll progress + back to top */
+  var bar = document.getElementById('bar');
+  var totop = document.getElementById('toTop');
   function onScroll() {
-    const se = document.scrollingElement || doc;
-    const max = se.scrollHeight - se.clientHeight;
+    var se = document.scrollingElement || root;
+    var max = se.scrollHeight - se.clientHeight;
     bar.style.width = (max > 0 ? (se.scrollTop / max) * 100 : 0) + '%';
     totop.classList.toggle('show', se.scrollTop > 700);
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
-  totop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-  totop.addEventListener('click', haptic);
+  totop.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
 
-  // table of contents: close the drawer on click + highlight the section being read
-  const links = Array.from(document.querySelectorAll('.drawer .nav-link[href^="#"]'));
-  const byId = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
-  links.forEach(a => a.addEventListener('click', () => { closeDrawer(); haptic(); }));
+  /* heading anchors (h2 and h3) */
+  var used = {};
+  function slug(t) {
+    var b = t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'section';
+    var n = b, i = 2;
+    while (used[n] || document.getElementById(n)) n = b + '-' + (i++);
+    used[n] = 1; return n;
+  }
+  document.querySelectorAll('.sec > h2, .sec > h3').forEach(function (h) {
+    if (!h.id) {
+      var host = h.tagName === 'H2' ? h.parentElement : null;
+      h.id = host && host.id ? host.id + '-title' : slug(h.textContent);
+    }
+    var a = document.createElement('a');
+    a.className = 'anchor'; a.href = '#' + h.id; a.setAttribute('aria-label', 'Link to this section'); a.textContent = '#';
+    h.insertBefore(a, h.firstChild);
+  });
+
+  /* table of contents: close drawer on click + highlight the section being read */
+  var links = Array.prototype.slice.call(document.querySelectorAll('.sidebar .nav-link[href^="#"]'));
+  var byId = {};
+  links.forEach(function (a) {
+    byId[a.getAttribute('href').slice(1)] = a;
+    a.addEventListener('click', closeDrawer);
+  });
   if ('IntersectionObserver' in window) {
-    const spy = new IntersectionObserver(entries => {
-      entries.forEach(en => {
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
         if (!en.isIntersecting) return;
-        links.forEach(l => l.classList.remove('active'));
-        const a = byId.get(en.target.id);
-        if (a) a.classList.add('active');
+        var a = byId[en.target.id];
+        if (!a) return;
+        links.forEach(function (l) { l.classList.remove('active'); });
+        a.classList.add('active');
+        if (window.matchMedia('(min-width: 1012px)').matches) {
+          var sb = drawer, r = a.getBoundingClientRect(), sr = sb.getBoundingClientRect();
+          if (r.top < sr.top || r.bottom > sr.bottom) a.scrollIntoView({ block: 'center' });
+        }
       });
-    }, { rootMargin: '-30% 0px -65% 0px' });
-    document.querySelectorAll('section[id]').forEach(s => spy.observe(s));
-
-    // fade sections in as they appear
-    const rev = new IntersectionObserver(entries => {
-      entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); rev.unobserve(en.target); } });
-    }, { threshold: 0.04 });
-    document.querySelectorAll('.reveal').forEach(el => rev.observe(el));
-  } else {
-    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    document.querySelectorAll('section[id]').forEach(function (s) { spy.observe(s); });
   }
 
-  // copy buttons (key binds, console lines)
-  async function copyText(text) {
-    try { await navigator.clipboard.writeText(text); return true; }
-    catch (e) {
-      const t = document.createElement('textarea');
+  /* copy buttons */
+  function copyText(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(text).then(function () { return true; }, function () { return false; });
+    }
+    return new Promise(function (resolve) {
+      var t = document.createElement('textarea');
       t.value = text; t.style.position = 'fixed'; t.style.opacity = '0';
       document.body.appendChild(t); t.select();
-      let ok = false;
-      try { ok = document.execCommand('copy'); } catch (e2) {}
-      document.body.removeChild(t);
-      return ok;
-    }
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(t); resolve(ok);
+    });
   }
-  document.querySelectorAll('.copy').forEach(btn => {
-    btn.addEventListener('click', async () => {
-      const target = document.getElementById(btn.dataset.target);
+  document.querySelectorAll('.copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var target = document.getElementById(btn.dataset.target);
       if (!target) return;
-      // read the lines without the button's own label, and drop the // comments
-      const clone = target.cloneNode(true);
-      clone.querySelectorAll('.copy').forEach(b => b.remove());
-      const text = clone.textContent.replace(/\u00a0/g, ' ').split('\n')
-        .map(l => l.replace(/\s+\/\/.*$/, '').trim()).filter(Boolean).join('\n');
-      const ok = await copyText(text);
-      const old = btn.textContent;
-      btn.textContent = ok ? 'copied' : 'press Ctrl+C';
-      btn.classList.add('done');
-      haptic();
-      setTimeout(() => { btn.textContent = old; btn.classList.remove('done'); }, 1400);
+      var clone = target.cloneNode(true);
+      clone.querySelectorAll('.copy').forEach(function (b) { b.remove(); });
+      var text = clone.textContent.replace(/\u00a0/g, ' ').split('\n')
+        .map(function (l) { return l.replace(/\s+\/\/.*$/, '').trim(); })
+        .filter(Boolean).join('\n');
+      copyText(text).then(function (ok) {
+        var old = btn.textContent;
+        btn.textContent = ok ? 'Copied' : 'Press Ctrl+C';
+        btn.classList.add('done');
+        setTimeout(function () { btn.textContent = old; btn.classList.remove('done'); }, 1400);
+      });
     });
   });
 
-  // generic live filter: pills (data-side) + search box over a table's rows
-  function setupFilter(root) {
-    const rows = Array.from(root.querySelectorAll('tbody tr'));
-    const search = root.querySelector('.search');
-    const pills = Array.from(root.querySelectorAll('.pill'));
-    const counter = root.querySelector('.count');
-    let side = 'all';
+  /* live filter: pills (data-side) + search box over a table */
+  function setupFilter(rootEl) {
+    var rows = Array.prototype.slice.call(rootEl.querySelectorAll('tbody tr'));
+    var search = rootEl.querySelector('.search');
+    var pills = Array.prototype.slice.call(rootEl.querySelectorAll('.pill'));
+    var counter = rootEl.querySelector('.count');
+    var side = 'all';
     function apply() {
-      const q = search ? search.value.trim().toLowerCase() : '';
-      let shown = 0;
-      rows.forEach(r => {
-        const okSide = side === 'all' || (r.dataset.side || 'all').split(' ').includes(side);
-        const okText = !q || r.textContent.toLowerCase().includes(q);
-        const vis = okSide && okText;
+      var q = search ? search.value.trim().toLowerCase() : '';
+      var shown = 0;
+      rows.forEach(function (r) {
+        var okSide = side === 'all' || (r.dataset.side || 'all').split(' ').indexOf(side) > -1;
+        var okText = !q || r.textContent.toLowerCase().indexOf(q) > -1;
+        var vis = okSide && okText;
         r.style.display = vis ? '' : 'none';
         if (vis) shown++;
       });
       if (counter) counter.textContent = shown + ' of ' + rows.length + ' shown';
     }
-    pills.forEach(p => p.addEventListener('click', () => {
-      pills.forEach(x => x.setAttribute('aria-pressed', 'false'));
-      p.setAttribute('aria-pressed', 'true');
-      side = p.dataset.side;
-      apply(); haptic();
-    }));
+    pills.forEach(function (p) {
+      p.addEventListener('click', function () {
+        pills.forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+        p.setAttribute('aria-pressed', 'true');
+        side = p.dataset.side; apply();
+      });
+    });
     if (search) search.addEventListener('input', apply);
     apply();
   }
   document.querySelectorAll('[data-filter]').forEach(setupFilter);
 
-  // expand / collapse all answers
-  const toggleAll = document.getElementById('toggleAll');
+  /* FAQ: expand / collapse all */
+  var toggleAll = document.getElementById('toggleAll');
   if (toggleAll) {
-    toggleAll.addEventListener('click', () => {
-      const items = Array.from(document.querySelectorAll('#faq details.acc'));
-      const open = items.some(d => !d.open);
-      items.forEach(d => d.open = open);
+    toggleAll.addEventListener('click', function () {
+      var items = Array.prototype.slice.call(document.querySelectorAll('#sec-faq details.acc'));
+      var open = items.some(function (d) { return !d.open; });
+      items.forEach(function (d) { d.open = open; });
       toggleAll.textContent = open ? 'Collapse all' : 'Expand all';
-      haptic();
     });
   }
-})();
 
+  /* open a FAQ item or anchor target that is hidden inside a closed <details> */
+  function openHash() {
+    var id = decodeURIComponent(location.hash.slice(1));
+    var el = id && document.getElementById(id);
+    var d = el && el.closest && el.closest('details');
+    if (d) d.open = true;
+  }
+  window.addEventListener('hashchange', openHash);
+  openHash();
+})();
 </script>
 </body>
 </html>
