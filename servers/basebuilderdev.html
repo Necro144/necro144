@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KG1SF91F87"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-KG1SF91F87');
+</script>
+<script>document.documentElement.classList.add('js');</script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)" />
+<meta name="color-scheme" content="light dark" />
+<meta name="description" content="Base Builder 7.5-NS - the zombie building mod for Counter-Strike 1.6 on the [NS] server. The complete guide: building, roles, zombie classes and abilities, credits, shop, upgrades, medals, challenges and commands." />
+<meta property="og:title" content="Base Builder - CS 1.6 mod guide" />
+<meta property="og:description" content="Build a base, survive the zombie horde - Base Builder 7.5-NS for Counter-Strike 1.6." />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Necro's Hub" />
+<link rel="canonical" href="/servers/basebuilderdev" />
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect fill='%2304070a' width='180' height='180' rx='40'/%3E%3Ctext x='90' y='125' font-size='100' text-anchor='middle' fill='%232ee6d0' font-weight='900' font-family='monospace'%3EN%3C/text%3E%3C/svg%3E" />
+<title>Base Builder - CS 1.6 mod guide - Necro's Hub</title>
+
+
+<script>
+(function(){try{var t=localStorage.getItem('rage-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+<style>
+:root{
+  --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --subtle:#f6f8fa; --subtle2:#eef1f4;
+  --link:#0969da; --header:#f6f8fa; --code:rgba(129,139,152,.16); --sel:#ddf4ff;
+  --note:#0969da; --tip:#1a7f37; --imp:#8250df; --warn:#9a6700; --bad:#d1242f;
+  --ghost:#d1242f; --inv:#0969da; --gold:#9a6700;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  color-scheme:light;
+}
+:root[data-theme="dark"]{
+  --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --subtle:#151b23; --subtle2:#1c232d;
+  --link:#4493f8; --header:#010409; --code:rgba(101,108,118,.25); --sel:#143054;
+  --note:#4493f8; --tip:#3fb950; --imp:#ab7df8; --warn:#d29922; --bad:#f85149;
+  --ghost:#f85149; --inv:#4493f8; --gold:#d29922;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme]){
+    --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --subtle:#151b23; --subtle2:#1c232d;
+    --link:#4493f8; --header:#010409; --code:rgba(101,108,118,.25); --sel:#143054;
+    --note:#4493f8; --tip:#3fb950; --imp:#ab7df8; --warn:#d29922; --bad:#f85149;
+    --ghost:#f85149; --inv:#4493f8; --gold:#d29922; color-scheme:dark;
+  }
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--link);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--link);outline-offset:2px;border-radius:4px}
+::selection{background:var(--sel)}
+section[id],[id^="gl-"]{scroll-margin-top:76px}
+
+/* ===== Header ===== */
+.gh-header{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:12px;height:56px;padding:0 16px;padding-top:env(safe-area-inset-top,0px);background:var(--header);border-bottom:1px solid var(--border)}
+.gh-header .bar{position:absolute;left:0;bottom:-1px;height:2px;width:0;background:var(--link)}
+.crumb{display:flex;align-items:center;gap:8px;color:var(--fg);font-size:14px;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.crumb:hover{text-decoration:none}
+.crumb .a{color:var(--link)}
+.crumb .sl{color:var(--muted)}
+.crumb b{font-weight:600}
+.spacer{flex:1}
+.hbtn,.hlink{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:32px;padding:0 12px;font:500 13px/1 var(--sans);color:var(--fg);background:var(--bg);border:1px solid var(--border);border-radius:6px;cursor:pointer;white-space:nowrap}
+.hbtn:hover,.hlink:hover{background:var(--subtle2);text-decoration:none}
+.menu-btn{padding:0 10px;font-size:16px}
+@media(max-width:600px){.hlink{display:none}.crumb .a,.crumb .sl{display:none}.gh-header{padding-left:12px;padding-right:12px;gap:8px}}
+
+/* ===== Layout ===== */
+.layout{max-width:1280px;margin:0 auto;padding:24px 16px 64px;display:grid;grid-template-columns:minmax(0,1fr);gap:24px}
+@media(min-width:1012px){.layout{grid-template-columns:268px minmax(0,1fr);gap:32px;padding:24px 24px 64px}.menu-btn{display:none}}
+
+/* ===== Sidebar / TOC ===== */
+.sidebar{font-size:14px}
+.side-title{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;padding:0 8px 8px}
+.sidebar nav{display:flex;flex-direction:column}
+.drawer__group{padding:14px 8px 4px;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.nav-link{display:block;padding:5px 8px;margin:1px 0;color:var(--fg);border-radius:6px;border-left:2px solid transparent}
+.nav-link:hover{background:var(--subtle2);text-decoration:none}
+.nav-link.active{background:var(--subtle);font-weight:600;border-left-color:var(--link);color:var(--link)}
+.side-sep{border:0;border-top:1px solid var(--border);margin:12px 0;width:100%}
+.backdrop{display:none}
+@media(min-width:1012px){
+  .sidebar{position:sticky;top:80px;align-self:start;max-height:calc(100vh - 96px);overflow-y:auto;padding-right:8px}
+}
+@media(max-width:1011px){
+  .sidebar{position:fixed;inset:0 auto 0 0;width:min(86vw,320px);z-index:70;background:var(--bg);border-right:1px solid var(--border);padding:16px 12px calc(24px + env(safe-area-inset-bottom,0px));overflow-y:auto;transform:translateX(-100%);visibility:hidden;transition:transform .25s ease,visibility 0s linear .25s;box-shadow:0 8px 24px rgba(1,4,9,.4)}
+  .sidebar.open{transform:none;visibility:visible;transition:transform .25s ease,visibility 0s}
+  .backdrop{position:fixed;inset:0;background:rgba(1,4,9,.55);z-index:60;opacity:0;pointer-events:none;transition:opacity .25s ease;display:block}
+  .backdrop.show{opacity:1;pointer-events:auto}
+}
+
+/* ===== README box ===== */
+.doc{min-width:0;border:1px solid var(--border);border-radius:6px;background:var(--bg)}
+.file-head{display:flex;align-items:center;gap:8px;padding:10px 16px;background:var(--subtle);border-bottom:1px solid var(--border);border-radius:6px 6px 0 0;font-size:14px;font-weight:600}
+.file-head .muted{font-weight:400;margin-left:auto}
+.doc-body{padding:24px 16px 32px}
+@media(min-width:768px){.doc-body{padding:32px 48px 48px}}
+
+.doc-body>.sec{margin-top:40px}
+.hero{text-align:left}
+.hero h1{margin:0 0 16px;padding-bottom:.3em;font-size:2em;font-weight:600;line-height:1.25;border-bottom:1px solid var(--border)}
+.hero p{margin:0 0 16px}
+
+h2,h3,h4{position:relative;font-weight:600;line-height:1.25;margin:24px 0 16px}
+.sec>h2{margin:4px 0 16px;padding-bottom:.3em;font-size:1.5em;border-bottom:1px solid var(--border)}
+h3{font-size:1.25em}
+h4{font-size:1em}
+.sec>h3:first-of-type{margin-top:20px}
+.kicker{display:block;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px}
+.anchor{position:absolute;left:-24px;padding-right:6px;color:var(--muted);font-weight:400;font-size:.85em;opacity:0;text-decoration:none}
+h2:hover .anchor,h3:hover .anchor,.anchor:focus{opacity:1}
+.anchor:hover{text-decoration:none;color:var(--link)}
+@media(max-width:767px){.anchor{display:none}}
+
+p{margin:0 0 16px}
+.lead{font-size:1.125em;color:var(--fg)}
+.muted{color:var(--muted)}
+small.muted{font-size:.8em;font-weight:400}
+ul,ol{margin:0 0 16px;padding-left:2em}
+li{margin:.25em 0}
+li>ul,li>ol{margin:.25em 0 0}
+b,strong{font-weight:600}
+hr{border:0;border-top:1px solid var(--border);margin:24px 0}
+.clr-g{color:var(--tip)} .clr-r{color:var(--bad)} .clr-v{color:var(--imp)}
+
+/* ===== Badges / tags ===== */
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 16px}
+.badge{display:inline-block;padding:2px 10px;font-size:12px;font-weight:500;line-height:20px;border:1px solid var(--note);color:var(--note);border-radius:2em;white-space:nowrap}
+a.badge:hover{background:var(--subtle2);text-decoration:none}
+.badge.a{border-color:var(--warn);color:var(--warn)}
+.badge.m{border-color:var(--imp);color:var(--imp)}
+.tag{display:inline-block;padding:0 8px;font-size:12px;font-weight:500;line-height:18px;border:1px solid var(--border);border-radius:2em;white-space:nowrap;color:var(--muted)}
+.tag.t{color:var(--bad);border-color:var(--bad)}
+.tag.ct{color:var(--note);border-color:var(--note)}
+.tag.all{color:var(--warn);border-color:var(--warn)}
+.tag.dead{color:var(--imp);border-color:var(--imp)}
+.tag.lv{color:var(--muted)}
+
+/* ===== Tables ===== */
+.tablewrap{overflow-x:auto;margin:0 0 16px;-webkit-overflow-scrolling:touch}
+.tablewrap table{border-collapse:collapse;border-spacing:0;width:100%;font-size:14px}
+.tablewrap th,.tablewrap td{padding:6px 13px;border:1px solid var(--border);vertical-align:top;text-align:left}
+.tablewrap th{font-weight:600;background:var(--subtle);white-space:nowrap}
+.tablewrap tbody tr:nth-child(even){background:var(--subtle)}
+.tablewrap td:first-child{font-weight:600}
+.tablewrap td:first-child code{font-weight:400;white-space:nowrap}
+.tablewrap td.num{white-space:nowrap;text-align:right;font-variant-numeric:tabular-nums}
+.tablewrap td{min-width:64px}
+
+/* ===== Code ===== */
+code,.kbd{font-family:var(--mono);font-size:85%;padding:.2em .4em;background:var(--code);border-radius:6px}
+.kbd{border:1px solid var(--border);border-bottom-width:2px;background:var(--subtle)}
+.codeblock{position:relative;margin:0 0 16px;padding:16px 76px 16px 16px;font-family:var(--mono);font-size:85%;line-height:1.5;background:var(--subtle);border:1px solid var(--border);border-radius:6px;white-space:pre;overflow-x:auto}
+.codeblock .c{color:var(--muted)}
+.copy{position:absolute;top:8px;right:8px;height:28px;padding:0 10px;font:500 12px/1 var(--sans);color:var(--fg);background:var(--bg);border:1px solid var(--border);border-radius:6px;cursor:pointer}
+.copy:hover{background:var(--subtle2)}
+.copy.done{color:#fff;background:var(--tip);border-color:var(--tip)}
+.tree{margin:0 0 16px;padding:16px;font-family:var(--mono);font-size:85%;line-height:1.55;white-space:pre;overflow-x:auto;background:var(--subtle);border:1px solid var(--border);border-radius:6px}
+.tree b{color:var(--link)} .tree i{color:var(--muted);font-style:normal}
+
+/* ===== Callouts (GitHub alerts) ===== */
+.callout{margin:0 0 16px;padding:8px 16px;border-left:.25em solid var(--note)}
+.callout p{margin:0 0 8px}
+.callout p:last-child{margin-bottom:0}
+.callout .ct{display:block;margin-bottom:4px;font-weight:600;color:var(--note)}
+.callout.warn{border-left-color:var(--warn)} .callout.warn .ct{color:var(--warn)}
+.callout.bad{border-left-color:var(--bad)} .callout.bad .ct{color:var(--bad)}
+
+/* ===== Cards ===== */
+.grid2,.grid3{display:grid;gap:16px;margin:0 0 16px}
+.grid2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid3{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:860px){.grid3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.grid2,.grid3{grid-template-columns:1fr}}
+.mini{padding:12px 16px;background:var(--subtle);border:1px solid var(--border);border-radius:6px}
+.mini h4{margin:0 0 6px;font-size:1em}
+.mini p,.mini ul,.mini ol{font-size:14px;margin:0 0 8px}
+.mini>:last-child{margin-bottom:0}
+.mini li{margin:.15em 0}
+.mini.ghost{border-top:3px solid var(--ghost)} .mini.ghost h4{color:var(--ghost)}
+.mini.inv{border-top:3px solid var(--inv)} .mini.inv h4{color:var(--inv)}
+.mini.gold{border-top:3px solid var(--gold)} .mini.gold h4{color:var(--gold)}
+.mini .big{display:block;margin-bottom:2px;font-size:1.75rem;font-weight:600;line-height:1.2;color:var(--link)}
+
+/* ===== Timeline ===== */
+.stepper,.doc ul.stepper{list-style:none;margin:0 0 16px;padding:0 0 0 20px;border-left:2px solid var(--border)}
+.stepper li{position:relative;margin:0;padding:0 0 16px 16px}
+.stepper li:last-child{padding-bottom:0}
+.stepper li::before{content:"";position:absolute;left:-27px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--note)}
+.stepper li.m::before{border-color:var(--imp)} .stepper li.a::before{border-color:var(--warn)}
+.stepper .t{display:block;font-weight:600}
+
+/* ===== HUD mock ===== */
+.screen{position:relative;height:300px;margin:0 0 8px;border:1px solid #30363d;border-radius:6px;overflow:hidden;background:radial-gradient(circle at 50% 40%,#0b1613 0%,#020605 75%)}
+.screen .hudbox{position:absolute;font:12px/1.5 var(--mono);white-space:pre}
+.screen .tl{left:12px;top:28px;color:#ff8c8c}
+.screen .tc{left:50%;top:10px;transform:translateX(-50%);color:#ebd796;text-align:center}
+.screen .cc{left:50%;bottom:40px;transform:translateX(-50%);color:#ff8c8c;text-align:center}
+.screen .radar{position:absolute;left:8px;top:8px;width:16px;height:16px;border-radius:50%;border:1px solid #2c8f4e;background:rgba(44,143,78,.25)}
+.screen .cross{position:absolute;left:50%;top:42%;width:14px;height:14px;margin:-7px 0 0 -7px;border:1px solid #ff4d4d;border-radius:50%;opacity:.8}
+.screen .tag-note{position:absolute;font:11px/1.4 var(--sans);color:#d29922;border:1px solid #9e6a03;border-radius:6px;padding:1px 6px;background:rgba(0,0,0,.7)}
+@media(max-width:600px){.screen .hudbox{font-size:10px}}
+
+/* ===== Filters ===== */
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+.pill{height:32px;padding:0 12px;font:500 13px/1 var(--sans);color:var(--fg);background:var(--bg);border:1px solid var(--border);border-radius:2em;cursor:pointer}
+.pill:hover{background:var(--subtle2)}
+.pill[aria-pressed="true"]{background:var(--link);border-color:var(--link);color:#fff}
+.search{display:block;width:100%;height:36px;margin:0 0 8px;padding:0 12px;font:14px var(--sans);color:var(--fg);background:var(--bg);border:1px solid var(--border);border-radius:6px}
+.search:focus{outline:2px solid var(--link);outline-offset:-1px;border-color:var(--link)}
+.count{display:block;margin-bottom:8px;font-size:12px;color:var(--muted)}
+
+/* ===== Accordions ===== */
+details.acc{margin:0 0 8px;border:1px solid var(--border);border-radius:6px}
+details.acc summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px 16px;font-weight:600;font-size:15px;border-radius:6px}
+details.acc summary::-webkit-details-marker{display:none}
+details.acc summary::before{content:"";flex:none;width:0;height:0;border-left:6px solid var(--muted);border-top:5px solid transparent;border-bottom:5px solid transparent;transition:transform .15s ease}
+details.acc[open] summary::before{transform:rotate(90deg)}
+details.acc summary:hover{background:var(--subtle)}
+details.acc[open] summary{border-bottom:1px solid var(--border);border-radius:6px 6px 0 0;background:var(--subtle)}
+details.acc .body{padding:12px 16px 4px}
+
+/* ===== Glossary ===== */
+.azbar{display:flex;flex-wrap:wrap;gap:4px;margin:0 0 16px}
+.azbar a,.azbar span{display:inline-grid;place-items:center;width:32px;height:32px;font-size:14px;font-weight:600;border-radius:6px}
+.azbar a{border:1px solid var(--border);color:var(--link)}
+.azbar a:hover{background:var(--subtle2);text-decoration:none}
+.azbar span{color:var(--muted);opacity:.45}
+.gl{display:grid;grid-template-columns:40px minmax(0,1fr);gap:0 12px;padding:12px 0;border-top:1px solid var(--border)}
+.gl .L{font-size:1.75rem;font-weight:600;line-height:1.1;color:var(--muted)}
+.gl dl{margin:0}
+.gl dt{font-weight:600}
+.gl dd{margin:0 0 8px;color:var(--fg)}
+
+/* ===== Footer / helpers ===== */
+.foot{margin-top:32px;padding-top:16px;border-top:1px solid var(--border);font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px 16px}
+.totop{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:40;display:none;width:40px;height:40px;place-items:center;font-size:18px;color:var(--fg);background:var(--bg);border:1px solid var(--border);border-radius:50%;cursor:pointer;box-shadow:0 1px 3px rgba(1,4,9,.2)}
+.totop.show{display:grid}
+.totop:hover{background:var(--subtle2)}
+
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+@media print{.gh-header,.sidebar,.backdrop,.totop,.copy{display:none!important}.layout{display:block;padding:0}.doc{border:0}.doc-body{padding:0}}
+
+</style>
+</head>
+<body>
+<header class="gh-header">
+  <button class="hbtn menu-btn" id="menuBtn" type="button" aria-label="Open table of contents" aria-controls="drawer" aria-expanded="false">&#9776;</button>
+  <a class="crumb" href="/main_index"><span class="a">Necro's Hub</span><span class="sl">/</span><b>base-builder</b></a>
+  <span class="spacer"></span>
+  <a class="hlink" href="/main_index">Back to hub</a>
+  <button class="hbtn" id="themeBtn" type="button" aria-label="Switch light or dark theme">Theme</button>
+  <div class="bar" id="bar"></div>
+</header>
+
+<div class="backdrop" id="backdrop"></div>
+<div class="layout">
+  <aside class="sidebar" id="drawer" aria-label="Table of contents">
+    <div class="side-title">On this page</div>
+    <nav>
+      <div class="drawer__group">Start here</div><a class="nav-link" href="#sec-tldr">Quick Start</a><a class="nav-link" href="#sec-what">What is Base Builder?</a><a class="nav-link" href="#sec-round">How a Round Works</a><div class="drawer__group">Builders</div><a class="nav-link" href="#sec-build">Building</a><a class="nav-link" href="#sec-roles">Builder Roles and Party</a><a class="nav-link" href="#sec-guns">Weapons and Unlocks</a><div class="drawer__group">Zombies</div><a class="nav-link" href="#sec-zclass">Zombie Classes</a><a class="nav-link" href="#sec-zplay">Playing a Zombie</a><div class="drawer__group">Economy</div><a class="nav-link" href="#sec-credits">Credits</a><a class="nav-link" href="#sec-shop">Shop</a><a class="nav-link" href="#sec-upgrades">Upgrades</a><div class="drawer__group">Rounds</div><a class="nav-link" href="#sec-boss">Boss Rounds and Last Human</a><a class="nav-link" href="#sec-medals">Medals</a><a class="nav-link" href="#sec-chal">Challenges</a><a class="nav-link" href="#sec-votes">Votes</a><div class="drawer__group">Interface</div><a class="nav-link" href="#sec-menu">The M Menu</a><a class="nav-link" href="#sec-binds">Key Binds</a><a class="nav-link" href="#sec-cmds">All Commands</a><div class="drawer__group">Community</div><a class="nav-link" href="#sec-faq">FAQ</a><a class="nav-link" href="#sec-tips">Tips and Strategy</a><div class="drawer__group">Reference</div><a class="nav-link" href="#sec-owners">For Server Owners</a><a class="nav-link" href="#sec-dev">Dev Status</a>
+      <hr class="side-sep">
+      <a class="nav-link" href="/">Necro's Hub (home)</a>
+      <a class="nav-link" href="/main_index">NECRO144's Main Page</a>
+      <a class="nav-link" href="/fastdl/">FastDL Map Downloads</a>
+    </nav>
+  </aside>
+
+  <main class="doc">
+    <div class="file-head"><span>&#128214; README.md</span><span class="muted">v7.5-NS &middot; In testing</span></div>
+    <div class="doc-body">
+
+<section class="hero" id="top">
+  <h1>Base Builder</h1>
+  <p class="lead">Build a fortress, survive the horde. Builders have two and a half minutes to move blocks into a base, then the zombies are released - the complete guide to the NS edition, from your first block to boss rounds.</p>
+  <p>Original mod by <b>Tirant</b> &middot; NS edition by <b>Néć[Ř]ø /A/</b></p>
+  <div class="badges"><span class="badge">v7.5-NS</span><span class="badge a">In testing</span><span class="badge m">AMX Mod X 1.8.2</span></div>
+  <div class="badges"><a class="badge" href="#sec-tldr">Quick Start</a><a class="badge" href="#sec-build">Building</a><a class="badge" href="#sec-zclass">Zombie Classes</a><a class="badge" href="#sec-shop">Shop</a><a class="badge" href="#sec-cmds">Commands</a><a class="badge" href="#sec-dev">Dev Status</a></div>
+</section>
+
+<section class="sec" id="sec-tldr">
+<span class="kicker">01 START HERE</span>
+<h2>Quick Start</h2>
+
+<p class="lead">Builders (CT) build a base out of the map's blocks, then defend it with guns. Zombies (T) break in and infect them. Last team standing wins.</p>
+<ol>
+<li><b>Press M.</b> The main menu has everything: zombie class, shop, weapons, unlocks, upgrades, role, party, colors, stats and voting.</li>
+<li><b>Builders: hold E on a block</b> to grab it during the build phase. Move the mouse to carry it, scroll in and out with your aim, let go to drop it.</li>
+<li><b>Lock your blocks.</b> Aim at a block and say <code>/lock</code> (up to 10) so nobody else can move it.</li>
+<li><b>Pick a role and a gun.</b> <code>/role</code> for a builder perk, and the weapon menu appears when the zombies are released.</li>
+<li><b>Zombies: pick a class</b> with <code>/class</code> and use its ability with <b>G</b> or <b>R</b>.</li>
+<li><b>Earn credits</b> from kills, medals and challenges and spend them on <code>/shop</code>, <code>/unlock</code> and <code>/upgrade</code>. Everything is saved.</li>
+</ol>
+<div class="callout warn"><span class="ct">Dev build</span><p>This is version <b>7.5-NS</b>, our own fork of Base Builder 7.4. It is installed on the server but still <b>in testing</b> - numbers on this page are the defaults and may change. See <a href="#sec-dev">Dev Status</a>.</p></div>
+
+</section>
+
+<section class="sec" id="sec-what">
+<span class="kicker">02 START HERE</span>
+<h2>What is Base Builder?</h2>
+
+<p><b>Base Builder</b> is a classic zombie mod for <b>Counter-Strike 1.6</b>. Maps (<code>bb_</code>) are full of movable blocks behind a barrier. The builders turn those blocks into a base while the zombies wait; when the barrier drops, the zombies have to break in.</p>
+<div class="badges"><span class="badge">CS 1.6</span><span class="badge">AMX Mod X 1.8.2</span><span class="badge">bb_ maps only</span><span class="badge a">v7.5-NS</span><span class="badge m">10 plugins</span></div>
+<div class="grid2">
+<div class="mini inv"><h4>Builders (CT)</h4><ul><li>Grab, move, lock and color blocks</li><li>4 roles: Engineer, Medic, Gunner, Scout</li><li>Party up and share your blocks</li><li>Repair damaged blocks by holding E</li><li>24 guns, most unlocked with credits</li></ul></div>
+<div class="mini ghost"><h4>Zombies (T)</h4><ul><li>10 classes, each with an ability</li><li>Break blocks (2,500 HP each)</li><li>Infect builders - they join you</li><li>Shop: Madness, +1000 HP, Speed</li><li>Upgrades: health, speed, low gravity</li></ul></div>
+</div>
+
+</section>
+
+<section class="sec" id="sec-round">
+<span class="kicker">03 START HERE</span>
+<h2>How a Round Works</h2>
+
+<ul class="stepper">
+<li><span class="t">Build phase - 150 s</span>Builders grab and place blocks. Zombies wait behind the barrier and pick a class.</li>
+<li class="m"><span class="t">Prep phase - 30 s</span>Blocks can no longer be moved. Builders pick a weapon and take position; everyone votes the best base.</li>
+<li class="a"><span class="t">Release</span>The barrier drops and the zombies attack. From now on blocks have health: zombies break them, builders repair them.</li>
+<li><span class="t">Infection</span>A builder killed by a zombie comes back as a zombie after 5 s. Dead zombies respawn after 3 s.</li>
+<li class="m"><span class="t">Last human</span>The last builder alive gets +200 HP and 1.5&times; damage. Surviving the round pays 50 credits.</li>
+<li><span class="t">Round end</span>Builders win if anyone survives the timer; zombies win when every builder is infected. MVPs are announced and paid.</li>
+</ul>
+<p class="muted">Every 5th round can be a <a href="#sec-boss">boss round</a>.</p>
+
+</section>
+
+<section class="sec" id="sec-build">
+<span class="kicker">04 BUILDERS</span>
+<h2>Building</h2>
+
+<p class="lead">Hold <b>E</b> on a block to grab it. While you hold it, the block follows your aim; look closer or further to pull and push it.</p>
+<div class="tablewrap"><table><thead><tr><th>Action</th><th>How</th><th>Notes</th></tr></thead><tbody>
+<tr><td>Grab / move</td><td>hold <b>E</b> (or bind <code>+grab</code>)</td><td>Build phase only. Reach 32 - 768 units.</td></tr>
+<tr><td>Lock / claim</td><td><code>/lock</code> while aiming at a block</td><td>Up to 10 blocks (11 for Engineers). Only you and your party can move it.</td></tr>
+<tr><td>Color</td><td><code>/colors</code>, <code>/random</code></td><td>Your blocks take your color. <code>/mycolor</code> shows it, <code>/whois &lt;color&gt;</code> finds the owner.</td></tr>
+<tr><td>Repair</td><td>hold <b>E</b> on a damaged block</td><td>After release: +40 HP every 0.5 s (Engineers twice as fast).</td></tr>
+<tr><td>Respawn</td><td><code>/respawn</code></td><td>Builders can respawn freely during the build phase - handy if you are stuck.</td></tr>
+</tbody></table></div>
+<div class="callout"><span class="ct">Block health</span><p>After the zombies are released every block has <b>2,500 HP</b>. Watch for cracks and keep an Engineer near the weak spots.</p></div>
+
+</section>
+
+<section class="sec" id="sec-roles">
+<span class="kicker">05 BUILDERS</span>
+<h2>Builder Roles and Party</h2>
+<p>Say <code>/role</code> (or M &rarr; Role) to pick a perk. You can change it every round.</p>
+<div class="tablewrap"><table><thead><tr><th>Role</th><th>Perk</th></tr></thead><tbody>
+<tr><td>Engineer</td><td>+1 lock slot, repairs blocks twice as fast</td></tr>
+<tr><td>Medic</td><td>Heals nearby builders 3 HP/s (up to 100 HP)</td></tr>
+<tr><td>Gunner</td><td>+15% damage to zombies</td></tr>
+<tr><td>Scout</td><td>Zombie radar on the HUD, lower gravity</td></tr>
+</tbody></table></div>
+<h3>Party</h3>
+<p>Say <code>/party</code> to invite friends (up to 3). Party members share claimed blocks: you can move and unclaim each other's blocks and build one base together.</p>
+</section>
+
+<section class="sec" id="sec-guns">
+<span class="kicker">06 BUILDERS</span>
+<h2>Weapons and Unlocks</h2>
+<p>When the zombies are released you choose a primary and a secondary weapon. The <b>P228</b> and <b>SG-552</b> are free; everything else is unlocked once, forever, with credits (<code>/unlock</code>).</p>
+<div class="tablewrap"><table><thead><tr><th>Weapon</th><th class="num">Credits</th><th>Weapon</th><th class="num">Credits</th></tr></thead><tbody>
+<tr><td>P228 Compact</td><td class="num">free</td><td>SG-552 Commando</td><td class="num">free</td></tr>
+<tr><td>Fiveseven</td><td class="num">250</td><td>Dual Elite Berettas</td><td class="num">500</td></tr>
+<tr><td>Ingram MAC-10</td><td class="num">500</td><td>Schmidt TMP</td><td class="num">500</td></tr>
+<tr><td>Schmidt Scout</td><td class="num">750</td><td>USP .45 Tactical</td><td class="num">750</td></tr>
+<tr><td>Glock 18C</td><td class="num">750</td><td>XM1014</td><td class="num">1,000</td></tr>
+<tr><td>Steyr AUG A1</td><td class="num">1,000</td><td>MP5 Navy</td><td class="num">1,000</td></tr>
+<tr><td>Desert Eagle</td><td class="num">1,000</td><td>Famas</td><td class="num">1,500</td></tr>
+<tr><td>AWP</td><td class="num">1,500</td><td>ES P90</td><td class="num">1,500</td></tr>
+<tr><td>UMP 45</td><td class="num">2,000</td><td>M3 Super 90</td><td class="num">2,000</td></tr>
+<tr><td>IMI Galil</td><td class="num">2,500</td><td>M4A1 Carbine</td><td class="num">10,000</td></tr>
+<tr><td>AK-47</td><td class="num">15,000</td><td>M249 Para</td><td class="num">25,000</td></tr>
+<tr><td>G3SG1 Auto-Sniper</td><td class="num">25,000</td><td>SG-550 Auto-Sniper</td><td class="num">50,000</td></tr>
+</tbody></table></div>
+<p class="muted">Builders' weapons are balanced for this mod: damage and fire rate are tuned per gun (for example the Deagle hits 3&times; harder).</p>
+</section>
+
+<section class="sec" id="sec-zclass">
+<span class="kicker">07 ZOMBIES</span>
+<h2>Zombie Classes</h2>
+<p>Say <code>/class</code> (or M &rarr; Class). Four classes are free; six more are bought once with credits. VIPs own every class.</p>
+<div class="tablewrap"><table><thead><tr><th>Class</th><th class="num">HP</th><th class="num">Speed</th><th>Gravity</th><th>Ability (G / R)</th><th class="num">Cost</th></tr></thead><tbody>
+<tr><td>Classic Zombie</td><td class="num">3,000</td><td class="num">260</td><td>1.00</td><td><b>Rage</b> - +30% speed for 4 s (25 s)</td><td class="num">free</td></tr>
+<tr><td>Fast Zombie</td><td class="num">2,000</td><td class="num">325</td><td>1.00</td><td><b>Sprint</b> - +50% speed for 2.5 s (20 s)</td><td class="num">free</td></tr>
+<tr><td>Jumper Zombie</td><td class="num">2,500</td><td class="num">285</td><td>0.50</td><td><b>Leap</b> - jump forward (6 s)</td><td class="num">free</td></tr>
+<tr><td>Tanker Zombie</td><td class="num">4,000</td><td class="num">210</td><td>1.00</td><td><b>Fortify</b> - take 50% damage for 4 s (25 s), 200 armor</td><td class="num">free</td></tr>
+<tr><td>Banshee</td><td class="num">2,250</td><td class="num">260</td><td>0.85</td><td><b>Scream</b> - pushes and blinds nearby builders (25 s); walks through zombies</td><td class="num">500</td></tr>
+<tr><td>Charger</td><td class="num">3,500</td><td class="num">210</td><td>0.85</td><td><b>Charge</b> - fast dash forward (8 s)</td><td class="num">750</td></tr>
+<tr><td>Rejuvinator</td><td class="num">2,500</td><td class="num">270</td><td>0.80</td><td><b>Mend</b> - heal yourself 30%, nearby zombies 10% (20 s); regenerates</td><td class="num">750</td></tr>
+<tr><td>Werewolf</td><td class="num">3,000</td><td class="num">275</td><td>0.75</td><td><b>Howl</b> - zombies nearby +20% speed for 5 s (30 s)</td><td class="num">1,000</td></tr>
+<tr><td>The Smasher</td><td class="num">1,500</td><td class="num">260</td><td>1.00</td><td><b>Smash</b> - 400 damage to the block you aim at (15 s); no pain shock</td><td class="num">1,000</td></tr>
+<tr><td>Chainsaw</td><td class="num">3,000</td><td class="num">245</td><td>0.85</td><td><b>Rev</b> - 3&times; block damage for 5 s (25 s); 2&times; damage</td><td class="num">1,500</td></tr>
+</tbody></table></div>
+<p class="muted">Cooldowns in brackets. HP, speed and gravity also improve with <a href="#sec-upgrades">upgrades</a>.</p>
+</section>
+
+<section class="sec" id="sec-zplay">
+<span class="kicker">08 ZOMBIES</span>
+<h2>Playing a Zombie</h2>
+<ul>
+<li>During the build phase, scout the builders' base and pick the class that beats it - Smasher and Chainsaw for thick walls, Jumper and Banshee to get over or around.</li>
+<li>Abilities are on <b>G</b> (drop) and <b>R</b> (reload). Each class has one.</li>
+<li>Attack together: Werewolf's Howl and Rejuvinator's Mend help the whole horde.</li>
+<li>Dying costs you nothing: you respawn after 3 s and still earn 1 credit per death.</li>
+<li>Shop items for zombies: <b>Madness</b> (5 s invulnerable), <b>+1000 HP</b> and a <b>Speed Boost</b>.</li>
+</ul>
+</section>
+
+<section class="sec" id="sec-credits">
+<span class="kicker">09 ECONOMY</span>
+<h2>Credits</h2>
+<p><b>Credits</b> are the server currency, saved with your SteamID. Say <code>/credits</code> to see yours.</p>
+<div class="tablewrap"><table><thead><tr><th>You earn</th><th class="num">Credits</th></tr></thead><tbody>
+<tr><td>Killing a zombie</td><td class="num">1</td></tr>
+<tr><td>Infecting a builder (as a zombie)</td><td class="num">10</td></tr>
+<tr><td>Dying as a zombie</td><td class="num">1</td></tr>
+<tr><td>Medals</td><td class="num">1 - 15</td></tr>
+<tr><td>Challenges</td><td class="num">25 - 1,000</td></tr>
+<tr><td>Round MVP</td><td class="num">15</td></tr>
+<tr><td>Best base vote</td><td class="num">25</td></tr>
+<tr><td>Surviving as last human</td><td class="num">50</td></tr>
+<tr><td>Killing the boss</td><td class="num">100</td></tr>
+</tbody></table></div>
+<p>Spend them on the <a href="#sec-shop">shop</a>, <a href="#sec-guns">weapon unlocks</a>, <a href="#sec-zclass">zombie classes</a> and <a href="#sec-upgrades">upgrades</a>. Set a savings goal with <code>/setgoal &lt;credits&gt;</code> and check it with <code>/goal</code>.</p>
+</section>
+
+<section class="sec" id="sec-shop">
+<span class="kicker">10 ECONOMY</span>
+<h2>Shop</h2>
+<p>Say <code>/shop</code> or M &rarr; Shop. Paid with credits; most items once per round.</p>
+<div class="tablewrap"><table><thead><tr><th>Item</th><th>For</th><th class="num">Price</th><th>Effect</th></tr></thead><tbody>
+<tr><td>Frost Grenade</td><td><span class="tag ct">Builders</span></td><td class="num">150</td><td>Freezes zombies within 240 units for 3 s</td></tr>
+<tr><td>Flare</td><td><span class="tag ct">Builders</span></td><td class="num">50</td><td>Lights up the area for 30 s</td></tr>
+<tr><td>Jetpack</td><td><span class="tag ct">Builders</span></td><td class="num">400</td><td>Hold JUMP in the air to fly - this round, after the release</td></tr>
+<tr><td>Extra Lock Slot</td><td><span class="tag ct">Builders</span></td><td class="num">100</td><td>Lock one more block (build phase only)</td></tr>
+<tr><td>+100 Armor</td><td><span class="tag ct">Builders</span></td><td class="num">75</td><td>100 more armor</td></tr>
+<tr><td>+50 HP</td><td><span class="tag ct">Builders</span></td><td class="num">100</td><td>50 more health</td></tr>
+<tr><td>Madness</td><td><span class="tag t">Zombies</span></td><td class="num">200</td><td>5 s invulnerable</td></tr>
+<tr><td>+1000 HP</td><td><span class="tag t">Zombies</span></td><td class="num">150</td><td>1,000 more health</td></tr>
+<tr><td>Speed Boost</td><td><span class="tag t">Zombies</span></td><td class="num">100</td><td>Faster for 10 s</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="sec" id="sec-upgrades">
+<span class="kicker">11 ECONOMY</span>
+<h2>Upgrades</h2>
+<p>Say <code>/upgrade</code>. Upgrades are permanent and saved. Each has <b>25 levels</b>; a level costs <b>100 + 100 &times; current level</b> credits (100, 200, 300 ...).</p>
+<div class="tablewrap"><table><thead><tr><th>Upgrade</th><th>Effect</th></tr></thead><tbody>
+<tr><td>Zombie Health</td><td>More HP as a zombie</td></tr>
+<tr><td>Zombie Speed</td><td>Faster as a zombie</td></tr>
+<tr><td>Zombie Low Gravity</td><td>Higher jumps as a zombie</td></tr>
+<tr><td>Builder Armor</td><td>Spawn with more armor as a builder</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="sec" id="sec-boss">
+<span class="kicker">12 ROUNDS</span>
+<h2>Boss Rounds and Last Human</h2>
+<div class="grid2">
+<div class="mini ghost"><h4>Boss round</h4><ul><li>Every 5th round (4+ players)</li><li>One zombie becomes the boss</li><li>6,000 HP + 1,500 per builder</li><li>The builder who kills it gets 100 credits</li></ul></div>
+<div class="mini inv"><h4>Last human</h4><ul><li>When one builder is left (4+ players)</li><li>+200 HP and 1.5&times; damage</li><li>Survive the round: 50 credits</li></ul></div>
+</div>
+<h3>Round MVP</h3>
+<p>At round end the best builder and best zombie are named MVP and get 15 credits each.</p>
+</section>
+
+<section class="sec" id="sec-medals">
+<span class="kicker">13 ROUNDS</span>
+<h2>Medals</h2>
+<p>Medals pop up with a sound when you pull off something special. <code>/medals</code> shows yours, <code>/medallist</code> the full list.</p>
+<div class="tablewrap"><table><thead><tr><th>Medal</th><th>How</th><th class="num">Credits</th></tr></thead><tbody>
+<tr><td>First Blood</td><td>First kill of the round</td><td class="num">2</td></tr>
+<tr><td>Multi-Kill</td><td>2 kills in rapid succession</td><td class="num">5</td></tr>
+<tr><td>Mega-Kill</td><td>3 kills in rapid succession</td><td class="num">7</td></tr>
+<tr><td>Ludacriss Kill</td><td>4 kills in rapid succession</td><td class="num">9</td></tr>
+<tr><td>Wicked Sick</td><td>5 kills in rapid succession</td><td class="num">11</td></tr>
+<tr><td>Butcher</td><td>Deal a devastating blow (150+ damage)</td><td class="num">15</td></tr>
+<tr><td>Cold Efficiency</td><td>Kill 2 zombies without reloading</td><td class="num">5</td></tr>
+<tr><td>Lucky Shot</td><td>Kill 2 invisible enemies in rapid succession</td><td class="num">5</td></tr>
+<tr><td>Suicidal</td><td>Kill yourself instead of letting a zombie get you</td><td class="num">1</td></tr>
+<tr><td>Headcase</td><td>Kill a human with a headshot</td><td class="num">5</td></tr>
+<tr><td>Holy Shit</td><td>Kill a zombie with a knife</td><td class="num">10</td></tr>
+<tr><td>Shotgun Madness</td><td>5 kills in a row with a shotgun</td><td class="num">7</td></tr>
+<tr><td>Headhunter</td><td>2 headshot kills in a row</td><td class="num">3</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="sec" id="sec-chal">
+<span class="kicker">14 ROUNDS</span>
+<h2>Challenges</h2>
+<p>Long-term goals that pay big, once. <code>/challenges</code> shows your progress, <code>/challist</code> the full list. There are also a <b>daily</b> and a <b>weekly</b> challenge: <code>/daily</code>.</p>
+<div class="tablewrap"><table><thead><tr><th>Challenge</th><th>Goal</th><th class="num">Credits</th></tr></thead><tbody>
+<tr><td>Alpha and Omega</td><td>Take down 25,000 enemies</td><td class="num">1,000</td></tr>
+<tr><td>Zombie Genocidist</td><td>Eliminate 10,000 zombies</td><td class="num">500</td></tr>
+<tr><td>Hmm... Tasty</td><td>Eat the brains of 500 humans</td><td class="num">750</td></tr>
+<tr><td>Shoot to Kill</td><td>Headshot 1,337 zombies</td><td class="num">350</td></tr>
+<tr><td>Owned</td><td>Die 5,000 times as a zombie</td><td class="num">500</td></tr>
+<tr><td>One For The Team</td><td>Die 1,000 times as a human</td><td class="num">100</td></tr>
+<tr><td>Colorblind</td><td>Select a new color 250 times</td><td class="num">50</td></tr>
+<tr><td>Locked-up Tight</td><td>Lock and claim 250 blocks</td><td class="num">250</td></tr>
+<tr><td>Base Builder</td><td>Move 10,000 blocks</td><td class="num">250</td></tr>
+<tr><td>Fast Killer</td><td>First Blood 100 times</td><td class="num">200</td></tr>
+<tr><td>1shot2kill</td><td>Multi-Kill 50 times</td><td class="num">350</td></tr>
+<tr><td>Drop of Blood</td><td>Mega-Kill 50 times</td><td class="num">500</td></tr>
+<tr><td>Pool of Blood</td><td>Ludacriss Kill 25 times</td><td class="num">750</td></tr>
+<tr><td>River of Blood</td><td>Wicked Sick 10 times</td><td class="num">1,000</td></tr>
+<tr><td>The Cleaver</td><td>Butcher 10 times</td><td class="num">250</td></tr>
+<tr><td>Ammo Conservative</td><td>Cold Efficiency 50 times</td><td class="num">450</td></tr>
+<tr><td>Heat Sensor</td><td>Lucky Shot 50 times</td><td class="num">250</td></tr>
+<tr><td>The Easy Way Out</td><td>Suicidal 25 times</td><td class="num">25</td></tr>
+<tr><td>The Guillotine</td><td>Headcase 10 times</td><td class="num">400</td></tr>
+<tr><td>Commando</td><td>Holy Shit 15 times</td><td class="num">500</td></tr>
+<tr><td>Dead Wreckening</td><td>Inflict 100,000 damage as a zombie</td><td class="num">750</td></tr>
+<tr><td>Every Bullet Counts</td><td>Inflict 1,000,000 damage as a human</td><td class="num">250</td></tr>
+<tr><td>Boomstick</td><td>Shotgun Madness 250 times</td><td class="num">500</td></tr>
+<tr><td>Pinpoint Precision</td><td>Headhunter 250 times</td><td class="num">500</td></tr>
+<tr><td>Challenge Hunter</td><td>Complete every other challenge</td><td class="num">250</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="sec" id="sec-votes">
+<span class="kicker">15 ROUNDS</span>
+<h2>Votes</h2>
+<div class="tablewrap"><table><thead><tr><th>Vote</th><th>How it works</th></tr></thead><tbody>
+<tr><td>Rock the Vote</td><td>Say <code>rtv</code>. When 60% of players want it (from 3 minutes into the map), a 5-map vote starts. The map changes at round end.</td></tr>
+<tr><td>Build time</td><td>Once per map (2nd round) everyone votes how long the build phase lasts.</td></tr>
+<tr><td>Base rating</td><td>During the prep phase everyone votes the best base. The winner gets 25 credits (needs 3+ builders).</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="sec" id="sec-menu">
+<span class="kicker">16 INTERFACE</span>
+<h2>The M Menu</h2>
+<p>Press <b>M</b> (the team menu key) or say <code>/menu</code>:</p>
+<ol>
+<li>Zombie class</li><li>Shop</li><li>Weapons</li><li>Unlocks</li><li>Upgrades</li><li>Builder role</li><li>Party</li><li>Colors</li><li>Stats, top 15 and daily challenge</li><li>Rock the vote</li><li>Admin menu (admins only)</li>
+</ol>
+</section>
+
+<section class="sec" id="sec-binds">
+<span class="kicker">17 INTERFACE</span>
+<h2>Key Binds</h2>
+<p>The defaults work out of the box (<b>E</b> grab, <b>G</b>/<b>R</b> ability, <b>M</b> menu). Extra binds for your console:</p><div class="codeblock" id="bind-bb">bind mouse3 +grab          <span class="c">// grab blocks with the middle mouse</span>
+bind n &quot;say /shop&quot;        <span class="c">// shop</span>
+bind j &quot;say /menu&quot;        <span class="c">// main menu</span>
+bind k &quot;say /lock&quot;        <span class="c">// lock the block you aim at</span>
+bind l &quot;say /class&quot;       <span class="c">// zombie class</span>
+bind p &quot;say /respawn&quot;     <span class="c">// respawn in the build phase</span><button class="copy" data-target="bind-bb">copy</button></div>
+</section>
+
+<section class="sec" id="sec-cmds">
+<span class="kicker">18 INTERFACE</span>
+<h2>All Commands</h2>
+<p>Chat commands start with a slash. Search or filter.</p>
+<div data-filter>
+<div class="pills">
+<button class="pill" data-side="all" aria-pressed="true">All</button>
+<button class="pill" data-side="everyone" aria-pressed="false">Everyone</button>
+<button class="pill" data-side="builder" aria-pressed="false">Builders</button>
+<button class="pill" data-side="zombie" aria-pressed="false">Zombies</button>
+<button class="pill" data-side="admin" aria-pressed="false">Admin</button>
+</div>
+<input class="search" type="search" placeholder="Search a command or what it does..." aria-label="Search commands" autocomplete="off">
+<span class="count"></span>
+<div class="tablewrap"><table><thead><tr><th>Command</th><th>For</th><th>What it does</th></tr></thead><tbody>
+<tr data-side="everyone"><td><code>M key / /menu</code></td><td><span class="tag all">Everyone</span></td><td>Main menu - everything in one place</td></tr>
+<tr data-side="everyone"><td><code>/shop</code></td><td><span class="tag all">Everyone</span></td><td>Open the shop</td></tr>
+<tr data-side="everyone"><td><code>/credits</code></td><td><span class="tag all">Everyone</span></td><td>Your credits</td></tr>
+<tr data-side="everyone"><td><code>/unlock</code></td><td><span class="tag all">Everyone</span></td><td>Unlock weapons</td></tr>
+<tr data-side="everyone"><td><code>/upgrade</code></td><td><span class="tag all">Everyone</span></td><td>Buy upgrades</td></tr>
+<tr data-side="everyone"><td><code>/mystats</code></td><td><span class="tag all">Everyone</span></td><td>Your stats</td></tr>
+<tr data-side="everyone"><td><code>/whostats &lt;name&gt;</code></td><td><span class="tag all">Everyone</span></td><td>Another player's stats</td></tr>
+<tr data-side="everyone"><td><code>/top15</code> / <code>/rank</code></td><td><span class="tag all">Everyone</span></td><td>Leaderboard and your rank</td></tr>
+<tr data-side="everyone"><td><code>/medals</code> / <code>/medallist</code></td><td><span class="tag all">Everyone</span></td><td>Your medals / all medals</td></tr>
+<tr data-side="everyone"><td><code>/challenges</code> / <code>/challist</code></td><td><span class="tag all">Everyone</span></td><td>Your challenge progress / all challenges</td></tr>
+<tr data-side="everyone"><td><code>/daily</code></td><td><span class="tag all">Everyone</span></td><td>Today's and this week's challenge</td></tr>
+<tr data-side="everyone"><td><code>/setgoal &lt;n&gt;</code> / <code>/goal</code></td><td><span class="tag all">Everyone</span></td><td>Set and check a credits goal</td></tr>
+<tr data-side="everyone"><td><code>rtv</code> / <code>/rtv</code></td><td><span class="tag all">Everyone</span></td><td>Rock the vote</td></tr>
+<tr data-side="everyone"><td><code>/cmd</code> / <code>/commands</code></td><td><span class="tag all">Everyone</span></td><td>Short command list in chat</td></tr>
+<tr data-side="builder"><td><code>/lock</code> / <code>/claim</code></td><td><span class="tag ct">Builders</span></td><td>Lock the block you aim at</td></tr>
+<tr data-side="builder"><td><code>/colors</code></td><td><span class="tag ct">Builders</span></td><td>Choose your block color</td></tr>
+<tr data-side="builder"><td><code>/random</code></td><td><span class="tag ct">Builders</span></td><td>Random color</td></tr>
+<tr data-side="builder"><td><code>/mycolor</code></td><td><span class="tag ct">Builders</span></td><td>Show your color</td></tr>
+<tr data-side="builder"><td><code>/whois &lt;color&gt;</code></td><td><span class="tag ct">Builders</span></td><td>Who owns that color</td></tr>
+<tr data-side="builder"><td><code>/role</code></td><td><span class="tag ct">Builders</span></td><td>Choose a builder role</td></tr>
+<tr data-side="builder"><td><code>/party</code></td><td><span class="tag ct">Builders</span></td><td>Invite friends and share blocks</td></tr>
+<tr data-side="builder"><td><code>/guns</code></td><td><span class="tag ct">Builders</span></td><td>Weapon menu</td></tr>
+<tr data-side="builder"><td><code>/respawn</code></td><td><span class="tag ct">Builders</span></td><td>Respawn during the build phase</td></tr>
+<tr data-side="zombie"><td><code>/class</code></td><td><span class="tag t">Zombies</span></td><td>Choose a zombie class</td></tr>
+<tr data-side="zombie"><td><code>G</code> or <code>R</code></td><td><span class="tag t">Zombies</span></td><td>Use your class ability</td></tr>
+<tr data-side="admin"><td><code>/grantbuild [s]</code></td><td><span class="tag dead">Admin</span></td><td>Builders may move blocks for a few more seconds</td></tr>
+<tr data-side="admin"><td><code>/swap &lt;name&gt;</code></td><td><span class="tag dead">Admin</span></td><td>Move a player to the other team</td></tr>
+<tr data-side="admin"><td><code>/swap2 &lt;a&gt; &lt;b&gt;</code></td><td><span class="tag dead">Admin</span></td><td>Swap two players</td></tr>
+<tr data-side="admin"><td><code>/revive &lt;name&gt;</code></td><td><span class="tag dead">Admin</span></td><td>Revive a player</td></tr>
+<tr data-side="admin"><td><code>/ban &lt;name&gt;</code></td><td><span class="tag dead">Admin</span></td><td>Build-ban a griefer (can't move blocks)</td></tr>
+<tr data-side="admin"><td><code>/releasezombies</code></td><td><span class="tag dead">Admin</span></td><td>End the build phase now</td></tr>
+<tr data-side="admin"><td><code>bb_addcredits &lt;name&gt; &lt;n&gt;</code></td><td><span class="tag dead">Admin</span></td><td>Give credits (console, rcon flag)</td></tr>
+</tbody></table></div>
+</div>
+</section>
+
+<section class="sec" id="sec-faq">
+<span class="kicker">19 COMMUNITY</span>
+<h2>FAQ</h2>
+<button class="pill" id="toggleAll" type="button">Expand all</button>
+<details class="acc"><summary>Do I have to download anything?</summary><div class="body"><p>No. Maps, zombie models and sounds download automatically and fast from our FastDL. You can also grab the map packs from the <a href="/fastdl/">FastDL page</a> before you join.</p></div></details><details class="acc"><summary>I can't move a block.</summary><div class="body"><p>Blocks only move during the build phase, and not if someone else locked it (unless they are in your party). After the release you can only repair.</p></div></details><details class="acc"><summary>Is my progress saved?</summary><div class="body"><p>Yes: credits, unlocked guns and classes, upgrades, medals and challenges are saved by your SteamID.</p></div></details><details class="acc"><summary>How do I use my zombie ability?</summary><div class="body"><p>Press G (drop) or R (reload). The chat tells you when it is on cooldown.</p></div></details><details class="acc"><summary>Someone keeps wrecking our base.</summary><div class="body"><p>Tell an admin: every block move is logged, and admins can build-ban griefers.</p></div></details><details class="acc"><summary>Why does M not open the team menu?</summary><div class="body"><p>M opens the Base Builder menu. Teams are set by the mod: builders are CT, zombies are T.</p></div></details>
+</section>
+
+<section class="sec" id="sec-tips">
+<span class="kicker">20 COMMUNITY</span>
+<h2>Tips and Strategy</h2>
+<ul>
+<li><b>Builders:</b> build small and thick. A tight box with layered walls beats a big base with gaps.</li>
+<li>Lock your key blocks early - unlocked blocks can be moved by anyone during the build phase.</li>
+<li>Put an Engineer on repairs and a Medic in the middle; Gunners hold the entrance.</li>
+<li>Save a Frost Grenade for when the wall breaks.</li>
+<li><b>Zombies:</b> attack one wall together - spreading out only helps the builders.</li>
+<li>Smasher and Chainsaw open walls; Jumper and Banshee get over and through.</li>
+<li>Spend early credits on upgrades: they last forever.</li>
+</ul>
+</section>
+
+<section class="sec" id="sec-owners">
+<span class="kicker">21 REFERENCE</span>
+<h2>For Server Owners</h2>
+<p>Requires AMX Mod X 1.8.2 with fakemeta, hamsandwich, engine, fun, cstrike, csx and nvault. Plugins load from <code>plugins-basebuilder.ini</code> in this order: core first, class plugins right after.</p><div class="codeblock" id="cfg-bb">bb_buildtime 150          <span class="c">// build phase, seconds</span>
+bb_preptime 30            <span class="c">// prep phase, seconds</span>
+bb_zombie_respawn_delay 3 <span class="c">// zombie respawn</span>
+bb_infection_respawn 5    <span class="c">// infected builder becomes a zombie</span>
+bb_lockmax 10             <span class="c">// locked blocks per player</span>
+bb_lock_everyone 1        <span class="c">// 0 = only VIP flag m can lock</span>
+bb_block_hp 2500          <span class="c">// block HP after release, 0 = unbreakable</span>
+bb_block_repair 40        <span class="c">// HP repaired per 0.5 s</span>
+bb_boss_every 5           <span class="c">// boss round every N rounds</span>
+bb_lasthuman 1            <span class="c">// last human bonus</span>
+bb_shop 1                 <span class="c">// shop on/off, prices: bb_shop_&lt;item&gt;</span>
+amx_dmg_mode 2            <span class="c">// weapon damage tuning: builders only</span>
+amx_speed_mode 2          <span class="c">// weapon fire-rate tuning: builders only</span><button class="copy" data-target="cfg-bb">copy</button></div>
+<div class="tablewrap"><table><thead><tr><th>Plugin</th><th>Does</th></tr></thead><tbody>
+<tr><td>basebuilder65.amxx</td><td>Core: build/prep/release, blocks, lock, colors, teams, admin commands</td></tr>
+<tr><td>bb_classes65.amxx</td><td>4 free zombie classes + abilities</td></tr>
+<tr><td>bb_classes74.amxx</td><td>6 credit zombie classes + abilities</td></tr>
+<tr><td>bb_credits74.amxx</td><td>Credits, unlocks, upgrades, medals, challenges, leaderboard</td></tr>
+<tr><td>bb_weaponbalance.amxx</td><td>Weapon damage and fire rate (amx_dmg_* / amx_speed_*)</td></tr>
+<tr><td>bb_shop.amxx</td><td>Shop</td></tr>
+<tr><td>bb_rounds.amxx</td><td>Boss rounds, last human, MVP, daily/weekly, block log</td></tr>
+<tr><td>bb_roles.amxx</td><td>Builder roles and party</td></tr>
+<tr><td>bb_votes.amxx</td><td>Rock the vote, build-time vote, base rating</td></tr>
+<tr><td>bb_menu.amxx</td><td>M main menu and admin menu</td></tr>
+</tbody></table></div>
+<div class="callout"><span class="ct">Admin flags</span><p><b>c</b> (kick): build ban, swap, revive, grant build time, admin menu &middot; <b>d</b> (ban): release zombies &middot; <b>m</b>: VIP - every zombie class free &middot; <b>l</b> (rcon): give credits.</p></div>
+</section>
+
+<section class="sec" id="sec-dev">
+<span class="kicker">22 REFERENCE</span>
+<h2>Dev Status</h2>
+<p><b>7.5-NS</b> is our fork of Tirant's Base Builder 7.4. It is installed on the server and switched on for test sessions; the server name changes to <b>[NS] Base Builder</b> when it runs.</p>
+<div class="grid2">
+<div class="mini gold"><h4>Fixed in 7.5-NS</h4><ul><li>Credit upgrades now apply and are saved</li><li>Credits load only after the SteamID is known</li><li>Weapon unlocks no longer leak to the next player</li><li>Saves every round end and map change</li><li>Chainsaw 2&times; damage only for zombies</li><li>Banshee semiclip rewritten (no lag)</li><li>Challenges and medals pay reliably, once</li><li>No credits for world/trigger kills</li><li>Game messages no longer blocked</li><li>Builders lose zombie gravity after a swap</li></ul></div>
+<div class="mini inv"><h4>New in 7.5-NS</h4><ul><li>M main menu + admin menu</li><li>Zombie abilities for every class</li><li>Block HP and repair</li><li>Shop, boss rounds, last human, MVP</li><li>Daily and weekly challenges, /top15, /rank</li><li>Builder roles and party</li><li>Rock the vote, build-time and base votes</li><li>Temporary build access for admins</li><li>Anti-grief block log</li><li>Open-source weapon balance plugin</li></ul></div>
+</div>
+<p class="muted">Found a bug? Tell an admin in game or on Discord - this page is updated with every release.</p>
+</section>
+
+      <div class="foot"><span>Base Builder &middot; CS 1.6 mod guide</span><span>v7.5-NS</span><a href="#top">Back to top &uarr;</a></div>
+    </div>
+  </main>
+</div>
+<button class="totop" id="toTop" type="button" aria-label="Back to top">&uarr;</button>
+<script>
+(function () {
+  var root = document.documentElement;
+  var store = {
+    get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  };
+
+  /* theme */
+  function isDark() {
+    var t = root.getAttribute('data-theme');
+    return t ? t === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  document.getElementById('themeBtn').addEventListener('click', function () {
+    var next = isDark() ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    store.set('rage-theme', next);
+  });
+
+  /* mobile contents drawer */
+  var drawer = document.getElementById('drawer');
+  var backdrop = document.getElementById('backdrop');
+  var menuBtn = document.getElementById('menuBtn');
+  function openDrawer() {
+    drawer.classList.add('open'); backdrop.classList.add('show');
+    menuBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDrawer() {
+    if (!drawer.classList.contains('open')) return;
+    drawer.classList.remove('open'); backdrop.classList.remove('show');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  menuBtn.addEventListener('click', function () { drawer.classList.contains('open') ? closeDrawer() : openDrawer(); });
+  backdrop.addEventListener('click', closeDrawer);
+  window.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeDrawer(); });
+  window.matchMedia('(min-width: 1012px)').addEventListener('change', closeDrawer);
+
+  /* scroll progress + back to top */
+  var bar = document.getElementById('bar');
+  var totop = document.getElementById('toTop');
+  function onScroll() {
+    var se = document.scrollingElement || root;
+    var max = se.scrollHeight - se.clientHeight;
+    bar.style.width = (max > 0 ? (se.scrollTop / max) * 100 : 0) + '%';
+    totop.classList.toggle('show', se.scrollTop > 700);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  totop.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+  /* heading anchors (h2 and h3) */
+  var used = {};
+  function slug(t) {
+    var b = t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'section';
+    var n = b, i = 2;
+    while (used[n] || document.getElementById(n)) n = b + '-' + (i++);
+    used[n] = 1; return n;
+  }
+  document.querySelectorAll('.sec > h2, .sec > h3').forEach(function (h) {
+    if (!h.id) {
+      var host = h.tagName === 'H2' ? h.parentElement : null;
+      h.id = host && host.id ? host.id + '-title' : slug(h.textContent);
+    }
+    var a = document.createElement('a');
+    a.className = 'anchor'; a.href = '#' + h.id; a.setAttribute('aria-label', 'Link to this section'); a.textContent = '#';
+    h.insertBefore(a, h.firstChild);
+  });
+
+  /* table of contents: close drawer on click + highlight the section being read */
+  var links = Array.prototype.slice.call(document.querySelectorAll('.sidebar .nav-link[href^="#"]'));
+  var byId = {};
+  links.forEach(function (a) {
+    byId[a.getAttribute('href').slice(1)] = a;
+    a.addEventListener('click', closeDrawer);
+  });
+  if ('IntersectionObserver' in window) {
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var a = byId[en.target.id];
+        if (!a) return;
+        links.forEach(function (l) { l.classList.remove('active'); });
+        a.classList.add('active');
+        if (window.matchMedia('(min-width: 1012px)').matches) {
+          var sb = drawer, r = a.getBoundingClientRect(), sr = sb.getBoundingClientRect();
+          if (r.top < sr.top || r.bottom > sr.bottom) a.scrollIntoView({ block: 'center' });
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    document.querySelectorAll('section[id]').forEach(function (s) { spy.observe(s); });
+  }
+
+  /* copy buttons */
+  function copyText(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(text).then(function () { return true; }, function () { return false; });
+    }
+    return new Promise(function (resolve) {
+      var t = document.createElement('textarea');
+      t.value = text; t.style.position = 'fixed'; t.style.opacity = '0';
+      document.body.appendChild(t); t.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(t); resolve(ok);
+    });
+  }
+  document.querySelectorAll('.copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var target = document.getElementById(btn.dataset.target);
+      if (!target) return;
+      var clone = target.cloneNode(true);
+      clone.querySelectorAll('.copy').forEach(function (b) { b.remove(); });
+      var text = clone.textContent.replace(/\u00a0/g, ' ').split('\n')
+        .map(function (l) { return l.replace(/\s+\/\/.*$/, '').trim(); })
+        .filter(Boolean).join('\n');
+      copyText(text).then(function (ok) {
+        var old = btn.textContent;
+        btn.textContent = ok ? 'Copied' : 'Press Ctrl+C';
+        btn.classList.add('done');
+        setTimeout(function () { btn.textContent = old; btn.classList.remove('done'); }, 1400);
+      });
+    });
+  });
+
+  /* live filter: pills (data-side) + search box over a table */
+  function setupFilter(rootEl) {
+    var rows = Array.prototype.slice.call(rootEl.querySelectorAll('tbody tr'));
+    var search = rootEl.querySelector('.search');
+    var pills = Array.prototype.slice.call(rootEl.querySelectorAll('.pill'));
+    var counter = rootEl.querySelector('.count');
+    var side = 'all';
+    function apply() {
+      var q = search ? search.value.trim().toLowerCase() : '';
+      var shown = 0;
+      rows.forEach(function (r) {
+        var okSide = side === 'all' || (r.dataset.side || 'all').split(' ').indexOf(side) > -1;
+        var okText = !q || r.textContent.toLowerCase().indexOf(q) > -1;
+        var vis = okSide && okText;
+        r.style.display = vis ? '' : 'none';
+        if (vis) shown++;
+      });
+      if (counter) counter.textContent = shown + ' of ' + rows.length + ' shown';
+    }
+    pills.forEach(function (p) {
+      p.addEventListener('click', function () {
+        pills.forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+        p.setAttribute('aria-pressed', 'true');
+        side = p.dataset.side; apply();
+      });
+    });
+    if (search) search.addEventListener('input', apply);
+    apply();
+  }
+  document.querySelectorAll('[data-filter]').forEach(setupFilter);
+
+  /* FAQ: expand / collapse all */
+  var toggleAll = document.getElementById('toggleAll');
+  if (toggleAll) {
+    toggleAll.addEventListener('click', function () {
+      var items = Array.prototype.slice.call(document.querySelectorAll('#sec-faq details.acc'));
+      var open = items.some(function (d) { return !d.open; });
+      items.forEach(function (d) { d.open = open; });
+      toggleAll.textContent = open ? 'Collapse all' : 'Expand all';
+    });
+  }
+
+  /* open a FAQ item or anchor target that is hidden inside a closed <details> */
+  function openHash() {
+    var id = decodeURIComponent(location.hash.slice(1));
+    var el = id && document.getElementById(id);
+    var d = el && el.closest && el.closest('details');
+    if (d) d.open = true;
+  }
+  window.addEventListener('hashchange', openHash);
+  openHash();
+})();
+
+</script>
+</body>
+</html>
