@@ -1,0 +1,15 @@
+// overview description file for cs_familyguy.bmp
+// overview by cscargo.net - PapyFr78
+
+global 
+{
+	ZOOM	1.75
+	ORIGIN	128	-416	-64
+	ROTATED	1
+}
+
+layer 
+{
+	IMAGE	"overviews/cs_familyguy.bmp"
+	HEIGHT	-673
+}

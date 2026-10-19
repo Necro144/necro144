@@ -1,0 +1,10 @@
+CsCargo vous presente sommairement cs_familyguy
+
+Une quartier dans lequel on trouve 4 otages dans une meme maisons
+
+2 au 1er dans le couloir
+2 dans le garage
+
+A ramener sur la rue pres du depart CT
+
+waypoint Podbot add by sacripan@cscargo.net

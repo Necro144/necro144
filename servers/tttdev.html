@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KG1SF91F87"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-KG1SF91F87');
+</script>
+<script>document.documentElement.classList.add('js');</script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)" />
+<meta name="color-scheme" content="light dark" />
+<meta name="description" content="Trouble in Terrorist Town 2.5.2 for Counter-Strike 1.6 on the [NS] server. The complete guide: roles, rounds, dead bodies, karma, credits, Traitor and Detective shops, maps and commands." />
+<meta property="og:title" content="TTT - CS 1.6 mod guide" />
+<meta property="og:description" content="Find the Traitors before they find you - Trouble in Terrorist Town for Counter-Strike 1.6." />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Necro's Hub" />
+<link rel="canonical" href="/servers/tttdev" />
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect fill='%2304070a' width='180' height='180' rx='40'/%3E%3Ctext x='90' y='125' font-size='100' text-anchor='middle' fill='%232ee6d0' font-weight='900' font-family='monospace'%3EN%3C/text%3E%3C/svg%3E" />
+<title>TTT - CS 1.6 mod guide - Necro's Hub</title>
+
+
+<script>
+(function(){try{var t=localStorage.getItem('rage-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+<style>
+:root{
+  --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --subtle:#f6f8fa; --subtle2:#eef1f4;
+  --link:#0969da; --header:#f6f8fa; --code:rgba(129,139,152,.16); --sel:#ddf4ff;
+  --note:#0969da; --tip:#1a7f37; --imp:#8250df; --warn:#9a6700; --bad:#d1242f;
+  --ghost:#d1242f; --inv:#0969da; --gold:#9a6700;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  color-scheme:light;
+}
+:root[data-theme="dark"]{
+  --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --subtle:#151b23; --subtle2:#1c232d;
+  --link:#4493f8; --header:#010409; --code:rgba(101,108,118,.25); --sel:#143054;
+  --note:#4493f8; --tip:#3fb950; --imp:#ab7df8; --warn:#d29922; --bad:#f85149;
+  --ghost:#f85149; --inv:#4493f8; --gold:#d29922;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme]){
+    --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --subtle:#151b23; --subtle2:#1c232d;
+    --link:#4493f8; --header:#010409; --code:rgba(101,108,118,.25); --sel:#143054;
+    --note:#4493f8; --tip:#3fb950; --imp:#ab7df8; --warn:#d29922; --bad:#f85149;
+    --ghost:#f85149; --inv:#4493f8; --gold:#d29922; color-scheme:dark;
+  }
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--link);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--link);outline-offset:2px;border-radius:4px}
+::selection{background:var(--sel)}
+section[id],[id^="gl-"]{scroll-margin-top:76px}
+
+/* ===== Header ===== */
+.gh-header{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:12px;height:56px;padding:0 16px;padding-top:env(safe-area-inset-top,0px);background:var(--header);border-bottom:1px solid var(--border)}
+.gh-header .bar{position:absolute;left:0;bottom:-1px;height:2px;width:0;background:var(--link)}
+.crumb{display:flex;align-items:center;gap:8px;color:var(--fg);font-size:14px;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.crumb:hover{text-decoration:none}
+.crumb .a{color:var(--link)}
+.crumb .sl{color:var(--muted)}
+.crumb b{font-weight:600}
+.spacer{flex:1}
+.hbtn,.hlink{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:32px;padding:0 12px;font:500 13px/1 var(--sans);color:var(--fg);background:var(--bg);border:1px solid var(--border);border-radius:6px;cursor:pointer;white-space:nowrap}
+.hbtn:hover,.hlink:hover{background:var(--subtle2);text-decoration:none}
+.menu-btn{padding:0 10px;font-size:16px}
+@media(max-width:600px){.hlink{display:none}.crumb .a,.crumb .sl{display:none}.gh-header{padding-left:12px;padding-right:12px;gap:8px}}
+
+/* ===== Layout ===== */
+.layout{max-width:1280px;margin:0 auto;padding:24px 16px 64px;display:grid;grid-template-columns:minmax(0,1fr);gap:24px}
+@media(min-width:1012px){.layout{grid-template-columns:268px minmax(0,1fr);gap:32px;padding:24px 24px 64px}.menu-btn{display:none}}
+
+/* ===== Sidebar / TOC ===== */
+.sidebar{font-size:14px}
+.side-title{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;padding:0 8px 8px}
+.sidebar nav{display:flex;flex-direction:column}
+.drawer__group{padding:14px 8px 4px;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.nav-link{display:block;padding:5px 8px;margin:1px 0;color:var(--fg);border-radius:6px;border-left:2px solid transparent}
+.nav-link:hover{background:var(--subtle2);text-decoration:none}
+.nav-link.active{background:var(--subtle);font-weight:600;border-left-color:var(--link);color:var(--link)}
+.side-sep{border:0;border-top:1px solid var(--border);margin:12px 0;width:100%}
+.backdrop{display:none}
+@media(min-width:1012px){
+  .sidebar{position:sticky;top:80px;align-self:start;max-height:calc(100vh - 96px);overflow-y:auto;padding-right:8px}
+}
+@media(max-width:1011px){
+  .sidebar{position:fixed;inset:0 auto 0 0;width:min(86vw,320px);z-index:70;background:var(--bg);border-right:1px solid var(--border);padding:16px 12px calc(24px + env(safe-area-inset-bottom,0px));overflow-y:auto;transform:translateX(-100%);visibility:hidden;transition:transform .25s ease,visibility 0s linear .25s;box-shadow:0 8px 24px rgba(1,4,9,.4)}
+  .sidebar.open{transform:none;visibility:visible;transition:transform .25s ease,visibility 0s}
+  .backdrop{position:fixed;inset:0;background:rgba(1,4,9,.55);z-index:60;opacity:0;pointer-events:none;transition:opacity .25s ease;display:block}
+  .backdrop.show{opacity:1;pointer-events:auto}
+}
+
+/* ===== README box ===== */
+.doc{min-width:0;border:1px solid var(--border);border-radius:6px;background:var(--bg)}
+.file-head{display:flex;align-items:center;gap:8px;padding:10px 16px;background:var(--subtle);border-bottom:1px solid var(--border);border-radius:6px 6px 0 0;font-size:14px;font-weight:600}
+.file-head .muted{font-weight:400;margin-left:auto}
+.doc-body{padding:24px 16px 32px}
+@media(min-width:768px){.doc-body{padding:32px 48px 48px}}
+
+.doc-body>.sec{margin-top:40px}
+.hero{text-align:left}
+.hero h1{margin:0 0 16px;padding-bottom:.3em;font-size:2em;font-weight:600;line-height:1.25;border-bottom:1px solid var(--border)}
+.hero p{margin:0 0 16px}
+
+h2,h3,h4{position:relative;font-weight:600;line-height:1.25;margin:24px 0 16px}
+.sec>h2{margin:4px 0 16px;padding-bottom:.3em;font-size:1.5em;border-bottom:1px solid var(--border)}
+h3{font-size:1.25em}
+h4{font-size:1em}
+.sec>h3:first-of-type{margin-top:20px}
+.kicker{display:block;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px}
+.anchor{position:absolute;left:-24px;padding-right:6px;color:var(--muted);font-weight:400;font-size:.85em;opacity:0;text-decoration:none}
+h2:hover .anchor,h3:hover .anchor,.anchor:focus{opacity:1}
+.anchor:hover{text-decoration:none;color:var(--link)}
+@media(max-width:767px){.anchor{display:none}}
+
+p{margin:0 0 16px}
+.lead{font-size:1.125em;color:var(--fg)}
+.muted{color:var(--muted)}
+small.muted{font-size:.8em;font-weight:400}
+ul,ol{margin:0 0 16px;padding-left:2em}
+li{margin:.25em 0}
+li>ul,li>ol{margin:.25em 0 0}
+b,strong{font-weight:600}
+hr{border:0;border-top:1px solid var(--border);margin:24px 0}
+.clr-g{color:var(--tip)} .clr-r{color:var(--bad)} .clr-v{color:var(--imp)}
+
+/* ===== Badges / tags ===== */
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 16px}
+.badge{display:inline-block;padding:2px 10px;font-size:12px;font-weight:500;line-height:20px;border:1px solid var(--note);color:var(--note);border-radius:2em;white-space:nowrap}
+a.badge:hover{background:var(--subtle2);text-decoration:none}
+.badge.a{border-color:var(--warn);color:var(--warn)}
+.badge.m{border-color:var(--imp);color:var(--imp)}
+.tag{display:inline-block;padding:0 8px;font-size:12px;font-weight:500;line-height:18px;border:1px solid var(--border);border-radius:2em;white-space:nowrap;color:var(--muted)}
+.tag.t{color:var(--bad);border-color:var(--bad)}
+.tag.ct{color:var(--note);border-color:var(--note)}
+.tag.all{color:var(--warn);border-color:var(--warn)}
+.tag.dead{color:var(--imp);border-color:var(--imp)}
+.tag.lv{color:var(--muted)}
+
+/* ===== Tables ===== */
+.tablewrap{overflow-x:auto;margin:0 0 16px;-webkit-overflow-scrolling:touch}
+.tablewrap table{border-collapse:collapse;border-spacing:0;width:100%;font-size:14px}
+.tablewrap th,.tablewrap td{padding:6px 13px;border:1px solid var(--border);vertical-align:top;text-align:left}
+.tablewrap th{font-weight:600;background:var(--subtle);white-space:nowrap}
+.tablewrap tbody tr:nth-child(even){background:var(--subtle)}
+.tablewrap td:first-child{font-weight:600}
+.tablewrap td:first-child code{font-weight:400;white-space:nowrap}
+.tablewrap td.num{white-space:nowrap;text-align:right;font-variant-numeric:tabular-nums}
+.tablewrap td{min-width:64px}
+
+/* ===== Code ===== */
+code,.kbd{font-family:var(--mono);font-size:85%;padding:.2em .4em;background:var(--code);border-radius:6px}
+.kbd{border:1px solid var(--border);border-bottom-width:2px;background:var(--subtle)}
+.codeblock{position:relative;margin:0 0 16px;padding:16px 76px 16px 16px;font-family:var(--mono);font-size:85%;line-height:1.5;background:var(--subtle);border:1px solid var(--border);border-radius:6px;white-space:pre;overflow-x:auto}
+.codeblock .c{color:var(--muted)}
+.copy{position:absolute;top:8px;right:8px;height:28px;padding:0 10px;font:500 12px/1 var(--sans);color:var(--fg);background:var(--bg);border:1px solid var(--border);border-radius:6px;cursor:pointer}
+.copy:hover{background:var(--subtle2)}
+.copy.done{color:#fff;background:var(--tip);border-color:var(--tip)}
+.tree{margin:0 0 16px;padding:16px;font-family:var(--mono);font-size:85%;line-height:1.55;white-space:pre;overflow-x:auto;background:var(--subtle);border:1px solid var(--border);border-radius:6px}
+.tree b{color:var(--link)} .tree i{color:var(--muted);font-style:normal}
+
+/* ===== Callouts (GitHub alerts) ===== */
+.callout{margin:0 0 16px;padding:8px 16px;border-left:.25em solid var(--note)}
+.callout p{margin:0 0 8px}
+.callout p:last-child{margin-bottom:0}
+.callout .ct{display:block;margin-bottom:4px;font-weight:600;color:var(--note)}
+.callout.warn{border-left-color:var(--warn)} .callout.warn .ct{color:var(--warn)}
+.callout.bad{border-left-color:var(--bad)} .callout.bad .ct{color:var(--bad)}
+
+/* ===== Cards ===== */
+.grid2,.grid3{display:grid;gap:16px;margin:0 0 16px}
+.grid2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid3{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:860px){.grid3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.grid2,.grid3{grid-template-columns:1fr}}
+.mini{padding:12px 16px;background:var(--subtle);border:1px solid var(--border);border-radius:6px}
+.mini h4{margin:0 0 6px;font-size:1em}
+.mini p,.mini ul,.mini ol{font-size:14px;margin:0 0 8px}
+.mini>:last-child{margin-bottom:0}
+.mini li{margin:.15em 0}
+.mini.ghost{border-top:3px solid var(--ghost)} .mini.ghost h4{color:var(--ghost)}
+.mini.inv{border-top:3px solid var(--inv)} .mini.inv h4{color:var(--inv)}
+.mini.gold{border-top:3px solid var(--gold)} .mini.gold h4{color:var(--gold)}
+.mini .big{display:block;margin-bottom:2px;font-size:1.75rem;font-weight:600;line-height:1.2;color:var(--link)}
+
+/* ===== Timeline ===== */
+.stepper,.doc ul.stepper{list-style:none;margin:0 0 16px;padding:0 0 0 20px;border-left:2px solid var(--border)}
+.stepper li{position:relative;margin:0;padding:0 0 16px 16px}
+.stepper li:last-child{padding-bottom:0}
+.stepper li::before{content:"";position:absolute;left:-27px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--note)}
+.stepper li.m::before{border-color:var(--imp)} .stepper li.a::before{border-color:var(--warn)}
+.stepper .t{display:block;font-weight:600}
+
+/* ===== HUD mock ===== */
+.screen{position:relative;height:300px;margin:0 0 8px;border:1px solid #30363d;border-radius:6px;overflow:hidden;background:radial-gradient(circle at 50% 40%,#0b1613 0%,#020605 75%)}
+.screen .hudbox{position:absolute;font:12px/1.5 var(--mono);white-space:pre}
+.screen .tl{left:12px;top:28px;color:#ff8c8c}
+.screen .tc{left:50%;top:10px;transform:translateX(-50%);color:#ebd796;text-align:center}
+.screen .cc{left:50%;bottom:40px;transform:translateX(-50%);color:#ff8c8c;text-align:center}
+.screen .radar{position:absolute;left:8px;top:8px;width:16px;height:16px;border-radius:50%;border:1px solid #2c8f4e;background:rgba(44,143,78,.25)}
+.screen .cross{position:absolute;left:50%;top:42%;width:14px;height:14px;margin:-7px 0 0 -7px;border:1px solid #ff4d4d;border-radius:50%;opacity:.8}
+.screen .tag-note{position:absolute;font:11px/1.4 var(--sans);color:#d29922;border:1px solid #9e6a03;border-radius:6px;padding:1px 6px;background:rgba(0,0,0,.7)}
+@media(max-width:600px){.screen .hudbox{font-size:10px}}
+
+/* ===== Filters ===== */
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+.pill{height:32px;padding:0 12px;font:500 13px/1 var(--sans);color:var(--fg);background:var(--bg);border:1px solid var(--border);border-radius:2em;cursor:pointer}
+.pill:hover{background:var(--subtle2)}
+.pill[aria-pressed="true"]{background:var(--link);border-color:var(--link);color:#fff}
+.search{display:block;width:100%;height:36px;margin:0 0 8px;padding:0 12px;font:14px var(--sans);color:var(--fg);background:var(--bg);border:1px solid var(--border);border-radius:6px}
+.search:focus{outline:2px solid var(--link);outline-offset:-1px;border-color:var(--link)}
+.count{display:block;margin-bottom:8px;font-size:12px;color:var(--muted)}
+
+/* ===== Accordions ===== */
+details.acc{margin:0 0 8px;border:1px solid var(--border);border-radius:6px}
+details.acc summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px 16px;font-weight:600;font-size:15px;border-radius:6px}
+details.acc summary::-webkit-details-marker{display:none}
+details.acc summary::before{content:"";flex:none;width:0;height:0;border-left:6px solid var(--muted);border-top:5px solid transparent;border-bottom:5px solid transparent;transition:transform .15s ease}
+details.acc[open] summary::before{transform:rotate(90deg)}
+details.acc summary:hover{background:var(--subtle)}
+details.acc[open] summary{border-bottom:1px solid var(--border);border-radius:6px 6px 0 0;background:var(--subtle)}
+details.acc .body{padding:12px 16px 4px}
+
+/* ===== Glossary ===== */
+.azbar{display:flex;flex-wrap:wrap;gap:4px;margin:0 0 16px}
+.azbar a,.azbar span{display:inline-grid;place-items:center;width:32px;height:32px;font-size:14px;font-weight:600;border-radius:6px}
+.azbar a{border:1px solid var(--border);color:var(--link)}
+.azbar a:hover{background:var(--subtle2);text-decoration:none}
+.azbar span{color:var(--muted);opacity:.45}
+.gl{display:grid;grid-template-columns:40px minmax(0,1fr);gap:0 12px;padding:12px 0;border-top:1px solid var(--border)}
+.gl .L{font-size:1.75rem;font-weight:600;line-height:1.1;color:var(--muted)}
+.gl dl{margin:0}
+.gl dt{font-weight:600}
+.gl dd{margin:0 0 8px;color:var(--fg)}
+
+/* ===== Footer / helpers ===== */
+.foot{margin-top:32px;padding-top:16px;border-top:1px solid var(--border);font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px 16px}
+.totop{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:40;display:none;width:40px;height:40px;place-items:center;font-size:18px;color:var(--fg);background:var(--bg);border:1px solid var(--border);border-radius:50%;cursor:pointer;box-shadow:0 1px 3px rgba(1,4,9,.2)}
+.totop.show{display:grid}
+.totop:hover{background:var(--subtle2)}
+
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+@media print{.gh-header,.sidebar,.backdrop,.totop,.copy{display:none!important}.layout{display:block;padding:0}.doc{border:0}.doc-body{padding:0}}
+
+</style>
+</head>
+<body>
+<header class="gh-header">
+  <button class="hbtn menu-btn" id="menuBtn" type="button" aria-label="Open table of contents" aria-controls="drawer" aria-expanded="false">&#9776;</button>
+  <a class="crumb" href="/main_index"><span class="a">Necro's Hub</span><span class="sl">/</span><b>ttt</b></a>
+  <span class="spacer"></span>
+  <a class="hlink" href="/main_index">Back to hub</a>
+  <button class="hbtn" id="themeBtn" type="button" aria-label="Switch light or dark theme">Theme</button>
+  <div class="bar" id="bar"></div>
+</header>
+
+<div class="backdrop" id="backdrop"></div>
+<div class="layout">
+  <aside class="sidebar" id="drawer" aria-label="Table of contents">
+    <div class="side-title">On this page</div>
+    <nav>
+      <div class="drawer__group">Start here</div><a class="nav-link" href="#sec-tldr">Quick Start</a><a class="nav-link" href="#sec-what">What is TTT?</a><a class="nav-link" href="#sec-round">How a Round Works</a><div class="drawer__group">Roles</div><a class="nav-link" href="#sec-roles">Roles</a><a class="nav-link" href="#sec-bodies">Dead Bodies</a><a class="nav-link" href="#sec-karma">Karma and Warnings</a><div class="drawer__group">Shop</div><a class="nav-link" href="#sec-credits">Credits</a><a class="nav-link" href="#sec-tshop">Traitor Shop</a><a class="nav-link" href="#sec-dshop">Detective Shop</a><div class="drawer__group">Server</div><a class="nav-link" href="#sec-maps">Maps</a><div class="drawer__group">Interface</div><a class="nav-link" href="#sec-binds">Key Binds</a><a class="nav-link" href="#sec-cmds">All Commands</a><div class="drawer__group">Community</div><a class="nav-link" href="#sec-faq">FAQ</a><a class="nav-link" href="#sec-tips">Tips and Strategy</a><div class="drawer__group">Reference</div><a class="nav-link" href="#sec-owners">For Server Owners</a><a class="nav-link" href="#sec-dev">Dev Status</a>
+      <hr class="side-sep">
+      <a class="nav-link" href="/">Necro's Hub (home)</a>
+      <a class="nav-link" href="/main_index">NECRO144's Main Page</a>
+      <a class="nav-link" href="/fastdl/">FastDL Map Downloads</a>
+    </nav>
+  </aside>
+
+  <main class="doc">
+    <div class="file-head"><span>&#128214; README.md</span><span class="muted">v2.5.2 &middot; In testing</span></div>
+    <div class="doc-body">
+
+<section class="hero" id="top">
+  <h1>Trouble in Terrorist Town</h1>
+  <p class="lead">Someone in this room is a traitor. Find them before they find you - the complete guide to TTT on the [NS] server, from your first round as an Innocent to the Golden Gun.</p>
+  <p>Original mod by <b>GuskiS</b> &middot; [NS] server by <b>Néć[Ř]ø /A/</b></p>
+  <div class="badges"><span class="badge">v2.5.2</span><span class="badge a">In testing</span><span class="badge m">AMX Mod X 1.8.2</span></div>
+  <div class="badges"><a class="badge" href="#sec-tldr">Quick Start</a><a class="badge" href="#sec-roles">Roles</a><a class="badge" href="#sec-karma">Karma</a><a class="badge" href="#sec-tshop">Traitor Shop</a><a class="badge" href="#sec-dshop">Detective Shop</a><a class="badge" href="#sec-cmds">Commands</a></div>
+</section>
+
+<section class="sec" id="sec-tldr">
+<span class="kicker">01 START HERE</span>
+<h2>Quick Start</h2>
+
+<p class="lead">Everyone looks the same. A few players are secretly <b>Traitors</b>; the rest are <b>Innocents</b>, led by the <b>Detectives</b>. Traitors win by killing everyone else, Innocents by finding and killing the Traitors.</p>
+<ol>
+<li><b>Check your role.</b> It is shown when the round starts, after a 10 second preparation.</li>
+<li><b>Say <code>/ttt</code></b> for the command menu with everything in one place.</li>
+<li><b>Innocent?</b> Stay with others, watch who acts strange, and follow the Detective.</li>
+<li><b>Traitor?</b> Blend in, say <code>/buy</code> for traitor gear, and pick your moment.</li>
+<li><b>Detective?</b> You are known to everyone (blue glow). Scan bodies, buy tools with <code>/buy</code>, lead the hunt.</li>
+<li><b>Don't kill without a reason.</b> Killing your own side costs <a href="#sec-karma">karma</a> and earns warnings.</li>
+</ol>
+<div class="callout warn"><span class="ct">Dev build</span><p>TTT is installed on the server and <b>in testing</b> - it runs when the server is switched to TTT mode (server name <b>[NS] TTT</b>). Numbers on this page are the server's current settings.</p></div>
+
+</section>
+
+<section class="sec" id="sec-what">
+<span class="kicker">02 START HERE</span>
+<h2>What is TTT?</h2>
+
+<p><b>Trouble in Terrorist Town</b> is a social deduction mod, originally from Garry's Mod, rebuilt for <b>Counter-Strike 1.6</b> by GuskiS. Nobody knows who the Traitors are - except the Traitors.</p>
+<div class="badges"><span class="badge">CS 1.6</span><span class="badge">AMX Mod X 1.8.2</span><span class="badge">ReAPI</span><span class="badge a">v2.5.2</span><span class="badge m">51 plugins</span></div>
+<div class="grid2">
+<div class="mini inv"><h4>Innocents and Detectives</h4><ul><li>Find the Traitors by their behavior</li><li>Identify bodies to learn roles</li><li>Detectives glow and have their own shop</li><li>Health Station, Golden Gun, Teleport</li><li>Win when every Traitor is dead</li></ul></div>
+<div class="mini ghost"><h4>Traitors</h4><ul><li>Know each other, hidden from everyone else</li><li>Earn credits for kills</li><li>C4, Jihad bomb, throwing knife, Silenced USP</li><li>Fake Detective, Death Station, Newton Launcher</li><li>Win when everyone else is dead</li></ul></div>
+</div>
+
+</section>
+
+<section class="sec" id="sec-round">
+<span class="kicker">03 START HERE</span>
+<h2>How a Round Works</h2>
+
+<ul class="stepper">
+<li><span class="t">Preparation - 10 s</span>Everyone spawns and picks up weapons. Roles are not handed out yet.</li>
+<li class="m"><span class="t">Roles</span>1 Traitor for every 3 players and 1 Detective for every 6. Traitors see each other; Detectives are revealed to all.</li>
+<li class="a"><span class="t">The hunt</span>Traitors kill quietly, Innocents search for clues, bodies are found and identified.</li>
+<li><span class="t">Round end</span>Traitors win when every Innocent and Detective is dead. Innocents win when every Traitor is dead.</li>
+<li class="m"><span class="t">Karma</span>Surviving and winning gives karma; killing your own side takes it away.</li>
+</ul>
+
+</section>
+
+<section class="sec" id="sec-roles">
+<span class="kicker">04 ROLES</span>
+<h2>Roles</h2>
+<div class="tablewrap"><table><thead><tr><th>Role</th><th>How many</th><th>Knows</th><th>Goal</th></tr></thead><tbody>
+<tr><td><span class="tag ct">Innocent</span></td><td>everyone else</td><td>only themselves</td><td>Survive and kill the Traitors</td></tr>
+<tr><td><span class="tag ct">Detective</span></td><td>1 per 6 players</td><td>is known to everyone, glows</td><td>Lead the Innocents, scan bodies, use the Detective shop</td></tr>
+<tr><td><span class="tag t">Traitor</span></td><td>1 per 3 players</td><td>the other Traitors</td><td>Kill every Innocent and Detective</td></tr>
+</tbody></table></div>
+<p>Traitors can buy a <b>Fake Detective</b> disguise, so a "Detective" is not always what they seem.</p>
+</section>
+
+<section class="sec" id="sec-bodies">
+<span class="kicker">05 ROLES</span>
+<h2>Dead Bodies</h2>
+<p>Players who die leave a body. Walk up to it and press <b>E</b> to identify it: everyone learns who it was and their role, and identified bodies glow in their role's color.</p>
+<ul>
+<li>On this server <b>anyone</b> can identify a body, not only Detectives.</li>
+<li>Identifying a body gives <b>+10 karma</b>.</li>
+<li>A Detective identifying a Traitor's body earns <b>+1 credit</b>.</li>
+<li>Aim at a player, body or item to see its info (and a player's health).</li>
+</ul>
+</section>
+
+<section class="sec" id="sec-karma">
+<span class="kicker">06 ROLES</span>
+<h2>Karma and Warnings</h2>
+<p><b>Karma</b> is your reputation. You start at <b>760</b>. It goes up when you play fair and down when you hurt your own side, and it scales the damage you deal - low karma means weaker shots.</p>
+<div class="tablewrap"><table><thead><tr><th>Event</th><th>Karma</th></tr></thead><tbody>
+<tr><td>Win the round and stay alive</td><td>+20</td></tr>
+<tr><td>Identify a body</td><td>+10</td></tr>
+<tr><td>Damaging your own side</td><td>loses karma (0.25 per damage)</td></tr>
+<tr><td>Killing your own side</td><td>loses a lot (&times;50 modifier)</td></tr>
+</tbody></table></div>
+<h3>Warnings</h3>
+<p>Killing the wrong people gives warnings (from 5 players): 3 for wrongly killing Innocents, 2 for wrongly killing Traitors or Detectives, 3 in a row overall. Reaching the limit punishes you: <b>karma removed</b>, <b>HP set to 1</b> and <b>bad aim</b>. Check yours with <code>/tttwarns</code>.</p>
+</section>
+
+<section class="sec" id="sec-credits">
+<span class="kicker">07 SHOP</span>
+<h2>Credits</h2>
+<p>Traitors and Detectives get <b>credits</b> to spend in their shop (<code>/buy</code>). Credits only last for the round.</p>
+<div class="grid2">
+<div class="mini ghost"><h4>Traitor credits</h4><ul><li>Start with 2</li><li>+1 every time a quarter of the players are dead</li><li>+1 for killing a Detective</li></ul></div>
+<div class="mini inv"><h4>Detective credits</h4><ul><li>Start with 1</li><li>+1 every 45 s you survive</li><li>+1 for killing a Traitor</li><li>+1 for identifying a Traitor's body</li></ul></div>
+</div>
+<p>With <b>item sharing</b> you can also buy an item for a teammate instead of yourself.</p>
+</section>
+
+<section class="sec" id="sec-tshop">
+<span class="kicker">08 SHOP</span>
+<h2>Traitor Shop</h2>
+<div class="tablewrap"><table><thead><tr><th>Item</th><th class="num">Credits</th><th>What it does</th></tr></thead><tbody>
+<tr><td>C4</td><td class="num">3</td><td>Plantable bomb with a timer you set (30 - 180 s, default 45). Can be planted once 45 s of the round have passed.</td></tr>
+<tr><td>Jihad Bomb</td><td class="num">2</td><td>Blow yourself up: 300 damage in a 420-unit radius after 3 s.</td></tr>
+<tr><td>Throwing Knife</td><td class="num">3</td><td>An 11&times; damage knife you can throw.</td></tr>
+<tr><td>Silenced USP</td><td class="num">2</td><td>Quiet pistol, 2&times; damage, 10 + 50 bullets.</td></tr>
+<tr><td>Death Station</td><td class="num">2</td><td>Looks like a Health Station - but hurts whoever uses it.</td></tr>
+<tr><td>Fake Detective</td><td class="num">2</td><td>Appear as a Detective (1 per round).</td></tr>
+<tr><td>Newton Launcher</td><td class="num">1</td><td>Knocks players flying - off ledges, into hazards.</td></tr>
+<tr><td>AWP</td><td class="num">1</td><td>A sniper rifle with 1 + 15 bullets.</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="sec" id="sec-dshop">
+<span class="kicker">09 SHOP</span>
+<h2>Detective Shop</h2>
+<div class="tablewrap"><table><thead><tr><th>Item</th><th class="num">Credits</th><th>What it does</th></tr></thead><tbody>
+<tr><td>Health Station</td><td class="num">2</td><td>Place it down; players heal at it.</td></tr>
+<tr><td>Golden Gun</td><td class="num">2</td><td>One special bullet. Choose your target well.</td></tr>
+<tr><td>Pocket Revolver</td><td class="num">3</td><td>A 6-shot revolver.</td></tr>
+<tr><td>UMP Prototype</td><td class="num">1</td><td>An experimental UMP with 10 + 30 bullets.</td></tr>
+<tr><td>Teleporter</td><td class="num">1</td><td>Save a spot and teleport back to it (5 s between uses).</td></tr>
+</tbody></table></div>
+<p class="muted">Installed but switched off for now: DNA Scanner, Armor/Defuser, Disguiser, Hook and Tripmine.</p>
+</section>
+
+<section class="sec" id="sec-maps">
+<span class="kicker">10 SERVER</span>
+<h2>Maps</h2>
+<p>The TTT rotation: <code>cs_crackhouse_beta</code>, <code>cs_familyguy</code>, <code>cs_mansion_beta-ns</code>, <code>cs_mcdonalds</code>, <code>de_eldorado</code>, <code>de_westwood</code>, <code>ttt_little_house_beta-ns</code> and <code>cs_estate</code>. Jailbreak maps work too - doors open with <code>/open</code>.</p>
+<p>Maps and TTT models download automatically and fast from our FastDL. You can also grab the map packs first from the <a href="/fastdl/">FastDL page</a>.</p>
+</section>
+
+<section class="sec" id="sec-binds">
+<span class="kicker">11 INTERFACE</span>
+<h2>Key Binds</h2>
+<p>Handy binds for your console:</p><div class="codeblock" id="bind-ttt">bind n &quot;say /buy&quot;          <span class="c">// shop (Traitors and Detectives)</span>
+bind j &quot;say /ttt&quot;          <span class="c">// command menu</span>
+bind k &quot;say /tttme&quot;        <span class="c">// your role and info</span>
+bind h &quot;+specialvoice&quot;     <span class="c">// special voice channel</span><button class="copy" data-target="bind-ttt">copy</button></div>
+</section>
+
+<section class="sec" id="sec-cmds">
+<span class="kicker">12 INTERFACE</span>
+<h2>All Commands</h2>
+<p>Chat commands start with a slash. Search or filter.</p>
+<div data-filter>
+<div class="pills">
+<button class="pill" data-side="all" aria-pressed="true">All</button>
+<button class="pill" data-side="everyone" aria-pressed="false">Everyone</button>
+<button class="pill" data-side="special" aria-pressed="false">Traitor / Detective</button>
+<button class="pill" data-side="admin" aria-pressed="false">Admin</button>
+</div>
+<input class="search" type="search" placeholder="Search a command or what it does..." aria-label="Search commands" autocomplete="off">
+<span class="count"></span>
+<div class="tablewrap"><table><thead><tr><th>Command</th><th>For</th><th>What it does</th></tr></thead><tbody>
+<tr data-side="everyone"><td><code>/ttt</code></td><td><span class="tag all">Everyone</span></td><td>Command menu - everything in one place</td></tr>
+<tr data-side="everyone"><td><code>/tttme</code></td><td><span class="tag all">Everyone</span></td><td>Your role, karma and info</td></tr>
+<tr data-side="everyone"><td><code>/tttstats</code></td><td><span class="tag all">Everyone</span></td><td>Your stats</td></tr>
+<tr data-side="everyone"><td><code>/ttttop</code></td><td><span class="tag all">Everyone</span></td><td>Top 10 players</td></tr>
+<tr data-side="everyone"><td><code>/tttwarns</code></td><td><span class="tag all">Everyone</span></td><td>Your warnings</td></tr>
+<tr data-side="everyone"><td><code>/rules</code> / <code>/help</code></td><td><span class="tag all">Everyone</span></td><td>Server rules and how to play</td></tr>
+<tr data-side="everyone"><td><code>/open</code></td><td><span class="tag all">Everyone</span></td><td>Open jail doors on jailbreak maps</td></tr>
+<tr data-side="everyone"><td><code>E</code> on a body</td><td><span class="tag all">Everyone</span></td><td>Identify a dead body</td></tr>
+<tr data-side="special"><td><code>/buy</code></td><td><span class="tag t">Traitor</span> <span class="tag ct">Detective</span></td><td>Open your shop</td></tr>
+<tr data-side="special"><td><code>+specialvoice</code></td><td><span class="tag t">Traitor</span> <span class="tag ct">Detective</span></td><td>Talk on the special voice channel</td></tr>
+<tr data-side="admin"><td><code>terminate_round</code></td><td><span class="tag dead">Admin</span></td><td>End the round now (console, rcon flag)</td></tr>
+<tr data-side="admin"><td><code>roundtimer_pause</code> / <code>roundtimer_set</code></td><td><span class="tag dead">Admin</span></td><td>Pause or set the round timer (console)</td></tr>
+</tbody></table></div>
+</div>
+</section>
+
+<section class="sec" id="sec-faq">
+<span class="kicker">13 COMMUNITY</span>
+<h2>FAQ</h2>
+<button class="pill" id="toggleAll" type="button">Expand all</button>
+<details class="acc"><summary>Do I have to download anything?</summary><div class="body"><p>No. Maps and TTT models download automatically from our FastDL when you join. You can also get the map packs from the <a href="/fastdl/">FastDL page</a>.</p></div></details><details class="acc"><summary>Why are my shots so weak?</summary><div class="body"><p>Your karma is low. Karma scales your damage - stop hurting your own side and it climbs back up.</p></div></details><details class="acc"><summary>I got HP 1 and terrible aim.</summary><div class="body"><p>You reached the warning limit for killing the wrong people. Check /tttwarns and play fair.</p></div></details><details class="acc"><summary>How do I know who the Traitors are?</summary><div class="body"><p>You don't - that's the game. Watch behavior, identify bodies and trust the Detective (unless it's a fake).</p></div></details><details class="acc"><summary>Why can't I buy anything?</summary><div class="body"><p>Only Traitors and Detectives have a shop and credits. Innocents use the weapons they find.</p></div></details><details class="acc"><summary>Is my progress saved?</summary><div class="body"><p>Yes - karma, stats and warnings are saved on the server.</p></div></details>
+</section>
+
+<section class="sec" id="sec-tips">
+<span class="kicker">14 COMMUNITY</span>
+<h2>Tips and Strategy</h2>
+<ul>
+<li><b>Innocents:</b> never wander alone, and remember who was near a body when it was found.</li>
+<li>Identify every body - roles of the dead are the best clue you will get.</li>
+<li><b>Traitors:</b> act normal. Shooting in public gives you away; the Silenced USP and throwing knife do not.</li>
+<li>Save credits for C4 when the Innocents group up, or the Jihad bomb as a last stand.</li>
+<li><b>Detectives:</b> drop a Health Station where your team gathers - and watch who avoids it.</li>
+<li>A "Detective" acting oddly may be a Traitor with the Fake Detective item.</li>
+</ul>
+</section>
+
+<section class="sec" id="sec-owners">
+<span class="kicker">15 REFERENCE</span>
+<h2>For Server Owners</h2>
+<p>Needs AMX Mod X 1.8.2 with ReGameDLL and ReAPI (the round terminator and timer controller are the ReAPI versions - no Orpheu). Plugins load from <code>plugins-ttt.ini</code>; settings are in <code>ttt_mod.cfg</code>, models and sounds in <code>ttt_mod.ini</code>.</p><div class="codeblock" id="cfg-ttt">ttt_traitors 3            <span class="c">// one Traitor per X players</span>
+ttt_detectives 6          <span class="c">// one Detective per X players</span>
+ttt_preparation_time 10   <span class="c">// seconds before roles</span>
+ttt_karma_start 760       <span class="c">// starting karma</span>
+ttt_allow_scan_anytime 1  <span class="c">// anyone can identify bodies</span>
+ttt_warnings_punishment cdf <span class="c">// remove karma, HP 1, bad aim</span>
+ttt_stats 2               <span class="c">// stats saved in SQLite</span>
+ttt_antiretry 2           <span class="c">// anti-retry in SQLite</span>
+ttt_price_c4 3            <span class="c">// shop prices: ttt_price_&lt;item&gt;</span><button class="copy" data-target="cfg-ttt">copy</button></div>
+<div class="tablewrap"><table><thead><tr><th>Plugins</th><th>Does</th></tr></thead><tbody>
+<tr><td>amx_settings_api, cs_teams_api, smm_cs_weapons_api</td><td>Helper APIs: settings, safe team changes, weapons</td></tr>
+<tr><td>round_terminator, timer_controller</td><td>End rounds and control the round timer (ReAPI)</td></tr>
+<tr><td>buyzonerange, random_spawns</td><td>Buy anywhere, random spawn points</td></tr>
+<tr><td>ttt_core</td><td>Roles, rounds, karma, credits</td></tr>
+<tr><td>ttt_dead_body, ttt_special_info, ttt_show_infos</td><td>Bodies, aim info, MOTD info</td></tr>
+<tr><td>ttt_round_winner, ttt_team_management</td><td>Round winner and teams</td></tr>
+<tr><td>ttt_warning_system, ttt_antiretry_system, ttt_stats_system</td><td>Warnings and punishments, anti-retry, stats</td></tr>
+<tr><td>ttt_items_base, ttt_items_backpack, ttt_items_sharing, ttt_item_*</td><td>Shop and items</td></tr>
+<tr><td>ttt_mapsupport, ttt_objective_remover, ttt_exploit_prevention</td><td>Jailbreak maps, no objectives, blocks cl_minmodels</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="sec" id="sec-dev">
+<span class="kicker">16 REFERENCE</span>
+<h2>Dev Status</h2>
+<p>This is GuskiS's TTT <b>2.5.2</b> from our April 2024 server, with five extra add-ons: Fake Detective, Hook, Tripmine, item sharing and loyalty. It is installed on the server and switched on for test sessions.</p>
+<div class="grid2">
+<div class="mini gold"><h4>On</h4><ul><li>13 shop items (8 Traitor, 5 Detective)</li><li>Item sharing</li><li>Karma, warnings and punishments</li><li>Stats and anti-retry in SQLite</li><li>Jailbreak map support</li></ul></div>
+<div class="mini inv"><h4>Off for now</h4><ul><li>DNA Scanner</li><li>Armor / Defuser</li><li>Disguiser</li><li>Hook and Tripmine</li><li>Version check (its site is gone)</li></ul></div>
+</div>
+<p class="muted">Found a bug? Tell an admin in game or on Discord - this page is updated with every release.</p>
+</section>
+
+      <div class="foot"><span>TTT &middot; CS 1.6 mod guide</span><span>v2.5.2</span><a href="#top">Back to top &uarr;</a></div>
+    </div>
+  </main>
+</div>
+<button class="totop" id="toTop" type="button" aria-label="Back to top">&uarr;</button>
+<script>
+(function () {
+  var root = document.documentElement;
+  var store = {
+    get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  };
+
+  /* theme */
+  function isDark() {
+    var t = root.getAttribute('data-theme');
+    return t ? t === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  document.getElementById('themeBtn').addEventListener('click', function () {
+    var next = isDark() ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    store.set('rage-theme', next);
+  });
+
+  /* mobile contents drawer */
+  var drawer = document.getElementById('drawer');
+  var backdrop = document.getElementById('backdrop');
+  var menuBtn = document.getElementById('menuBtn');
+  function openDrawer() {
+    drawer.classList.add('open'); backdrop.classList.add('show');
+    menuBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDrawer() {
+    if (!drawer.classList.contains('open')) return;
+    drawer.classList.remove('open'); backdrop.classList.remove('show');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  menuBtn.addEventListener('click', function () { drawer.classList.contains('open') ? closeDrawer() : openDrawer(); });
+  backdrop.addEventListener('click', closeDrawer);
+  window.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeDrawer(); });
+  window.matchMedia('(min-width: 1012px)').addEventListener('change', closeDrawer);
+
+  /* scroll progress + back to top */
+  var bar = document.getElementById('bar');
+  var totop = document.getElementById('toTop');
+  function onScroll() {
+    var se = document.scrollingElement || root;
+    var max = se.scrollHeight - se.clientHeight;
+    bar.style.width = (max > 0 ? (se.scrollTop / max) * 100 : 0) + '%';
+    totop.classList.toggle('show', se.scrollTop > 700);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  totop.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+  /* heading anchors (h2 and h3) */
+  var used = {};
+  function slug(t) {
+    var b = t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'section';
+    var n = b, i = 2;
+    while (used[n] || document.getElementById(n)) n = b + '-' + (i++);
+    used[n] = 1; return n;
+  }
+  document.querySelectorAll('.sec > h2, .sec > h3').forEach(function (h) {
+    if (!h.id) {
+      var host = h.tagName === 'H2' ? h.parentElement : null;
+      h.id = host && host.id ? host.id + '-title' : slug(h.textContent);
+    }
+    var a = document.createElement('a');
+    a.className = 'anchor'; a.href = '#' + h.id; a.setAttribute('aria-label', 'Link to this section'); a.textContent = '#';
+    h.insertBefore(a, h.firstChild);
+  });
+
+  /* table of contents: close drawer on click + highlight the section being read */
+  var links = Array.prototype.slice.call(document.querySelectorAll('.sidebar .nav-link[href^="#"]'));
+  var byId = {};
+  links.forEach(function (a) {
+    byId[a.getAttribute('href').slice(1)] = a;
+    a.addEventListener('click', closeDrawer);
+  });
+  if ('IntersectionObserver' in window) {
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var a = byId[en.target.id];
+        if (!a) return;
+        links.forEach(function (l) { l.classList.remove('active'); });
+        a.classList.add('active');
+        if (window.matchMedia('(min-width: 1012px)').matches) {
+          var sb = drawer, r = a.getBoundingClientRect(), sr = sb.getBoundingClientRect();
+          if (r.top < sr.top || r.bottom > sr.bottom) a.scrollIntoView({ block: 'center' });
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    document.querySelectorAll('section[id]').forEach(function (s) { spy.observe(s); });
+  }
+
+  /* copy buttons */
+  function copyText(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(text).then(function () { return true; }, function () { return false; });
+    }
+    return new Promise(function (resolve) {
+      var t = document.createElement('textarea');
+      t.value = text; t.style.position = 'fixed'; t.style.opacity = '0';
+      document.body.appendChild(t); t.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(t); resolve(ok);
+    });
+  }
+  document.querySelectorAll('.copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var target = document.getElementById(btn.dataset.target);
+      if (!target) return;
+      var clone = target.cloneNode(true);
+      clone.querySelectorAll('.copy').forEach(function (b) { b.remove(); });
+      var text = clone.textContent.replace(/\u00a0/g, ' ').split('\n')
+        .map(function (l) { return l.replace(/\s+\/\/.*$/, '').trim(); })
+        .filter(Boolean).join('\n');
+      copyText(text).then(function (ok) {
+        var old = btn.textContent;
+        btn.textContent = ok ? 'Copied' : 'Press Ctrl+C';
+        btn.classList.add('done');
+        setTimeout(function () { btn.textContent = old; btn.classList.remove('done'); }, 1400);
+      });
+    });
+  });
+
+  /* live filter: pills (data-side) + search box over a table */
+  function setupFilter(rootEl) {
+    var rows = Array.prototype.slice.call(rootEl.querySelectorAll('tbody tr'));
+    var search = rootEl.querySelector('.search');
+    var pills = Array.prototype.slice.call(rootEl.querySelectorAll('.pill'));
+    var counter = rootEl.querySelector('.count');
+    var side = 'all';
+    function apply() {
+      var q = search ? search.value.trim().toLowerCase() : '';
+      var shown = 0;
+      rows.forEach(function (r) {
+        var okSide = side === 'all' || (r.dataset.side || 'all').split(' ').indexOf(side) > -1;
+        var okText = !q || r.textContent.toLowerCase().indexOf(q) > -1;
+        var vis = okSide && okText;
+        r.style.display = vis ? '' : 'none';
+        if (vis) shown++;
+      });
+      if (counter) counter.textContent = shown + ' of ' + rows.length + ' shown';
+    }
+    pills.forEach(function (p) {
+      p.addEventListener('click', function () {
+        pills.forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+        p.setAttribute('aria-pressed', 'true');
+        side = p.dataset.side; apply();
+      });
+    });
+    if (search) search.addEventListener('input', apply);
+    apply();
+  }
+  document.querySelectorAll('[data-filter]').forEach(setupFilter);
+
+  /* FAQ: expand / collapse all */
+  var toggleAll = document.getElementById('toggleAll');
+  if (toggleAll) {
+    toggleAll.addEventListener('click', function () {
+      var items = Array.prototype.slice.call(document.querySelectorAll('#sec-faq details.acc'));
+      var open = items.some(function (d) { return !d.open; });
+      items.forEach(function (d) { d.open = open; });
+      toggleAll.textContent = open ? 'Collapse all' : 'Expand all';
+    });
+  }
+
+  /* open a FAQ item or anchor target that is hidden inside a closed <details> */
+  function openHash() {
+    var id = decodeURIComponent(location.hash.slice(1));
+    var el = id && document.getElementById(id);
+    var d = el && el.closest && el.closest('details');
+    if (d) d.open = true;
+  }
+  window.addEventListener('hashchange', openHash);
+  openHash();
+})();
+
+</script>
+</body>
+</html>
