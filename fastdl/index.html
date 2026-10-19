@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KG1SF91F87"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-KG1SF91F87');
+</script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#04070a" />
+<meta name="color-scheme" content="dark" />
+<meta name="description" content="FastDL map downloads for Necro's Counter-Strike 1.6 servers. Grab the map packs before you join so you load in instantly." />
+<meta property="og:title" content="FastDL // CS 1.6 map downloads" />
+<meta property="og:description" content="Download the custom maps, models and sounds used on Necro's CS 1.6 servers." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect fill='%2304070a' width='180' height='180' rx='40'/%3E%3Ctext x='90' y='125' font-size='100' text-anchor='middle' fill='%232ee6d0' font-weight='900' font-family='monospace'%3EN%3C/text%3E%3C/svg%3E" />
+<link rel="canonical" href="/fastdl/" />
+<title>FastDL // Map Downloads</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #04070a; --bg-deep: #010302; --panel: rgba(8, 16, 18, 0.85); --panel-2: rgba(12, 24, 26, 0.9);
+  --line: rgba(46, 230, 208, 0.18); --line-strong: rgba(46, 230, 208, 0.38);
+  --cyan: #2ee6d0; --cyan-soft: #7dfbe9; --magenta: #ff3ea5; --amber: #ffb703;
+  --text: #d9f6f0; --muted: #6f9b95; --radius: 12px;
+  --mono: 'JetBrains Mono', ui-monospace, monospace; --pixel: 'VT323', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; font-family: var(--mono); }
+body { background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+.bg-grid { position: fixed; inset: 0; z-index: -2; background-color: var(--bg-deep);
+  background-image: linear-gradient(rgba(46,230,208,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(46,230,208,.06) 1px, transparent 1px);
+  background-size: 34px 34px; }
+.bg-glow { position: fixed; inset: 0; z-index: -1;
+  background: radial-gradient(circle at 15% 10%, rgba(46,230,208,.10) 0%, transparent 45%), radial-gradient(circle at 85% 90%, rgba(255,62,165,.08) 0%, transparent 45%); }
+a { color: var(--cyan); }
+:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+
+.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+.crumb { text-decoration: none; color: var(--muted); font-size: 14px; }
+.crumb b { color: var(--cyan); font-weight: 600; }
+.crumb .sl { margin: 0 6px; opacity: .6; }
+.hlink { font-size: 13px; text-decoration: none; border: 1px solid var(--line); padding: 6px 12px; border-radius: 999px; color: var(--text); }
+.hlink:hover { border-color: var(--cyan); color: var(--cyan); }
+
+.hero { padding: 48px 0 28px; }
+.kicker { color: var(--magenta); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; }
+h1 { font-family: var(--pixel); font-weight: 400; font-size: clamp(48px, 9vw, 84px); line-height: .95; margin: 8px 0 14px; color: var(--cyan); text-shadow: 0 0 24px rgba(46,230,208,.35); }
+h1 span { color: var(--text); }
+.lead { max-width: 640px; color: var(--muted); margin: 0; }
+.stats { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+.stat { border: 1px solid var(--line); background: var(--panel); border-radius: 999px; padding: 6px 14px; font-size: 13px; }
+.stat b { color: var(--cyan); font-variant-numeric: tabular-nums; }
+
+.howto { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 8px 0 32px; }
+.step { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; }
+.step .n { font-family: var(--pixel); font-size: 30px; color: var(--amber); line-height: 1; }
+.step h3 { margin: 6px 0 4px; font-size: 15px; }
+.step p { margin: 0; color: var(--muted); font-size: 13px; }
+code { background: rgba(46,230,208,.08); border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; font-size: 12px; color: var(--cyan-soft); word-break: break-all; }
+
+.bar { display: flex; gap: 10px; align-items: center; margin-bottom: 16px; }
+.search { flex: 1; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 11px 14px; color: var(--text); font: inherit; font-size: 14px; }
+.search::placeholder { color: var(--muted); }
+.search:focus { outline: none; border-color: var(--cyan); }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; display: flex; flex-direction: column; gap: 10px; transition: border-color .15s, transform .15s; }
+.card:hover { border-color: var(--line-strong); transform: translateY(-2px); }
+.card .name { font-family: var(--pixel); font-size: 30px; line-height: 1; color: var(--text); word-break: break-all; }
+.card .title { color: var(--muted); font-size: 13px; margin-top: -4px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { font-size: 11px; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+.tag.mode { color: var(--amber); border-color: rgba(255,183,3,.35); }
+.tag.new { color: var(--magenta); border-color: rgba(255,62,165,.4); }
+.about { font-size: 13px; color: var(--text); opacity: .85; margin: 0; }
+.dl { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 6px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; background: var(--cyan); color: #021012; font-weight: 700; font-size: 14px; text-decoration: none; padding: 10px 16px; border-radius: 10px; }
+.btn:hover { background: var(--cyan-soft); }
+.size { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+details { border-top: 1px dashed var(--line); padding-top: 8px; font-size: 12px; }
+summary { cursor: pointer; color: var(--muted); }
+summary:hover { color: var(--cyan); }
+details ul { list-style: none; padding: 0; margin: 8px 0 0; }
+details li { display: flex; justify-content: space-between; gap: 10px; padding: 2px 0; }
+details li a { text-decoration: none; word-break: break-all; }
+details li span { color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+details pre { white-space: pre-wrap; color: var(--muted); font: inherit; margin: 8px 0 0; }
+.empty { display: none; color: var(--muted); padding: 24px 0; }
+
+footer { margin: 48px 0 32px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+
+@media (max-width: 760px) { .howto { grid-template-columns: 1fr; } .grid { grid-template-columns: 1fr; } .hero { padding-top: 32px; } }
+</style>
+</head>
+<body>
+<div class="bg-grid"></div><div class="bg-glow"></div>
+
+<div class="wrap">
+  <header class="top">
+    <a class="crumb" href="/main_index"><span>Necro's Hub</span><span class="sl">/</span><b>fastdl</b></a>
+    <a class="hlink" href="/main_index">Back to hub</a>
+  </header>
+
+  <section class="hero">
+    <div class="kicker">Counter-Strike 1.6 // FastDL</div>
+    <h1>Map <span>Downloads</span></h1>
+    <p class="lead">Every custom map we run, packed with its models, sounds and textures. Grab them before you join and you'll skip the slow in-game download.</p>
+    <div class="stats">
+      <div class="stat"><b>4</b> maps</div>
+      <div class="stat"><b>11.7 MB</b> total</div>
+      <div class="stat">updated <b>2026-10-19</b></div>
+    </div>
+  </section>
+
+  <section class="howto" aria-label="How to install">
+    <div class="step"><div class="n">01</div><h3>Download a pack</h3><p>Each pack is a .zip with everything that map needs.</p></div>
+    <div class="step"><div class="n">02</div><h3>Extract it here</h3><p><code>Steam\steamapps\common\Half-Life\cstrike_downloads</code></p></div>
+    <div class="step"><div class="n">03</div><h3>Join the server</h3><p>The map loads straight away. Overwrite if asked.</p></div>
+  </section>
+
+  <div class="bar">
+    <input class="search" id="q" type="search" placeholder="Search maps..." aria-label="Search maps" autocomplete="off">
+  </div>
+
+  <section class="grid" id="maps">
+    <article class="card" data-search="awesome_cars awesome cars vehicle war ivor weurman">
+      <div class="name">awesome_cars</div>
+      <div class="title">Awesome Cars by Ivor Weurman</div>
+      <div class="tags"><span class="tag new">new</span><span class="tag mode">Vehicle War</span><span class="tag">2 files</span></div>
+      <div class="dl"><a class="btn" href="/fastdl/packs/awesome_cars.zip" download>Download pack</a><span class="size">1.3 MB</span></div>
+      <details><summary>Files in this pack &amp; readme</summary>
+        <ul>
+          <li><a href="/fastdl/maps/awesome_cars.bsp">maps/awesome_cars.bsp</a><span>2.7 MB</span></li>
+          <li><a href="/fastdl/maps/awesome_cars.txt">maps/awesome_cars.txt</a><span>1 KB</span></li>
+        </ul>
+        <pre>-------------------------------------------
+awesome_cars by Ivor Weurman
+HAVE FUN
+-------------------------------------------
+ivor_six@hotmail.com
+http://gamebanana.com/members/606398
+six_mapping
+-------------------------------------------</pre>
+      </details>
+    </article>
+    <article class="card" data-search="cs_horror the horror house hostage rescue corvalho">
+      <div class="name">cs_horror</div>
+      <div class="title">The Horror House by corvalho</div>
+      <div class="tags"><span class="tag new">new</span><span class="tag mode">Hostage Rescue</span><span class="tag">15 files</span></div>
+      <div class="dl"><a class="btn" href="/fastdl/packs/cs_horror.zip" download>Download pack</a><span class="size">2.4 MB</span></div>
+      <details><summary>Files in this pack &amp; readme</summary>
+        <ul>
+          <li><a href="/fastdl/cs_addams.wad">cs_addams.wad</a><span>996 KB</span></li>
+          <li><a href="/fastdl/maps/cs_horror.bsp">maps/cs_horror.bsp</a><span>2.0 MB</span></li>
+          <li><a href="/fastdl/maps/cs_horror.txt">maps/cs_horror.txt</a><span>1 KB</span></li>
+          <li><a href="/fastdl/models/cs_horror/horror_bulb.mdl">models/cs_horror/horror_bulb.mdl</a><span>7 KB</span></li>
+          <li><a href="/fastdl/models/cs_horror/horror_outlamp1.mdl">models/cs_horror/horror_outlamp1.mdl</a><span>28 KB</span></li>
+          <li><a href="/fastdl/models/cs_horror/horror_statue.mdl">models/cs_horror/horror_statue.mdl</a><span>22 KB</span></li>
+          <li><a href="/fastdl/models/cs_horror/horror_tree1.mdl">models/cs_horror/horror_tree1.mdl</a><span>73 KB</span></li>
+          <li><a href="/fastdl/models/cs_horror/horror_tree2.mdl">models/cs_horror/horror_tree2.mdl</a><span>73 KB</span></li>
+          <li><a href="/fastdl/models/cs_horror/hostage.mdl">models/cs_horror/hostage.mdl</a><span>1.1 MB</span></li>
+          <li><a href="/fastdl/sound/ambience/horror_ghosts.wav">sound/ambience/horror_ghosts.wav</a><span>107 KB</span></li>
+          <li><a href="/fastdl/sound/ambience/horror_howl.wav">sound/ambience/horror_howl.wav</a><span>78 KB</span></li>
+          <li><a href="/fastdl/sound/ambience/horror_swamp.wav">sound/ambience/horror_swamp.wav</a><span>133 KB</span></li>
+          <li><a href="/fastdl/sprites/cs_horror/horror_fire.spr">sprites/cs_horror/horror_fire.spr</a><span>129 KB</span></li>
+          <li><a href="/fastdl/sprites/cs_horror/horror_fumee.spr">sprites/cs_horror/horror_fumee.spr</a><span>31 KB</span></li>
+          <li><a href="/fastdl/sprites/cs_horror/horror_glow.spr">sprites/cs_horror/horror_glow.spr</a><span>5 KB</span></li>
+        </ul>
+        <pre>The Horror House - Hostage Rescue
+by corvalho
+The terrorists raided the abandoned house and took as
+hostages four ghosts (if that is possible) then:
+Counter-Terrorists: Enter the dark house, find 
+and rescue the ghost hostages. 
+Take out the Terrorists without 
+jeopardizing the ghost (...this is crazy).
+Terrorists: Prevent Counter-Terrorist
+force from rescuing the hostages. 
+Other Notes: There are 4 ghost hostages in 
+this mission.
+Good luck!</pre>
+      </details>
+    </article>
+    <article class="card" data-search="cs_horror2 the horror house ii (halloween edition) hostage rescue corvalho">
+      <div class="name">cs_horror2</div>
+      <div class="title">The Horror House II (Halloween Edition) by corvalho</div>
+      <div class="tags"><span class="tag new">new</span><span class="tag mode">Hostage Rescue</span><span class="tag">38 files</span></div>
+      <div class="dl"><a class="btn" href="/fastdl/packs/cs_horror2.zip" download>Download pack</a><span class="size">7.4 MB</span></div>
+      <details><summary>Files in this pack &amp; readme</summary>
+        <ul>
+          <li><a href="/fastdl/cs_horror2.wad">cs_horror2.wad</a><span>4.4 MB</span></li>
+          <li><a href="/fastdl/maps/cs_horror2.bsp">maps/cs_horror2.bsp</a><span>3.2 MB</span></li>
+          <li><a href="/fastdl/maps/cs_horror2.txt">maps/cs_horror2.txt</a><span>1 KB</span></li>
+          <li><a href="/fastdl/models/cs_horror/cauldron.mdl">models/cs_horror/cauldron.mdl</a><span>74 KB</span></li>
+          <li><a href="/fastdl/models/cs_horror/couch.mdl">models/cs_horror/couch.mdl</a><span>70 KB</span></li>
+          <li><a href="/fastdl/models/cs_horror/couffin.mdl">models/cs_horror/couffin.mdl</a><span>151 KB</span></li>
+          <li><a href="/fastdl/models/cs_horror/deadguy_desert.mdl">models/cs_horror/deadguy_desert.mdl</a><span>263 KB</span></li>
+          <li><a href="/fastdl/models/cs_horror/dragon.mdl">models/cs_horror/dragon.mdl</a><span>141 KB</span></li>
+          <li><a href="/fastdl/models/cs_horror/horror_bulb.mdl">models/cs_horror/horror_bulb.mdl</a><span>7 KB</span></li>
+          <li><a href="/fastdl/models/cs_horror/horror_ghost.mdl">models/cs_horror/horror_ghost.mdl</a><span>159 KB</span></li>
+          <li><a href="/fastdl/models/cs_horror/horror_outlamp1.mdl">models/cs_horror/horror_outlamp1.mdl</a><span>28 KB</span></li>
+          <li><a href="/fastdl/models/cs_horror/horror_spider.mdl">models/cs_horror/horror_spider.mdl</a><span>122 KB</span></li>
+          <li><a href="/fastdl/models/cs_horror/horror_statue.mdl">models/cs_horror/horror_statue.mdl</a><span>22 KB</span></li>
+          <li><a href="/fastdl/models/cs_horror/horror_tree1.mdl">models/cs_horror/horror_tree1.mdl</a><span>73 KB</span></li>
+          <li><a href="/fastdl/models/cs_horror/horror_tree2.mdl">models/cs_horror/horror_tree2.mdl</a><span>73 KB</span></li>
+          <li><a href="/fastdl/models/cs_horror/hostage.mdl">models/cs_horror/hostage.mdl</a><span>1.1 MB</span></li>
+          <li><a href="/fastdl/models/cs_horror/lumber.mdl">models/cs_horror/lumber.mdl</a><span>75 KB</span></li>
+          <li><a href="/fastdl/models/cs_horror/pentagram.mdl">models/cs_horror/pentagram.mdl</a><span>24 KB</span></li>
+          <li><a href="/fastdl/models/cs_horror/piano.mdl">models/cs_horror/piano.mdl</a><span>74 KB</span></li>
+          <li><a href="/fastdl/models/cs_horror/portrait1.mdl">models/cs_horror/portrait1.mdl</a><span>67 KB</span></li>
+          <li><a href="/fastdl/models/cs_horror/portrait2.mdl">models/cs_horror/portrait2.mdl</a><span>67 KB</span></li>
+          <li><a href="/fastdl/models/cs_horror/portrait3.mdl">models/cs_horror/portrait3.mdl</a><span>68 KB</span></li>
+          <li><a href="/fastdl/models/cs_horror/portrait4.mdl">models/cs_horror/portrait4.mdl</a><span>67 KB</span></li>
+          <li><a href="/fastdl/models/cs_horror/portrait5.mdl">models/cs_horror/portrait5.mdl</a><span>67 KB</span></li>
+          <li><a href="/fastdl/models/cs_horror/portrait6.mdl">models/cs_horror/portrait6.mdl</a><span>67 KB</span></li>
+          <li><a href="/fastdl/models/cs_horror/portrait7.mdl">models/cs_horror/portrait7.mdl</a><span>68 KB</span></li>
+          <li><a href="/fastdl/models/cs_horror/pumpkin1.mdl">models/cs_horror/pumpkin1.mdl</a><span>268 KB</span></li>
+          <li><a href="/fastdl/models/cs_horror/pumpkin2.mdl">models/cs_horror/pumpkin2.mdl</a><span>268 KB</span></li>
+          <li><a href="/fastdl/models/cs_horror/pumpkin3.mdl">models/cs_horror/pumpkin3.mdl</a><span>268 KB</span></li>
+          <li><a href="/fastdl/overviews/cs_horror2.bmp">overviews/cs_horror2.bmp</a><span>769 KB</span></li>
+          <li><a href="/fastdl/overviews/cs_horror2.txt">overviews/cs_horror2.txt</a><span>1 KB</span></li>
+          <li><a href="/fastdl/sound/cs_horror/horror_fire.wav">sound/cs_horror/horror_fire.wav</a><span>59 KB</span></li>
+          <li><a href="/fastdl/sound/cs_horror/horror_house_ambience.wav">sound/cs_horror/horror_house_ambience.wav</a><span>704 KB</span></li>
+          <li><a href="/fastdl/sound/cs_horror/horror_out_ambience.wav">sound/cs_horror/horror_out_ambience.wav</a><span>1.1 MB</span></li>
+          <li><a href="/fastdl/sound/cs_horror/horror_piano.wav">sound/cs_horror/horror_piano.wav</a><span>281 KB</span></li>
+          <li><a href="/fastdl/sprites/cs_horror/horror_fire.spr">sprites/cs_horror/horror_fire.spr</a><span>129 KB</span></li>
+          <li><a href="/fastdl/sprites/cs_horror/horror_fumee.spr">sprites/cs_horror/horror_fumee.spr</a><span>31 KB</span></li>
+          <li><a href="/fastdl/sprites/cs_horror/horror_glow.spr">sprites/cs_horror/horror_glow.spr</a><span>5 KB</span></li>
+        </ul>
+        <pre>The Horror House II (Halloween Edition) - H. Rescue 
+by corvalho (corvalho1@gmail.com)
+The terrorists raided the haunted house and with
+their advanced supernatural techniques they took
+four ghosts as hostages.
+Counter-Terrorists: Enter the dark house, find 
+and rescue the ghost hostages. 
+Take out the Terrorists without 
+jeopardizing the ghost. (...wut?)
+Terrorists: Prevent Counter-Terrorist
+force from rescuing the hostages. 
+Other Notes: There are 4 ghost hostages in 
+this mission.
+Good luck!</pre>
+      </details>
+    </article>
+    <article class="card" data-search="woohoo_cars woohoo cars vehicle war">
+      <div class="name">woohoo_cars</div>
+      <div class="title">Woohoo Cars</div>
+      <div class="tags"><span class="tag new">new</span><span class="tag mode">Vehicle War</span><span class="tag">1 file</span></div>
+      <p class="about">Drive weird cars online with friends.</p>
+      <div class="dl"><a class="btn" href="/fastdl/packs/woohoo_cars.zip" download>Download pack</a><span class="size">633 KB</span></div>
+      <details><summary>Files in this pack</summary>
+        <ul>
+          <li><a href="/fastdl/maps/woohoo_cars.bsp">maps/woohoo_cars.bsp</a><span>1.5 MB</span></li>
+        </ul>
+        <p><a href="https://gamebanana.com/mods/98492" rel="noopener" target="_blank">Original download page</a></p>
+      </details>
+    </article>
+  </section>
+  <p class="empty" id="empty">No maps match that search.</p>
+
+  <footer>
+    <span>Necro's Hub // FastDL</span>
+    <span>Maps belong to their authors. Shared for players of our servers.</span>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var q = document.getElementById('q'), cards = document.querySelectorAll('.card'), empty = document.getElementById('empty');
+  q.addEventListener('input', function () {
+    var v = q.value.trim().toLowerCase(), shown = 0;
+    cards.forEach(function (c) { var hit = !v || c.getAttribute('data-search').indexOf(v) !== -1; c.hidden = !hit; if (hit) shown++; });
+    empty.style.display = shown ? 'none' : 'block';
+  });
+})();
+</script>
+</body>
+</html>

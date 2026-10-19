@@ -1,0 +1,14 @@
+// overview description file for cs_horror2.bsp
+
+global 
+{
+	ZOOM	2.16
+	ORIGIN	441.00 	43.00	-32.00
+	ROTATED	0
+}
+
+layer 
+{
+	IMAGE	"overviews/cs_horror2.bmp"
+	HEIGHT	0
+}
