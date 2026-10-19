@@ -1,0 +1,14 @@
+// overview description file for cs_rhs22.bsp
+
+global 
+{
+	ZOOM	2.19
+	ORIGIN	524 	-509.92	-513
+	ROTATED	1
+}
+
+layer 
+{
+	IMAGE	"overviews/cs_rhs22.bmp"
+	HEIGHT	-512
+}

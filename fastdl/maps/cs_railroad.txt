@@ -1,0 +1,19 @@
+Railroad - Sauver les hotages
+par SoMaR & OLiVE (simonmarsault180@hotmail.com)
+
+Counter-terrorists : infiltrer la maison occupée par les
+terroristes et ramener les 4 hotages dans ou derrière le saloon.
+
+Terrorists : Empêcher que les counter-terroristes sauvent
+les hotages.
+
+Notes : un chemin de fer fréquenté traverse la région.
+
+--------------------------------------------------
+
+Merci au site du zero pour tous ces cours!
+www.siteduzero.com
+
+--------------------------------------------------
+
+-- Appuyer sur la touche d'action pour continuer --

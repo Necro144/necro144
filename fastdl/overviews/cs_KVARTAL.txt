@@ -1,0 +1,14 @@
+// overview description file for cs_KVARTAL.bsp
+
+global 
+{
+	ZOOM	0.75
+	ORIGIN	0	-27.53 -640
+	ROTATED	1
+}
+
+layer 
+{
+	IMAGE	"overviews/cs_KVARTAL.bmp"
+	HEIGHT	-640
+}

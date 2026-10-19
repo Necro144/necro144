@@ -1,0 +1,14 @@
+// overview description file for cs_railroad.bsp
+
+global 
+{
+	ZOOM	1.75
+	ORIGIN	-192.81 	-545.13	-223.00
+	ROTATED	1
+}
+
+layer 
+{
+	IMAGE	"overviews/cs_railroad.bmp"
+	HEIGHT	-763.00
+}

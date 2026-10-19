@@ -1,0 +1,18 @@
+cs_mansion by -=DjBourgeoisie=-
+nightowl2874@yahoo.com
+
+Installation
+Simply extract to your \Steam\SteamApps\youremail\counter-strike source\cstrike\maps folder.
+
+My first map for cs_source, really a remake of the classic cs map and influenced by
+cs_estate.  Roughly 3 weeks of work were put into it.  
+
+*NOTES*
+
+Power box in basement will toggle the 1st floor lights (some of them).
+
+4 hostages total, 1 in the basement, 2 on the first floor, and 1 on the 2nd floor.  
+
+Rescue point is in ct spawn.  
+
+Have fun!

@@ -1,0 +1,14 @@
+// overview description file for es_KVARTAL.bsp
+
+global 
+{
+	ZOOM	0.76
+	ORIGIN	0	-8 -640
+	ROTATED	1
+}
+
+layer 
+{
+	IMAGE	"overviews/es_KVARTAL.bmp"
+	HEIGHT	-640
+}
