@@ -256,9 +256,9 @@
 
     <script>
         const servers = [
-            { name: 'CS1.6| LEGENDLEAGUES JAILBREAK', img: 'cslljb.png', ip: '51.38.36.119:27015', online: true },
-            { name: 'CS1.6| ZOMBIE PLAGUE', img: 'csllzp.png', ip: '51.38.36.119:27010', online: true },
-            { name: 'CS1.6| ADMINS ONLY (10 Slots)', img: 'csprivate.png', ip: '173.199.107.158:27055', online: true },
+            { name: 'CS1.6| LEGENDLEAGUES JAILBREAK', img: 'cslljb.png', ip: '51.38.36.119:27015', online: false },
+            { name: 'CS1.6| ZOMBIE PLAGUE', img: 'csllzp.png', ip: '51.38.36.119:27010', online: false },
+            { name: '|NS| Old School [ Steam Only ]', img: 'csprivate.png', ip: '173.199.107.158:27055', online: true },
             { name: 'CS1.6| BASE BUILDER', img: 'basebuilder.jpg', ip: '178.63.16.211:27215', online: false },
             { name: 'CS1.6| CLASSIC OLD SCHOOL', img: 'classic.jpg', ip: '178.63.16.211:27095', online: false },
             { name: 'CS1.6| DEATH RUN', img: 'dr.jpg', ip: '178.63.16.211:27085', online: false },
@@ -281,7 +281,7 @@
                         <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
                         <span class="status-pill ${statusClass}">${server.online ? 'ONLINE' : 'OFFLINE'}</span>
                     </div>
-                    <div class="card-image"><img src="${server.img}" alt="${server.name} thumbnail"></div>
+                    <div class="card-image"><img src="../assets/img/${server.img}" alt="${server.name} thumbnail" loading="lazy" onerror="this.onerror=null;this.src='../assets/img/cs.png'"></div>
                     <div class="card-content">
                         <span class="server-name">${server.name}</span>
                         <a href="${joinHref}" class="${joinClasses}" ${server.online ? '' : 'tabindex="-1" aria-disabled="true"'}>${joinLabel}</a>
