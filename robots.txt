@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://necro144.com/sitemap.xml
