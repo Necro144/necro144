@@ -16,15 +16,14 @@
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)" />
 <meta name="color-scheme" content="light dark" />
-<meta name="description" content="Base Builder 7.5-NS - the zombie building mod for Counter-Strike 1.6 on the [NS] server. The complete guide: building, roles, zombie classes and abilities, credits, shop, upgrades, medals, challenges and commands." />
-<meta property="og:title" content="Base Builder - CS 1.6 mod guide" />
-<meta property="og:description" content="Build a base, survive the zombie horde - Base Builder 7.5-NS for Counter-Strike 1.6." />
+<meta name="description" content="Base Builder 7.5-NS: the Counter-Strike 1.6 zombie base building mod for AMX Mod X, based on Tirant's Base Builder 7.4. Build, then survive the zombies. Full guide." />
+<meta property="og:title" content="Base Builder 7.5-NS - CS 1.6 zombie base builder mod" />
+<meta property="og:description" content="Base Builder 7.5-NS: the Counter-Strike 1.6 zombie base building mod for AMX Mod X, based on Tirant's Base Builder 7.4. Build, then survive the zombies. Full guide." />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="apple-mobile-web-app-title" content="Necro's Hub" />
-<link rel="canonical" href="/servers/basebuilderdev" />
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect fill='%2304070a' width='180' height='180' rx='40'/%3E%3Ctext x='90' y='125' font-size='100' text-anchor='middle' fill='%232ee6d0' font-weight='900' font-family='monospace'%3EN%3C/text%3E%3C/svg%3E" />
-<title>Base Builder - CS 1.6 mod guide - Necro's Hub</title>
+<title>Base Builder 7.5 - CS 1.6 Zombie Base Builder Mod (AMXX) | Necro</title>
 
 
 <script>
@@ -256,7 +255,21 @@ details.acc .body{padding:12px 16px 4px}
 @media print{.gh-header,.sidebar,.backdrop,.totop,.copy{display:none!important}.layout{display:block;padding:0}.doc{border:0}.doc-body{padding:0}}
 
 </style>
-</head>
+<!-- seo:start -->
+<link rel="canonical" href="https://necro144.com/servers/basebuilderdev" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://necro144.com/servers/basebuilderdev" />
+<meta property="og:site_name" content="Necro - necro144.com" />
+<meta property="og:image" content="https://necro144.com/assets/img/cs16.jpg" />
+<meta name="twitter:card" content="summary" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"SoftwareApplication","name":"Base Builder 7.5-NS","alternateName":["Base Builder","BaseBuilder","Base Builder 7.4","Base Builder 7.5","CS 1.6 base builder","CS 1.6 zombie base builder mod","bb mod amxx"],"description":"Zombie base building game mode for Counter-Strike 1.6: builders make a base from map blocks, then survive the zombie horde. AMX Mod X, based on Tirant's Base Builder 7.4.","applicationCategory":"GameApplication","applicationSubCategory":"Counter-Strike 1.6 game mode","operatingSystem":"Counter-Strike 1.6 server with AMX Mod X 1.8.2","softwareVersion":"7.5-NS","url":"https://necro144.com/servers/basebuilderdev","author":{"@type":"Person","name":"Qusai","alternateName":"|Ns| Necro","url":"https://necro144.com/"}},
+{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://necro144.com/"},{"@type":"ListItem","position":2,"name":"Game servers","item":"https://necro144.com/servers/"},{"@type":"ListItem","position":3,"name":"Base Builder 7.5-NS","item":"https://necro144.com/servers/basebuilderdev"}]},
+{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I have to download anything?","acceptedAnswer":{"@type":"Answer","text":"No. Maps, zombie models and sounds download automatically and fast from our FastDL. You can also grab the map packs from the FastDL page before you join."}},{"@type":"Question","name":"I can't move a block.","acceptedAnswer":{"@type":"Answer","text":"Blocks only move during the build phase, and not if someone else locked it (unless they are in your party). After the release you can only repair."}},{"@type":"Question","name":"Is my progress saved?","acceptedAnswer":{"@type":"Answer","text":"Yes: credits, unlocked guns and classes, upgrades, medals and challenges are saved by your SteamID."}},{"@type":"Question","name":"How do I use my zombie ability?","acceptedAnswer":{"@type":"Answer","text":"Press G (drop) or R (reload). The chat tells you when it is on cooldown."}},{"@type":"Question","name":"I spawned inside a block / I am stuck.","acceptedAnswer":{"@type":"Answer","text":"Say /stuck . You are moved to the nearest free spot. The server also checks every spawn and frees anyone a block is dropped on."}},{"@type":"Question","name":"I spawned frozen - the camera is stuck and there is no HUD.","acceptedAnswer":{"@type":"Answer","text":"Say /fix . It finishes your join, puts the camera back and resends the HUD. If that does not help, an admin can fix you from M → Admin."}},{"@type":"Question","name":"Someone keeps wrecking our base.","acceptedAnswer":{"@type":"Answer","text":"Tell an admin: every block move is logged, and admins can build-ban griefers."}},{"@type":"Question","name":"Why does M not open the team menu?","acceptedAnswer":{"@type":"Answer","text":"M opens the Base Builder menu. Teams are set by the mod: builders are CT, zombies are T."}}]}
+]}
+</script>
+<!-- seo:end --></head>
 <body>
 <header class="gh-header">
   <button class="hbtn menu-btn" id="menuBtn" type="button" aria-label="Open table of contents" aria-controls="drawer" aria-expanded="false">&#9776;</button>
@@ -286,7 +299,7 @@ details.acc .body{padding:12px 16px 4px}
 
 <section class="hero" id="top">
   <h1>Base Builder</h1>
-  <p class="lead">Build a fortress, survive the horde. Builders have two and a half minutes to move blocks into a base, then the zombies are released - the complete guide to the NS edition, from your first block to boss rounds.</p>
+  <p class="lead">Build a fortress, survive the horde. <b>Base Builder</b> is the classic <b>Counter-Strike 1.6 zombie building mod</b> - this is the NS edition (7.5-NS, based on Tirant's Base Builder 7.4) for AMX Mod X. Builders have two and a half minutes to move blocks into a base, then the zombies are released. The complete guide, from your first block to boss rounds.</p>
   <p>Original mod by <b>Tirant</b> &middot; NS edition by <b>Néć[Ř]ø /A/</b></p>
   <div class="badges"><span class="badge">v7.5-NS</span><span class="badge a">In testing</span><span class="badge m">AMX Mod X 1.8.2</span></div>
   <div class="badges"><a class="badge" href="#sec-tldr">Quick Start</a><a class="badge" href="#sec-build">Building</a><a class="badge" href="#sec-zclass">Zombie Classes</a><a class="badge" href="#sec-shop">Shop</a><a class="badge" href="#sec-cmds">Commands</a><a class="badge" href="#sec-dev">Dev Status</a></div>
