@@ -24,7 +24,8 @@ Everything is built for **AMX Mod X 1.8.2** on ReGameDLL, deployed straight from
 | **[BHOP RAGE](https://necro144.com/servers/roadrage)** | Bunny-hop, knife and turbo-ability mod: 9 classes, Rage Points shop, races, map cars, jump stats and leaderboards | 🟢 Live · v1.3.0 |
 | **[Horror Hunt](https://necro144.com/servers/horror_hunt)** | *Hidden Haunted Seek* - invisible ghosts hunt investigators armed with flashlights | 🟡 Playable · v0.8.0 |
 | **[Base Builder](https://necro144.com/servers/basebuilderdev)** | Zombie building mod - Tirant's 7.4 rebuilt as 7.5-NS: M menu, shop, boss rounds, roles, votes, anti-stuck | 🟡 In testing · 7.5-NS |
-| **[FastDL](https://necro144.com/fastdl/)** | 74 custom maps with download packs, served to players straight from this site | 🟢 Live |
+| **[GunGame](https://necro144.com/servers/)** | Written from scratch: 26 weapon levels ending on the knife, knife steals a level, instant respawn, warm-up, M menu, top winners · 5 gg_ maps | 🟢 On now · 1.0.0-NS |
+| **[FastDL](https://necro144.com/fastdl/)** | 79 custom maps with download packs, served to players straight from this site | 🟢 Live |
 | **[necro144.com](https://necro144.com)** | This repository - my personal site, photography portfolio and server hub | 🟢 Live |
 | **[asubank.org](https://asubank.org)** | ASU-E Library - exam test banks for Applied Science Private University students | 🟢 Live |
 
@@ -36,7 +37,7 @@ Everything is built for **AMX Mod X 1.8.2** on ReGameDLL, deployed straight from
 connect 173.199.107.158:27055
 ```
 
-Steam only · the active mode rotates between BHOP RAGE, Horror Hunt and Base Builder - the server name shows which one is on.
+Steam only · the active mode rotates between BHOP RAGE, Horror Hunt, Base Builder and GunGame - the server name shows which one is on.
 Maps and models download automatically and fast from the site.
 
 ## Toolbox
