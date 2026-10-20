@@ -9,132 +9,119 @@
   gtag('js', new Date());
   gtag('config', 'G-KG1SF91F87');
 </script>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#04070a" />
-<meta name="color-scheme" content="dark" />
-<meta name="description" content="Download Counter-Strike 1.6 maps: 79 custom CS 1.6 maps with models, sounds and wads in one-click packs - bhop, base builder, horror, surf and more. FastDL for the [NS] server." />
-<meta property="og:title" content="FastDL // CS 1.6 map downloads" />
-<meta property="og:description" content="Download the custom maps, models and sounds used on Necro's CS 1.6 servers." />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect fill='%2304070a' width='180' height='180' rx='40'/%3E%3Ctext x='90' y='125' font-size='100' text-anchor='middle' fill='%232ee6d0' font-weight='900' font-family='monospace'%3EN%3C/text%3E%3C/svg%3E" />
-<link rel="canonical" href="https://necro144.com/fastdl/" />
-<meta property="og:url" content="https://necro144.com/fastdl/" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>CS 1.6 Maps Download - FastDL Map Packs | Necro</title>
+<meta name="description" content="Download Counter-Strike 1.6 maps: 79 custom CS 1.6 maps with models, sounds and wads in one-click packs - bhop, base builder, gungame, horror and more. FastDL for the [NS] server.">
+<meta name="theme-color" content="#0a0e13">
+<link rel="canonical" href="https://necro144.com/fastdl/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://necro144.com/fastdl/">
+<meta property="og:title" content="CS 1.6 map downloads - [NS] FastDL">
+<meta property="og:description" content="79 custom maps with every model, sound and texture they need, packed one zip per map.">
+<meta property="og:image" content="https://necro144.com/assets/img/cs16.jpg">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232ee6d0'/%3E%3Ctext x='32' y='45' font-size='36' text-anchor='middle' fill='%23032621' font-family='monospace' font-weight='800'%3EN%3C/text%3E%3C/svg%3E">
+<script>(function(){try{var t=localStorage.getItem('site-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=VT323&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/site.css">
 <style>
-:root {
-  --bg: #04070a; --bg-deep: #010302; --panel: rgba(8, 16, 18, 0.85); --panel-2: rgba(12, 24, 26, 0.9);
-  --line: rgba(46, 230, 208, 0.18); --line-strong: rgba(46, 230, 208, 0.38);
-  --cyan: #2ee6d0; --cyan-soft: #7dfbe9; --magenta: #ff3ea5; --amber: #ffb703;
-  --text: #d9f6f0; --muted: #6f9b95; --radius: 12px;
-  --mono: 'JetBrains Mono', ui-monospace, monospace; --pixel: 'VT323', monospace;
-}
-*, *::before, *::after { box-sizing: border-box; }
-html, body { margin: 0; font-family: var(--mono); }
-body { background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-.bg-grid { position: fixed; inset: 0; z-index: -2; background-color: var(--bg-deep);
-  background-image: linear-gradient(rgba(46,230,208,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(46,230,208,.06) 1px, transparent 1px);
-  background-size: 34px 34px; }
-.bg-glow { position: fixed; inset: 0; z-index: -1;
-  background: radial-gradient(circle at 15% 10%, rgba(46,230,208,.10) 0%, transparent 45%), radial-gradient(circle at 85% 90%, rgba(255,62,165,.08) 0%, transparent 45%); }
-a { color: var(--cyan); }
-:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
-.wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+  .stats { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 999px; padding: 7px 14px; font-size: 0.9rem; color: var(--text-2); }
+  .stat b { color: var(--text); font-variant-numeric: tabular-nums; }
 
-.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 0; border-bottom: 1px solid var(--line); }
-.crumb { text-decoration: none; color: var(--muted); font-size: 14px; }
-.crumb b { color: var(--cyan); font-weight: 600; }
-.crumb .sl { margin: 0 6px; opacity: .6; }
-.hlink { font-size: 13px; text-decoration: none; border: 1px solid var(--line); padding: 6px 12px; border-radius: 999px; color: var(--text); }
-.hlink:hover { border-color: var(--cyan); color: var(--cyan); }
+  .toolbar { position: sticky; top: 64px; z-index: 20; padding: 14px 0; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+  .toolbar .wrap { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  .search { flex: 1 1 260px; min-width: 0; background: var(--surface); border: 1px solid var(--border-strong); border-radius: 11px; padding: 11px 14px; color: var(--text); font: 500 0.98rem var(--sans); }
+  .search::placeholder { color: var(--muted); }
+  .search:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { border: 1px solid var(--border); background: var(--surface); color: var(--text-2); border-radius: 999px; padding: 6px 12px; font: 600 0.84rem var(--sans); cursor: pointer; }
+  .chip:hover { border-color: var(--border-strong); color: var(--text); }
+  .chip[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+  .count { color: var(--muted); font-size: 0.88rem; margin-left: auto; white-space: nowrap; }
 
-.hero { padding: 48px 0 28px; }
-.kicker { color: var(--magenta); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; }
-h1 { font-family: var(--pixel); font-weight: 400; font-size: clamp(48px, 9vw, 84px); line-height: .95; margin: 8px 0 14px; color: var(--cyan); text-shadow: 0 0 24px rgba(46,230,208,.35); }
-h1 span { color: var(--text); }
-.lead { max-width: 640px; color: var(--muted); margin: 0; }
-.stats { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
-.stat { border: 1px solid var(--line); background: var(--panel); border-radius: 999px; padding: 6px 14px; font-size: 13px; }
-.stat b { color: var(--cyan); font-variant-numeric: tabular-nums; }
-
-.howto { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 8px 0 32px; }
-.step { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; }
-.step .n { font-family: var(--pixel); font-size: 30px; color: var(--amber); line-height: 1; }
-.step h3 { margin: 6px 0 4px; font-size: 15px; }
-.step p { margin: 0; color: var(--muted); font-size: 13px; }
-code { background: rgba(46,230,208,.08); border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; font-size: 12px; color: var(--cyan-soft); word-break: break-all; }
-
-.bar { display: flex; gap: 10px; align-items: center; margin-bottom: 16px; }
-.search { flex: 1; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 11px 14px; color: var(--text); font: inherit; font-size: 14px; }
-.search::placeholder { color: var(--muted); }
-.search:focus { outline: none; border-color: var(--cyan); }
-
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
-.card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; display: flex; flex-direction: column; gap: 10px; transition: border-color .15s, transform .15s; }
-.card:hover { border-color: var(--line-strong); transform: translateY(-2px); }
-.card .name { font-family: var(--pixel); font-size: 30px; line-height: 1; color: var(--text); word-break: break-all; }
-.card .title { color: var(--muted); font-size: 13px; margin-top: -4px; }
-.tags { display: flex; flex-wrap: wrap; gap: 6px; }
-.tag { font-size: 11px; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
-.tag.mode { color: var(--amber); border-color: rgba(255,183,3,.35); }
-.tag.new { color: var(--magenta); border-color: rgba(255,62,165,.4); }
-.about { font-size: 13px; color: var(--text); opacity: .85; margin: 0; }
-.dl { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 6px; }
-.btn { display: inline-flex; align-items: center; gap: 8px; background: var(--cyan); color: #021012; font-weight: 700; font-size: 14px; text-decoration: none; padding: 10px 16px; border-radius: 10px; }
-.btn:hover { background: var(--cyan-soft); }
-.size { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
-details { border-top: 1px dashed var(--line); padding-top: 8px; font-size: 12px; }
-summary { cursor: pointer; color: var(--muted); }
-summary:hover { color: var(--cyan); }
-details ul { list-style: none; padding: 0; margin: 8px 0 0; }
-details li { display: flex; justify-content: space-between; gap: 10px; padding: 2px 0; }
-details li a { text-decoration: none; word-break: break-all; }
-details li span { color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
-details pre { white-space: pre-wrap; color: var(--muted); font: inherit; margin: 8px 0 0; }
-.empty { display: none; color: var(--muted); padding: 24px 0; }
-
-footer { margin: 48px 0 32px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
-
-@media (max-width: 760px) { .howto { grid-template-columns: 1fr; } .grid { grid-template-columns: 1fr; } .hero { padding-top: 32px; } }
+  .maps { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 16px; }
+  .map .name { font: 700 1.12rem/1.25 var(--mono); color: var(--text); word-break: break-all; letter-spacing: -0.01em; }
+  .map .title { color: var(--muted); font-size: 0.9rem; margin-top: -6px; }
+  .map .about { margin: 0; color: var(--text-2); font-size: 0.93rem; }
+  .map .tag.new { color: var(--rose); border-color: rgba(255, 92, 138, 0.4); background: rgba(255, 92, 138, 0.08); }
+  .map .tag.mode { color: var(--amber); border-color: rgba(255, 183, 3, 0.35); background: var(--amber-soft); }
+  .map .dl { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 6px; }
+  .map .size { font: 500 0.85rem var(--mono); color: var(--muted); }
+  .map details { border-top: 1px dashed var(--border-strong); padding-top: 10px; font-size: 0.86rem; }
+  .map summary { cursor: pointer; color: var(--muted); font-weight: 500; }
+  .map summary:hover { color: var(--accent); }
+  .map details ul { list-style: none; padding: 0; margin: 10px 0 0; display: grid; gap: 4px; }
+  .map details li { display: flex; justify-content: space-between; gap: 10px; }
+  .map details li a { font-family: var(--mono); font-size: 0.82rem; word-break: break-all; }
+  .map details li span { color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .map details pre { white-space: pre-wrap; color: var(--muted); font: 0.8rem/1.5 var(--mono); margin: 10px 0 0; max-height: 220px; overflow: auto; }
+  .map details p { margin: 10px 0 0; }
+  .map[hidden] { display: none; }
+  .empty { display: none; color: var(--muted); padding: 32px 0; text-align: center; }
+  .path { font-family: var(--mono); font-size: 0.85rem; background: var(--surface-2); border: 1px solid var(--border); border-radius: 7px; padding: 2px 7px; word-break: break-all; }
 </style>
 </head>
 <body>
-<div class="bg-grid"></div><div class="bg-glow"></div>
+<a class="skip" href="#main">Skip to content</a>
 
-<div class="wrap">
-  <header class="top">
-    <a class="crumb" href="/main_index"><span>Necro's Hub</span><span class="sl">/</span><b>fastdl</b></a>
-    <a class="hlink" href="/main_index">Back to hub</a>
-  </header>
+<header class="site-header">
+  <nav class="wrap nav" aria-label="Main">
+    <a class="brand" href="/"><span class="brand-mark">N</span><span>Necro<small>necro144.com</small></span></a>
+    <button class="icon-btn nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu">☰</button>
+    <ul class="nav-links" id="menu">
+      <li><a href="/">Home</a></li>
+      <li><a href="/photography/">Photography</a></li>
+      <li><a href="/servers/" aria-current="page">Game Servers</a></li>
+      <li><a href="/#projects">Projects</a></li>
+      <li><a href="/main_index">Links</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+    <button class="icon-btn" type="button" data-theme-toggle aria-label="Switch theme">☀</button>
+  </nav>
+</header>
+
+<main id="main">
 
   <section class="hero">
-    <div class="kicker">Counter-Strike 1.6 // FastDL</div>
-    <h1>Map <span>Downloads</span></h1>
-    <p class="lead">Every custom map we run, packed with its models, sounds and textures. Grab them before you join and you'll skip the slow in-game download.</p>
-    <div class="stats">
-      <div class="stat"><b>79</b> maps</div>
-      <div class="stat"><b>151.3 MB</b> total</div>
-      <div class="stat">updated <b>2026-10-21</b></div>
+    <div class="wrap">
+      <span class="eyebrow amber">Counter-Strike 1.6 · FastDL</span>
+      <h1>Map <span>downloads</span></h1>
+      <p class="lead">Every custom map on the [NS] server, packed with the models, sounds and textures it needs. Grab a pack before you join and skip the in-game download.</p>
+      <div class="stats">
+        <span class="stat"><b>79</b> maps</span>
+        <span class="stat"><b>151.3 MB</b> of packs</span>
+        <span class="stat">updated <b>2026-10-21</b></span>
+      </div>
     </div>
   </section>
 
-  <section class="howto" aria-label="How to install">
-    <div class="step"><div class="n">01</div><h3>Download a pack</h3><p>Each pack is a .zip with everything that map needs.</p></div>
-    <div class="step"><div class="n">02</div><h3>Extract it here</h3><p><code>Steam\steamapps\common\Half-Life\cstrike_downloads</code></p></div>
-    <div class="step"><div class="n">03</div><h3>Join the server</h3><p>The map loads straight away. Overwrite if asked.</p></div>
+  <section class="section section-alt" style="padding-top:44px;padding-bottom:44px">
+    <div class="wrap grid grid-3">
+      <div class="card"><div class="card-icon">⬇</div><h3>Download a pack</h3><p>One .zip per map with everything it uses.</p></div>
+      <div class="card"><div class="card-icon">🗂</div><h3>Extract it here</h3><p><span class="path">Steam\steamapps\common\Half-Life\cstrike_downloads</span></p></div>
+      <div class="card"><div class="card-icon amber">▶</div><h3>Join the server</h3><p>The map loads straight away. Overwrite if Windows asks. <a href="/servers/">Server info →</a></p></div>
+    </div>
   </section>
 
-  <div class="bar">
-    <input class="search" id="q" type="search" placeholder="Search maps..." aria-label="Search maps" autocomplete="off">
+  <div class="toolbar">
+    <div class="wrap">
+      <input class="search" id="q" type="search" placeholder="Search maps, modes or authors…" aria-label="Search maps" autocomplete="off">
+      <div class="chips" id="chips" role="group" aria-label="Filter by game mode"></div>
+      <span class="count" id="count" aria-live="polite"></span>
+    </div>
   </div>
 
-  <section class="grid" id="maps">
-    <article class="card" data-search="as_forest assassination">
+  <section class="section" style="padding-top:28px">
+    <div class="wrap">
+      <div class="maps" id="maps">
+    <article class="card map reveal" data-search="as_forest assassination" data-mode="Assassination">
       <div class="name">as_forest</div>
       <div class="tags"><span class="tag mode">Assassination</span><span class="tag">3 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/as_forest.zip" download>Download pack</a><span class="size">1.2 MB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/as_forest.zip" download>Download pack</a><span class="size">1.2 MB</span></div>
       <details><summary>Files in this pack &amp; readme</summary>
         <ul>
           <li><a href="/fastdl/maps/as_forest.bsp">maps/as_forest.bsp</a><span>3.5 MB</span></li>
@@ -160,10 +147,10 @@ Terrorists: Stick it in the VIP&#39;s pooper.
 (Press FIRE to continue)</pre>
       </details>
     </article>
-    <article class="card" data-search="as_highrise assassination">
+    <article class="card map reveal" data-search="as_highrise assassination" data-mode="Assassination">
       <div class="name">as_highrise</div>
       <div class="tags"><span class="tag mode">Assassination</span><span class="tag">2 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/as_highrise.zip" download>Download pack</a><span class="size">2.1 MB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/as_highrise.zip" download>Download pack</a><span class="size">2.1 MB</span></div>
       <details><summary>Files in this pack &amp; readme</summary>
         <ul>
           <li><a href="/fastdl/maps/as_highrise.bsp">maps/as_highrise.bsp</a><span>3.9 MB</span></li>
@@ -183,10 +170,10 @@ kill the VIP.
 (Press FIRE to continue)</pre>
       </details>
     </article>
-    <article class="card" data-search="as_kvartal assassination">
+    <article class="card map reveal" data-search="as_kvartal assassination" data-mode="Assassination">
       <div class="name">as_KVARTAL</div>
       <div class="tags"><span class="tag mode">Assassination</span><span class="tag">85 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/as_KVARTAL.zip" download>Download pack</a><span class="size">17.9 MB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/as_KVARTAL.zip" download>Download pack</a><span class="size">17.9 MB</span></div>
       <details><summary>Files in this pack &amp; readme</summary>
         <ul>
           <li><a href="/fastdl/gfx/env/vostokbk.tga">gfx/env/vostokbk.tga</a><span>192 KB</span></li>
@@ -288,11 +275,11 @@ Other Notes: MADE IN RUSSIA!
 (Press FIRE to continue)</pre>
       </details>
     </article>
-    <article class="card" data-search="awesome_cars awesome cars vehicle war ivor weurman">
+    <article class="card map reveal" data-search="awesome_cars awesome cars vehicle war ivor weurman" data-mode="Vehicle War">
       <div class="name">awesome_cars</div>
       <div class="title">Awesome Cars by Ivor Weurman</div>
       <div class="tags"><span class="tag mode">Vehicle War</span><span class="tag">2 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/awesome_cars.zip" download>Download pack</a><span class="size">1.3 MB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/awesome_cars.zip" download>Download pack</a><span class="size">1.3 MB</span></div>
       <details><summary>Files in this pack &amp; readme</summary>
         <ul>
           <li><a href="/fastdl/maps/awesome_cars.bsp">maps/awesome_cars.bsp</a><span>2.7 MB</span></li>
@@ -308,50 +295,50 @@ six_mapping
 -------------------------------------------</pre>
       </details>
     </article>
-    <article class="card" data-search="bb_around3 base builder">
+    <article class="card map reveal" data-search="bb_around3 base builder" data-mode="Base Builder">
       <div class="name">bb_around3</div>
       <div class="tags"><span class="tag mode">Base Builder</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/bb_around3.zip" download>Download pack</a><span class="size">198 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/bb_around3.zip" download>Download pack</a><span class="size">198 KB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/bb_around3.bsp">maps/bb_around3.bsp</a><span>592 KB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="bb_assault base builder">
+    <article class="card map reveal" data-search="bb_assault base builder" data-mode="Base Builder">
       <div class="name">bb_assault</div>
       <div class="tags"><span class="tag mode">Base Builder</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/bb_assault.zip" download>Download pack</a><span class="size">277 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/bb_assault.zip" download>Download pack</a><span class="size">277 KB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/bb_assault.bsp">maps/bb_assault.bsp</a><span>852 KB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="bb_aztec_s1 base builder">
+    <article class="card map reveal" data-search="bb_aztec_s1 base builder" data-mode="Base Builder">
       <div class="name">bb_aztec_s1</div>
       <div class="tags"><span class="tag mode">Base Builder</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/bb_aztec_s1.zip" download>Download pack</a><span class="size">814 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/bb_aztec_s1.zip" download>Download pack</a><span class="size">814 KB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/bb_aztec_s1.bsp">maps/bb_aztec_s1.bsp</a><span>1.9 MB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="bb_basement6 base builder">
+    <article class="card map reveal" data-search="bb_basement6 base builder" data-mode="Base Builder">
       <div class="name">bb_basement6</div>
       <div class="tags"><span class="tag mode">Base Builder</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/bb_basement6.zip" download>Download pack</a><span class="size">156 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/bb_basement6.zip" download>Download pack</a><span class="size">156 KB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/bb_basement6.bsp">maps/bb_basement6.bsp</a><span>453 KB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="bb_cg_bigbase base builder">
+    <article class="card map reveal" data-search="bb_cg_bigbase base builder" data-mode="Base Builder">
       <div class="name">bb_cg_bigbase</div>
       <div class="tags"><span class="tag mode">Base Builder</span><span class="tag">11 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/bb_cg_bigbase.zip" download>Download pack</a><span class="size">2.9 MB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/bb_cg_bigbase.zip" download>Download pack</a><span class="size">2.9 MB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/gfx/env/gardenbk.tga">gfx/env/gardenbk.tga</a><span>166 KB</span></li>
@@ -368,10 +355,10 @@ six_mapping
         </ul>
       </details>
     </article>
-    <article class="card" data-search="bb_cg_hard_base_v4 base builder">
+    <article class="card map reveal" data-search="bb_cg_hard_base_v4 base builder" data-mode="Base Builder">
       <div class="name">bb_cg_hard_base_v4</div>
       <div class="tags"><span class="tag mode">Base Builder</span><span class="tag">2 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/bb_cg_hard_base_v4.zip" download>Download pack</a><span class="size">1.9 MB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/bb_cg_hard_base_v4.zip" download>Download pack</a><span class="size">1.9 MB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/bb_cg_hard_base_v4.bsp">maps/bb_cg_hard_base_v4.bsp</a><span>3.5 MB</span></li>
@@ -379,160 +366,160 @@ six_mapping
         </ul>
       </details>
     </article>
-    <article class="card" data-search="bb_classic11 base builder">
+    <article class="card map reveal" data-search="bb_classic11 base builder" data-mode="Base Builder">
       <div class="name">bb_classic11</div>
       <div class="tags"><span class="tag mode">Base Builder</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/bb_classic11.zip" download>Download pack</a><span class="size">128 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/bb_classic11.zip" download>Download pack</a><span class="size">128 KB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/bb_classic11.bsp">maps/bb_classic11.bsp</a><span>349 KB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="bb_corners7 base builder">
+    <article class="card map reveal" data-search="bb_corners7 base builder" data-mode="Base Builder">
       <div class="name">bb_corners7</div>
       <div class="tags"><span class="tag mode">Base Builder</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/bb_corners7.zip" download>Download pack</a><span class="size">173 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/bb_corners7.zip" download>Download pack</a><span class="size">173 KB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/bb_corners7.bsp">maps/bb_corners7.bsp</a><span>480 KB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="bb_crete3 base builder">
+    <article class="card map reveal" data-search="bb_crete3 base builder" data-mode="Base Builder">
       <div class="name">bb_crete3</div>
       <div class="tags"><span class="tag mode">Base Builder</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/bb_crete3.zip" download>Download pack</a><span class="size">128 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/bb_crete3.zip" download>Download pack</a><span class="size">128 KB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/bb_crete3.bsp">maps/bb_crete3.bsp</a><span>454 KB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="bb_divided3 base builder">
+    <article class="card map reveal" data-search="bb_divided3 base builder" data-mode="Base Builder">
       <div class="name">bb_divided3</div>
       <div class="tags"><span class="tag mode">Base Builder</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/bb_divided3.zip" download>Download pack</a><span class="size">191 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/bb_divided3.zip" download>Download pack</a><span class="size">191 KB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/bb_divided3.bsp">maps/bb_divided3.bsp</a><span>535 KB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="bb_dust2 base builder">
+    <article class="card map reveal" data-search="bb_dust2 base builder" data-mode="Base Builder">
       <div class="name">bb_dust2</div>
       <div class="tags"><span class="tag mode">Base Builder</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/bb_dust2.zip" download>Download pack</a><span class="size">347 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/bb_dust2.zip" download>Download pack</a><span class="size">347 KB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/bb_dust2.bsp">maps/bb_dust2.bsp</a><span>1.0 MB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="bb_frigid2 base builder">
+    <article class="card map reveal" data-search="bb_frigid2 base builder" data-mode="Base Builder">
       <div class="name">bb_frigid2</div>
       <div class="tags"><span class="tag mode">Base Builder</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/bb_frigid2.zip" download>Download pack</a><span class="size">191 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/bb_frigid2.zip" download>Download pack</a><span class="size">191 KB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/bb_frigid2.bsp">maps/bb_frigid2.bsp</a><span>605 KB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="bb_havana base builder">
+    <article class="card map reveal" data-search="bb_havana base builder" data-mode="Base Builder">
       <div class="name">bb_havana</div>
       <div class="tags"><span class="tag mode">Base Builder</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/bb_havana.zip" download>Download pack</a><span class="size">579 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/bb_havana.zip" download>Download pack</a><span class="size">579 KB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/bb_havana.bsp">maps/bb_havana.bsp</a><span>1.8 MB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="bb_insane base builder">
+    <article class="card map reveal" data-search="bb_insane base builder" data-mode="Base Builder">
       <div class="name">bb_insane</div>
       <div class="tags"><span class="tag mode">Base Builder</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/bb_insane.zip" download>Download pack</a><span class="size">869 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/bb_insane.zip" download>Download pack</a><span class="size">869 KB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/bb_insane.bsp">maps/bb_insane.bsp</a><span>1.7 MB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="bb_lockout base builder">
+    <article class="card map reveal" data-search="bb_lockout base builder" data-mode="Base Builder">
       <div class="name">bb_lockout</div>
       <div class="tags"><span class="tag mode">Base Builder</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/bb_lockout.zip" download>Download pack</a><span class="size">645 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/bb_lockout.zip" download>Download pack</a><span class="size">645 KB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/bb_lockout.bsp">maps/bb_lockout.bsp</a><span>1.5 MB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="bb_megabuild5 base builder">
+    <article class="card map reveal" data-search="bb_megabuild5 base builder" data-mode="Base Builder">
       <div class="name">bb_megabuild5</div>
       <div class="tags"><span class="tag mode">Base Builder</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/bb_megabuild5.zip" download>Download pack</a><span class="size">133 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/bb_megabuild5.zip" download>Download pack</a><span class="size">133 KB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/bb_megabuild5.bsp">maps/bb_megabuild5.bsp</a><span>375 KB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="bb_oilrig base builder">
+    <article class="card map reveal" data-search="bb_oilrig base builder" data-mode="Base Builder">
       <div class="name">bb_oilrig</div>
       <div class="tags"><span class="tag mode">Base Builder</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/bb_oilrig.zip" download>Download pack</a><span class="size">328 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/bb_oilrig.zip" download>Download pack</a><span class="size">328 KB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/bb_oilrig.bsp">maps/bb_oilrig.bsp</a><span>970 KB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="bb_retribution5 base builder">
+    <article class="card map reveal" data-search="bb_retribution5 base builder" data-mode="Base Builder">
       <div class="name">bb_retribution5</div>
       <div class="tags"><span class="tag mode">Base Builder</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/bb_retribution5.zip" download>Download pack</a><span class="size">186 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/bb_retribution5.zip" download>Download pack</a><span class="size">186 KB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/bb_retribution5.bsp">maps/bb_retribution5.bsp</a><span>508 KB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="bb_separation6 base builder">
+    <article class="card map reveal" data-search="bb_separation6 base builder" data-mode="Base Builder">
       <div class="name">bb_separation6</div>
       <div class="tags"><span class="tag mode">Base Builder</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/bb_separation6.zip" download>Download pack</a><span class="size">558 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/bb_separation6.zip" download>Download pack</a><span class="size">558 KB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/bb_separation6.bsp">maps/bb_separation6.bsp</a><span>1.3 MB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="bb_tournament4 base builder">
+    <article class="card map reveal" data-search="bb_tournament4 base builder" data-mode="Base Builder">
       <div class="name">bb_tournament4</div>
       <div class="tags"><span class="tag mode">Base Builder</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/bb_tournament4.zip" download>Download pack</a><span class="size">190 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/bb_tournament4.zip" download>Download pack</a><span class="size">190 KB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/bb_tournament4.bsp">maps/bb_tournament4.bsp</a><span>667 KB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="bb_ultrabuild4 base builder">
+    <article class="card map reveal" data-search="bb_ultrabuild4 base builder" data-mode="Base Builder">
       <div class="name">bb_ultrabuild4</div>
       <div class="tags"><span class="tag mode">Base Builder</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/bb_ultrabuild4.zip" download>Download pack</a><span class="size">150 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/bb_ultrabuild4.zip" download>Download pack</a><span class="size">150 KB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/bb_ultrabuild4.bsp">maps/bb_ultrabuild4.bsp</a><span>427 KB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="bio_dust_city1 biohazard">
+    <article class="card map reveal" data-search="bio_dust_city1 biohazard" data-mode="Biohazard">
       <div class="name">bio_dust_city1</div>
       <div class="tags"><span class="tag mode">Biohazard</span><span class="tag">2 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/bio_dust_city1.zip" download>Download pack</a><span class="size">1.0 MB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/bio_dust_city1.zip" download>Download pack</a><span class="size">1.0 MB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/bio_dust_city1.bsp">maps/bio_dust_city1.bsp</a><span>1.4 MB</span></li>
@@ -540,40 +527,40 @@ six_mapping
         </ul>
       </details>
     </article>
-    <article class="card" data-search="bio_escape_bridge37 biohazard">
+    <article class="card map reveal" data-search="bio_escape_bridge37 biohazard" data-mode="Biohazard">
       <div class="name">bio_escape_bridge37</div>
       <div class="tags"><span class="tag mode">Biohazard</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/bio_escape_bridge37.zip" download>Download pack</a><span class="size">1.1 MB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/bio_escape_bridge37.zip" download>Download pack</a><span class="size">1.1 MB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/bio_escape_bridge37.bsp">maps/bio_escape_bridge37.bsp</a><span>2.4 MB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="bio_escape_bridge45 biohazard">
+    <article class="card map reveal" data-search="bio_escape_bridge45 biohazard" data-mode="Biohazard">
       <div class="name">bio_escape_bridge45</div>
       <div class="tags"><span class="tag mode">Biohazard</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/bio_escape_bridge45.zip" download>Download pack</a><span class="size">1.2 MB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/bio_escape_bridge45.zip" download>Download pack</a><span class="size">1.2 MB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/bio_escape_bridge45.bsp">maps/bio_escape_bridge45.bsp</a><span>2.0 MB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="bio_escape_bridge46 biohazard">
+    <article class="card map reveal" data-search="bio_escape_bridge46 biohazard" data-mode="Biohazard">
       <div class="name">bio_escape_bridge46</div>
       <div class="tags"><span class="tag mode">Biohazard</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/bio_escape_bridge46.zip" download>Download pack</a><span class="size">1.4 MB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/bio_escape_bridge46.zip" download>Download pack</a><span class="size">1.4 MB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/bio_escape_bridge46.bsp">maps/bio_escape_bridge46.bsp</a><span>3.9 MB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="bio_escape_bridge53 biohazard">
+    <article class="card map reveal" data-search="bio_escape_bridge53 biohazard" data-mode="Biohazard">
       <div class="name">bio_escape_bridge53</div>
       <div class="tags"><span class="tag mode">Biohazard</span><span class="tag">2 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/bio_escape_bridge53.zip" download>Download pack</a><span class="size">1.6 MB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/bio_escape_bridge53.zip" download>Download pack</a><span class="size">1.6 MB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/bio_escape_bridge53.bsp">maps/bio_escape_bridge53.bsp</a><span>4.4 MB</span></li>
@@ -581,20 +568,20 @@ six_mapping
         </ul>
       </details>
     </article>
-    <article class="card" data-search="cs_5star hostage rescue">
+    <article class="card map reveal" data-search="cs_5star hostage rescue" data-mode="Hostage Rescue">
       <div class="name">cs_5star</div>
       <div class="tags"><span class="tag mode">Hostage Rescue</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/cs_5star.zip" download>Download pack</a><span class="size">528 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/cs_5star.zip" download>Download pack</a><span class="size">528 KB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/cs_5star.bsp">maps/cs_5star.bsp</a><span>1.7 MB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="cs_alpin hostage rescue">
+    <article class="card map reveal" data-search="cs_alpin hostage rescue" data-mode="Hostage Rescue">
       <div class="name">cs_alpin</div>
       <div class="tags"><span class="tag mode">Hostage Rescue</span><span class="tag">2 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/cs_alpin.zip" download>Download pack</a><span class="size">1.0 MB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/cs_alpin.zip" download>Download pack</a><span class="size">1.0 MB</span></div>
       <details><summary>Files in this pack &amp; readme</summary>
         <ul>
           <li><a href="/fastdl/maps/cs_alpin.bsp">maps/cs_alpin.bsp</a><span>2.3 MB</span></li>
@@ -617,10 +604,10 @@ of the cable way station
 (Press FIRE to continue)</pre>
       </details>
     </article>
-    <article class="card" data-search="cs_arabstreets hostage rescue">
+    <article class="card map reveal" data-search="cs_arabstreets hostage rescue" data-mode="Hostage Rescue">
       <div class="name">cs_arabstreets</div>
       <div class="tags"><span class="tag mode">Hostage Rescue</span><span class="tag">2 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/cs_arabstreets.zip" download>Download pack</a><span class="size">2.9 MB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/cs_arabstreets.zip" download>Download pack</a><span class="size">2.9 MB</span></div>
       <details><summary>Files in this pack &amp; readme</summary>
         <ul>
           <li><a href="/fastdl/maps/cs_arabstreets.bsp">maps/cs_arabstreets.bsp</a><span>5.0 MB</span></li>
@@ -644,20 +631,20 @@ from rescuing the Hostages.
 (Press FIRE to continue)</pre>
       </details>
     </article>
-    <article class="card" data-search="cs_compound hostage rescue">
+    <article class="card map reveal" data-search="cs_compound hostage rescue" data-mode="Hostage Rescue">
       <div class="name">cs_compound</div>
       <div class="tags"><span class="tag mode">Hostage Rescue</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/cs_compound.zip" download>Download pack</a><span class="size">549 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/cs_compound.zip" download>Download pack</a><span class="size">549 KB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/cs_compound.bsp">maps/cs_compound.bsp</a><span>1.3 MB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="cs_costabrava hostage rescue">
+    <article class="card map reveal" data-search="cs_costabrava hostage rescue" data-mode="Hostage Rescue">
       <div class="name">cs_costabrava</div>
       <div class="tags"><span class="tag mode">Hostage Rescue</span><span class="tag">59 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/cs_costabrava.zip" download>Download pack</a><span class="size">7.3 MB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/cs_costabrava.zip" download>Download pack</a><span class="size">7.3 MB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/gfx/env/costabravabk.tga">gfx/env/costabravabk.tga</a><span>256 KB</span></li>
@@ -722,20 +709,20 @@ from rescuing the Hostages.
         </ul>
       </details>
     </article>
-    <article class="card" data-search="cs_desert hostage rescue">
+    <article class="card map reveal" data-search="cs_desert hostage rescue" data-mode="Hostage Rescue">
       <div class="name">cs_desert</div>
       <div class="tags"><span class="tag mode">Hostage Rescue</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/cs_desert.zip" download>Download pack</a><span class="size">376 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/cs_desert.zip" download>Download pack</a><span class="size">376 KB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/cs_desert.bsp">maps/cs_desert.bsp</a><span>1.0 MB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="cs_docks hostage rescue">
+    <article class="card map reveal" data-search="cs_docks hostage rescue" data-mode="Hostage Rescue">
       <div class="name">cs_docks</div>
       <div class="tags"><span class="tag mode">Hostage Rescue</span><span class="tag">2 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/cs_docks.zip" download>Download pack</a><span class="size">724 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/cs_docks.zip" download>Download pack</a><span class="size">724 KB</span></div>
       <details><summary>Files in this pack &amp; readme</summary>
         <ul>
           <li><a href="/fastdl/maps/cs_docks.bsp">maps/cs_docks.bsp</a><span>1.9 MB</span></li>
@@ -754,10 +741,10 @@ route if needed.
 (Press FIRE to continue)</pre>
       </details>
     </article>
-    <article class="card" data-search="cs_facility hostage rescue">
+    <article class="card map reveal" data-search="cs_facility hostage rescue" data-mode="Hostage Rescue">
       <div class="name">cs_facility</div>
       <div class="tags"><span class="tag mode">Hostage Rescue</span><span class="tag">2 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/cs_facility.zip" download>Download pack</a><span class="size">836 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/cs_facility.zip" download>Download pack</a><span class="size">836 KB</span></div>
       <details><summary>Files in this pack &amp; readme</summary>
         <ul>
           <li><a href="/fastdl/maps/cs_facility.bsp">maps/cs_facility.bsp</a><span>3.2 MB</span></li>
@@ -774,20 +761,20 @@ the mission.
 (Press FIRE to continue)</pre>
       </details>
     </article>
-    <article class="card" data-search="cs_fat_mansion hostage rescue">
+    <article class="card map reveal" data-search="cs_fat_mansion hostage rescue" data-mode="Hostage Rescue">
       <div class="name">cs_fat_mansion</div>
       <div class="tags"><span class="tag mode">Hostage Rescue</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/cs_fat_mansion.zip" download>Download pack</a><span class="size">232 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/cs_fat_mansion.zip" download>Download pack</a><span class="size">232 KB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/cs_fat_mansion.bsp">maps/cs_fat_mansion.bsp</a><span>921 KB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="cs_hideout hostage rescue">
+    <article class="card map reveal" data-search="cs_hideout hostage rescue" data-mode="Hostage Rescue">
       <div class="name">cs_hideout</div>
       <div class="tags"><span class="tag mode">Hostage Rescue</span><span class="tag">3 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/cs_hideout.zip" download>Download pack</a><span class="size">522 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/cs_hideout.zip" download>Download pack</a><span class="size">522 KB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/cs_hideout.wad">cs_hideout.wad</a><span>29 KB</span></li>
@@ -796,11 +783,11 @@ the mission.
         </ul>
       </details>
     </article>
-    <article class="card" data-search="cs_horror the horror house hostage rescue corvalho">
+    <article class="card map reveal" data-search="cs_horror the horror house hostage rescue corvalho" data-mode="Hostage Rescue">
       <div class="name">cs_horror</div>
       <div class="title">The Horror House by corvalho</div>
       <div class="tags"><span class="tag mode">Hostage Rescue</span><span class="tag">15 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/cs_horror.zip" download>Download pack</a><span class="size">2.4 MB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/cs_horror.zip" download>Download pack</a><span class="size">2.4 MB</span></div>
       <details><summary>Files in this pack &amp; readme</summary>
         <ul>
           <li><a href="/fastdl/cs_addams.wad">cs_addams.wad</a><span>996 KB</span></li>
@@ -834,11 +821,11 @@ this mission.
 Good luck!</pre>
       </details>
     </article>
-    <article class="card" data-search="cs_horror2 the horror house ii (halloween edition) hostage rescue corvalho">
+    <article class="card map reveal" data-search="cs_horror2 the horror house ii (halloween edition) hostage rescue corvalho" data-mode="Hostage Rescue">
       <div class="name">cs_horror2</div>
       <div class="title">The Horror House II (Halloween Edition) by corvalho</div>
       <div class="tags"><span class="tag mode">Hostage Rescue</span><span class="tag">38 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/cs_horror2.zip" download>Download pack</a><span class="size">7.4 MB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/cs_horror2.zip" download>Download pack</a><span class="size">7.4 MB</span></div>
       <details><summary>Files in this pack &amp; readme</summary>
         <ul>
           <li><a href="/fastdl/cs_horror2.wad">cs_horror2.wad</a><span>4.4 MB</span></li>
@@ -896,10 +883,10 @@ this mission.
 Good luck!</pre>
       </details>
     </article>
-    <article class="card" data-search="cs_icedearth hostage rescue">
+    <article class="card map reveal" data-search="cs_icedearth hostage rescue" data-mode="Hostage Rescue">
       <div class="name">cs_icedearth</div>
       <div class="tags"><span class="tag mode">Hostage Rescue</span><span class="tag">4 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/cs_icedearth.zip" download>Download pack</a><span class="size">1.5 MB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/cs_icedearth.zip" download>Download pack</a><span class="size">1.5 MB</span></div>
       <details><summary>Files in this pack &amp; readme</summary>
         <ul>
           <li><a href="/fastdl/as_tundra.wad">as_tundra.wad</a><span>545 KB</span></li>
@@ -921,10 +908,10 @@ the mission.
 (Press FIRE to continue)</pre>
       </details>
     </article>
-    <article class="card" data-search="cs_kvartal hostage rescue">
+    <article class="card map reveal" data-search="cs_kvartal hostage rescue" data-mode="Hostage Rescue">
       <div class="name">cs_KVARTAL</div>
       <div class="tags"><span class="tag mode">Hostage Rescue</span><span class="tag">82 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/cs_KVARTAL.zip" download>Download pack</a><span class="size">19.4 MB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/cs_KVARTAL.zip" download>Download pack</a><span class="size">19.4 MB</span></div>
       <details><summary>Files in this pack &amp; readme</summary>
         <ul>
           <li><a href="/fastdl/maps/cs_KVARTAL.bsp">maps/cs_KVARTAL.bsp</a><span>18.0 MB</span></li>
@@ -1024,10 +1011,10 @@ Other Notes: MADE IN RUSSIA!
 (Press FIRE to continue)</pre>
       </details>
     </article>
-    <article class="card" data-search="cs_mansion hostage rescue">
+    <article class="card map reveal" data-search="cs_mansion hostage rescue" data-mode="Hostage Rescue">
       <div class="name">cs_mansion</div>
       <div class="tags"><span class="tag mode">Hostage Rescue</span><span class="tag">2 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/cs_mansion.zip" download>Download pack</a><span class="size">234 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/cs_mansion.zip" download>Download pack</a><span class="size">234 KB</span></div>
       <details><summary>Files in this pack &amp; readme</summary>
         <ul>
           <li><a href="/fastdl/maps/cs_mansion.bsp">maps/cs_mansion.bsp</a><span>714 KB</span></li>
@@ -1046,10 +1033,10 @@ Rescue point is in ct spawn.
 Have fun!</pre>
       </details>
     </article>
-    <article class="card" data-search="cs_militia_flood hostage rescue">
+    <article class="card map reveal" data-search="cs_militia_flood hostage rescue" data-mode="Hostage Rescue">
       <div class="name">cs_militia_flood</div>
       <div class="tags"><span class="tag mode">Hostage Rescue</span><span class="tag">7 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/cs_militia_flood.zip" download>Download pack</a><span class="size">2.3 MB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/cs_militia_flood.zip" download>Download pack</a><span class="size">2.3 MB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/gfx/env/grnplsnt_rotbk.tga">gfx/env/grnplsnt_rotbk.tga</a><span>172 KB</span></li>
@@ -1062,20 +1049,20 @@ Have fun!</pre>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="cs_modern_mansion hostage rescue">
+    <article class="card map reveal" data-search="cs_modern_mansion hostage rescue" data-mode="Hostage Rescue">
       <div class="name">cs_modern_mansion</div>
       <div class="tags"><span class="tag mode">Hostage Rescue</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/cs_modern_mansion.zip" download>Download pack</a><span class="size">883 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/cs_modern_mansion.zip" download>Download pack</a><span class="size">883 KB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/cs_modern_mansion.bsp">maps/cs_modern_mansion.bsp</a><span>1.9 MB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="cs_railroad hostage rescue">
+    <article class="card map reveal" data-search="cs_railroad hostage rescue" data-mode="Hostage Rescue">
       <div class="name">cs_railroad</div>
       <div class="tags"><span class="tag mode">Hostage Rescue</span><span class="tag">5 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/cs_railroad.zip" download>Download pack</a><span class="size">638 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/cs_railroad.zip" download>Download pack</a><span class="size">638 KB</span></div>
       <details><summary>Files in this pack &amp; readme</summary>
         <ul>
           <li><a href="/fastdl/maps/cs_railroad.bsp">maps/cs_railroad.bsp</a><span>1.5 MB</span></li>
@@ -1098,10 +1085,10 @@ www.siteduzero.com
 -- Appuyer sur la touche d&#39;action pour continuer --</pre>
       </details>
     </article>
-    <article class="card" data-search="cs_rhs22 hostage rescue">
+    <article class="card map reveal" data-search="cs_rhs22 hostage rescue" data-mode="Hostage Rescue">
       <div class="name">cs_rhs22</div>
       <div class="tags"><span class="tag mode">Hostage Rescue</span><span class="tag">74 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/cs_rhs22.zip" download>Download pack</a><span class="size">9.2 MB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/cs_rhs22.zip" download>Download pack</a><span class="size">9.2 MB</span></div>
       <details><summary>Files in this pack &amp; readme</summary>
         <ul>
           <li><a href="/fastdl/gfx/env/52h03bk.tga">gfx/env/52h03bk.tga</a><span>192 KB</span></li>
@@ -1212,10 +1199,10 @@ this mission.
 (Press FIRE to continue)</pre>
       </details>
     </article>
-    <article class="card" data-search="cs_ship hostage rescue">
+    <article class="card map reveal" data-search="cs_ship hostage rescue" data-mode="Hostage Rescue">
       <div class="name">cs_ship</div>
       <div class="tags"><span class="tag mode">Hostage Rescue</span><span class="tag">3 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/cs_ship.zip" download>Download pack</a><span class="size">624 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/cs_ship.zip" download>Download pack</a><span class="size">624 KB</span></div>
       <details><summary>Files in this pack &amp; readme</summary>
         <ul>
           <li><a href="/fastdl/maps/cs_ship.bsp">maps/cs_ship.bsp</a><span>1.5 MB</span></li>
@@ -1232,20 +1219,20 @@ Other Notes: There are 5 hostages in
 the mission.</pre>
       </details>
     </article>
-    <article class="card" data-search="cs_station hostage rescue">
+    <article class="card map reveal" data-search="cs_station hostage rescue" data-mode="Hostage Rescue">
       <div class="name">cs_station</div>
       <div class="tags"><span class="tag mode">Hostage Rescue</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/cs_station.zip" download>Download pack</a><span class="size">567 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/cs_station.zip" download>Download pack</a><span class="size">567 KB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/cs_station.bsp">maps/cs_station.bsp</a><span>1.7 MB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="cs_thunder hostage rescue">
+    <article class="card map reveal" data-search="cs_thunder hostage rescue" data-mode="Hostage Rescue">
       <div class="name">cs_thunder</div>
       <div class="tags"><span class="tag mode">Hostage Rescue</span><span class="tag">3 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/cs_thunder.zip" download>Download pack</a><span class="size">1.7 MB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/cs_thunder.zip" download>Download pack</a><span class="size">1.7 MB</span></div>
       <details><summary>Files in this pack &amp; readme</summary>
         <ul>
           <li><a href="/fastdl/cs_thunder.wad">cs_thunder.wad</a><span>1.4 MB</span></li>
@@ -1264,10 +1251,10 @@ in this mission.
 (Press FIRE to continue)</pre>
       </details>
     </article>
-    <article class="card" data-search="cs_tire hostage rescue">
+    <article class="card map reveal" data-search="cs_tire hostage rescue" data-mode="Hostage Rescue">
       <div class="name">cs_tire</div>
       <div class="tags"><span class="tag mode">Hostage Rescue</span><span class="tag">2 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/cs_tire.zip" download>Download pack</a><span class="size">588 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/cs_tire.zip" download>Download pack</a><span class="size">588 KB</span></div>
       <details><summary>Files in this pack &amp; readme</summary>
         <ul>
           <li><a href="/fastdl/maps/cs_tire.bsp">maps/cs_tire.bsp</a><span>1.7 MB</span></li>
@@ -1284,10 +1271,10 @@ the mission.
 (Press FIRE to continue)</pre>
       </details>
     </article>
-    <article class="card" data-search="cs_wpndepot hostage rescue">
+    <article class="card map reveal" data-search="cs_wpndepot hostage rescue" data-mode="Hostage Rescue">
       <div class="name">cs_wpndepot</div>
       <div class="tags"><span class="tag mode">Hostage Rescue</span><span class="tag">2 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/cs_wpndepot.zip" download>Download pack</a><span class="size">269 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/cs_wpndepot.zip" download>Download pack</a><span class="size">269 KB</span></div>
       <details><summary>Files in this pack &amp; readme</summary>
         <ul>
           <li><a href="/fastdl/maps/cs_wpndepot.bsp">maps/cs_wpndepot.bsp</a><span>692 KB</span></li>
@@ -1297,10 +1284,10 @@ the mission.
 (Press FIRE to continue)</pre>
       </details>
     </article>
-    <article class="card" data-search="cs_zoption hostage rescue">
+    <article class="card map reveal" data-search="cs_zoption hostage rescue" data-mode="Hostage Rescue">
       <div class="name">cs_zoption</div>
       <div class="tags"><span class="tag mode">Hostage Rescue</span><span class="tag">3 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/cs_zoption.zip" download>Download pack</a><span class="size">886 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/cs_zoption.zip" download>Download pack</a><span class="size">886 KB</span></div>
       <details><summary>Files in this pack &amp; readme</summary>
         <ul>
           <li><a href="/fastdl/gfx/env/cl_desertrt.tga">gfx/env/cl_desertrt.tga</a><span>192 KB</span></li>
@@ -1311,50 +1298,50 @@ the mission.
 (Press FIRE to continue)</pre>
       </details>
     </article>
-    <article class="card" data-search="de_aztec_classic bomb defusal">
+    <article class="card map reveal" data-search="de_aztec_classic bomb defusal" data-mode="Bomb Defusal">
       <div class="name">de_aztec_classic</div>
       <div class="tags"><span class="tag mode">Bomb Defusal</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/de_aztec_classic.zip" download>Download pack</a><span class="size">1.2 MB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/de_aztec_classic.zip" download>Download pack</a><span class="size">1.2 MB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/de_aztec_classic.bsp">maps/de_aztec_classic.bsp</a><span>2.6 MB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="de_cbble_classic bomb defusal">
+    <article class="card map reveal" data-search="de_cbble_classic bomb defusal" data-mode="Bomb Defusal">
       <div class="name">de_cbble_classic</div>
       <div class="tags"><span class="tag mode">Bomb Defusal</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/de_cbble_classic.zip" download>Download pack</a><span class="size">593 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/de_cbble_classic.zip" download>Download pack</a><span class="size">593 KB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/de_cbble_classic.bsp">maps/de_cbble_classic.bsp</a><span>1.6 MB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="de_dust_classic bomb defusal">
+    <article class="card map reveal" data-search="de_dust_classic bomb defusal" data-mode="Bomb Defusal">
       <div class="name">de_dust_classic</div>
       <div class="tags"><span class="tag mode">Bomb Defusal</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/de_dust_classic.zip" download>Download pack</a><span class="size">453 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/de_dust_classic.zip" download>Download pack</a><span class="size">453 KB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/de_dust_classic.bsp">maps/de_dust_classic.bsp</a><span>1.3 MB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="de_dustyaztec bomb defusal">
+    <article class="card map reveal" data-search="de_dustyaztec bomb defusal" data-mode="Bomb Defusal">
       <div class="name">de_dustyaztec</div>
       <div class="tags"><span class="tag mode">Bomb Defusal</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/de_dustyaztec.zip" download>Download pack</a><span class="size">646 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/de_dustyaztec.zip" download>Download pack</a><span class="size">646 KB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/de_dustyaztec.bsp">maps/de_dustyaztec.bsp</a><span>2.0 MB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="de_fang bomb defusal">
+    <article class="card map reveal" data-search="de_fang bomb defusal" data-mode="Bomb Defusal">
       <div class="name">de_fang</div>
       <div class="tags"><span class="tag mode">Bomb Defusal</span><span class="tag">4 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/de_fang.zip" download>Download pack</a><span class="size">1.5 MB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/de_fang.zip" download>Download pack</a><span class="size">1.5 MB</span></div>
       <details><summary>Files in this pack &amp; readme</summary>
         <ul>
           <li><a href="/fastdl/gfx/env/carnivaldn.tga">gfx/env/carnivaldn.tga</a><span>8 KB</span></li>
@@ -1377,10 +1364,10 @@ substance stored in sealed crates.
 (Press FIRE to continue)</pre>
       </details>
     </article>
-    <article class="card" data-search="de_foption bomb defusal">
+    <article class="card map reveal" data-search="de_foption bomb defusal" data-mode="Bomb Defusal">
       <div class="name">de_foption</div>
       <div class="tags"><span class="tag mode">Bomb Defusal</span><span class="tag">8 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/de_foption.zip" download>Download pack</a><span class="size">1.7 MB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/de_foption.zip" download>Download pack</a><span class="size">1.7 MB</span></div>
       <details><summary>Files in this pack &amp; readme</summary>
         <ul>
           <li><a href="/fastdl/gfx/env/grnplsnt_rotbk.tga">gfx/env/grnplsnt_rotbk.tga</a><span>172 KB</span></li>
@@ -1410,20 +1397,20 @@ in this mission:
 (Press FIRE to continue)</pre>
       </details>
     </article>
-    <article class="card" data-search="de_inferno_classic bomb defusal">
+    <article class="card map reveal" data-search="de_inferno_classic bomb defusal" data-mode="Bomb Defusal">
       <div class="name">de_inferno_classic</div>
       <div class="tags"><span class="tag mode">Bomb Defusal</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/de_inferno_classic.zip" download>Download pack</a><span class="size">1.9 MB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/de_inferno_classic.zip" download>Download pack</a><span class="size">1.9 MB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/de_inferno_classic.bsp">maps/de_inferno_classic.bsp</a><span>3.4 MB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="de_mjolby6 bomb defusal">
+    <article class="card map reveal" data-search="de_mjolby6 bomb defusal" data-mode="Bomb Defusal">
       <div class="name">de_mjolby6</div>
       <div class="tags"><span class="tag mode">Bomb Defusal</span><span class="tag">2 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/de_mjolby6.zip" download>Download pack</a><span class="size">1.0 MB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/de_mjolby6.zip" download>Download pack</a><span class="size">1.0 MB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/de_mjolby6.bsp">maps/de_mjolby6.bsp</a><span>3.5 MB</span></li>
@@ -1431,10 +1418,10 @@ in this mission:
         </ul>
       </details>
     </article>
-    <article class="card" data-search="de_nuke_classic bomb defusal">
+    <article class="card map reveal" data-search="de_nuke_classic bomb defusal" data-mode="Bomb Defusal">
       <div class="name">de_nuke_classic</div>
       <div class="tags"><span class="tag mode">Bomb Defusal</span><span class="tag">2 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/de_nuke_classic.zip" download>Download pack</a><span class="size">1.3 MB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/de_nuke_classic.zip" download>Download pack</a><span class="size">1.3 MB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/jos.wad">jos.wad</a><span>681 KB</span></li>
@@ -1442,20 +1429,20 @@ in this mission:
         </ul>
       </details>
     </article>
-    <article class="card" data-search="de_piranesi_classic bomb defusal">
+    <article class="card map reveal" data-search="de_piranesi_classic bomb defusal" data-mode="Bomb Defusal">
       <div class="name">de_piranesi_classic</div>
       <div class="tags"><span class="tag mode">Bomb Defusal</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/de_piranesi_classic.zip" download>Download pack</a><span class="size">1.1 MB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/de_piranesi_classic.zip" download>Download pack</a><span class="size">1.1 MB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/de_piranesi_classic.bsp">maps/de_piranesi_classic.bsp</a><span>3.2 MB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="de_rotterdam bomb defusal">
+    <article class="card map reveal" data-search="de_rotterdam bomb defusal" data-mode="Bomb Defusal">
       <div class="name">de_rotterdam</div>
       <div class="tags"><span class="tag mode">Bomb Defusal</span><span class="tag">8 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/de_rotterdam.zip" download>Download pack</a><span class="size">3.8 MB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/de_rotterdam.zip" download>Download pack</a><span class="size">3.8 MB</span></div>
       <details><summary>Files in this pack &amp; readme</summary>
         <ul>
           <li><a href="/fastdl/de_rotterdam.wad">de_rotterdam.wad</a><span>3.4 MB</span></li>
@@ -1477,10 +1464,10 @@ C4 must destroy the warehouse or the office.
 (Press FIRE to continue)</pre>
       </details>
     </article>
-    <article class="card" data-search="de_vegas bomb defusal">
+    <article class="card map reveal" data-search="de_vegas bomb defusal" data-mode="Bomb Defusal">
       <div class="name">de_vegas</div>
       <div class="tags"><span class="tag mode">Bomb Defusal</span><span class="tag">3 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/de_vegas.zip" download>Download pack</a><span class="size">2.5 MB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/de_vegas.zip" download>Download pack</a><span class="size">2.5 MB</span></div>
       <details><summary>Files in this pack &amp; readme</summary>
         <ul>
           <li><a href="/fastdl/maps/de_vegas.bsp">maps/de_vegas.bsp</a><span>4.9 MB</span></li>
@@ -1503,20 +1490,20 @@ Orange.
 (Press FIRE to continue)</pre>
       </details>
     </article>
-    <article class="card" data-search="de_vertigo_classic bomb defusal">
+    <article class="card map reveal" data-search="de_vertigo_classic bomb defusal" data-mode="Bomb Defusal">
       <div class="name">de_vertigo_classic</div>
       <div class="tags"><span class="tag mode">Bomb Defusal</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/de_vertigo_classic.zip" download>Download pack</a><span class="size">960 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/de_vertigo_classic.zip" download>Download pack</a><span class="size">960 KB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/de_vertigo_classic.bsp">maps/de_vertigo_classic.bsp</a><span>2.0 MB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="es_kvartal escape">
+    <article class="card map reveal" data-search="es_kvartal escape" data-mode="Escape">
       <div class="name">es_KVARTAL</div>
       <div class="tags"><span class="tag mode">Escape</span><span class="tag">75 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/es_KVARTAL.zip" download>Download pack</a><span class="size">17.1 MB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/es_KVARTAL.zip" download>Download pack</a><span class="size">17.1 MB</span></div>
       <details><summary>Files in this pack &amp; readme</summary>
         <ul>
           <li><a href="/fastdl/gfx/env/grnplsnt_rotbk.tga">gfx/env/grnplsnt_rotbk.tga</a><span>172 KB</span></li>
@@ -1609,12 +1596,12 @@ Other Notes: MADE IN RUSSIA!
 (Press FIRE to continue)</pre>
       </details>
     </article>
-    <article class="card" data-search="gg_capture capture gungame">
+    <article class="card map reveal" data-search="gg_capture capture gungame" data-mode="GunGame">
       <div class="name">gg_capture</div>
       <div class="title">Capture</div>
       <div class="tags"><span class="tag new">new</span><span class="tag mode">GunGame</span><span class="tag">1 file</span></div>
       <p class="about">Mid-size urban map for GunGame.</p>
-      <div class="dl"><a class="btn" href="/fastdl/packs/gg_capture.zip" download>Download pack</a><span class="size">1.7 MB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/gg_capture.zip" download>Download pack</a><span class="size">1.7 MB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/gg_capture.bsp">maps/gg_capture.bsp</a><span>2.5 MB</span></li>
@@ -1622,12 +1609,12 @@ Other Notes: MADE IN RUSSIA!
         <p><a href="https://gamebanana.com/mods/96153" rel="noopener" target="_blank">Original download page</a></p>
       </details>
     </article>
-    <article class="card" data-search="gg_dusty dusty gungame">
+    <article class="card map reveal" data-search="gg_dusty dusty gungame" data-mode="GunGame">
       <div class="name">gg_dusty</div>
       <div class="title">Dusty</div>
       <div class="tags"><span class="tag new">new</span><span class="tag mode">GunGame</span><span class="tag">1 file</span></div>
       <p class="about">Small dust-style arena, quick respawn fights.</p>
-      <div class="dl"><a class="btn" href="/fastdl/packs/gg_dusty.zip" download>Download pack</a><span class="size">913 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/gg_dusty.zip" download>Download pack</a><span class="size">913 KB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/gg_dusty.bsp">maps/gg_dusty.bsp</a><span>1.4 MB</span></li>
@@ -1635,12 +1622,12 @@ Other Notes: MADE IN RUSSIA!
         <p><a href="https://gamebanana.com/mods/96220" rel="noopener" target="_blank">Original download page</a></p>
       </details>
     </article>
-    <article class="card" data-search="gg_js_justmap just map gungame">
+    <article class="card map reveal" data-search="gg_js_justmap just map gungame" data-mode="GunGame">
       <div class="name">gg_js_justmap</div>
       <div class="title">Just Map</div>
       <div class="tags"><span class="tag new">new</span><span class="tag mode">GunGame</span><span class="tag">1 file</span></div>
       <p class="about">Compact lab corridors made for GunGame.</p>
-      <div class="dl"><a class="btn" href="/fastdl/packs/gg_js_justmap.zip" download>Download pack</a><span class="size">300 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/gg_js_justmap.zip" download>Download pack</a><span class="size">300 KB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/gg_js_justmap.bsp">maps/gg_js_justmap.bsp</a><span>987 KB</span></li>
@@ -1648,12 +1635,12 @@ Other Notes: MADE IN RUSSIA!
         <p><a href="https://gamebanana.com/mods/96339" rel="noopener" target="_blank">Original download page</a></p>
       </details>
     </article>
-    <article class="card" data-search="gg_js_mario mario gungame">
+    <article class="card map reveal" data-search="gg_js_mario mario gungame" data-mode="GunGame">
       <div class="name">gg_js_mario</div>
       <div class="title">Mario</div>
       <div class="tags"><span class="tag new">new</span><span class="tag mode">GunGame</span><span class="tag">7 files</span></div>
       <p class="about">Super Mario world with its own Mario sky.</p>
-      <div class="dl"><a class="btn" href="/fastdl/packs/gg_js_mario.zip" download>Download pack</a><span class="size">631 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/gg_js_mario.zip" download>Download pack</a><span class="size">631 KB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/gfx/env/mariobk.tga">gfx/env/mariobk.tga</a><span>192 KB</span></li>
@@ -1667,12 +1654,12 @@ Other Notes: MADE IN RUSSIA!
         <p><a href="https://gamebanana.com/mods/96340" rel="noopener" target="_blank">Original download page</a></p>
       </details>
     </article>
-    <article class="card" data-search="gg_mcdonalds mcdonald&#39;s gungame">
+    <article class="card map reveal" data-search="gg_mcdonalds mcdonald&#39;s gungame" data-mode="GunGame">
       <div class="name">gg_mcdonalds</div>
       <div class="title">McDonald&#39;s</div>
       <div class="tags"><span class="tag new">new</span><span class="tag mode">GunGame</span><span class="tag">2 files</span></div>
       <p class="about">Fast-food restaurant arena for GunGame.</p>
-      <div class="dl"><a class="btn" href="/fastdl/packs/gg_mcdonalds.zip" download>Download pack</a><span class="size">2.7 MB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/gg_mcdonalds.zip" download>Download pack</a><span class="size">2.7 MB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/gg_mcdonalds.bsp">maps/gg_mcdonalds.bsp</a><span>6.1 MB</span></li>
@@ -1681,10 +1668,10 @@ Other Notes: MADE IN RUSSIA!
         <p><a href="http://www.17buddies.net/17b2/View/Map/83820/gg_mcdonalds.html" rel="noopener" target="_blank">Original download page</a></p>
       </details>
     </article>
-    <article class="card" data-search="surf_ag-final surf">
+    <article class="card map reveal" data-search="surf_ag-final surf" data-mode="Surf">
       <div class="name">surf_ag-final</div>
       <div class="tags"><span class="tag mode">Surf</span><span class="tag">12 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/surf_ag-final.zip" download>Download pack</a><span class="size">817 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/surf_ag-final.zip" download>Download pack</a><span class="size">817 KB</span></div>
       <details><summary>Files in this pack &amp; readme</summary>
         <ul>
           <li><a href="/fastdl/gfx/env/finebk.tga">gfx/env/finebk.tga</a><span>2 KB</span></li>
@@ -1708,10 +1695,10 @@ there will always be a ramp there for you.
 Probably my last map and if, the BEST!</pre>
       </details>
     </article>
-    <article class="card" data-search="surf_combat surf">
+    <article class="card map reveal" data-search="surf_combat surf" data-mode="Surf">
       <div class="name">surf_combat</div>
       <div class="tags"><span class="tag mode">Surf</span><span class="tag">9 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/surf_combat.zip" download>Download pack</a><span class="size">2.4 MB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/surf_combat.zip" download>Download pack</a><span class="size">2.4 MB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/gfx/env/dustybk.tga">gfx/env/dustybk.tga</a><span>164 KB</span></li>
@@ -1726,20 +1713,20 @@ Probably my last map and if, the BEST!</pre>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="surf_ski_2 surf">
+    <article class="card map reveal" data-search="surf_ski_2 surf" data-mode="Surf">
       <div class="name">surf_ski_2</div>
       <div class="tags"><span class="tag mode">Surf</span><span class="tag">1 file</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/surf_ski_2.zip" download>Download pack</a><span class="size">933 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/surf_ski_2.zip" download>Download pack</a><span class="size">933 KB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/surf_ski_2.bsp">maps/surf_ski_2.bsp</a><span>3.3 MB</span></li>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="surf_ski_2_go surf">
+    <article class="card map reveal" data-search="surf_ski_2_go surf" data-mode="Surf">
       <div class="name">surf_ski_2_go</div>
       <div class="tags"><span class="tag mode">Surf</span><span class="tag">7 files</span></div>
-      <div class="dl"><a class="btn" href="/fastdl/packs/surf_ski_2_go.zip" download>Download pack</a><span class="size">1.5 MB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/surf_ski_2_go.zip" download>Download pack</a><span class="size">1.5 MB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/gfx/env/ss2gobk.tga">gfx/env/ss2gobk.tga</a><span>192 KB</span></li>
@@ -1752,12 +1739,12 @@ Probably my last map and if, the BEST!</pre>
         </ul>
       </details>
     </article>
-    <article class="card" data-search="woohoo_cars woohoo cars vehicle war">
+    <article class="card map reveal" data-search="woohoo_cars woohoo cars vehicle war" data-mode="Vehicle War">
       <div class="name">woohoo_cars</div>
       <div class="title">Woohoo Cars</div>
       <div class="tags"><span class="tag new">new</span><span class="tag mode">Vehicle War</span><span class="tag">1 file</span></div>
       <p class="about">Drive weird cars online with friends.</p>
-      <div class="dl"><a class="btn" href="/fastdl/packs/woohoo_cars.zip" download>Download pack</a><span class="size">633 KB</span></div>
+      <div class="dl"><a class="btn btn-primary btn-sm" href="/fastdl/packs/woohoo_cars.zip" download>Download pack</a><span class="size">633 KB</span></div>
       <details><summary>Files in this pack</summary>
         <ul>
           <li><a href="/fastdl/maps/woohoo_cars.bsp">maps/woohoo_cars.bsp</a><span>1.5 MB</span></li>
@@ -1765,23 +1752,57 @@ Probably my last map and if, the BEST!</pre>
         <p><a href="https://gamebanana.com/mods/98492" rel="noopener" target="_blank">Original download page</a></p>
       </details>
     </article>
+      </div>
+      <p class="empty" id="empty">No maps match that search.</p>
+    </div>
   </section>
-  <p class="empty" id="empty">No maps match that search.</p>
 
-  <footer>
-    <span>Necro's Hub // FastDL</span>
-    <span>Maps belong to their authors. Shared for players of our servers.</span>
-  </footer>
-</div>
+</main>
 
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-bottom" style="margin-top:0;padding-top:0;border-top:0">
+      <span>© <span data-year>2026</span> Qusai · necro144.com · FastDL</span>
+      <span>Maps belong to their authors and are shared for players of the [NS] server.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/js/site.js" defer></script>
 <script>
 (function () {
-  var q = document.getElementById('q'), cards = document.querySelectorAll('.card'), empty = document.getElementById('empty');
-  q.addEventListener('input', function () {
+  var q = document.getElementById('q'), chipsBox = document.getElementById('chips'),
+      count = document.getElementById('count'), empty = document.getElementById('empty'),
+      cards = Array.prototype.slice.call(document.querySelectorAll('.map')), mode = '';
+
+  // one chip per game mode that has at least two maps, most maps first
+  var tally = {};
+  cards.forEach(function (c) { var m = c.getAttribute('data-mode'); if (m) tally[m] = (tally[m] || 0) + 1; });
+  var modes = Object.keys(tally).filter(function (m) { return tally[m] > 1; }).sort(function (a, b) { return tally[b] - tally[a] || a.localeCompare(b); });
+  function chip(label, value) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip'; b.textContent = label; b.setAttribute('aria-pressed', value === mode ? 'true' : 'false');
+    b.addEventListener('click', function () {
+      mode = value;
+      chipsBox.querySelectorAll('.chip').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      apply();
+    });
+    chipsBox.appendChild(b);
+  }
+  chip('All', '');
+  modes.forEach(function (m) { chip(m + ' · ' + tally[m], m); });
+
+  function apply() {
     var v = q.value.trim().toLowerCase(), shown = 0;
-    cards.forEach(function (c) { var hit = !v || c.getAttribute('data-search').indexOf(v) !== -1; c.hidden = !hit; if (hit) shown++; });
+    cards.forEach(function (c) {
+      var hit = (!v || c.getAttribute('data-search').indexOf(v) !== -1) && (!mode || c.getAttribute('data-mode') === mode);
+      c.hidden = !hit; if (hit) shown++;
+    });
     empty.style.display = shown ? 'none' : 'block';
-  });
+    count.textContent = shown + ' of ' + cards.length + ' maps';
+  }
+  q.addEventListener('input', apply);
+  apply();
 })();
 </script>
 </body>
