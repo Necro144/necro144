@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KG1SF91F87"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-KG1SF91F87');
+</script>
+<script>document.documentElement.classList.add('js');</script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)" />
+<meta name="color-scheme" content="light dark" />
+<meta name="description" content="GunGame [NS]: a Counter-Strike 1.6 gun game mod for AMX Mod X. 26 weapon levels from Glock to knife, knife steals a level, instant respawn, warm-up and top winners. Full guide." />
+<meta property="og:title" content="GunGame [NS] - CS 1.6 gun game mod" />
+<meta property="og:description" content="GunGame [NS]: a Counter-Strike 1.6 gun game mod for AMX Mod X. 26 weapon levels from Glock to knife, knife steals a level, instant respawn, warm-up and top winners. Full guide." />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Necro's Hub" />
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect fill='%2304070a' width='180' height='180' rx='40'/%3E%3Ctext x='90' y='125' font-size='100' text-anchor='middle' fill='%232ee6d0' font-weight='900' font-family='monospace'%3EN%3C/text%3E%3C/svg%3E" />
+<title>GunGame [NS] - CS 1.6 Gun Game Mod (AMX Mod X) | Necro</title>
+
+
+<script>
+(function(){try{var t=localStorage.getItem('rage-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+<style>
+:root{
+  --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --subtle:#f6f8fa; --subtle2:#eef1f4;
+  --link:#0969da; --header:#f6f8fa; --code:rgba(129,139,152,.16); --sel:#ddf4ff;
+  --note:#0969da; --tip:#1a7f37; --imp:#8250df; --warn:#9a6700; --bad:#d1242f;
+  --ghost:#d1242f; --inv:#0969da; --gold:#9a6700;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  color-scheme:light;
+}
+:root[data-theme="dark"]{
+  --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --subtle:#151b23; --subtle2:#1c232d;
+  --link:#4493f8; --header:#010409; --code:rgba(101,108,118,.25); --sel:#143054;
+  --note:#4493f8; --tip:#3fb950; --imp:#ab7df8; --warn:#d29922; --bad:#f85149;
+  --ghost:#f85149; --inv:#4493f8; --gold:#d29922;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme]){
+    --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --subtle:#151b23; --subtle2:#1c232d;
+    --link:#4493f8; --header:#010409; --code:rgba(101,108,118,.25); --sel:#143054;
+    --note:#4493f8; --tip:#3fb950; --imp:#ab7df8; --warn:#d29922; --bad:#f85149;
+    --ghost:#f85149; --inv:#4493f8; --gold:#d29922; color-scheme:dark;
+  }
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--link);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--link);outline-offset:2px;border-radius:4px}
+::selection{background:var(--sel)}
+section[id],[id^="gl-"]{scroll-margin-top:76px}
+
+/* ===== Header ===== */
+.gh-header{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:12px;height:56px;padding:0 16px;padding-top:env(safe-area-inset-top,0px);background:var(--header);border-bottom:1px solid var(--border)}
+.gh-header .bar{position:absolute;left:0;bottom:-1px;height:2px;width:0;background:var(--link)}
+.crumb{display:flex;align-items:center;gap:8px;color:var(--fg);font-size:14px;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.crumb:hover{text-decoration:none}
+.crumb .a{color:var(--link)}
+.crumb .sl{color:var(--muted)}
+.crumb b{font-weight:600}
+.spacer{flex:1}
+.hbtn,.hlink{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:32px;padding:0 12px;font:500 13px/1 var(--sans);color:var(--fg);background:var(--bg);border:1px solid var(--border);border-radius:6px;cursor:pointer;white-space:nowrap}
+.hbtn:hover,.hlink:hover{background:var(--subtle2);text-decoration:none}
+.menu-btn{padding:0 10px;font-size:16px}
+@media(max-width:600px){.hlink{display:none}.crumb .a,.crumb .sl{display:none}.gh-header{padding-left:12px;padding-right:12px;gap:8px}}
+
+/* ===== Layout ===== */
+.layout{max-width:1280px;margin:0 auto;padding:24px 16px 64px;display:grid;grid-template-columns:minmax(0,1fr);gap:24px}
+@media(min-width:1012px){.layout{grid-template-columns:268px minmax(0,1fr);gap:32px;padding:24px 24px 64px}.menu-btn{display:none}}
+
+/* ===== Sidebar / TOC ===== */
+.sidebar{font-size:14px}
+.side-title{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;padding:0 8px 8px}
+.sidebar nav{display:flex;flex-direction:column}
+.drawer__group{padding:14px 8px 4px;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.nav-link{display:block;padding:5px 8px;margin:1px 0;color:var(--fg);border-radius:6px;border-left:2px solid transparent}
+.nav-link:hover{background:var(--subtle2);text-decoration:none}
+.nav-link.active{background:var(--subtle);font-weight:600;border-left-color:var(--link);color:var(--link)}
+.side-sep{border:0;border-top:1px solid var(--border);margin:12px 0;width:100%}
+.backdrop{display:none}
+@media(min-width:1012px){
+  .sidebar{position:sticky;top:80px;align-self:start;max-height:calc(100vh - 96px);overflow-y:auto;padding-right:8px}
+}
+@media(max-width:1011px){
+  .sidebar{position:fixed;inset:0 auto 0 0;width:min(86vw,320px);z-index:70;background:var(--bg);border-right:1px solid var(--border);padding:16px 12px calc(24px + env(safe-area-inset-bottom,0px));overflow-y:auto;transform:translateX(-100%);visibility:hidden;transition:transform .25s ease,visibility 0s linear .25s;box-shadow:0 8px 24px rgba(1,4,9,.4)}
+  .sidebar.open{transform:none;visibility:visible;transition:transform .25s ease,visibility 0s}
+  .backdrop{position:fixed;inset:0;background:rgba(1,4,9,.55);z-index:60;opacity:0;pointer-events:none;transition:opacity .25s ease;display:block}
+  .backdrop.show{opacity:1;pointer-events:auto}
+}
+
+/* ===== README box ===== */
+.doc{min-width:0;border:1px solid var(--border);border-radius:6px;background:var(--bg)}
+.file-head{display:flex;align-items:center;gap:8px;padding:10px 16px;background:var(--subtle);border-bottom:1px solid var(--border);border-radius:6px 6px 0 0;font-size:14px;font-weight:600}
+.file-head .muted{font-weight:400;margin-left:auto}
+.doc-body{padding:24px 16px 32px}
+@media(min-width:768px){.doc-body{padding:32px 48px 48px}}
+
+.doc-body>.sec{margin-top:40px}
+.hero{text-align:left}
+.hero h1{margin:0 0 16px;padding-bottom:.3em;font-size:2em;font-weight:600;line-height:1.25;border-bottom:1px solid var(--border)}
+.hero p{margin:0 0 16px}
+
+h2,h3,h4{position:relative;font-weight:600;line-height:1.25;margin:24px 0 16px}
+.sec>h2{margin:4px 0 16px;padding-bottom:.3em;font-size:1.5em;border-bottom:1px solid var(--border)}
+h3{font-size:1.25em}
+h4{font-size:1em}
+.sec>h3:first-of-type{margin-top:20px}
+.kicker{display:block;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px}
+.anchor{position:absolute;left:-24px;padding-right:6px;color:var(--muted);font-weight:400;font-size:.85em;opacity:0;text-decoration:none}
+h2:hover .anchor,h3:hover .anchor,.anchor:focus{opacity:1}
+.anchor:hover{text-decoration:none;color:var(--link)}
+@media(max-width:767px){.anchor{display:none}}
+
+p{margin:0 0 16px}
+.lead{font-size:1.125em;color:var(--fg)}
+.muted{color:var(--muted)}
+small.muted{font-size:.8em;font-weight:400}
+ul,ol{margin:0 0 16px;padding-left:2em}
+li{margin:.25em 0}
+li>ul,li>ol{margin:.25em 0 0}
+b,strong{font-weight:600}
+hr{border:0;border-top:1px solid var(--border);margin:24px 0}
+.clr-g{color:var(--tip)} .clr-r{color:var(--bad)} .clr-v{color:var(--imp)}
+
+/* ===== Badges / tags ===== */
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 16px}
+.badge{display:inline-block;padding:2px 10px;font-size:12px;font-weight:500;line-height:20px;border:1px solid var(--note);color:var(--note);border-radius:2em;white-space:nowrap}
+a.badge:hover{background:var(--subtle2);text-decoration:none}
+.badge.a{border-color:var(--warn);color:var(--warn)}
+.badge.m{border-color:var(--imp);color:var(--imp)}
+.tag{display:inline-block;padding:0 8px;font-size:12px;font-weight:500;line-height:18px;border:1px solid var(--border);border-radius:2em;white-space:nowrap;color:var(--muted)}
+.tag.t{color:var(--bad);border-color:var(--bad)}
+.tag.ct{color:var(--note);border-color:var(--note)}
+.tag.all{color:var(--warn);border-color:var(--warn)}
+.tag.dead{color:var(--imp);border-color:var(--imp)}
+.tag.lv{color:var(--muted)}
+
+/* ===== Tables ===== */
+.tablewrap{overflow-x:auto;margin:0 0 16px;-webkit-overflow-scrolling:touch}
+.tablewrap table{border-collapse:collapse;border-spacing:0;width:100%;font-size:14px}
+.tablewrap th,.tablewrap td{padding:6px 13px;border:1px solid var(--border);vertical-align:top;text-align:left}
+.tablewrap th{font-weight:600;background:var(--subtle);white-space:nowrap}
+.tablewrap tbody tr:nth-child(even){background:var(--subtle)}
+.tablewrap td:first-child{font-weight:600}
+.tablewrap td:first-child code{font-weight:400;white-space:nowrap}
+.tablewrap td.num{white-space:nowrap;text-align:right;font-variant-numeric:tabular-nums}
+.tablewrap td{min-width:64px}
+
+/* ===== Code ===== */
+code,.kbd{font-family:var(--mono);font-size:85%;padding:.2em .4em;background:var(--code);border-radius:6px}
+.kbd{border:1px solid var(--border);border-bottom-width:2px;background:var(--subtle)}
+.codeblock{position:relative;margin:0 0 16px;padding:16px 76px 16px 16px;font-family:var(--mono);font-size:85%;line-height:1.5;background:var(--subtle);border:1px solid var(--border);border-radius:6px;white-space:pre;overflow-x:auto}
+.codeblock .c{color:var(--muted)}
+.copy{position:absolute;top:8px;right:8px;height:28px;padding:0 10px;font:500 12px/1 var(--sans);color:var(--fg);background:var(--bg);border:1px solid var(--border);border-radius:6px;cursor:pointer}
+.copy:hover{background:var(--subtle2)}
+.copy.done{color:#fff;background:var(--tip);border-color:var(--tip)}
+.tree{margin:0 0 16px;padding:16px;font-family:var(--mono);font-size:85%;line-height:1.55;white-space:pre;overflow-x:auto;background:var(--subtle);border:1px solid var(--border);border-radius:6px}
+.tree b{color:var(--link)} .tree i{color:var(--muted);font-style:normal}
+
+/* ===== Callouts (GitHub alerts) ===== */
+.callout{margin:0 0 16px;padding:8px 16px;border-left:.25em solid var(--note)}
+.callout p{margin:0 0 8px}
+.callout p:last-child{margin-bottom:0}
+.callout .ct{display:block;margin-bottom:4px;font-weight:600;color:var(--note)}
+.callout.warn{border-left-color:var(--warn)} .callout.warn .ct{color:var(--warn)}
+.callout.bad{border-left-color:var(--bad)} .callout.bad .ct{color:var(--bad)}
+
+/* ===== Cards ===== */
+.grid2,.grid3{display:grid;gap:16px;margin:0 0 16px}
+.grid2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid3{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:860px){.grid3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.grid2,.grid3{grid-template-columns:1fr}}
+.mini{padding:12px 16px;background:var(--subtle);border:1px solid var(--border);border-radius:6px}
+.mini h4{margin:0 0 6px;font-size:1em}
+.mini p,.mini ul,.mini ol{font-size:14px;margin:0 0 8px}
+.mini>:last-child{margin-bottom:0}
+.mini li{margin:.15em 0}
+.mini.ghost{border-top:3px solid var(--ghost)} .mini.ghost h4{color:var(--ghost)}
+.mini.inv{border-top:3px solid var(--inv)} .mini.inv h4{color:var(--inv)}
+.mini.gold{border-top:3px solid var(--gold)} .mini.gold h4{color:var(--gold)}
+.mini .big{display:block;margin-bottom:2px;font-size:1.75rem;font-weight:600;line-height:1.2;color:var(--link)}
+
+/* ===== Timeline ===== */
+.stepper,.doc ul.stepper{list-style:none;margin:0 0 16px;padding:0 0 0 20px;border-left:2px solid var(--border)}
+.stepper li{position:relative;margin:0;padding:0 0 16px 16px}
+.stepper li:last-child{padding-bottom:0}
+.stepper li::before{content:"";position:absolute;left:-27px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--note)}
+.stepper li.m::before{border-color:var(--imp)} .stepper li.a::before{border-color:var(--warn)}
+.stepper .t{display:block;font-weight:600}
+
+/* ===== HUD mock ===== */
+.screen{position:relative;height:300px;margin:0 0 8px;border:1px solid #30363d;border-radius:6px;overflow:hidden;background:radial-gradient(circle at 50% 40%,#0b1613 0%,#020605 75%)}
+.screen .hudbox{position:absolute;font:12px/1.5 var(--mono);white-space:pre}
+.screen .tl{left:12px;top:28px;color:#ff8c8c}
+.screen .tc{left:50%;top:10px;transform:translateX(-50%);color:#ebd796;text-align:center}
+.screen .cc{left:50%;bottom:40px;transform:translateX(-50%);color:#ff8c8c;text-align:center}
+.screen .radar{position:absolute;left:8px;top:8px;width:16px;height:16px;border-radius:50%;border:1px solid #2c8f4e;background:rgba(44,143,78,.25)}
+.screen .cross{position:absolute;left:50%;top:42%;width:14px;height:14px;margin:-7px 0 0 -7px;border:1px solid #ff4d4d;border-radius:50%;opacity:.8}
+.screen .tag-note{position:absolute;font:11px/1.4 var(--sans);color:#d29922;border:1px solid #9e6a03;border-radius:6px;padding:1px 6px;background:rgba(0,0,0,.7)}
+@media(max-width:600px){.screen .hudbox{font-size:10px}}
+
+/* ===== Filters ===== */
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+.pill{height:32px;padding:0 12px;font:500 13px/1 var(--sans);color:var(--fg);background:var(--bg);border:1px solid var(--border);border-radius:2em;cursor:pointer}
+.pill:hover{background:var(--subtle2)}
+.pill[aria-pressed="true"]{background:var(--link);border-color:var(--link);color:#fff}
+.search{display:block;width:100%;height:36px;margin:0 0 8px;padding:0 12px;font:14px var(--sans);color:var(--fg);background:var(--bg);border:1px solid var(--border);border-radius:6px}
+.search:focus{outline:2px solid var(--link);outline-offset:-1px;border-color:var(--link)}
+.count{display:block;margin-bottom:8px;font-size:12px;color:var(--muted)}
+
+/* ===== Accordions ===== */
+details.acc{margin:0 0 8px;border:1px solid var(--border);border-radius:6px}
+details.acc summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px 16px;font-weight:600;font-size:15px;border-radius:6px}
+details.acc summary::-webkit-details-marker{display:none}
+details.acc summary::before{content:"";flex:none;width:0;height:0;border-left:6px solid var(--muted);border-top:5px solid transparent;border-bottom:5px solid transparent;transition:transform .15s ease}
+details.acc[open] summary::before{transform:rotate(90deg)}
+details.acc summary:hover{background:var(--subtle)}
+details.acc[open] summary{border-bottom:1px solid var(--border);border-radius:6px 6px 0 0;background:var(--subtle)}
+details.acc .body{padding:12px 16px 4px}
+
+/* ===== Glossary ===== */
+.azbar{display:flex;flex-wrap:wrap;gap:4px;margin:0 0 16px}
+.azbar a,.azbar span{display:inline-grid;place-items:center;width:32px;height:32px;font-size:14px;font-weight:600;border-radius:6px}
+.azbar a{border:1px solid var(--border);color:var(--link)}
+.azbar a:hover{background:var(--subtle2);text-decoration:none}
+.azbar span{color:var(--muted);opacity:.45}
+.gl{display:grid;grid-template-columns:40px minmax(0,1fr);gap:0 12px;padding:12px 0;border-top:1px solid var(--border)}
+.gl .L{font-size:1.75rem;font-weight:600;line-height:1.1;color:var(--muted)}
+.gl dl{margin:0}
+.gl dt{font-weight:600}
+.gl dd{margin:0 0 8px;color:var(--fg)}
+
+/* ===== Footer / helpers ===== */
+.foot{margin-top:32px;padding-top:16px;border-top:1px solid var(--border);font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px 16px}
+.totop{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:40;display:none;width:40px;height:40px;place-items:center;font-size:18px;color:var(--fg);background:var(--bg);border:1px solid var(--border);border-radius:50%;cursor:pointer;box-shadow:0 1px 3px rgba(1,4,9,.2)}
+.totop.show{display:grid}
+.totop:hover{background:var(--subtle2)}
+
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+@media print{.gh-header,.sidebar,.backdrop,.totop,.copy{display:none!important}.layout{display:block;padding:0}.doc{border:0}.doc-body{padding:0}}
+
+</style>
+<!-- seo:start -->
+<link rel="canonical" href="https://necro144.com/servers/gungame" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://necro144.com/servers/gungame" />
+<meta property="og:site_name" content="Necro - necro144.com" />
+<meta property="og:image" content="https://necro144.com/assets/img/cs16.jpg" />
+<meta name="twitter:card" content="summary" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"SoftwareApplication","name":"GunGame [NS]","alternateName":["GunGame","Gun Game","GG mod","CS 1.6 gungame","CS 1.6 gun game mod","AMX Mod X gungame plugin","gg_ maps"],"description":"Gun game mode for Counter-Strike 1.6: every kill moves you up a ladder of 26 weapons, the first knife kill on the last level wins the map. AMX Mod X plugin written for the [NS] server.","applicationCategory":"GameApplication","applicationSubCategory":"Counter-Strike 1.6 game mode","operatingSystem":"Counter-Strike 1.6 server with AMX Mod X 1.8.2","softwareVersion":"1.0.0-NS","url":"https://necro144.com/servers/gungame","author":{"@type":"Person","name":"Qusai","alternateName":"|Ns| Necro","url":"https://necro144.com/"}},
+{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://necro144.com/"},{"@type":"ListItem","position":2,"name":"Game servers","item":"https://necro144.com/servers/"},{"@type":"ListItem","position":3,"name":"GunGame [NS]","item":"https://necro144.com/servers/gungame"}]},
+{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I have to download anything?","acceptedAnswer":{"@type":"Answer","text":"No. GunGame runs on the server, and the gg_ maps download automatically from our FastDL. You can also grab the map packs from the FastDL page before you join."}},{"@type":"Question","name":"My kill didn't count.","acceptedAnswer":{"@type":"Answer","text":"Only kills with your level's weapon count (and knife kills, which steal a level). Team kills and kills during the warm-up never count."}},{"@type":"Question","name":"I lost a level - why?","acceptedAnswer":{"@type":"Answer","text":"Someone knifed you, or you killed yourself: falling, your own grenade or the kill command all cost a level."}},{"@type":"Question","name":"Can I buy or pick up a better gun?","acceptedAnswer":{"@type":"Answer","text":"No. There is no money and no buy menu, and dropped guns disappear. Your level decides your weapon."}},{"@type":"Question","name":"Is my progress saved?","acceptedAnswer":{"@type":"Answer","text":"Your level lasts for the current map. Your wins are saved by SteamID and show in /ggtop."}},{"@type":"Question","name":"Why does M not open the team menu?","acceptedAnswer":{"@type":"Answer","text":"M opens the GunGame menu once you're in a team. Pick \"Change team\" in it to get the normal team menu."}}]}
+]}
+</script>
+<!-- seo:end --></head>
+<body>
+<header class="gh-header">
+  <button class="hbtn menu-btn" id="menuBtn" type="button" aria-label="Open table of contents" aria-controls="drawer" aria-expanded="false">&#9776;</button>
+  <a class="crumb" href="/main_index"><span class="a">Necro's Hub</span><span class="sl">/</span><b>gungame</b></a>
+  <span class="spacer"></span>
+  <a class="hlink" href="/main_index">Back to hub</a>
+  <button class="hbtn" id="themeBtn" type="button" aria-label="Switch light or dark theme">Theme</button>
+  <div class="bar" id="bar"></div>
+</header>
+
+<div class="backdrop" id="backdrop"></div>
+<div class="layout">
+  <aside class="sidebar" id="drawer" aria-label="Table of contents">
+    <div class="side-title">On this page</div>
+    <nav>
+      <div class="drawer__group">Start here</div><a class="nav-link" href="#sec-tldr">Quick Start</a><a class="nav-link" href="#sec-what">What is GunGame?</a><a class="nav-link" href="#sec-round">How a Match Works</a><div class="drawer__group">Weapons</div><a class="nav-link" href="#sec-order">Weapon Order</a><a class="nav-link" href="#sec-levels">Kills and Levels</a><div class="drawer__group">Match</div><a class="nav-link" href="#sec-spawn">Respawn and Protection</a><a class="nav-link" href="#sec-warmup">Warm-up and Late Joiners</a><a class="nav-link" href="#sec-win">Winning and the Top 10</a><div class="drawer__group">Interface</div><a class="nav-link" href="#sec-menu">The M Menu</a><a class="nav-link" href="#sec-hud">HUD</a><a class="nav-link" href="#sec-binds">Key Binds</a><a class="nav-link" href="#sec-cmds">All Commands</a><div class="drawer__group">Maps</div><a class="nav-link" href="#sec-maps">gg_ Maps</a><div class="drawer__group">Community</div><a class="nav-link" href="#sec-faq">FAQ</a><a class="nav-link" href="#sec-tips">Tips and Strategy</a><div class="drawer__group">Reference</div><a class="nav-link" href="#sec-owners">For Server Owners</a><a class="nav-link" href="#sec-dev">Dev Status</a>
+      <hr class="side-sep">
+      <a class="nav-link" href="/">Necro's Hub (home)</a>
+      <a class="nav-link" href="/main_index">NECRO144's Main Page</a>
+      <a class="nav-link" href="/fastdl/">FastDL Map Downloads</a>
+    </nav>
+  </aside>
+
+  <main class="doc">
+    <div class="file-head"><span>&#128214; README.md</span><span class="muted">v1.0.0-NS &middot; Installed</span></div>
+    <div class="doc-body">
+
+<section class="hero" id="top">
+  <h1>GunGame</h1>
+  <p class="lead"><b>GunGame [NS]</b> is a <b>Counter-Strike 1.6 gun game mod</b> written from scratch for AMX Mod X: everybody starts with the same pistol, every kill moves you up the weapon ladder, and the first player to win a knife fight on the last level takes the map. The complete guide, from your first Glock kill to the knife.</p>
+  <p>Written by <b>Néć[Ř]ø /A/</b> for the [NS] server</p>
+  <div class="badges"><span class="badge">v1.0.0-NS</span><span class="badge a">Installed</span><span class="badge m">AMX Mod X 1.8.2</span></div>
+  <div class="badges"><a class="badge" href="#sec-tldr">Quick Start</a><a class="badge" href="#sec-order">Weapon Order</a><a class="badge" href="#sec-levels">Levels</a><a class="badge" href="#sec-menu">M Menu</a><a class="badge" href="#sec-cmds">Commands</a><a class="badge" href="#sec-maps">Maps</a></div>
+</section>
+
+<section class="sec" id="sec-tldr">
+<span class="kicker">01 START HERE</span>
+<h2>Quick Start</h2>
+<p class="lead">Kill with the gun you are given. Every two kills you get the next gun. Get a kill with the knife on the last level and you win the map.</p>
+<ol>
+<li><b>Join a team.</b> You spawn with a <b>Glock-18</b> and a knife - that's level 1.</li>
+<li><b>Get 2 kills with your gun.</b> You instantly get the next weapon, with a full clip.</li>
+<li><b>Knife someone</b> at any time to <b>steal a level</b> from them.</li>
+<li><b>Don't kill yourself.</b> Falling or your own grenade costs you a level.</li>
+<li><b>Reach the knife level</b> (level 26) and get one knife kill to <b>win</b>.</li>
+<li><b>Press M</b> for your progress, the weapon order, the top 10 winners and the rules.</li>
+</ol>
+<div class="callout"><span class="ct">No buying</span><p>There is no money and no buy menu. You can't drop or pick up guns: your level decides your weapon. You respawn right away with 2 seconds of spawn protection.</p></div>
+</section>
+
+<section class="sec" id="sec-what">
+<span class="kicker">02 START HERE</span>
+<h2>What is GunGame?</h2>
+<p>GunGame is a fast, arcade-style deathmatch for <b>Counter-Strike 1.6</b>. Instead of buying weapons, everybody climbs the same ladder of guns: pistols, shotguns, SMGs, rifles, snipers, the machine gun, a grenade and finally the knife. It rewards aim with every weapon, not just your favourite one.</p>
+<div class="badges"><span class="badge">CS 1.6</span><span class="badge">AMX Mod X 1.8.2</span><span class="badge">No client download</span><span class="badge">26 levels</span><span class="badge">Instant respawn</span></div>
+<div class="grid2">
+<div class="mini inv"><h4>Gameplay</h4><ul><li>26 weapon levels, knife last</li><li>2 kills per gun, 1 for grenade and knife</li><li>Knife steals a level</li><li>Suicide / fall costs a level</li><li>Instant respawn + spawn protection</li></ul></div>
+<div class="mini gold"><h4>Match</h4><ul><li>30-second warm-up at map start</li><li>Late joiners start at the lowest level</li><li>Leader announcements</li><li>Winner saved, /ggtop top 10</li><li>Next map after the win</li></ul></div>
+</div>
+</section>
+
+<section class="sec" id="sec-round">
+<span class="kicker">03 START HERE</span>
+<h2>How a Match Works</h2>
+<ol>
+<li><b>Warm-up (30 s).</b> Everybody plays with the level-1 pistol and kills don't count. When it ends, everybody is reset to level 1 and respawned.</li>
+<li><b>The race.</b> There are no rounds: you respawn 1.5 seconds after dying and keep your level. The HUD on the left shows your level, weapon, kills and the leader.</li>
+<li><b>The knife level.</b> When someone reaches the last level, the whole server is told. Everybody now wants to stop them.</li>
+<li><b>The win.</b> The first knife kill on the last level wins the map. The winner is announced, players freeze, the win is saved and the next map loads 10 seconds later.</li>
+</ol>
+</section>
+
+<section class="sec" id="sec-order">
+<span class="kicker">04 WEAPONS</span>
+<h2>Weapon Order</h2>
+<p>The default ladder. Server owners can change it with <code>gg_weapon_order</code>; the knife is always the last level.</p>
+<div class="tablewrap"><table><thead><tr><th>Level</th><th>Weapon</th><th>Type</th><th>Kills</th></tr></thead><tbody>
+<tr><td>1</td><td>Glock-18</td><td>Pistol</td><td>2</td></tr>
+<tr><td>2</td><td>USP</td><td>Pistol</td><td>2</td></tr>
+<tr><td>3</td><td>P228</td><td>Pistol</td><td>2</td></tr>
+<tr><td>4</td><td>Desert Eagle</td><td>Pistol</td><td>2</td></tr>
+<tr><td>5</td><td>Five-SeveN</td><td>Pistol</td><td>2</td></tr>
+<tr><td>6</td><td>Dual Elites</td><td>Pistol</td><td>2</td></tr>
+<tr><td>7</td><td>M3</td><td>Shotgun</td><td>2</td></tr>
+<tr><td>8</td><td>XM1014</td><td>Shotgun</td><td>2</td></tr>
+<tr><td>9</td><td>TMP</td><td>SMG</td><td>2</td></tr>
+<tr><td>10</td><td>MAC-10</td><td>SMG</td><td>2</td></tr>
+<tr><td>11</td><td>MP5</td><td>SMG</td><td>2</td></tr>
+<tr><td>12</td><td>UMP45</td><td>SMG</td><td>2</td></tr>
+<tr><td>13</td><td>P90</td><td>SMG</td><td>2</td></tr>
+<tr><td>14</td><td>Galil</td><td>Rifle</td><td>2</td></tr>
+<tr><td>15</td><td>FAMAS</td><td>Rifle</td><td>2</td></tr>
+<tr><td>16</td><td>AK-47</td><td>Rifle</td><td>2</td></tr>
+<tr><td>17</td><td>M4A1</td><td>Rifle</td><td>2</td></tr>
+<tr><td>18</td><td>SG552</td><td>Rifle</td><td>2</td></tr>
+<tr><td>19</td><td>AUG</td><td>Rifle</td><td>2</td></tr>
+<tr><td>20</td><td>Scout</td><td>Sniper</td><td>2</td></tr>
+<tr><td>21</td><td>AWP</td><td>Sniper</td><td>2</td></tr>
+<tr><td>22</td><td>G3SG1</td><td>Auto sniper</td><td>2</td></tr>
+<tr><td>23</td><td>SG550</td><td>Auto sniper</td><td>2</td></tr>
+<tr><td>24</td><td>M249</td><td>Machine gun</td><td>2</td></tr>
+<tr><td>25</td><td>HE Grenade</td><td>Grenade</td><td>1</td></tr>
+<tr><td>26</td><td>Knife</td><td>Melee - win</td><td>1</td></tr>
+</tbody></table></div>
+<p>On the grenade level you get a new HE grenade 2 seconds after every throw.</p>
+</section>
+
+<section class="sec" id="sec-levels">
+<span class="kicker">05 WEAPONS</span>
+<h2>Kills and Levels</h2>
+<div class="tablewrap"><table><thead><tr><th>What happens</th><th>Result</th></tr></thead><tbody>
+<tr><td>Kill with your level's weapon</td><td>+1 kill; at 2 kills you level up (grenade and knife levels: 1 kill)</td></tr>
+<tr><td>Kill that isn't with your level's weapon</td><td>Doesn't count</td></tr>
+<tr><td>Knife kill on anyone</td><td>You gain a level, the victim loses one</td></tr>
+<tr><td>Knife kill on the last level</td><td><b>You win the map</b></td></tr>
+<tr><td>Suicide, fall, your own grenade</td><td>You lose a level</td></tr>
+<tr><td>Team kill</td><td>Doesn't count</td></tr>
+</tbody></table></div>
+<p>A level up gives you the new gun immediately, even mid-fight, and every counted kill refills your clip.</p>
+</section>
+
+<section class="sec" id="sec-spawn">
+<span class="kicker">06 MATCH</span>
+<h2>Respawn and Spawn Protection</h2>
+<p>You respawn <b>1.5 seconds</b> after dying, with kevlar and a helmet. For the first <b>2 seconds</b> you glow in your team colour and can't be hurt. Dropped guns vanish right away, so there's nothing to pick up.</p>
+</section>
+
+<section class="sec" id="sec-warmup">
+<span class="kicker">07 MATCH</span>
+<h2>Warm-up and Late Joiners</h2>
+<p>Each map starts with a <b>30-second warm-up</b> so everybody can load in: kills don't count and everybody has the level-1 pistol. When the warm-up ends, all levels reset.</p>
+<p>If you join in the middle of a match you <b>start at the lowest level anyone is on</b>, so you're not stuck at the bottom while others are far ahead.</p>
+</section>
+
+<section class="sec" id="sec-win">
+<span class="kicker">08 MATCH</span>
+<h2>Winning and the Top 10</h2>
+<p>The winner is announced on screen and in chat, everybody freezes and the next map loads after 10 seconds. Every win is saved by SteamID: say <code>/ggtop</code> to see the <b>top 10 winners</b> of the server.</p>
+</section>
+
+<section class="sec" id="sec-menu">
+<span class="kicker">09 INTERFACE</span>
+<h2>The M Menu</h2>
+<p>Press <b>M</b> (the team menu key) or say <code>/gg</code>:</p>
+<ol>
+<li>My progress - level, weapon and kills</li><li>Weapon order - the ladder with your level marked</li><li>Top 10 winners</li><li>How to play</li><li>HUD on / off</li><li>Change team</li><li>Admin menu (admins only) - restart GunGame, skip the warm-up, change a player's level</li>
+</ol>
+</section>
+
+<section class="sec" id="sec-hud">
+<span class="kicker">10 INTERFACE</span>
+<h2>HUD</h2>
+<p>The yellow panel on the left shows <b>[NS] GunGame</b>, your level and weapon (e.g. <i>Level 11/26: MP5</i>), your kills on this level (<i>Kills: 1/2</i>) and the current leader. During the warm-up it counts down instead. Turn it off in M &rarr; HUD.</p>
+</section>
+
+<section class="sec" id="sec-binds">
+<span class="kicker">11 INTERFACE</span>
+<h2>Key Binds</h2>
+<p>M already opens the menu. Optional binds for your console:</p><div class="codeblock" id="bind-gg">bind j &quot;say /gg&quot;        <span class="c">// GunGame menu</span>
+bind k &quot;say /level&quot;     <span class="c">// your level and kills</span>
+bind l &quot;say /ggtop&quot;     <span class="c">// top 10 winners</span><button class="copy" data-target="bind-gg">copy</button></div>
+</section>
+
+<section class="sec" id="sec-cmds">
+<span class="kicker">12 INTERFACE</span>
+<h2>All Commands</h2>
+<p>Chat commands start with a slash. Search or filter.</p>
+<div data-filter>
+<div class="pills">
+<button class="pill" data-side="all" aria-pressed="true">All</button>
+<button class="pill" data-side="everyone" aria-pressed="false">Everyone</button>
+<button class="pill" data-side="admin" aria-pressed="false">Admin</button>
+</div>
+<input class="search" type="search" placeholder="Search a command or what it does..." aria-label="Search commands" autocomplete="off">
+<span class="count"></span>
+<div class="tablewrap"><table><thead><tr><th>Command</th><th>For</th><th>What it does</th></tr></thead><tbody>
+<tr data-side="everyone"><td><code>M key / /gg / /menu</code></td><td><span class="tag all">Everyone</span></td><td>GunGame main menu</td></tr>
+<tr data-side="everyone"><td><code>/level</code></td><td><span class="tag all">Everyone</span></td><td>Your level, weapon and kills</td></tr>
+<tr data-side="everyone"><td><code>/weapons</code></td><td><span class="tag all">Everyone</span></td><td>The weapon order</td></tr>
+<tr data-side="everyone"><td><code>/ggtop</code> / <code>/top</code></td><td><span class="tag all">Everyone</span></td><td>Top 10 winners</td></tr>
+<tr data-side="everyone"><td><code>/rules</code></td><td><span class="tag all">Everyone</span></td><td>How to play</td></tr>
+<tr data-side="admin"><td><code>gg_restart</code></td><td><span class="tag dead">Admin</span></td><td>Everybody back to level 1 (also M &rarr; Admin)</td></tr>
+<tr data-side="admin"><td><code>gg_skipwarmup</code></td><td><span class="tag dead">Admin</span></td><td>End the warm-up now</td></tr>
+<tr data-side="admin"><td><code>gg_setlevel &lt;name|#id&gt; &lt;n&gt;</code></td><td><span class="tag dead">Admin</span></td><td>Put a player on level n</td></tr>
+</tbody></table></div>
+</div>
+</section>
+
+<section class="sec" id="sec-maps">
+<span class="kicker">13 MAPS</span>
+<h2>Maps</h2>
+<p>GunGame plays its own <code>gg_</code> map rotation. Every map downloads automatically when you join, or grab the packs from the <a href="/fastdl/">FastDL page</a> first.</p>
+<div class="tablewrap"><table><thead><tr><th>Map</th><th>What it is</th></tr></thead><tbody>
+<tr><td><code>gg_mcdonalds</code></td><td>Fast-food restaurant arena</td></tr>
+<tr><td><code>gg_dusty</code></td><td>Small dust-style arena</td></tr>
+<tr><td><code>gg_js_justmap</code></td><td>Compact lab corridors</td></tr>
+<tr><td><code>gg_js_mario</code></td><td>Super Mario world with its own Mario sky</td></tr>
+<tr><td><code>gg_capture</code></td><td>Mid-size urban map</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="sec" id="sec-faq">
+<span class="kicker">14 COMMUNITY</span>
+<h2>FAQ</h2>
+<button class="pill" id="toggleAll" type="button">Expand all</button>
+<details class="acc"><summary>Do I have to download anything?</summary><div class="body"><p>No. GunGame runs on the server, and the gg_ maps download automatically from our FastDL. You can also grab the map packs from the <a href="/fastdl/">FastDL page</a> before you join.</p></div></details><details class="acc"><summary>My kill didn't count.</summary><div class="body"><p>Only kills with your level's weapon count (and knife kills, which steal a level). Team kills and kills during the warm-up never count.</p></div></details><details class="acc"><summary>I lost a level - why?</summary><div class="body"><p>Someone knifed you, or you killed yourself: falling, your own grenade or the kill command all cost a level.</p></div></details><details class="acc"><summary>Can I buy or pick up a better gun?</summary><div class="body"><p>No. There is no money and no buy menu, and dropped guns disappear. Your level decides your weapon.</p></div></details><details class="acc"><summary>Is my progress saved?</summary><div class="body"><p>Your level lasts for the current map. Your wins are saved by SteamID and show in /ggtop.</p></div></details><details class="acc"><summary>Why does M not open the team menu?</summary><div class="body"><p>M opens the GunGame menu once you're in a team. Pick "Change team" in it to get the normal team menu.</p></div></details>
+</section>
+
+<section class="sec" id="sec-tips">
+<span class="kicker">15 COMMUNITY</span>
+<h2>Tips and Strategy</h2>
+<ul>
+<li><b>Hunt the leader with the knife.</b> Knifing them costs them a level and gives you one.</li>
+<li><b>Pistol levels are the fastest.</b> Go for headshots - the Desert Eagle kills in one.</li>
+<li><b>Shotguns: get close.</b> Use corners and doorways on the small gg_ maps.</li>
+<li><b>Snipers: don't stand still.</b> Everybody respawns right away and comes looking for you.</li>
+<li><b>Grenade level:</b> throw, take cover, a new grenade comes every 2 seconds.</li>
+<li><b>Knife level:</b> jump and strafe, attack from behind, and stay away from open areas.</li>
+</ul>
+</section>
+
+<section class="sec" id="sec-owners">
+<span class="kicker">16 REFERENCE</span>
+<h2>For Server Owners</h2>
+<p>Requires AMX Mod X 1.8.2 with cstrike, fun, fakemeta, hamsandwich and csx (all standard) and ReGameDLL for infinite rounds. No ReAPI or Orpheu. Loads from <code>plugins-gungame.ini</code>; settings in <code>configs/gungame.cfg</code>:</p><div class="codeblock" id="cfg-gg">gg_weapon_order "glock18,usp,...,hegrenade,knife"
+gg_kills_per_level 2      <span class="c">// kills per gun</span>
+gg_knife_pro 1            <span class="c">// knife kill steals a level</span>
+gg_suicide_penalty 1      <span class="c">// suicide / fall costs a level</span>
+gg_respawn_delay 1.5      <span class="c">// seconds</span>
+gg_spawn_protection 2.0   <span class="c">// seconds, 0 = off</span>
+gg_warmup 30              <span class="c">// seconds, 0 = off</span>
+gg_handicap 1             <span class="c">// late joiners start at the lowest level</span>
+gg_win_delay 10           <span class="c">// seconds before the next map</span>
+gg_nade_refresh 2.0       <span class="c">// new HE grenade after a throw</span>
+gg_armor 100              <span class="c">// kevlar + helmet on spawn</span><button class="copy" data-target="cfg-gg">copy</button></div>
+<div class="callout"><span class="ct">Admin flag</span><p><b>d</b> (ban): gg_restart, gg_skipwarmup, gg_setlevel and the admin menu.</p></div>
+</section>
+
+<section class="sec" id="sec-dev">
+<span class="kicker">17 REFERENCE</span>
+<h2>Dev Status</h2>
+<p><b>1.0.0-NS</b> is the first release. It is installed on the server and switched on for GunGame sessions; the server name changes to <b>[NS] GunGame</b> when it runs.</p>
+<p class="muted">Found a bug or want a different weapon order? Tell an admin in game or on Discord - this page is updated with every release.</p>
+</section>
+
+      <div class="foot"><span>GunGame &middot; CS 1.6 mod guide</span><span>v1.0.0-NS</span><a href="#top">Back to top &uarr;</a></div>
+    </div>
+  </main>
+</div>
+<button class="totop" id="toTop" type="button" aria-label="Back to top">&uarr;</button>
+<script>
+(function () {
+  var root = document.documentElement;
+  var store = {
+    get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  };
+
+  /* theme */
+  function isDark() {
+    var t = root.getAttribute('data-theme');
+    return t ? t === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  document.getElementById('themeBtn').addEventListener('click', function () {
+    var next = isDark() ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    store.set('rage-theme', next);
+  });
+
+  /* mobile contents drawer */
+  var drawer = document.getElementById('drawer');
+  var backdrop = document.getElementById('backdrop');
+  var menuBtn = document.getElementById('menuBtn');
+  function openDrawer() {
+    drawer.classList.add('open'); backdrop.classList.add('show');
+    menuBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDrawer() {
+    if (!drawer.classList.contains('open')) return;
+    drawer.classList.remove('open'); backdrop.classList.remove('show');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  menuBtn.addEventListener('click', function () { drawer.classList.contains('open') ? closeDrawer() : openDrawer(); });
+  backdrop.addEventListener('click', closeDrawer);
+  window.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeDrawer(); });
+  window.matchMedia('(min-width: 1012px)').addEventListener('change', closeDrawer);
+
+  /* scroll progress + back to top */
+  var bar = document.getElementById('bar');
+  var totop = document.getElementById('toTop');
+  function onScroll() {
+    var se = document.scrollingElement || root;
+    var max = se.scrollHeight - se.clientHeight;
+    bar.style.width = (max > 0 ? (se.scrollTop / max) * 100 : 0) + '%';
+    totop.classList.toggle('show', se.scrollTop > 700);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  totop.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+  /* heading anchors (h2 and h3) */
+  var used = {};
+  function slug(t) {
+    var b = t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'section';
+    var n = b, i = 2;
+    while (used[n] || document.getElementById(n)) n = b + '-' + (i++);
+    used[n] = 1; return n;
+  }
+  document.querySelectorAll('.sec > h2, .sec > h3').forEach(function (h) {
+    if (!h.id) {
+      var host = h.tagName === 'H2' ? h.parentElement : null;
+      h.id = host && host.id ? host.id + '-title' : slug(h.textContent);
+    }
+    var a = document.createElement('a');
+    a.className = 'anchor'; a.href = '#' + h.id; a.setAttribute('aria-label', 'Link to this section'); a.textContent = '#';
+    h.insertBefore(a, h.firstChild);
+  });
+
+  /* table of contents: close drawer on click + highlight the section being read */
+  var links = Array.prototype.slice.call(document.querySelectorAll('.sidebar .nav-link[href^="#"]'));
+  var byId = {};
+  links.forEach(function (a) {
+    byId[a.getAttribute('href').slice(1)] = a;
+    a.addEventListener('click', closeDrawer);
+  });
+  if ('IntersectionObserver' in window) {
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var a = byId[en.target.id];
+        if (!a) return;
+        links.forEach(function (l) { l.classList.remove('active'); });
+        a.classList.add('active');
+        if (window.matchMedia('(min-width: 1012px)').matches) {
+          var sb = drawer, r = a.getBoundingClientRect(), sr = sb.getBoundingClientRect();
+          if (r.top < sr.top || r.bottom > sr.bottom) a.scrollIntoView({ block: 'center' });
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    document.querySelectorAll('section[id]').forEach(function (s) { spy.observe(s); });
+  }
+
+  /* copy buttons */
+  function copyText(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(text).then(function () { return true; }, function () { return false; });
+    }
+    return new Promise(function (resolve) {
+      var t = document.createElement('textarea');
+      t.value = text; t.style.position = 'fixed'; t.style.opacity = '0';
+      document.body.appendChild(t); t.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(t); resolve(ok);
+    });
+  }
+  document.querySelectorAll('.copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var target = document.getElementById(btn.dataset.target);
+      if (!target) return;
+      var clone = target.cloneNode(true);
+      clone.querySelectorAll('.copy').forEach(function (b) { b.remove(); });
+      var text = clone.textContent.replace(/\u00a0/g, ' ').split('\n')
+        .map(function (l) { return l.replace(/\s+\/\/.*$/, '').trim(); })
+        .filter(Boolean).join('\n');
+      copyText(text).then(function (ok) {
+        var old = btn.textContent;
+        btn.textContent = ok ? 'Copied' : 'Press Ctrl+C';
+        btn.classList.add('done');
+        setTimeout(function () { btn.textContent = old; btn.classList.remove('done'); }, 1400);
+      });
+    });
+  });
+
+  /* live filter: pills (data-side) + search box over a table */
+  function setupFilter(rootEl) {
+    var rows = Array.prototype.slice.call(rootEl.querySelectorAll('tbody tr'));
+    var search = rootEl.querySelector('.search');
+    var pills = Array.prototype.slice.call(rootEl.querySelectorAll('.pill'));
+    var counter = rootEl.querySelector('.count');
+    var side = 'all';
+    function apply() {
+      var q = search ? search.value.trim().toLowerCase() : '';
+      var shown = 0;
+      rows.forEach(function (r) {
+        var okSide = side === 'all' || (r.dataset.side || 'all').split(' ').indexOf(side) > -1;
+        var okText = !q || r.textContent.toLowerCase().indexOf(q) > -1;
+        var vis = okSide && okText;
+        r.style.display = vis ? '' : 'none';
+        if (vis) shown++;
+      });
+      if (counter) counter.textContent = shown + ' of ' + rows.length + ' shown';
+    }
+    pills.forEach(function (p) {
+      p.addEventListener('click', function () {
+        pills.forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+        p.setAttribute('aria-pressed', 'true');
+        side = p.dataset.side; apply();
+      });
+    });
+    if (search) search.addEventListener('input', apply);
+    apply();
+  }
+  document.querySelectorAll('[data-filter]').forEach(setupFilter);
+
+  /* FAQ: expand / collapse all */
+  var toggleAll = document.getElementById('toggleAll');
+  if (toggleAll) {
+    toggleAll.addEventListener('click', function () {
+      var items = Array.prototype.slice.call(document.querySelectorAll('#sec-faq details.acc'));
+      var open = items.some(function (d) { return !d.open; });
+      items.forEach(function (d) { d.open = open; });
+      toggleAll.textContent = open ? 'Collapse all' : 'Expand all';
+    });
+  }
+
+  /* open a FAQ item or anchor target that is hidden inside a closed <details> */
+  function openHash() {
+    var id = decodeURIComponent(location.hash.slice(1));
+    var el = id && document.getElementById(id);
+    var d = el && el.closest && el.closest('details');
+    if (d) d.open = true;
+  }
+  window.addEventListener('hashchange', openHash);
+  openHash();
+})();
+
+</script>
+</body>
+</html>
