@@ -7,212 +7,80 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-KG1SF91F87');
 </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#04070a">
-    <meta name="color-scheme" content="dark">
-    <title>banlist.log // NS Banned Players</title>
-    <link rel="icon" href="https://i.imgur.com/vqfrYWD.png" type="image/png">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <style>
-        :root {
-            --bg: #04070a;
-            --bg-deep: #010302;
-            --panel: rgba(8, 16, 18, 0.85);
-            --line: rgba(46, 230, 208, 0.18);
-            --cyan: #2ee6d0;
-            --cyan-soft: #7dfbe9;
-            --magenta: #ff3ea5;
-            --amber: #ffb703;
-            --text: #d9f6f0;
-            --muted: #5f8b85;
-            --radius: 12px;
-            --mono: 'JetBrains Mono', ui-monospace, monospace;
-            --pixel: 'VT323', monospace;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        html, body { height: 100%; }
-
-        body {
-            font-family: var(--mono);
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            position: relative;
-            overflow-x: hidden;
-            padding-bottom: 60px;
-        }
-
-        .bg-grid {
-            position: fixed; inset: 0; z-index: -2;
-            background-color: var(--bg-deep);
-            background-image:
-                linear-gradient(rgba(46, 230, 208, 0.06) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(46, 230, 208, 0.06) 1px, transparent 1px);
-            background-size: 34px 34px;
-        }
-        .bg-glow {
-            position: fixed; inset: 0; z-index: -1;
-            background:
-                radial-gradient(circle at 15% 8%, rgba(46, 230, 208, 0.10) 0%, transparent 45%),
-                radial-gradient(circle at 85% 95%, rgba(255, 62, 165, 0.08) 0%, transparent 45%);
-        }
-        body::after {
-            content: '';
-            position: fixed; inset: 0; z-index: 45; pointer-events: none;
-            background: repeating-linear-gradient(180deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 2px, transparent 4px);
-            mix-blend-mode: overlay;
-        }
-
-        header {
-            position: relative;
-            padding: 2.2rem 20px 1.6rem;
-            text-align: center;
-            border-bottom: 1px solid var(--line);
-            background: rgba(4, 7, 10, 0.6);
-            backdrop-filter: blur(10px);
-        }
-
-        .back-button {
-            position: absolute; left: 16px; top: 50%;
-            transform: translateY(-50%);
-            background: var(--panel);
-            border: 1px solid var(--line);
-            color: var(--cyan);
-            text-decoration: none;
-            font-size: 0.8rem;
-            padding: 8px 14px;
-            border-radius: 8px;
-            transition: all 0.25s ease;
-        }
-        .back-button:hover { background: rgba(46,230,208,0.1); border-color: var(--cyan); }
-
-        .terminal-path { font-size: 0.72rem; color: var(--muted); margin-bottom: 8px; }
-        .terminal-path .ps1 { color: var(--cyan); }
-
-        h1 {
-            font-family: var(--pixel);
-            font-weight: 400;
-            font-size: clamp(1.8rem, 6vw, 2.3rem);
-            letter-spacing: 1px;
-            color: var(--cyan-soft);
-            text-shadow: 0 0 10px rgba(46,230,208,0.45);
-        }
-
-        .table-wrap { max-width: 1150px; margin: 2rem auto; padding: 0 1.2rem; }
-
-        .roster-table-container {
-            background: var(--panel);
-            border: 1px solid var(--line);
-            border-radius: var(--radius);
-            overflow-x: auto;
-            box-shadow: 0 12px 40px rgba(0,0,0,0.35);
-        }
-
-        table { width: 100%; border-collapse: collapse; min-width: 800px; }
-
-        thead th {
-            background: rgba(46, 230, 208, 0.06);
-            color: var(--cyan);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-size: 0.7rem;
-            padding: 14px 14px;
-            text-align: left;
-            border-bottom: 1px solid var(--line);
-            white-space: nowrap;
-        }
-
-        tbody td {
-            padding: 12px 14px;
-            font-size: 0.82rem;
-            border-bottom: 1px solid rgba(46, 230, 208, 0.08);
-            white-space: nowrap;
-        }
-        tbody tr:last-child td { border-bottom: none; }
-        tbody tr:hover { background: rgba(46, 230, 208, 0.04); }
-
-        .ban-name { font-weight: 600; color: var(--text); }
-        .ban-name::before { content: '/ '; color: var(--muted); }
-        .ban-date, .ban-expiry { color: var(--muted); font-size: 0.78rem; }
-        .ban-reason { color: var(--cyan-soft); font-size: 0.78rem; }
-        .ban-server { color: var(--muted); font-size: 0.78rem; }
-
-        .status-tag {
-            display: inline-block;
-            padding: 3px 10px;
-            border-radius: 999px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 0.3px;
-            border: 1px solid currentColor;
-        }
-        .status-tag.expired { color: var(--cyan); }
-        .status-tag.active { color: var(--magenta); }
-
-        .approx-marker { color: var(--amber); font-size: 0.68rem; }
-
-        footer {
-            text-align: center;
-            padding: 2rem 20px 0;
-            color: var(--muted);
-            font-size: 0.75rem;
-        }
-
-        @media (max-width: 640px) {
-            .back-button { position: static; transform: none; margin-bottom: 12px; display: inline-block; }
-            header { text-align: center; }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ban list - [NS] Night-Shift | Necro</title>
+<meta name="description" content="[NS] Night-Shift ban list: the live ban list of the new servers, plus the archive of older bans.">
+<meta name="theme-color" content="#0a0e13">
+<link rel="canonical" href="https://necro144.com/community/banned">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://necro144.com/community/banned">
+<meta property="og:title" content="Ban list - [NS] Night-Shift | Necro">
+<meta property="og:description" content="[NS] Night-Shift ban list: the live ban list of the new servers, plus the archive of older bans.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232ee6d0'/%3E%3Ctext x='32' y='45' font-size='36' text-anchor='middle' fill='%23032621' font-family='monospace' font-weight='800'%3EN%3C/text%3E%3C/svg%3E">
+<script>(function(){try{var t=localStorage.getItem('site-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&family=Noto+Sans+Arabic:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/site.css">
 </head>
 <body>
-    <div class="bg-grid"></div>
-    <div class="bg-glow"></div>
+<a class="skip" href="#main">Skip to content</a>
 
-    <header>
-        <a href="/" class="back-button">&lt; back</a>
-        <p class="terminal-path"><span class="ps1">necro@root</span>:~$ cat banlist.log</p>
-        <h1>Player Ban Information</h1>
-    </header>
+<header class="site-header">
+  <nav class="wrap nav" aria-label="Main">
+    <a class="brand" href="/"><span class="brand-mark">N</span><span>Necro<small>necro144.com</small></span></a>
+    <button class="icon-btn nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu">☰</button>
+    <ul class="nav-links" id="menu">
+      <li><a href="/">Home</a></li>
+      <li><a href="/photography/">Photography</a></li>
+      <li><a href="/servers/">Game Servers</a></li>
+      <li><a href="/#projects">Projects</a></li>
+      <li><a href="/main_index">Links</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+    <button class="icon-btn" type="button" data-theme-toggle aria-label="Switch theme">☀</button>
+  </nav>
+</header>
 
-    <div class="table-wrap">
-        <div class="roster-table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nickname</th>
-                        <th>Date Banned</th>
-                        <th>Duration</th>
-                        <th>Ban Lifts On</th>
-                        <th>Status</th>
-                        <th>Reason</th>
-                        <th>Server</th>
-                    </tr>
-                </thead>
-                <tbody id="banBody"></tbody>
-            </table>
-        </div>
+<main id="main">
+<section class="page-hero">
+    <div class="wrap">
+      <span class="eyebrow amber">Community</span>
+      <h1>Ban list</h1>
+      <p class="lead">New bans are on the live ban list, shared by all [NS] servers. Below is the archive of older bans.</p>
+      <div class="btn-row" style="margin-top:8px"><a class="btn btn-amber" href="http://64.176.167.136/bans/" rel="noopener">Open the live ban list</a></div>
     </div>
+  </section>
+  <section class="page-body">
+    <div class="wrap">
+      <h2 style="font-size:1.3rem">Archive</h2>
+      <div class="table-wrap">
+        <table class="table">
+          <thead><tr><th>Nickname</th><th>Banned</th><th>Duration</th><th>Lifts on</th><th>Status</th><th>Reason</th><th>Server</th></tr></thead>
+          <tbody id="banBody"></tbody>
+        </table>
+      </div>
+      <p class="muted" style="margin-top:14px;font-size:.9rem">"Year only" means only the year was on record. Think a ban is wrong? Ask on <a href="/community/discord">Discord</a>.</p>
+    </div>
+  </section>
+</main>
 
-    <footer>© Necro's Hub — Ban Record Archive</footer>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-bottom" style="margin-top:0;padding-top:0;border-top:0">
+      <span>© <span data-year>2026</span> Qusai · necro144.com</span>
+      <span><a href="/servers/">Game servers</a> · <a href="/photography/">Photography</a> · <a href="/community/discord">Discord</a> · <a href="/main_index">All links</a></span>
+    </div>
+  </div>
+</footer>
 
-    <script>
-        // date: [year, month(1-12), day] — approx:true means only the year was on record,
-        // so day/month are placeholders (Jan 1) and the exact date is unknown.
-        const bans = [
+<script src="/assets/js/site.js" defer></script>
+<script>
+const bans = [
             { name: 'Haroun Ahmaro', date: [2023,10,12], approx: false, durationDays: 2, reason: 'TROLLING BEHAVIOUR', server: 'TROUBLE TOWN' },
             { name: 'efa', date: [2020,1,1], approx: true, durationDays: 7, reason: 'DISRESPECTFUL BEHAVIOUR', server: 'CLASSIC' },
             { name: 's.', date: [2023,10,12], approx: false, durationDays: 2, reason: 'TROLLING', server: 'TROUBLE TOWN' },
@@ -225,51 +93,18 @@
             { name: 'Bilcho', date: [2023,3,22], approx: false, durationDays: 3, reason: 'DISRUPTIVE BEHAVIOR', server: 'TROUBLE TOWN' },
             { name: '[SUP3R-B] Player', date: [2022,11,15], approx: false, durationDays: 10, reason: 'CHEATING', server: 'CLASSIC' }
         ];
-
-        const DAY_MS = 24 * 60 * 60 * 1000;
-        const dateFmt = new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'short', day: '2-digit' });
-
-        function renderRow({ name, date, approx, durationDays, reason, server }) {
-            const banDate = new Date(date[0], date[1] - 1, date[2]);
-            const expiryDate = new Date(banDate.getTime() + durationDays * DAY_MS);
-            const now = new Date();
-            const isExpired = now >= expiryDate;
-
-            const bannedLabel = approx ? `${date[0]} <span class="approx-marker">(exact date unknown)</span>` : dateFmt.format(banDate);
-            const expiryLabel = dateFmt.format(expiryDate);
-            const statusLabel = isExpired ? 'EXPIRED' : 'ACTIVE';
-            const statusClass = isExpired ? 'expired' : 'active';
-
-            return `
-                <tr>
-                    <td class="ban-name">${name}</td>
-                    <td class="ban-date">${bannedLabel}</td>
-                    <td class="ban-date">${durationDays} day${durationDays === 1 ? '' : 's'}</td>
-                    <td class="ban-expiry">${expiryLabel}</td>
-                    <td><span class="status-tag ${statusClass}">${statusLabel}</span></td>
-                    <td class="ban-reason">${reason}</td>
-                    <td class="ban-server">${server}</td>
-                </tr>`;
-        }
-
-        document.getElementById('banBody').innerHTML = bans.map(renderRow).join('');
-
-        // ===== Anti right-click & keyboard shortcut protection =====
-        document.addEventListener('contextmenu', e => e.preventDefault());
-        document.addEventListener('selectstart', e => e.preventDefault());
-        document.addEventListener('keydown', e => {
-            const key = e.key.toLowerCase();
-            const blocked =
-                e.key === 'F12' ||
-                (e.ctrlKey && e.shiftKey && ['i', 'j', 'c', 'k'].includes(key)) ||
-                (e.metaKey && e.altKey && ['i', 'j', 'c'].includes(key)) ||
-                ((e.ctrlKey || e.metaKey) && ['u', 's', 'p'].includes(key));
-            if (blocked) e.preventDefault();
-        });
-        document.addEventListener('dragstart', e => e.preventDefault());
-    </script>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-4DE6YQ7Q2M"></script>
-	
+function daysSince(y, m, d) { return Math.round((new Date() - new Date(y, m - 1, d)) / 86400000); }
+function cell(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+var fmt = new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'short', day: '2-digit' });
+document.getElementById('banBody').innerHTML = bans.map(function (b) {
+  var start = new Date(b.date[0], b.date[1] - 1, b.date[2]);
+  var end = new Date(start.getTime() + b.durationDays * 86400000);
+  var over = new Date() >= end;
+  return '<tr><td>' + cell(b.name) + '</td><td>' + (b.approx ? b.date[0] + ' <span class="muted">(year only)</span>' : fmt.format(start)) +
+    '</td><td>' + b.durationDays + ' day' + (b.durationDays === 1 ? '' : 's') + '</td><td>' + fmt.format(end) +
+    '</td><td><span class="rank" style="color:' + (over ? 'var(--muted)' : 'var(--rose)') + '">' + (over ? 'EXPIRED' : 'ACTIVE') +
+    '</span></td><td>' + cell(b.reason) + '</td><td>' + cell(b.server) + '</td></tr>';
+}).join('');
+</script>
 </body>
 </html>

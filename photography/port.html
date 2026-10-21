@@ -7,537 +7,136 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-KG1SF91F87');
 </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#04070a">
-    <meta name="color-scheme" content="dark">
-    <title>gallery.log // Photography Work Samples</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <style>
-        :root {
-            --bg: #04070a;
-            --bg-deep: #010302;
-            --panel: rgba(8, 16, 18, 0.85);
-            --line: rgba(46, 230, 208, 0.18);
-            --cyan: #2ee6d0;
-            --cyan-soft: #7dfbe9;
-            --magenta: #ff3ea5;
-            --amber: #ffb703;
-            --text: #d9f6f0;
-            --muted: #5f8b85;
-            --radius: 10px;
-            --mono: 'JetBrains Mono', ui-monospace, monospace;
-            --pixel: 'VT323', monospace;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        html, body { height: 100%; }
-
-        body {
-            font-family: var(--mono);
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        .bg-grid {
-            position: fixed; inset: 0; z-index: -2;
-            background-color: var(--bg-deep);
-            background-image:
-                linear-gradient(rgba(46, 230, 208, 0.06) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(46, 230, 208, 0.06) 1px, transparent 1px);
-            background-size: 34px 34px;
-        }
-        .bg-glow {
-            position: fixed; inset: 0; z-index: -1;
-            background:
-                radial-gradient(circle at 15% 8%, rgba(46, 230, 208, 0.10) 0%, transparent 45%),
-                radial-gradient(circle at 85% 95%, rgba(255, 62, 165, 0.08) 0%, transparent 45%);
-        }
-        body::after {
-            content: '';
-            position: fixed; inset: 0; z-index: 45; pointer-events: none;
-            background: repeating-linear-gradient(180deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 2px, transparent 4px);
-            mix-blend-mode: overlay;
-        }
-
-        header {
-            position: relative;
-            padding: 2.2rem 20px 1.8rem;
-            text-align: center;
-            border-bottom: 1px solid var(--line);
-            background: rgba(4, 7, 10, 0.6);
-            backdrop-filter: blur(10px);
-        }
-
-        .back-button {
-            position: absolute;
-            left: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: var(--panel);
-            border: 1px solid var(--line);
-            color: var(--cyan);
-            text-decoration: none;
-            font-size: 0.8rem;
-            padding: 8px 14px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.25s ease;
-        }
-        .back-button:hover { background: rgba(46,230,208,0.1); border-color: var(--cyan); }
-
-        .terminal-path { font-size: 0.72rem; color: var(--muted); margin-bottom: 8px; }
-        .terminal-path .ps1 { color: var(--cyan); }
-
-        h1 {
-            font-family: var(--pixel);
-            font-weight: 400;
-            font-size: clamp(1.8rem, 7vw, 2.4rem);
-            letter-spacing: 1px;
-            color: var(--cyan-soft);
-            text-shadow: 0 0 10px rgba(46,230,208,0.45);
-        }
-
-        /* Quality Notice */
-        .quality-notice {
-            background: var(--panel);
-            border: 1px solid var(--line);
-            border-left: 3px solid var(--cyan);
-            padding: 1.1rem 1.3rem;
-            margin: 1.6rem auto;
-            max-width: 1200px;
-            width: 92%;
-            text-align: center;
-            border-radius: var(--radius);
-            font-size: 0.85rem;
-            color: var(--muted);
-        }
-
-        .whatsapp-link { color: var(--cyan); font-weight: 700; text-decoration: none; }
-        .whatsapp-link:hover { text-decoration: underline; }
-
-        .arabic-line { direction: rtl; font-family: 'SF Arabic', 'Segoe UI', system-ui, sans-serif; margin-top: 8px; }
-
-        /* Gallery Grid */
-        .gallery-container { padding: 1.5rem; max-width: 1200px; margin: 0 auto; }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
-        }
-
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: var(--radius);
-            border: 1px solid var(--line);
-            background: var(--panel);
-            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-            aspect-ratio: 1/1;
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-3px);
-            border-color: var(--cyan);
-            box-shadow: 0 10px 26px rgba(46,230,208,0.15);
-        }
-
-        .gallery-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            cursor: pointer;
-            transition: opacity 0.3s ease, filter 0.3s ease;
-            filter: saturate(0.75) brightness(0.9);
-        }
-        .gallery-item:hover .gallery-img { filter: saturate(1) brightness(1); }
-
-        .gallery-img.loading { opacity: 0; }
-        .gallery-img.loaded { opacity: 1; }
-
-        /* Loading spinner */
-        .spinner {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 34px; height: 34px;
-            border: 3px solid rgba(46, 230, 208, 0.15);
-            border-radius: 50%;
-            border-top-color: var(--cyan);
-            animation: spin 0.9s linear infinite;
-        }
-        @keyframes spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
-
-        /* Lightbox Styles */
-        .lightbox {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            inset: 0;
-            background: rgba(2, 4, 5, 0.94);
-            backdrop-filter: blur(6px);
-            overflow: auto;
-        }
-
-        .lightbox-content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            padding: 2rem;
-        }
-
-        #lightbox-img {
-            max-width: 80%;
-            max-height: 70vh;
-            object-fit: contain;
-            border-radius: 8px;
-            border: 1px solid var(--line);
-            box-shadow: 0 0 40px rgba(46,230,208,0.15);
-        }
-
-        .photo-info { color: var(--text); text-align: center; margin-top: 1.4rem; max-width: 80%; }
-        .photo-info h3 { font-family: var(--pixel); font-size: 1.4rem; color: var(--cyan-soft); letter-spacing: 1px; }
-        .photo-info p { color: var(--muted); font-size: 0.85rem; margin-top: 6px; }
-
-        .close-btn, .prev-btn, .next-btn {
-            position: absolute;
-            color: var(--cyan);
-            font-size: 2rem;
-            cursor: pointer;
-            user-select: none;
-            transition: color 0.2s ease, transform 0.2s ease;
-        }
-        .close-btn:hover, .prev-btn:hover, .next-btn:hover { color: var(--magenta); transform: scale(1.1); }
-
-        .close-btn { top: 1.4rem; right: 1.6rem; }
-        .prev-btn, .next-btn { top: 50%; transform: translateY(-50%); padding: 1rem; }
-        .prev-btn { left: 1rem; }
-        .next-btn { right: 1rem; }
-
-        /* Testimonials */
-        .testimonials { max-width: 1200px; margin: 2.2rem auto; padding: 0 1.5rem 2rem; }
-        .testimonials h2 {
-            text-align: center;
-            margin-bottom: 1.6rem;
-            font-family: var(--pixel);
-            font-weight: 400;
-            font-size: 1.9rem;
-            letter-spacing: 1px;
-            color: var(--cyan-soft);
-            text-shadow: 0 0 8px rgba(46,230,208,0.35);
-        }
-
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-            gap: 1.1rem;
-        }
-
-        .testimonial {
-            background: var(--panel);
-            border: 1px solid var(--line);
-            border-radius: var(--radius);
-            padding: 1.2rem 1.3rem;
-            text-align: left;
-            transition: border-color 0.25s ease, transform 0.25s ease;
-        }
-        .testimonial:hover { border-color: var(--cyan); transform: translateY(-2px); }
-
-        .testimonial-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.8rem;
-            font-size: 0.85rem;
-        }
-        .customer-name { color: var(--cyan-soft); font-weight: 700; }
-        .testimonial-date { color: var(--muted); font-size: 0.78rem; }
-        .testimonial-text { color: var(--text); line-height: 1.6; font-style: italic; font-size: 0.88rem; }
-        .testimonial-text[dir="rtl"], .testimonial:has(.customer-name:lang(ar)) .testimonial-text { direction: rtl; }
-
-        footer {
-            text-align: center;
-            padding: 2rem 20px 1.2rem;
-            color: var(--muted);
-            font-size: 0.78rem;
-            border-top: 1px solid var(--line);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .gallery-grid { grid-template-columns: repeat(3, 1fr); }
-        }
-        @media (max-width: 768px) {
-            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-            .back-button { position: static; transform: none; margin-bottom: 12px; display: inline-flex; }
-            header { text-align: center; }
-        }
-        @media (max-width: 480px) {
-            .gallery-grid { grid-template-columns: 1fr; }
-            .gallery-container { padding: 1rem; }
-            #lightbox-img { max-width: 95%; }
-            .photo-info { max-width: 95%; }
-        }
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Portfolio &amp; reviews - Photography in Amman | Necro</title>
+<meta name="description" content="Photo session samples and customer reviews for Necro&#x27;s photography in Amman, Jordan.">
+<meta name="theme-color" content="#0a0e13">
+<link rel="canonical" href="https://necro144.com/photography/port">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://necro144.com/photography/port">
+<meta property="og:title" content="Portfolio &amp; reviews - Photography in Amman | Necro">
+<meta property="og:description" content="Photo session samples and customer reviews for Necro&#x27;s photography in Amman, Jordan.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232ee6d0'/%3E%3Ctext x='32' y='45' font-size='36' text-anchor='middle' fill='%23032621' font-family='monospace' font-weight='800'%3EN%3C/text%3E%3C/svg%3E">
+<script>(function(){try{var t=localStorage.getItem('site-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&family=Noto+Sans+Arabic:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/site.css">
 </head>
 <body>
-    <div class="bg-grid"></div>
-    <div class="bg-glow"></div>
+<a class="skip" href="#main">Skip to content</a>
 
-    <header>
-        <a href="/" class="back-button"><i class="fas fa-arrow-left"></i> Back</a>
-        <p class="terminal-path"><span class="ps1">necro@root</span>:~$ ls gallery/samples</p>
-        <h1>Photography Work Samples</h1>
-    </header>
+<header class="site-header">
+  <nav class="wrap nav" aria-label="Main">
+    <a class="brand" href="/"><span class="brand-mark">N</span><span>Necro<small>necro144.com</small></span></a>
+    <button class="icon-btn nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu">☰</button>
+    <ul class="nav-links" id="menu">
+      <li><a href="/">Home</a></li>
+      <li><a href="/photography/">Photography</a></li>
+      <li><a href="/servers/">Game Servers</a></li>
+      <li><a href="/#projects">Projects</a></li>
+      <li><a href="/main_index">Links</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+    <button class="icon-btn" type="button" data-theme-toggle aria-label="Switch theme">☀</button>
+  </nav>
+</header>
 
-    <div class="quality-notice">
-        These are low-quality samples only. Customers successfully received their original HD quality photos.
-        <br>For full-quality samples or more information, please <a href="https://wa.me/00962779352591" class="whatsapp-link">contact us via WhatsApp</a>.
-        <div class="arabic-line">
-            هذه عينات منخفضة الجودة فقط. العملاء تلقوا بنجاح صورهم الأصلية بجودة عالية الدقة.
-            <br>للحصول على عينات كاملة الجودة أو لمزيد من المعلومات، يرجى <a href="https://wa.me/00962779352591" class="whatsapp-link">الاتصال بنا عبر واتساب</a>.
-        </div>
+<main id="main">
+<section class="page-hero">
+    <div class="wrap">
+      <span class="eyebrow">Photography</span>
+      <h1>Portfolio &amp; reviews</h1>
+      <p class="lead">Low-quality samples of real sessions. Customers receive their originals in full HD.</p>
+      <p class="ar" dir="rtl" lang="ar" style="color:var(--text-2);margin:0">هذه عينات منخفضة الجودة فقط. العملاء تلقوا صورهم الأصلية بجودة عالية.</p>
+      <div class="btn-row" style="margin-top:20px"><a class="btn btn-primary" href="/photography/PhotographySession">Book a session</a><a class="btn btn-ghost" href="https://wa.me/00962779352591" target="_blank" rel="noopener">Ask for HD samples on WhatsApp</a></div>
     </div>
-
-    <div class="gallery-container">
-        <div class="gallery-grid">
-            <!-- Photos will be added dynamically by JavaScript -->
-        </div>
+  </section>
+  <section class="page-body">
+    <div class="wrap">
+      <div class="photo-grid">
+        <button type="button" data-i="0" aria-label="Open Sample 1"><img src="/photography/work_samples/IMG_2189.jpg" alt="Sample 1" loading="lazy"></button>
+        <button type="button" data-i="1" aria-label="Open Sample 2"><img src="/photography/work_samples/IMG_2358.jpg" alt="Sample 2" loading="lazy"></button>
+        <button type="button" data-i="2" aria-label="Open Sample 3"><img src="/photography/work_samples/IMG_2371.jpg" alt="Sample 3" loading="lazy"></button>
+        <button type="button" data-i="3" aria-label="Open Sample 4"><img src="/photography/work_samples/IMG_2378.jpg" alt="Sample 4" loading="lazy"></button>
+        <button type="button" data-i="4" aria-label="Open Sample 5"><img src="/photography/work_samples/IMG_2424.jpg" alt="Sample 5" loading="lazy"></button>
+        <button type="button" data-i="5" aria-label="Open Sample 6"><img src="/photography/work_samples/IMG_4910.jpg" alt="Sample 6" loading="lazy"></button>
+        <button type="button" data-i="6" aria-label="Open Sample 7"><img src="/photography/work_samples/IMG_4928.JPG" alt="Sample 7" loading="lazy"></button>
+        <button type="button" data-i="7" aria-label="Open Sample 8"><img src="/photography/work_samples/IMG_4936.jpg" alt="Sample 8" loading="lazy"></button>
+        <button type="button" data-i="8" aria-label="Open Sample 9"><img src="/photography/work_samples/IMG_4950.jpg" alt="Sample 9" loading="lazy"></button>
+        <button type="button" data-i="9" aria-label="Open Sample 10"><img src="/photography/work_samples/IMG_4974.jpg" alt="Sample 10" loading="lazy"></button>
+        <button type="button" data-i="10" aria-label="Open Sample 11"><img src="/photography/work_samples/IMG_4978.jpg" alt="Sample 11" loading="lazy"></button>
+        <button type="button" data-i="11" aria-label="Open Sample 12"><img src="/photography/work_samples/IMG_4980.jpg" alt="Sample 12" loading="lazy"></button>
+        <button type="button" data-i="12" aria-label="Open Sample 13"><img src="/photography/work_samples/IMG_4998.jpg" alt="Sample 13" loading="lazy"></button>
+        <button type="button" data-i="13" aria-label="Open Sample 14"><img src="/photography/work_samples/IMG_5001.jpg" alt="Sample 14" loading="lazy"></button>
+        <button type="button" data-i="14" aria-label="Open Sample 15"><img src="/photography/work_samples/IMG_5010.jpg" alt="Sample 15" loading="lazy"></button>
+        <button type="button" data-i="15" aria-label="Open Sample 16"><img src="/photography/work_samples/IMG_1368.jpg" alt="Sample 16" loading="lazy"></button>
+        <button type="button" data-i="16" aria-label="Open Sample 17"><img src="/photography/work_samples/IMG_1462.jpg" alt="Sample 17" loading="lazy"></button>
+        <button type="button" data-i="17" aria-label="Open Sample 18"><img src="/photography/work_samples/IMG_1469.jpg" alt="Sample 18" loading="lazy"></button>
+        <button type="button" data-i="18" aria-label="Open Sample 19"><img src="/photography/work_samples/IMG_1470.jpg" alt="Sample 19" loading="lazy"></button>
+        <button type="button" data-i="19" aria-label="Open Sample 20"><img src="/photography/work_samples/IMG_1964.jpg" alt="Sample 20" loading="lazy"></button>
+      </div>
+      <div class="section-head" style="margin:56px 0 22px"><span class="eyebrow">Reviews</span><h2>What customers said</h2></div>
+      <div class="grid grid-3">
+        <figure class="card quote reveal" dir="rtl" lang="ar"><p>"والله الجودة تفوق التوقعات! الصور كانت أجمل من ما توقعت والسعر أكثر من معقول"</p><footer><span>خالد أ****</span><span>03/05/2023</span></footer></figure>
+        <figure class="card quote reveal" dir="rtl" lang="ar"><p>"جودة الصور كانت فوق الممتاز! والخدمة سريعة ودقيقة. الله يبارك فيكم"</p><footer><span>عمر ك****</span><span>22/10/2023</span></footer></figure>
+        <figure class="card quote reveal" dir="rtl" lang="ar"><p>"حرفياً أحسن مصور تعاملت معه! الصور كانت تحفة فنية والسعر زهيد جداً بالمقارنة"</p><footer><span>سارة ن****</span><span>11/01/2024</span></footer></figure>
+        <figure class="card quote reveal" dir="rtl" lang="ar"><p>"النتيجة كانت تفوق الخيال! المصور فهم بالضبط اللي كنت أبيه من أول مرة"</p><footer><span>أحمد م****</span><span>29/03/2024</span></footer></figure>
+        <figure class="card quote reveal" dir="rtl" lang="ar"><p>"ما قصرتوا والله! الجودة عالية جداً والتعديلات كانت بالمقاس المثالي"</p><footer><span>لينا ر****</span><span>14/06/2024</span></footer></figure>
+        <figure class="card quote reveal" dir="rtl" lang="ar"><p>"أحسنت يا رب! الصور كانت أنضف من اللي يشوفها بالمجلات العالمية"</p><footer><span>يوسف ع****</span><span>07/09/2024</span></footer></figure>
+        <figure class="card quote reveal" dir="rtl" lang="ar"><p>"مافي أحسن من كذا! المصور عنده موهبة حقيقية والأسعار مناسبة جداً"</p><footer><span>دانا و****</span><span>25/11/2024</span></footer></figure>
+        <figure class="card quote reveal" dir="rtl" lang="ar"><p>"حرفياً كل اللي شافوا الصور قالوا إني دفعت ضعف السعر! الجودة لا توصف"</p><footer><span>محمود س****</span><span>19/02/2025</span></footer></figure>
+        <figure class="card quote reveal"><p>"Wallah the photos came out amazing! Better than I expected for the price. You deserve more money for this quality!"</p><footer><span>Mohammad A*****</span><span>15/03/2023</span></footer></figure>
+        <figure class="card quote reveal"><p>"Professional work mashallah! The photographer has an eye for details. Will book again inshallah."</p><footer><span>Ahmad K****</span><span>22/07/2023</span></footer></figure>
+        <figure class="card quote reveal"><p>"I was skeptical at first but subhanallah the results were perfect! Very fair prices for this level of quality."</p><footer><span>Sarah M****</span><span>05/11/2023</span></footer></figure>
+        <figure class="card quote reveal"><p>"The service was top-notch! Photos came out crispy clear. For the price? It's a steal ya zalameh!"</p><footer><span>Yousef B*****</span><span>18/01/2024</span></footer></figure>
+        <figure class="card quote reveal"><p>"Masha'Allah the photographer captured every special moment perfectly. Worth every fils!"</p><footer><span>Leena S****</span><span>30/04/2024</span></footer></figure>
+        <figure class="card quote reveal"><p>"Allah ykhalikom, the photos were stunning! The editing was on point and delivery was fast."</p><footer><span>Omar H****</span><span>12/06/2024</span></footer></figure>
+        <figure class="card quote reveal"><p>"Honestly, I expected less for what I paid. But subhanallah, the results were professional grade!"</p><footer><span>Rania T****</span><span>25/09/2024</span></footer></figure>
+        <figure class="card quote reveal"><p>"The wedding photos made everyone cry. Price was too cheap for this quality!"</p><footer><span>Khalid N****</span><span>08/12/2024</span></footer></figure>
+        <figure class="card quote reveal"><p>"Ya hala! The photos were next level! I would've paid double for these results. Highly recommended!"</p><footer><span>Dana R****</span><span>14/02/2025</span></footer></figure>
+      </div>
     </div>
+  </section>
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <button class="lb-btn lb-close" type="button" aria-label="Close">✕</button>
+    <button class="lb-btn lb-prev" type="button" aria-label="Previous photo">‹</button>
+    <button class="lb-btn lb-next" type="button" aria-label="Next photo">›</button>
+    <figure style="margin:0"><img id="lbImg" src="" alt=""><p id="lbCap"></p></figure>
+  </div>
+</main>
 
-    <div class="testimonials">
-        <h2>Customer Feedback</h2>
-        <div class="testimonial-grid">
-            <div class="testimonial">
-                <div class="testimonial-header"><span class="customer-name">خالد أ****</span><span class="testimonial-date">03/05/2023</span></div>
-                <p class="testimonial-text" dir="rtl">"والله الجودة تفوق التوقعات! الصور كانت أجمل من ما توقعت والسعر أكثر من معقول"</p>
-            </div>
-            <div class="testimonial">
-                <div class="testimonial-header"><span class="customer-name">عمر ك****</span><span class="testimonial-date">22/10/2023</span></div>
-                <p class="testimonial-text" dir="rtl">"جودة الصور كانت فوق الممتاز! والخدمة سريعة ودقيقة. الله يبارك فيكم"</p>
-            </div>
-            <div class="testimonial">
-                <div class="testimonial-header"><span class="customer-name">سارة ن****</span><span class="testimonial-date">11/01/2024</span></div>
-                <p class="testimonial-text" dir="rtl">"حرفياً أحسن مصور تعاملت معه! الصور كانت تحفة فنية والسعر زهيد جداً بالمقارنة"</p>
-            </div>
-            <div class="testimonial">
-                <div class="testimonial-header"><span class="customer-name">أحمد م****</span><span class="testimonial-date">29/03/2024</span></div>
-                <p class="testimonial-text" dir="rtl">"النتيجة كانت تفوق الخيال! المصور فهم بالضبط اللي كنت أبيه من أول مرة"</p>
-            </div>
-            <div class="testimonial">
-                <div class="testimonial-header"><span class="customer-name">لينا ر****</span><span class="testimonial-date">14/06/2024</span></div>
-                <p class="testimonial-text" dir="rtl">"ما قصرتوا والله! الجودة عالية جداً والتعديلات كانت بالمقاس المثالي"</p>
-            </div>
-            <div class="testimonial">
-                <div class="testimonial-header"><span class="customer-name">يوسف ع****</span><span class="testimonial-date">07/09/2024</span></div>
-                <p class="testimonial-text" dir="rtl">"أحسنت يا رب! الصور كانت أنضف من اللي يشوفها بالمجلات العالمية"</p>
-            </div>
-            <div class="testimonial">
-                <div class="testimonial-header"><span class="customer-name">دانا و****</span><span class="testimonial-date">25/11/2024</span></div>
-                <p class="testimonial-text" dir="rtl">"مافي أحسن من كذا! المصور عنده موهبة حقيقية والأسعار مناسبة جداً"</p>
-            </div>
-            <div class="testimonial">
-                <div class="testimonial-header"><span class="customer-name">محمود س****</span><span class="testimonial-date">19/02/2025</span></div>
-                <p class="testimonial-text" dir="rtl">"حرفياً كل اللي شافوا الصور قالوا إني دفعت ضعف السعر! الجودة لا توصف"</p>
-            </div>
-            <div class="testimonial">
-                <div class="testimonial-header"><span class="customer-name">Mohammad A*****</span><span class="testimonial-date">15/03/2023</span></div>
-                <p class="testimonial-text">"Wallah the photos came out amazing! Better than I expected for the price. You deserve more money for this quality!"</p>
-            </div>
-            <div class="testimonial">
-                <div class="testimonial-header"><span class="customer-name">Ahmad K****</span><span class="testimonial-date">22/07/2023</span></div>
-                <p class="testimonial-text">"Professional work mashallah! The photographer has an eye for details. Will book again inshallah."</p>
-            </div>
-            <div class="testimonial">
-                <div class="testimonial-header"><span class="customer-name">Sarah M****</span><span class="testimonial-date">05/11/2023</span></div>
-                <p class="testimonial-text">"I was skeptical at first but subhanallah the results were perfect! Very fair prices for this level of quality."</p>
-            </div>
-            <div class="testimonial">
-                <div class="testimonial-header"><span class="customer-name">Yousef B*****</span><span class="testimonial-date">18/01/2024</span></div>
-                <p class="testimonial-text">"The service was top-notch! Photos came out crispy clear. For the price? It's a steal ya zalameh!"</p>
-            </div>
-            <div class="testimonial">
-                <div class="testimonial-header"><span class="customer-name">Leena S****</span><span class="testimonial-date">30/04/2024</span></div>
-                <p class="testimonial-text">"Masha'Allah the photographer captured every special moment perfectly. Worth every fils!"</p>
-            </div>
-            <div class="testimonial">
-                <div class="testimonial-header"><span class="customer-name">Omar H****</span><span class="testimonial-date">12/06/2024</span></div>
-                <p class="testimonial-text">"Allah ykhalikom, the photos were stunning! The editing was on point and delivery was fast."</p>
-            </div>
-            <div class="testimonial">
-                <div class="testimonial-header"><span class="customer-name">Rania T****</span><span class="testimonial-date">25/09/2024</span></div>
-                <p class="testimonial-text">"Honestly, I expected less for what I paid. But subhanallah, the results were professional grade!"</p>
-            </div>
-            <div class="testimonial">
-                <div class="testimonial-header"><span class="customer-name">Khalid N****</span><span class="testimonial-date">08/12/2024</span></div>
-                <p class="testimonial-text">"The wedding photos made everyone cry. Price was too cheap for this quality!"</p>
-            </div>
-            <div class="testimonial">
-                <div class="testimonial-header"><span class="customer-name">Dana R****</span><span class="testimonial-date">14/02/2025</span></div>
-                <p class="testimonial-text">"Ya hala! The photos were next level! I would've paid double for these results. Highly recommended!"</p>
-            </div>
-        </div>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-bottom" style="margin-top:0;padding-top:0;border-top:0">
+      <span>© <span data-year>2026</span> Qusai · necro144.com</span>
+      <span><a href="/servers/">Game servers</a> · <a href="/photography/">Photography</a> · <a href="/community/discord">Discord</a> · <a href="/main_index">All links</a></span>
     </div>
+  </div>
+</footer>
 
-    <!-- Lightbox/Slideshow Modal -->
-    <div id="lightbox" class="lightbox">
-        <span class="close-btn">&times;</span>
-        <span class="prev-btn"><i class="fas fa-chevron-left"></i></span>
-        <span class="next-btn"><i class="fas fa-chevron-right"></i></span>
-        <div class="lightbox-content">
-            <img id="lightbox-img" src="" alt="" loading="eager">
-            <div class="photo-info">
-                <h3 id="photo-title"></h3>
-                <p id="photo-description">Low-quality sample — contact us for HD version</p>
-            </div>
-        </div>
-    </div>
-
-    <footer>
-        © 2025 Photography Portfolio | All photos shown are low-quality samples
-    </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const photos = [
-                { src: 'work_samples/IMG_2189.jpg', title: 'Sample 1' },
-                { src: 'work_samples/IMG_2358.jpg', title: 'Sample 2' },
-                { src: 'work_samples/IMG_2371.jpg', title: 'Sample 3' },
-                { src: 'work_samples/IMG_2378.jpg', title: 'Sample 4' },
-                { src: 'work_samples/IMG_2424.jpg', title: 'Sample 5' },
-                { src: 'work_samples/IMG_4910.jpg', title: 'Sample 6' },
-                { src: 'work_samples/IMG_4928.JPG', title: 'Sample 7' },
-                { src: 'work_samples/IMG_4936.jpg', title: 'Sample 8' },
-                { src: 'work_samples/IMG_4950.jpg', title: 'Sample 9' },
-                { src: 'work_samples/IMG_4974.jpg', title: 'Sample 10' },
-                { src: 'work_samples/IMG_4978.jpg', title: 'Sample 11' },
-                { src: 'work_samples/IMG_4980.jpg', title: 'Sample 12' },
-                { src: 'work_samples/IMG_4998.jpg', title: 'Sample 13' },
-                { src: 'work_samples/IMG_5001.jpg', title: 'Sample 14' },
-                { src: 'work_samples/IMG_5010.jpg', title: 'Sample 15' },
-                { src: 'work_samples/IMG_1368.jpg', title: 'Sample 16' },
-                { src: 'work_samples/IMG_1462.jpg', title: 'Sample 17' },
-                { src: 'work_samples/IMG_1469.jpg', title: 'Sample 18' },
-                { src: 'work_samples/IMG_1470.jpg', title: 'Sample 19' },
-                { src: 'work_samples/IMG_1964.jpg', title: 'Sample 20' }
-            ];
-
-            const galleryGrid = document.querySelector('.gallery-grid');
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImg = document.getElementById('lightbox-img');
-            const photoTitle = document.getElementById('photo-title');
-            const closeBtn = document.querySelector('.close-btn');
-            const prevBtn = document.querySelector('.prev-btn');
-            const nextBtn = document.querySelector('.next-btn');
-
-            let currentPhotoIndex = 0;
-
-            function setupLazyLoading() {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const img = entry.target.querySelector('img');
-                            const spinner = entry.target.querySelector('.spinner');
-                            const src = img.dataset.src;
-                            if (src) {
-                                img.src = src;
-                                img.onload = () => {
-                                    img.classList.remove('loading');
-                                    img.classList.add('loaded');
-                                    if (spinner) spinner.remove();
-                                    img.removeAttribute('data-src');
-                                };
-                            }
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, { rootMargin: '200px 0px', threshold: 0.01 });
-                return observer;
-            }
-
-            function createGalleryItems() {
-                const observer = setupLazyLoading();
-                photos.forEach((photo, index) => {
-                    const galleryItem = document.createElement('div');
-                    galleryItem.className = 'gallery-item';
-
-                    const spinner = document.createElement('div');
-                    spinner.className = 'spinner';
-
-                    const img = document.createElement('img');
-                    img.className = 'gallery-img loading';
-                    img.dataset.src = photo.src;
-                    img.alt = photo.title;
-                    img.loading = 'lazy';
-
-                    galleryItem.appendChild(spinner);
-                    galleryItem.appendChild(img);
-                    galleryGrid.appendChild(galleryItem);
-
-                    observer.observe(galleryItem);
-
-                    img.addEventListener('click', () => {
-                        currentPhotoIndex = index;
-                        openLightbox();
-                    });
-                });
-            }
-
-            createGalleryItems();
-
-            function openLightbox() {
-                const photo = photos[currentPhotoIndex];
-                lightboxImg.src = photo.src;
-                photoTitle.textContent = photo.title;
-                lightbox.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-            }
-
-            function closeLightbox() {
-                lightbox.style.display = 'none';
-                document.body.style.overflow = '';
-            }
-
-            function navigatePhotos(direction) {
-                currentPhotoIndex = (currentPhotoIndex + direction + photos.length) % photos.length;
-                openLightbox();
-            }
-
-            closeBtn.addEventListener('click', closeLightbox);
-            prevBtn.addEventListener('click', () => navigatePhotos(-1));
-            nextBtn.addEventListener('click', () => navigatePhotos(1));
-
-            lightbox.addEventListener('click', (e) => {
-                if (e.target === lightbox) closeLightbox();
-            });
-
-            document.addEventListener('keydown', (e) => {
-                if (lightbox.style.display === 'flex') {
-                    if (e.key === 'Escape') closeLightbox();
-                    else if (e.key === 'ArrowLeft') navigatePhotos(-1);
-                    else if (e.key === 'ArrowRight') navigatePhotos(1);
-                }
-            });
-        });
-    </script>
+<script src="/assets/js/site.js" defer></script>
+<script>
+(function () {
+  var items = Array.prototype.slice.call(document.querySelectorAll('.photo-grid button'));
+  var box = document.getElementById('lightbox'), img = document.getElementById('lbImg'), cap = document.getElementById('lbCap'), at = 0;
+  function open(i) { at = (i + items.length) % items.length; var s = items[at].querySelector('img'); img.src = s.src; img.alt = s.alt;
+    cap.textContent = s.alt + ' · low-quality sample (' + (at + 1) + '/' + items.length + ')'; box.classList.add('open'); }
+  function close() { box.classList.remove('open'); img.src = ''; }
+  items.forEach(function (b, i) { b.addEventListener('click', function () { open(i); }); });
+  box.querySelector('.lb-close').onclick = close;
+  box.querySelector('.lb-prev').onclick = function () { open(at - 1); };
+  box.querySelector('.lb-next').onclick = function () { open(at + 1); };
+  box.addEventListener('click', function (e) { if (e.target === box) close(); });
+  document.addEventListener('keydown', function (e) { if (!box.classList.contains('open')) return;
+    if (e.key === 'Escape') close(); if (e.key === 'ArrowLeft') open(at - 1); if (e.key === 'ArrowRight') open(at + 1); });
+  // samples only: no right-click saving on photos
+  document.querySelectorAll('.photo-grid img, #lbImg').forEach(function (n) { n.addEventListener('contextmenu', function (e) { e.preventDefault(); }); });
+})();
+</script>
 </body>
 </html>

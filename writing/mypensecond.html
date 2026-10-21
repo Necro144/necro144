@@ -7,265 +7,76 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-KG1SF91F87');
 </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#04070a">
-    <meta name="color-scheme" content="dark">
-    <title>entry.log // The Weight of Unluck</title>
-    <meta name="referrer" content="no-referrer">
-    <meta name="robots" content="noindex, nofollow">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <style>
-        :root {
-            --bg: #04070a;
-            --bg-deep: #010302;
-            --panel: rgba(8, 16, 18, 0.85);
-            --line: rgba(46, 230, 208, 0.18);
-            --cyan: #2ee6d0;
-            --cyan-soft: #7dfbe9;
-            --magenta: #ff3ea5;
-            --amber: #ffb703;
-            --text: #d9f6f0;
-            --muted: #5f8b85;
-            --radius: 16px;
-            --mono: 'JetBrains Mono', ui-monospace, monospace;
-            --pixel: 'VT323', monospace;
-            --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        html, body { height: 100%; }
-
-        body {
-            font-family: var(--mono);
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            min-height: 100vh;
-            padding: 20px;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        .bg-grid {
-            position: fixed; inset: 0; z-index: -2;
-            background-color: var(--bg-deep);
-            background-image:
-                linear-gradient(rgba(46, 230, 208, 0.06) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(46, 230, 208, 0.06) 1px, transparent 1px);
-            background-size: 34px 34px;
-        }
-        .bg-glow {
-            position: fixed; inset: 0; z-index: -1;
-            background:
-                radial-gradient(circle at 15% 8%, rgba(46, 230, 208, 0.10) 0%, transparent 45%),
-                radial-gradient(circle at 85% 95%, rgba(255, 62, 165, 0.08) 0%, transparent 45%);
-        }
-        body::after {
-            content: '';
-            position: fixed; inset: 0; z-index: 45; pointer-events: none;
-            background: repeating-linear-gradient(180deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 2px, transparent 4px);
-            mix-blend-mode: overlay;
-        }
-
-        .container {
-            max-width: 760px;
-            margin: 60px auto 40px;
-            background: var(--panel);
-            backdrop-filter: blur(14px);
-            border: 1px solid var(--line);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-            border-radius: var(--radius);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .term-bar {
-            display: flex; align-items: center; gap: 8px;
-            padding: 10px 16px;
-            background: rgba(0,0,0,0.35);
-            border-bottom: 1px solid var(--line);
-        }
-        .dot { width: 10px; height: 10px; border-radius: 50%; }
-        .dot.r { background: #ff5f56; }
-        .dot.y { background: #ffbd2e; }
-        .dot.g { background: #27c93f; }
-        .term-title { margin-left: 10px; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.5px; }
-
-        .container-inner { padding: 36px 40px; }
-
-        .profile { display: flex; align-items: center; margin-bottom: 26px; gap: 18px; }
-        .profile img {
-            width: 74px; height: 74px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--cyan);
-            box-shadow: 0 0 15px rgba(46, 230, 208, 0.25);
-        }
-        .profile-info { display: flex; flex-direction: column; }
-        .profile-info strong { font-size: 1.15em; color: var(--cyan-soft); font-weight: 700; }
-        .timestamp { color: var(--muted); font-size: 0.85em; margin-top: 4px; }
-
-        .post-content { font-size: 1rem; text-align: justify; }
-
-        .post-content h2 {
-            font-family: var(--pixel);
-            font-weight: 400;
-            color: var(--cyan-soft);
-            font-size: 1.9em;
-            letter-spacing: 0.5px;
-            margin-bottom: 22px;
-            position: relative;
-            display: inline-block;
-            text-shadow: 0 0 8px rgba(46,230,208,0.35);
-        }
-        .post-content h2::after {
-            content: '';
-            position: absolute;
-            bottom: -8px; left: 0;
-            width: 50%; height: 2px;
-            background: linear-gradient(90deg, var(--cyan), transparent);
-            border-radius: 3px;
-        }
-
-        .post-content p { margin-bottom: 20px; line-height: 1.8; color: var(--text); }
-
-        .controls {
-            position: fixed; top: 20px; right: 20px;
-            display: flex; gap: 10px; z-index: 100;
-        }
-        .control-btn {
-            padding: 10px 15px;
-            border: 1px solid var(--line);
-            border-radius: 50px;
-            background: var(--panel);
-            backdrop-filter: blur(10px);
-            color: var(--cyan);
-            cursor: pointer;
-            transition: var(--transition);
-            font-weight: 600;
-            font-family: var(--mono);
-            font-size: 0.8rem;
-            display: flex; align-items: center; gap: 6px;
-        }
-        .control-btn:hover { transform: translateY(-2px); border-color: var(--cyan); background: rgba(46,230,208,0.08); }
-
-        .back-btn {
-            position: fixed; top: 20px; left: 20px;
-            padding: 10px 15px;
-            border: 1px solid var(--line);
-            border-radius: 50px;
-            background: var(--panel);
-            backdrop-filter: blur(10px);
-            color: var(--cyan);
-            cursor: pointer;
-            transition: var(--transition);
-            font-weight: 600;
-            font-family: var(--mono);
-            font-size: 0.8rem;
-            display: flex; align-items: center; gap: 6px;
-            z-index: 100;
-            text-decoration: none;
-        }
-        .back-btn:hover { background: rgba(46,230,208,0.1); border-color: var(--cyan); }
-
-        @media (max-width: 768px) {
-            .container { margin: 70px auto 20px; }
-            .container-inner { padding: 26px 24px; }
-            .profile { flex-direction: column; text-align: center; }
-            .post-content h2 { font-size: 1.5em; }
-            .controls { top: 15px; right: 15px; }
-            .back-btn { top: 15px; left: 15px; }
-        }
-
-        @media (max-width: 480px) {
-            .container-inner { padding: 20px; }
-            .post-content { font-size: 0.95em; }
-            .control-btn, .back-btn { padding: 8px 12px; font-size: 0.78rem; }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Weight of Unluck: A Life Lived in Shadows - Journal | Necro</title>
+<meta name="description" content="The Weight of Unluck: A Life Lived in Shadows: a journal entry by Qusai Allan (July 16, 2025).">
+<meta name="theme-color" content="#0a0e13">
+<link rel="canonical" href="https://necro144.com/writing/mypensecond">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://necro144.com/writing/mypensecond">
+<meta property="og:title" content="The Weight of Unluck: A Life Lived in Shadows - Journal | Necro">
+<meta property="og:description" content="The Weight of Unluck: A Life Lived in Shadows: a journal entry by Qusai Allan (July 16, 2025).">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232ee6d0'/%3E%3Ctext x='32' y='45' font-size='36' text-anchor='middle' fill='%23032621' font-family='monospace' font-weight='800'%3EN%3C/text%3E%3C/svg%3E">
+<script>(function(){try{var t=localStorage.getItem('site-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&family=Noto+Sans+Arabic:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/site.css">
 </head>
 <body>
-    <div class="bg-grid"></div>
-    <div class="bg-glow"></div>
+<a class="skip" href="#main">Skip to content</a>
 
-    <a href="/" class="back-btn">← Back</a>
+<header class="site-header">
+  <nav class="wrap nav" aria-label="Main">
+    <a class="brand" href="/"><span class="brand-mark">N</span><span>Necro<small>necro144.com</small></span></a>
+    <button class="icon-btn nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu">☰</button>
+    <ul class="nav-links" id="menu">
+      <li><a href="/">Home</a></li>
+      <li><a href="/photography/">Photography</a></li>
+      <li><a href="/servers/">Game Servers</a></li>
+      <li><a href="/#projects">Projects</a></li>
+      <li><a href="/main_index">Links</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+    <button class="icon-btn" type="button" data-theme-toggle aria-label="Switch theme">☀</button>
+  </nav>
+</header>
 
-    <div class="controls">
-        <button class="control-btn" id="themeSwitcher">◈ Theme</button>
+<main id="main">
+<section class="page-hero">
+    <div class="wrap">
+      <span class="eyebrow">Journal</span>
+      <h1>The Weight of Unluck: A Life Lived in Shadows</h1>
+      <div class="byline"><img src="/assets/img/mr.jpg" alt=""><div><b>Qusai Allan</b><span>July 16, 2025</span></div></div>
     </div>
-
-    <div class="container">
-        <div class="term-bar">
-            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-            <span class="term-title">necro@root:~/journal/entry_002.log</span>
-        </div>
-        <div class="container-inner">
-            <div class="profile">
-                <img src="/assets/img/mr.jpg" alt="Profile picture of Qusai Allan">
-                <div class="profile-info">
-                    <strong>Qusai Allan</strong>
-                    <span class="timestamp">July 16, 2025</span>
-                </div>
-            </div>
-
-            <div class="post-content">
-                <h2>The Weight of Unluck: A Life Lived in Shadows</h2>
-                <p>Since the day I was born, it feels as though misfortune has been stitched into the fabric of my existence. Every corner of my life seems touched by an invisible curse—opportunities vanish before they arrive, friendships fade like whispers in the wind, and joy remains a distant mirage, always just out of reach. There is no fun, no job worth calling purpose, no friends who stay, and no life that feels truly mine. My health wavers like the tide, never stable, never predictable. Interests come and go like passing clouds, but nothing sticks, nothing brings meaning. Each day is not lived—it's endured.</p>
+  </section>
+  <section class="page-body">
+    <div class="wrap narrow">
+      <article class="panel prose">
+<p>Since the day I was born, it feels as though misfortune has been stitched into the fabric of my existence. Every corner of my life seems touched by an invisible curse—opportunities vanish before they arrive, friendships fade like whispers in the wind, and joy remains a distant mirage, always just out of reach. There is no fun, no job worth calling purpose, no friends who stay, and no life that feels truly mine. My health wavers like the tide, never stable, never predictable. Interests come and go like passing clouds, but nothing sticks, nothing brings meaning. Each day is not lived—it's endured.</p>
                 <p>The world buzzes around me, vibrant and alive, while I remain numb, watching from the outside like a ghost haunting my own life. All I want some days is for the clock to stop ticking, for the silence to be broken—not by noise, but by peace. But even that feels too far to reach.</p>
                 <p>I've become a spectator in my own story, watching as others move through life with purpose and connection while I remain anchored in this limbo of unluck. The simplest tasks feel monumental, and every small victory is quickly overshadowed by the next wave of misfortune. It's exhausting to keep pretending that everything might change tomorrow when history has shown me otherwise.</p>
                 <p>Yet somehow, I continue. Not because I want to, but because I must. There's a stubborn ember inside that refuses to be extinguished, no matter how strong the winds of misfortune blow. Maybe that's all I am—not a person living, but a will persisting against all odds.</p>
-            </div>
-        </div>
+      </article>
+
+      <p class="muted" style="margin-top:22px">More entries: <a href="/writing/poet">Mhmm, i don't feel like it</a> · <a href="/writing/mypensecond">The Weight of Unluck</a> · <a href="/writing/mythirdpen">The Girl I Met at ASU</a></p>
     </div>
+  </section>
+</main>
 
-    <script>
-        // ===== Theme cycling (matches rest of site) =====
-        const themes = {
-            cyan:   { cyan: '#2ee6d0', cyanSoft: '#7dfbe9', magenta: '#ff3ea5' },
-            matrix: { cyan: '#39ff14', cyanSoft: '#9dffa0', magenta: '#ffd60a' },
-            crimson:{ cyan: '#ff3860', cyanSoft: '#ff9fb1', magenta: '#00e0ff' }
-        };
-        const themeKeys = Object.keys(themes);
-        const root = document.documentElement;
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-bottom" style="margin-top:0;padding-top:0;border-top:0">
+      <span>© <span data-year>2026</span> Qusai · necro144.com</span>
+      <span><a href="/servers/">Game servers</a> · <a href="/photography/">Photography</a> · <a href="/community/discord">Discord</a> · <a href="/main_index">All links</a></span>
+    </div>
+  </div>
+</footer>
 
-        function applyTheme(key) {
-            const t = themes[key];
-            root.style.setProperty('--cyan', t.cyan);
-            root.style.setProperty('--cyan-soft', t.cyanSoft);
-            root.style.setProperty('--magenta', t.magenta);
-            localStorage.setItem('necro-theme', key);
-        }
-
-        let saved = localStorage.getItem('necro-theme');
-        if (!saved || !themes[saved]) saved = 'cyan';
-        applyTheme(saved);
-
-        document.getElementById('themeSwitcher').addEventListener('click', () => {
-            const idx = (themeKeys.indexOf(saved) + 1) % themeKeys.length;
-            saved = themeKeys[idx];
-            applyTheme(saved);
-        });
-
-        // ===== Content-protection flavor (non-blocking) =====
-        document.addEventListener('contextmenu', e => e.preventDefault());
-        document.addEventListener('keydown', e => {
-            const blocked = (e.key === 'F12') ||
-                ((e.ctrlKey || e.metaKey) && e.shiftKey && ['I','J','C'].includes(e.key.toUpperCase())) ||
-                ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'u');
-            if (blocked) e.preventDefault();
-        });
-    </script>
+<script src="/assets/js/site.js" defer></script>
 </body>
 </html>
