@@ -8,6 +8,8 @@ Amman, Jordan · Applied Science Private University
 
 [![Website](https://img.shields.io/badge/necro144.com-0b1215?style=for-the-badge&logo=googlechrome&logoColor=2ee6d0)](https://necro144.com)
 [![Server](https://img.shields.io/badge/CS_1.6-173.199.107.158:27055-0b1215?style=for-the-badge&logo=counterstrike&logoColor=ffb703)](https://necro144.com/servers/)
+[![Moded](https://img.shields.io/badge/Moded-64.176.167.136:27015-0b1215?style=for-the-badge&logo=counterstrike&logoColor=ffb703)](https://necro144.com/servers/sv)
+[![Jailbreak](https://img.shields.io/badge/Jailbreak-64.176.167.136:27016-0b1215?style=for-the-badge&logo=counterstrike&logoColor=ffb703)](https://necro144.com/servers/sv)
 [![Discord](https://img.shields.io/badge/Discord-nec__1999-0b1215?style=for-the-badge&logo=discord&logoColor=7289da)](https://necro144.com/community/discord)
 
 </div>
@@ -34,10 +36,13 @@ Everything is built for **AMX Mod X 1.8.2** on ReGameDLL, deployed straight from
 ## Play on the server
 
 ```
-connect 173.199.107.158:27055
+connect 173.199.107.158:27055   // [NS] Old-School - Steam only, rotating modes
+connect 64.176.167.136:27015    // [NS] Moded Server [NonSteam] - 32 slots
+connect 64.176.167.136:27016    // [NS] Jailbreak by Natsheh [NonSteam] - 10 slots
 ```
 
-Steam only · the active mode rotates between BHOP RAGE, Horror Hunt, Base Builder and GunGame - the server name shows which one is on.
+On the Old-School server the active mode rotates between BHOP RAGE, Horror Hunt, Base Builder and GunGame - the server name shows which one is on.
+Ban list: [64.176.167.136/bans](http://64.176.167.136/bans/)
 Maps and models download automatically and fast from the site.
 
 ## Toolbox
