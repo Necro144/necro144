@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KG1SF91F87"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-KG1SF91F87');
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[NS] Admin List | necro144.com</title>
+<meta name="description" content="Admins and VIPs of every [NS] Night-Shift server.">
+<meta name="theme-color" content="#0a0e13">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232ee6d0'/%3E%3Ctext x='32' y='45' font-size='36' text-anchor='middle' fill='%23032621' font-family='monospace' font-weight='800'%3EN%3C/text%3E%3C/svg%3E">
+<style>
+  :root { --bg:#0a0e13; --text:#e8eef3; --muted:#7d8b97; --accent:#2ee6d0; color-scheme:dark; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html, body { height:100%; overflow:hidden; background:var(--bg); color:var(--text); font:15px/1.5 Inter,system-ui,"Segoe UI",sans-serif; }
+  iframe { position:fixed; inset:0; width:100%; height:100%; border:0; background:var(--bg); }
+  .loading { position:fixed; inset:0; z-index:5; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; background:var(--bg); color:var(--muted); text-align:center; padding:16px; }
+  .loading[hidden] { display:none; }
+  .spinner { width:44px; height:44px; border:4px solid rgba(46,230,208,.2); border-top-color:var(--accent); border-radius:50%; animation:spin 1s linear infinite; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  .slow { visibility:hidden; font-size:13px; } .slow a { color:var(--accent); }
+</style>
+</head>
+<body>
+<div id="loader" class="loading" role="status">
+  <div class="spinner"></div>
+  <p>Loading [NS] Admin List&hellip;</p>
+  <p class="slow" id="slow">Taking long? <a id="direct" href="https://64.176.167.136/bans/?p=admins" target="_top">Open it directly</a></p>
+</div>
+<iframe id="frame" title="[NS] Admin List" referrerpolicy="no-referrer-when-downgrade"></iframe>
+<script>
+/* necro144.com/admins/ shows the live page from the [NS] server box (Vultr) inside this frame.
+   The ?query is passed on, e.g. necro144.com/stats/?s=moded */
+(function () {
+  var t = "https://64.176.167.136/bans/?p=admins", q = location.search.replace(/^\?/, "");
+  var src = q ? t + (t.indexOf("?") < 0 ? "?" : "&") + q : t;
+  var f = document.getElementById("frame");
+  document.getElementById("direct").href = src;
+  f.addEventListener("load", function () { document.getElementById("loader").hidden = true; });
+  setTimeout(function () { document.getElementById("slow").style.visibility = "visible"; }, 6000);
+  f.src = src;
+})();
+</script>
+</body>
+</html>
