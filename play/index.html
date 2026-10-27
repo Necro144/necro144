@@ -31,14 +31,14 @@
 <div id="loader" class="loading" role="status">
   <div class="spinner"></div>
   <p>Loading [NS] Servers&hellip;</p>
-  <p class="slow" id="slow">Taking long? <a id="direct" href="https://64.176.167.136/ns/" target="_top">Open it directly</a></p>
+  <p class="slow" id="slow">Taking long? <a id="direct" href="https://193.70.112.143/ns/" target="_top">Open it directly</a></p>
 </div>
 <iframe id="frame" title="[NS] Servers" referrerpolicy="no-referrer-when-downgrade"></iframe>
 <script>
 /* necro144.com/play/ shows the live page from the [NS] server box (Vultr) inside this frame.
    The ?query is passed on, e.g. necro144.com/stats/?s=moded */
 (function () {
-  var t = "https://64.176.167.136/ns/", q = location.search.replace(/^\?/, "");
+  var t = "https://193.70.112.143/ns/", q = location.search.replace(/^\?/, "");
   var src = q ? t + (t.indexOf("?") < 0 ? "?" : "&") + q : t;
   var f = document.getElementById("frame");
   document.getElementById("direct").href = src;
