@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KG1SF91F87"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-KG1SF91F87');
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>My Lyric Videos | Necro</title>
+<meta name="description" content="Five songs from one chapter at ASU, 2023 – 2026. Lyric videos in original quality.">
+<meta name="theme-color" content="#0a0e13">
+<link rel="canonical" href="https://necro144.com/MyLyricVideos/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://necro144.com/MyLyricVideos/">
+<meta property="og:title" content="My Lyric Videos | Necro">
+<meta property="og:description" content="Five songs from one chapter at ASU, 2023 – 2026. Lyric videos in original quality.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232ee6d0'/%3E%3Ctext x='32' y='45' font-size='36' text-anchor='middle' font-family='Arial' font-weight='700' fill='%23032621'%3EN%3C/text%3E%3C/svg%3E">
+<script>(function(){try{var t=localStorage.getItem('site-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&family=Noto+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/site.css">
+<link rel="preconnect" href="https://stats.necro144.com">
+<style>
+  .mlv-hero{padding:56px 0 8px}
+  .mlv-hero h1{font-size:clamp(2rem,5vw,3.2rem);letter-spacing:-.03em;margin:.35rem 0 .5rem;line-height:1.05}
+  .mlv-hero p{color:var(--text-2);max-width:620px;margin:0}
+  .mlv-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+  .mlv-chip{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:var(--surface);border:1px solid var(--border);font-size:.82rem;color:var(--text-2)}
+  .mlv-chip b{color:var(--text);font-weight:600}
+  .mlv-chip i{width:7px;height:7px;border-radius:50%;background:var(--accent);display:inline-block}
+
+  .mlv{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(0,1fr);gap:22px;align-items:start;padding:26px 0 64px}
+  @media (max-width:900px){.mlv{grid-template-columns:1fr}}
+
+  .mlv-stage{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+  .mlv-screen{position:relative;background:#000;aspect-ratio:16/9}
+  .mlv-screen video{position:absolute;inset:0;width:100%;height:100%;background:#000;display:block}
+  .mlv-msg{position:absolute;left:12px;right:12px;bottom:12px;padding:10px 14px;border-radius:10px;background:rgba(0,0,0,.72);color:#fff;font-size:.88rem;display:none}
+  .mlv-msg.show{display:block}
+
+  .mlv-now{padding:18px 20px 6px;display:flex;gap:16px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+  .mlv-now-txt{min-width:0}
+  .mlv-kicker{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+  .mlv-now h2{margin:.25rem 0 .2rem;font-size:clamp(1.3rem,2.6vw,1.75rem);letter-spacing:-.02em;line-height:1.2}
+  .mlv-now .mlv-sub{color:var(--muted);font-size:.92rem}
+  .mlv-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+  .mlv-tag{font-size:.74rem;padding:3px 9px;border-radius:999px;border:1px solid var(--border-strong);color:var(--text-2)}
+  .mlv-tag.hi{background:var(--accent-soft);border-color:transparent;color:var(--accent);font-weight:600}
+
+  .mlv-ctrl{display:flex;gap:8px;align-items:center}
+  .mlv-btn{appearance:none;border:1px solid var(--border-strong);background:var(--surface-2);color:var(--text);height:40px;min-width:40px;padding:0 12px;border-radius:10px;font:inherit;font-size:.88rem;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;transition:border-color .15s,background .15s}
+  .mlv-btn:hover{border-color:var(--accent)}
+  .mlv-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .mlv-btn[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+  .mlv-btn svg{width:18px;height:18px}
+
+  .mlv-lyrics{border-top:1px solid var(--border);margin-top:14px}
+  .mlv-lyrics summary{list-style:none;cursor:pointer;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;font-weight:600}
+  .mlv-lyrics summary::-webkit-details-marker{display:none}
+  .mlv-lyrics summary span{color:var(--muted);font-weight:500;font-size:.85rem}
+  .mlv-lyrics summary::after{content:"";width:9px;height:9px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);margin-left:12px;transition:transform .2s}
+  .mlv-lyrics[open] summary::after{transform:rotate(-135deg)}
+  .mlv-lyr{padding:0 20px 22px;max-height:520px;overflow:auto;color:var(--text-2);line-height:1.75;font-size:.98rem}
+  .mlv-lyr p{margin:0 0 1.1em;white-space:pre-line}
+  .mlv-lyr[dir="rtl"]{font-family:"Noto Sans Arabic",var(--sans);font-size:1.05rem;line-height:2}
+
+  .mlv-list{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:8px;position:sticky;top:84px}
+  @media (max-width:900px){.mlv-list{position:static}}
+  .mlv-list h3{margin:8px 12px 10px;font-size:.78rem;font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;display:flex;justify-content:space-between}
+  .mlv-list ol{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+  .mlv-item{width:100%;appearance:none;border:1px solid transparent;background:transparent;color:inherit;font:inherit;text-align:left;cursor:pointer;display:grid;grid-template-columns:44px minmax(0,1fr) auto;align-items:center;gap:12px;padding:10px;border-radius:11px;transition:background .15s,border-color .15s}
+  .mlv-item:hover{background:var(--surface-2)}
+  .mlv-item:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+  .mlv-item[aria-current="true"]{background:var(--accent-soft);border-color:color-mix(in srgb,var(--accent) 35%,transparent)}
+  .mlv-art{width:44px;height:44px;border-radius:10px;display:grid;place-items:center;font-family:var(--mono);font-weight:700;font-size:.95rem;color:#fff;position:relative;overflow:hidden}
+  .mlv-art .bars{display:none;gap:3px;align-items:flex-end;height:16px}
+  .mlv-art .bars i{width:3px;background:#fff;border-radius:2px;animation:mlvb 1s ease-in-out infinite}
+  .mlv-art .bars i:nth-child(2){animation-delay:-.4s}.mlv-art .bars i:nth-child(3){animation-delay:-.7s}
+  @keyframes mlvb{0%,100%{height:4px}50%{height:16px}}
+  .mlv-item.playing .num{display:none}.mlv-item.playing .bars{display:flex}
+  @media (prefers-reduced-motion:reduce){.mlv-art .bars i{animation:none;height:10px}}
+  .mlv-it{min-width:0}
+  .mlv-it b{display:block;font-weight:600;font-size:.95rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mlv-it b[dir="rtl"]{font-family:"Noto Sans Arabic",var(--sans);text-align:left}
+  .mlv-it span{display:block;color:var(--muted);font-size:.8rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mlv-dur{font-family:var(--mono);font-size:.8rem;color:var(--muted)}
+  .mlv-note{margin:12px 12px 8px;font-size:.8rem;color:var(--muted);line-height:1.5}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <nav class="wrap nav" aria-label="Main">
+    <a class="brand" href="/"><span class="brand-mark">N</span><span>Necro<small>necro144.com</small></span></a>
+    <button class="icon-btn nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu">☰</button>
+    <ul class="nav-links" id="menu">
+      <li><a href="/">Home</a></li>
+      <li><a href="/photography/">Photography</a></li>
+      <li><a href="/servers/">Game Servers</a></li>
+      <li><a href="/#projects">Projects</a></li>
+      <li><a href="/main_index">Links</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+    <button class="icon-btn" type="button" data-theme-toggle aria-label="Switch theme">☀</button>
+  </nav>
+</header>
+
+<main id="main">
+  <section class="mlv-hero">
+    <div class="wrap">
+      <span class="eyebrow">Music</span>
+      <h1>My Lyric Videos</h1>
+      <p>Five songs from one chapter at Applied Science University, 2023 – 2026. Played here from the original files, in full quality.</p>
+      <div class="mlv-chips">
+        <span class="mlv-chip"><i></i><b>5</b> songs</span>
+        <span class="mlv-chip"><b>24 min</b> total</span>
+        <span class="mlv-chip">English &amp; Egyptian Arabic</span>
+        <span class="mlv-chip">Original quality</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="mlv">
+      <div>
+        <div class="mlv-stage">
+          <div class="mlv-screen">
+            <video id="mlv-video" controls playsinline preload="metadata" controlslist="nodownload" disablepictureinpicture="false"></video>
+            <div class="mlv-msg" id="mlv-msg" role="status"></div>
+          </div>
+          <div class="mlv-now">
+            <div class="mlv-now-txt">
+              <div class="mlv-kicker" id="mlv-kicker">Song 1 of 5</div>
+              <h2 id="mlv-title"></h2>
+              <div class="mlv-sub" id="mlv-sub"></div>
+              <div class="mlv-tags" id="mlv-tags"></div>
+            </div>
+            <div class="mlv-ctrl">
+              <button class="mlv-btn" id="mlv-prev" type="button" aria-label="Previous song"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button>
+              <button class="mlv-btn" id="mlv-next" type="button" aria-label="Next song"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 5h2v14h-2zM4 5v14l11-7z"/></svg></button>
+              <button class="mlv-btn" id="mlv-auto" type="button" aria-pressed="true" title="Play the next song when one ends"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 2l4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg>Autoplay</button>
+            </div>
+          </div>
+          <details class="mlv-lyrics" id="mlv-lyrics" open>
+            <summary>Lyrics <span id="mlv-lyrlang"></span></summary>
+            <div class="mlv-lyr" id="mlv-lyr"></div>
+          </details>
+        </div>
+      </div>
+
+      <aside class="mlv-list" aria-label="Playlist">
+        <h3><span>Playlist</span><span>24 min</span></h3>
+        <ol id="mlv-ol"></ol>
+        <p class="mlv-note">These are the original high-bitrate files, so on a slow connection give a song a few seconds to start.</p>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-bottom" style="margin-top:0;padding-top:0;border-top:0">
+      <span>© <span data-year>2026</span> Qusai · necro144.com</span>
+      <span><a href="/servers/">Game servers</a> · <a href="/photography/">Photography</a> · <a href="/community/discord">Discord</a> · <a href="/main_index">All links</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var BASE = 'https://stats.necro144.com/mylyricvideos/';
+  var SONGS = [{"id": "coconut-my-princess", "title": "كوكونات… أميرتي", "sub": "CoConut… My Princess · duet", "rtl": true, "file": "coconut-my-princess-arabic.mp4", "tags": ["Egyptian Arabic", "Duet", "Original quality"], "lyrics": "فاكر أول مرة شُفنا بعض؟\nولا الأيام خدت مننا الكلام؟\nكنت قريب… من غير ما أحس\nإنك هتبقى أجمل حلم وأصعب فراق\n\nفي الجامعة كانت أول حكاية\nضحكة بريئة، وأيام عادية\nكنا أصحاب، بنضحك بالساعات\nوبنمشي سوا، وننسى كل اللي فات\n\nتلات سنين وإنتِ الأمان\nكنتِ راحتي وسط الزحام\nلحد ما قلبي قال من غير كلام\nإن الصداقة دي بقت غرام\n\nكنت بتناديني يا كوكونات\nوتقولي إنتِ أميرتي\nوكان في صوتك حنية\nتخلّي الدنيا في عيني جنتي\n\nفاكرة صورتنا يوم خمسة يناير\nفي المحاضرة، والوقت كان شاهد\nوخمستاشر يناير، أول حضن\nكان دافي… وكأنه وعد للأبد\n\nيا كوكونات… يا أميرتي\nيا أجمل حكاية في دنيتي\nلو الزمن يرجع بيا تاني\nهختارك إنتِ… من بين كل الناس\n\nيا كوكونات… يا حبيبتي\nلسه عايش على ذكرياتي\nمهما البُعد طال بينا\nهتفضلي حتة من قلبي وحياتي\n\nخمستاشر مايو… أحلى حضن\nوتمنتاشر يونيو… يوم ما يتنسيش\nكان قلبي شايف بكرة معاكِ\nولا كان يعرف إن الحلم ما يكملش\n\nوبعد التخرج، سألتي عني\nوصلني إنك لسه فاكراني\nوفي آخر يونيو رجعتي قلتي\n«هكون كويسة… ومش هسيبك تاني»\n\nأنا فاكرة كل كلمة قولناها\nوكل لحظة حلوة عشناها\nيمكن ما عرفناش نكمّل الطريق\nبس مش معنى البُعد إن الذكرى تضيع\n\nوبعدها بدأ صوتك يقل\nوالقرب بينا واحدة واحدة يقل\nكنت بسأل: مالك؟ في إيه؟\nوالصمت كان أصعب من أي جواب\n\nستاشر أكتوبر… قلتيها بهدوء\n«الأحسن إننا نفترق»\nمن غير سبب يطمن قلبي\nولا حتى فرصة أفهم إيه اللي حصل\n\nهو: طب والوعود اللي بينا؟\nهي: فاكرة… حتى لو مش باينة\nهو: طب والحضن اللي كان أمان؟\nهي: ساكن في قلبي مهما كان\nهو: أنا ما طلبتش غير نفضل سوا\nهي: ساعات الطريق بيبعد خطاوينا\n\nيا كوكونات… يا أميرتي\nيا أجمل حكاية في دنيتي\nلو الزمن يرجع بيا تاني\nهختارك إنتِ… من بين كل الناس\n\nيا كوكونات… يا حبيبتي\nحتى لو مش راجعة ليا\nهتفضلي أجمل ذكرى\nوأغلى حب عدى على قلبي في يوم\n\nمش بلومك… ولا بتمنى غير الخير ليكي\nبس كان نفسي نكمّل حكايتنا سوا\nيا أميرتي… يا كوكونات…\n\nوإنتَ… كنت يومًا بيتي.", "dur": "4:34"}, {"id": "my-princess-my-coconut", "title": "My Princess, My CoConut", "sub": "I still remember everything", "rtl": false, "file": "my-princess-my-coconut.mp4", "tags": ["English", "Power ballad", "Original quality"], "lyrics": "Applied Science University...\nSome people leave your life...\nBut they never leave your heart.\nThis one is for you, my CoConut.\n\nTwenty twenty-three, the year you walked into my days,\nEnglish Literature and Translation, two different hallways.\nI found you friends, we shared our lunch on campus ground,\nWe laughed so loud between the lectures, the happiest sound.\nI kept your secrets, you kept mine, I watched you grow,\nEven as just friends, I think a part of me already knew.\n\nYou'd call me at dawn just to drag me to class,\nAnd I'd pretend to be annoyed... and pray those mornings last.\n\nI still live my life, I still smile, I still go,\nBut my heart never learned how to let you go.\nEvery road at the university still knows your name,\nAnd nothing I've done since has ever felt the same.\nMy princess, my CoConut, wherever you are tonight,\nI still remember everything... and I hold it tight.\n\nJanuary fifth, twenty twenty-three, a photo in class,\nTwelve thirty-seven, a moment I swore would last.\nJune eighteenth, twenty twenty-five, I keep it like a prayer,\nThe last bright summer day I still find you there.\nJune twenty twenty-six, I graduated, gown and all,\nAnd still I searched the crowd for you in that hall.\n\nI'd call you princess and you'd laugh and look away,\nI'd call you CoConut and you'd smile the whole day.\n\nI still live my life, I still work, I still try,\nBut some nights your memory is the only reason why.\nI play our song when I'm driving all alone,\nAnd for three minutes, I feel like I'm home.\nMy princess, my CoConut, I never said goodbye,\nI just learned to carry you and keep you close inside.\n\nOn your hardest days, when your body ached,\nI'd bring you roses and the sweets you loved to take.\nWhen you stayed at your sister's, I'd ride across the town,\nOur favorite song so loud, the windows rolled down.\nI gave you Pandora, a little charm that shone,\nNot knowing it would be the last... before you were gone.\n\nYou wrote me letters, I still read them when I can't sleep,\nThe silver things you gave me are the things I keep.\nAnd that red bottle perfume, I never let it fade,\nOne breath... and I'm back in every moment that we made.\nOctober sixteenth, twenty twenty-six, the words were cold,\nBut I never let them take the warmth I hold.\n\nI will play this song again, and again, and again,\nUntil my heart remembers how to live like back then.\nI won't forget the laughter, the dawn calls, the campus light,\nI won't forget the way you said my name at night.\nMy princess, my CoConut, I'll never love the same,\nAnd no one in this world will ever take your place.\n\nApplied Science University...\nTwenty twenty-three... to twenty twenty-six...\nWe were friends...\nThen we were everything...\nAnd now you're the memory I live with.\n\nI still care, my CoConut.\nI always will.\nThank you for the memories, my princess.", "dur": "4:48"}, {"id": "did-you-forget-me-coconut", "title": "Did You Forget Me, CoConut?", "sub": "One question, my princess", "rtl": false, "file": "did-you-forget-me-coconut.mp4", "tags": ["English", "Power ballad", "Original quality"], "lyrics": "I'm not here to blame you...\nI'm not here to fight...\nI just have one question, my princess...\nDid you forget?\n\nDid you forget the roses on the days you couldn't smile?\nThe sweets I brought you, just to see you laugh a while?\nDid you forget the Pandora, the letters that you wrote?\nThe red bottle perfume still lingering on my coat?\nDid you forget the campus, the lunches and the jokes,\nApplied Science University, where all of this awoke?\n\nI'm not trying to say anything... I swear I'm not,\nI just can't believe you let go of all we've got.\n\nDid you forget me, CoConut? Did you forget us?\nThe hours that we gave, the love, the trust?\nIf you remember even half of what I do,\nYou never had to break the heart that lived for you.\nWe could have had a happy life, a home, a name,\nMy princess, tell me... how could you forget the flame?\n\nTens of hours on Snapchat, video calls till dawn,\nYour voice was the last thing I heard before the night was gone.\nWe fell asleep together, screens glowing in the dark,\nTwo phones, two rooms, but only one heart.\nI helped you all day long, every task, every fear,\nWhatever you needed, I was always right here.\n\nDid you forget the way you'd whisper \"goodnight\"?\nDid you forget I'd stay until your screen let go of the light?\n\nDid you forget me, CoConut? Did you forget the calls?\nThe nights we fell asleep, the laughter in the halls?\nIf you remember even half of what we shared,\nYou'd know there was no reason... I was always there.\nI never asked for more than just to hold your hand,\nMy princess, tell me... what did I not understand?\n\nI promised you, by the end of twenty twenty-six,\nI'd marry you, I'd build a home that nothing could break,\nBut October sixteenth came and took what it would take.\nSomething changed in you, and I still don't know why,\nMaybe there's a secret that you couldn't tell me then,\nYou didn't want to hurt me... so you never said it... and then...\nYou hurt me more than you ever thought you could,\nAnd I'm still here... wishing you understood.\n\nI will play this song again, and again, and again,\nUntil you remember how we lived back then.\nDid you forget the laughter, the dawn calls, the campus light?\nDid you forget the way you said my name at night?\nMy princess, my CoConut, I'll never love the same,\nAnd no one in this world will ever take your place.\n\nTwenty twenty-three... to twenty twenty-six...\nI didn't forget...\nNot one call... not one gift... not one night...\nAnd I will play this song again... and again...\nI'm still here.\n\nThank you for the memories, my princess.", "dur": "4:52"}, {"id": "not-like-this", "title": "Not Like This", "sub": "Did You Forget Me, CoConut? · Part II", "rtl": false, "file": "not-like-this.mp4", "tags": ["English", "Part II", "Original quality"], "lyrics": "I'm not here to blame you...\nI'm not here to fight...\nI just have one question, my princess...\nDid you forget?\n\nApplied Science University, our very first photograph,\nYou called me \"the stickers meme,\" I sent memes just to hear you laugh.\nI never thought I'd fall in love in my university days,\nBut you stole a heart that wasn't yours... and in your hands it stayed.\nEvery time I saw you on campus, my heart was born again,\nI prayed to God to make you my wife... not just my love, my friend.\n\nI'm not trying to say anything... I swear I'm not,\nI just can't believe you let go of all we've got.\n\nDid you forget me, CoConut? Did you forget us?\nThe nights we laughed till morning, the love, the trust?\nIf you remember even half of what I do,\nYou never had to break the heart that lived for you.\nIf you ever wanted us apart, you should have told me at the start,\nBefore we built these feelings... before you held my heart.\n\nI'll never forget your handwriting on that Valentine's card,\n\"Happy Valentine's Day, my qoqo\"... it still lives in my heart.\nAnd the letter: \"Thank you for everything, my baby man,\nKeep my scent close... I love you\"... I read it again and again.\nI'd order you food, I'd bring it to your door,\nGave you things you never asked for... and then I gave you more.\n\nWe helped each other through it, when we had to stand as one,\nWe carried each other to the end... did you forget what we'd done?\n\nDid you forget me, CoConut? Did you forget the calls?\nTens of hours on Snapchat, the laughter in the halls?\nI was coming to meet your family, to ask them for your hand,\nMy princess, tell me... what did I not understand?\nLoving you was never a cage, never a cell, never a chain,\nYou always had your freedom... I just wanted you to remain.\n\nJune twenty twenty-six, before I graduated, the first time we fell apart,\nI cried all night, I couldn't hold it, you were tearing out my heart.\nNot because I'm weak... but because I'm a man who loved you so,\nI begged the night to keep you, I begged you not to go.\nI won't pretend that I was strong when I needed you the most,\nThen October sixteenth came... and left me like a ghost.\nNo reason, no goodbye that I could ever understand,\nI know that love can hurt... but not like this, not by your hand.\n\nI will play this song again, and again, and again,\nUntil you remember how we lived back then.\nDid you forget the laughter, the dawn calls, the campus light?\nDid you forget the way you said my name at night?\nMy princess, my CoConut, I'll never love the same,\nAnd no one in this world will ever take your place.\n\nSometimes I wake up in the middle of the night...\nAnd I remember... we're not together...\nAnd I still can't believe it.\nSo I imagine your messages...\n\"Good morning\"... \"Good afternoon\"... \"What are you doing?\"... \"Good night\"...\nI know you were thankful... I know you wanted us to be better...\nI just wanted to be with you.\n\nTwenty twenty-three... to twenty twenty-six...\nI didn't forget.\nThank you for the memories, my princess.", "dur": "4:59"}, {"id": "friends-then-everything", "title": "Friends Then Everything", "sub": "Our whole story · duet", "rtl": false, "file": "friends-then-everything.mp4", "tags": ["English", "Duet", "Original quality"], "lyrics": "Applied Science University...\nTwenty twenty-three...\nSome people leave your life...\nBut they never leave your heart.\n\nI was English Literature, you were Translation down the hall,\nJanuary fifth, twelve thirty-seven, our first photo of them all.\nYou called me \"the stickers meme,\" I'd send memes just to make you laugh,\nI found you friends, we shared our lunch, I kept your secrets safe.\nThree years of friendship, side by side, through every rainy day,\nAnd then one morning love was there... and it never went away.\n\nI'd call you at dawn just to drag you to class,\nYou'd come on days with no lectures... just to see me pass.\n\nWe were friends, then we were everything,\nThree years of laughter, and a promised ring.\nWhat happened to us? Why did it end this way?\nMy princess, my CoConut...\nMy baby man...\nI still remember everything... every single day.\n\nYou brought me roses and my sweets on my hardest days,\nDrove me to my sister's with our song turned all the way.\nYou ordered food, you brought me things I never asked you for,\nA Pandora charm... I didn't know there'd be no more.\nI wrote \"Happy Valentine's Day, my qoqo\" by hand,\nAnd \"Thank you for everything... I love you, my baby man.\"\n\nI still keep your letters, and the silver that you gave,\nAnd the red bottle perfume... one breath and you never went away.\n\nWe were friends, then we were everything,\nSleeping on the call till the morning light would ring.\nWhat happened to us? Why did it end this way?\nMy princess, my CoConut...\nMy baby man...\nI still remember everything... every single day.\n\nYour face unlocked my phone, and my face unlocked yours,\nI barely spoke to girls at all, I closed the other doors.\nMy jealousy was red lines, no one spoke behind your back,\nIt was never a cage, never a cell... why did you see it like that?\nI prayed to God to make you my wife, not just my love, my friend,\nI was coming to meet your family... by twenty twenty-six's end.\n\nMy sister said since you came, I became a better me,\nYou said I pulled you from the dark and set your sadness free.\nWe stood as one when life was hard, we carried each other through,\nI know you gave your all to me... and I know you know it too.\n\nJune twenty twenty-six, before my graduation, the first time we fell apart,\nI cried all night... not because I'm weak, but because you were my heart.\nI searched the crowd for you that day, in my gown, alone,\nThen October sixteenth came... and the words were cold as stone.\nMaybe there was something I could never say,\nMaybe I didn't want to hurt you... so I walked away.\nAnd I hurt you more than I ever thought I would...\nIf you wanted us apart... you should have told me when you could.\n\nI will play this song again, and again, and again,\nUntil my heart remembers how to live like back then.\nWe were friends, then we were everything,\nThree years of laughter, and a promised ring.\nMy princess, my CoConut, I'll never love the same,\nAnd no one in this world will ever take your place.\n\nYour graduation's coming... I'll try to be there...\nAnd if you ever think of coming back...\nI'll make it official... I'll put that ring on your hand...\nBecause I can't lose you twice.\nUntil then... you live in a private room in my heart...\nAnd I'll close that door gently... when life tells me to.\nThank you for the memories... my baby man.\nThank you for the memories... my princess.", "dur": "4:55"}];
+  var GRADS = ['linear-gradient(135deg,#ff5c8a,#7b2ff7)','linear-gradient(135deg,#2ee6d0,#0b6e99)','linear-gradient(135deg,#ffb703,#fb5607)','linear-gradient(135deg,#8338ec,#3a86ff)','linear-gradient(135deg,#06d6a0,#118ab2)'];
+  var v = document.getElementById('mlv-video'), ol = document.getElementById('mlv-ol'), msg = document.getElementById('mlv-msg');
+  var auto = true, cur = -1;
+  try { if (localStorage.getItem('mlv-auto') === '0') auto = false; } catch(e){}
+  var autoBtn = document.getElementById('mlv-auto');
+  autoBtn.setAttribute('aria-pressed', String(auto));
+
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+  SONGS.forEach(function(s, i){
+    var li = document.createElement('li');
+    li.innerHTML = '<button class="mlv-item" type="button" data-i="'+i+'">' +
+      '<span class="mlv-art" style="background:'+GRADS[i % GRADS.length]+'"><span class="num">'+String(i+1).padStart(2,'0')+'</span><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span></span>' +
+      '<span class="mlv-it"><b'+(s.rtl?' dir="rtl"':'')+'>'+esc(s.title)+'</b><span>'+esc(s.sub)+'</span></span>' +
+      '<span class="mlv-dur">'+esc(s.dur)+'</span></button>';
+    ol.appendChild(li);
+  });
+  var items = ol.querySelectorAll('.mlv-item');
+
+  function select(i, play){
+    i = (i + SONGS.length) % SONGS.length;
+    var s = SONGS[i];
+    cur = i;
+    msg.classList.remove('show');
+    v.src = BASE + s.file;
+    document.getElementById('mlv-kicker').textContent = 'Song ' + (i+1) + ' of ' + SONGS.length;
+    var t = document.getElementById('mlv-title'); t.textContent = s.title; t.dir = s.rtl ? 'rtl' : 'auto';
+    document.getElementById('mlv-sub').textContent = s.sub;
+    document.getElementById('mlv-tags').innerHTML = s.tags.map(function(x, k){ return '<span class="mlv-tag'+(k===0?' hi':'')+'">'+esc(x)+'</span>'; }).join('');
+    var lyr = document.getElementById('mlv-lyr');
+    lyr.dir = s.rtl ? 'rtl' : 'ltr'; lyr.lang = s.rtl ? 'ar' : 'en';
+    lyr.innerHTML = s.lyrics.split(/\n{2,}/).map(function(p){ return '<p>'+esc(p)+'</p>'; }).join('');
+    lyr.scrollTop = 0;
+    document.getElementById('mlv-lyrlang').textContent = s.rtl ? 'Egyptian Arabic' : 'English';
+    items.forEach(function(b, k){ b.setAttribute('aria-current', k===i ? 'true' : 'false'); b.classList.remove('playing'); });
+    document.title = s.title + ' · My Lyric Videos | Necro';
+    if (history.replaceState) history.replaceState(null, '', '#' + s.id);
+    if (play) { var p = v.play(); if (p && p.catch) p.catch(function(){}); }
+  }
+
+  ol.addEventListener('click', function(e){
+    var b = e.target.closest('.mlv-item'); if (!b) return;
+    var i = +b.dataset.i;
+    if (i === cur) { v.paused ? v.play() : v.pause(); return; }
+    select(i, true);
+    if (window.matchMedia('(max-width:900px)').matches) document.querySelector('.mlv-stage').scrollIntoView({behavior:'smooth', block:'start'});
+  });
+  document.getElementById('mlv-prev').onclick = function(){ select(cur - 1, true); };
+  document.getElementById('mlv-next').onclick = function(){ select(cur + 1, true); };
+  autoBtn.onclick = function(){ auto = !auto; autoBtn.setAttribute('aria-pressed', String(auto)); try { localStorage.setItem('mlv-auto', auto ? '1' : '0'); } catch(e){} };
+
+  v.addEventListener('play', function(){ items[cur] && items[cur].classList.add('playing'); });
+  v.addEventListener('pause', function(){ items[cur] && items[cur].classList.remove('playing'); });
+  v.addEventListener('ended', function(){ items[cur] && items[cur].classList.remove('playing'); if (auto) select(cur + 1, true); });
+  v.addEventListener('waiting', function(){ msg.textContent = 'Loading the original-quality video…'; msg.classList.add('show'); });
+  v.addEventListener('playing', function(){ msg.classList.remove('show'); });
+  v.addEventListener('error', function(){ msg.textContent = 'This video could not load right now. Please try again in a moment.'; msg.classList.add('show'); });
+
+  var start = 0, h = location.hash.slice(1);
+  SONGS.forEach(function(s, i){ if (s.id === h) start = i; });
+  select(start, false);
+})();
+</script>
+<script src="/assets/js/site.js" defer></script>
+</body>
+</html>
