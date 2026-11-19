@@ -92,6 +92,41 @@
   .mlv-it span{display:block;color:var(--muted);font-size:.8rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .mlv-dur{font-family:var(--mono);font-size:.8rem;color:var(--muted)}
   .mlv-note{margin:12px 12px 8px;font-size:.8rem;color:var(--muted);line-height:1.5}
+  .mlv-btn.share{display:none}
+  .can-share .mlv-btn.share{display:inline-flex}
+
+  /* Phones: video pinned under the header, full width, title and buttons under it, then Up next and lyrics. */
+  @media (max-width:700px){
+    .mlv-hero{padding:18px 0 0}
+    .mlv-hero .eyebrow{display:none}
+    .mlv-hero h1{font-size:1.55rem;margin:0 0 .25rem}
+    .mlv-hero p{font-size:.9rem;line-height:1.5}
+    .mlv-chips{margin-top:10px;gap:6px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:-20px;padding-inline:20px}
+    .mlv-chips::-webkit-scrollbar{display:none}
+    .mlv-chip{flex:none;padding:5px 10px;font-size:.78rem}
+    .mlv{display:flex;flex-direction:column;align-items:stretch;gap:0;padding:14px 0 40px}
+    .mlv > div:first-child, .mlv-stage{display:contents}
+    .mlv-screen{position:sticky;top:var(--mlv-top,64px);z-index:20;margin-inline:-20px;aspect-ratio:16/9;order:1;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+    .mlv-now{order:2;padding:14px 0 4px;gap:12px}
+    .mlv-now-txt{width:100%}
+    .mlv-now h2{font-size:1.2rem}
+    .mlv-ctrl{width:100%;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+    .mlv-ctrl::-webkit-scrollbar{display:none}
+    .mlv-btn{height:44px;min-width:44px;border-radius:999px;flex:none;padding:0 16px}
+    .mlv-lyrics{order:3;margin-top:12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius)}
+    .mlv-lyrics summary{padding:14px 16px;gap:10px}
+    .mlv-lyrics summary span{margin-left:auto}
+    .mlv-lyr{max-height:none;overflow:visible;padding:0 16px 18px;font-size:1rem}
+    .mlv-list{order:4;margin-top:14px;padding:6px}
+    .mlv-list h3{margin:8px 10px}
+    .mlv-item{grid-template-columns:52px minmax(0,1fr) auto;padding:10px 8px;min-height:64px}
+    .mlv-art{width:52px;height:52px}
+    .mlv-it b{font-size:1rem}
+    .site-footer{padding-bottom:calc(16px + env(safe-area-inset-bottom))}
+  }
+  @media (max-width:700px) and (orientation:landscape){
+    .mlv-screen{position:relative;top:auto;margin-inline:0;max-height:calc(100vh - 70px);aspect-ratio:auto;height:calc(100vh - 70px)}
+  }
 </style>
 </head>
 <body>
@@ -120,7 +155,7 @@
       <h1>My Lyric Videos</h1>
       <p>Eleven songs from one chapter at Applied Science University, 2023 – 2026. Played here from the original files, in full quality.</p>
       <div class="mlv-chips">
-        <span class="mlv-chip"><i></i><b>5</b> songs</span>
+        <span class="mlv-chip"><i></i><b id="mlv-count">11</b> songs</span>
         <span class="mlv-chip"><b>53 min</b> total</span>
         <span class="mlv-chip">English &amp; Egyptian Arabic</span>
         <span class="mlv-chip">Original quality</span>
@@ -147,6 +182,7 @@
               <button class="mlv-btn" id="mlv-prev" type="button" aria-label="Previous song"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button>
               <button class="mlv-btn" id="mlv-next" type="button" aria-label="Next song"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 5h2v14h-2zM4 5v14l11-7z"/></svg></button>
               <button class="mlv-btn" id="mlv-auto" type="button" aria-pressed="true" title="Play the next song when one ends"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 2l4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg>Autoplay</button>
+              <button class="mlv-btn share" id="mlv-share" type="button" aria-label="Share this song"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/></svg>Share</button>
             </div>
           </div>
           <details class="mlv-lyrics" id="mlv-lyrics" open>
@@ -196,6 +232,23 @@
     ol.appendChild(li);
   });
   var items = ol.querySelectorAll('.mlv-item');
+  document.getElementById('mlv-count').textContent = SONGS.length;
+  var phone = window.matchMedia('(max-width:700px)');
+
+  // Keep the pinned video just under the site header.
+  var header = document.querySelector('.site-header');
+  function fitTop(){ if (header) document.documentElement.style.setProperty('--mlv-top', header.offsetHeight + 'px'); }
+  fitTop(); window.addEventListener('resize', fitTop);
+
+  // Lyrics start folded on phones (like a video description), open on bigger screens.
+  if (phone.matches) document.getElementById('mlv-lyrics').open = false;
+
+  // Share the song (phone share sheet), or copy its link.
+  if (navigator.share) document.documentElement.classList.add('can-share');
+  document.getElementById('mlv-share').onclick = function(){
+    var s = SONGS[cur], url = location.origin + location.pathname + '#' + s.id;
+    navigator.share({ title: s.title, text: s.title + ' · lyric video', url: url }).catch(function(){});
+  };
 
   function select(i, play){
     i = (i + SONGS.length) % SONGS.length;
@@ -214,6 +267,9 @@
     document.getElementById('mlv-lyrlang').textContent = s.rtl ? 'Egyptian Arabic' : 'English';
     items.forEach(function(b, k){ b.setAttribute('aria-current', k===i ? 'true' : 'false'); b.classList.remove('playing'); });
     document.title = s.title + ' · My Lyric Videos | Necro';
+    if ('mediaSession' in navigator && window.MediaMetadata) {
+      navigator.mediaSession.metadata = new MediaMetadata({ title: s.title, artist: 'Necro', album: 'My Lyric Videos' });
+    }
     if (history.replaceState) history.replaceState(null, '', '#' + s.id);
     if (play) { var p = v.play(); if (p && p.catch) p.catch(function(){}); }
   }
@@ -223,7 +279,10 @@
     var i = +b.dataset.i;
     if (i === cur) { v.paused ? v.play() : v.pause(); return; }
     select(i, true);
-    if (window.matchMedia('(max-width:900px)').matches) document.querySelector('.mlv-stage').scrollIntoView({behavior:'smooth', block:'start'});
+    if (phone.matches) {
+      var top = document.querySelector('.mlv').getBoundingClientRect().top + window.scrollY - (header ? header.offsetHeight : 0);
+      window.scrollTo({ top: Math.max(0, top - 8), behavior: 'smooth' });
+    } else if (window.matchMedia('(max-width:900px)').matches) document.querySelector('.mlv-stage').scrollIntoView({behavior:'smooth', block:'start'});
   });
   document.getElementById('mlv-prev').onclick = function(){ select(cur - 1, true); };
   document.getElementById('mlv-next').onclick = function(){ select(cur + 1, true); };
@@ -235,6 +294,14 @@
   v.addEventListener('waiting', function(){ msg.textContent = 'Loading the original-quality video…'; msg.classList.add('show'); });
   v.addEventListener('playing', function(){ msg.classList.remove('show'); });
   v.addEventListener('error', function(){ msg.textContent = 'This video could not load right now. Please try again in a moment.'; msg.classList.add('show'); });
+
+  // Lock screen and headphone buttons: next and previous song.
+  if ('mediaSession' in navigator) {
+    try {
+      navigator.mediaSession.setActionHandler('nexttrack', function(){ select(cur + 1, true); });
+      navigator.mediaSession.setActionHandler('previoustrack', function(){ select(cur - 1, true); });
+    } catch(e){}
+  }
 
   var start = 0, h = location.hash.slice(1);
   SONGS.forEach(function(s, i){ if (s.id === h) start = i; });
